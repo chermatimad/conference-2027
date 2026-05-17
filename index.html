@@ -118,26 +118,43 @@
 <body class="font-cairo text-gray-800 transition-all duration-300 flex flex-col min-h-screen">
 
     <!-- ========================================== -->
-    <!-- HEADER & NAVIGATION                        -->
+    <!-- HEADER (التصميم الجديد المنسق للشعارات والعنوان) -->
     <!-- ========================================== -->
-    <header class="bg-white py-2 px-4 sm:px-8 relative z-50 shadow-sm border-b border-gray-100">
-        <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <a href="#home" class="flex items-center gap-4 hover:opacity-80 transition">
-                <img src="1000007105.jpg" alt="Logo" class="h-12 md:h-16 object-contain">
-                <div class="hidden md:block">
-                    <h2 class="text-primary font-bold text-sm md:text-lg leading-tight" data-ar="كلية العلوم الاقتصادية والتجارية<br>وعلوم التسيير" data-en="Faculty of Economics, Commerce<br>& Management Sciences">كلية العلوم الاقتصادية والتجارية<br>وعلوم التسيير</h2>
-                    <p class="text-[10px] md:text-xs text-gray-500 font-bold" data-ar="جامعة سطيف 1 - فرحات عباس" data-en="Setif 1 University - Ferhat Abbas">جامعة سطيف 1 - فرحات عباس</p>
+    <header class="bg-white py-3 px-4 sm:px-8 relative z-50 shadow-sm border-b border-gray-100">
+        <div class="container mx-auto flex justify-between items-center gap-4">
+            
+            <!-- مجموعة الشعارات والعنوان (في اليمين باللغة العربية وفي اليسار باللغة الإنجليزية) -->
+            <div class="flex items-center gap-3 sm:gap-6">
+                <!-- 1. لوغو الكلية -->
+                <a href="#home" class="shrink-0 hover:opacity-80 transition transform hover:scale-105">
+                    <img src="1000007105.jpg" alt="Faculty Logo" class="h-12 sm:h-16 object-contain">
+                </a>
+                
+                <!-- 2. لوغو المؤتمر -->
+                <a href="#home" class="shrink-0 hover:opacity-80 transition transform hover:scale-105">
+                    <img src="1000033819.jpg" alt="Conference Logo" class="h-14 sm:h-20 object-contain">
+                </a>
+                
+                <!-- 3. عنوان المؤتمر (يظهر في الشاشات الكبيرة والمتوسطة لتجنب التزاحم في الهاتف) -->
+                <div class="hidden md:flex flex-col justify-center rtl:border-r-2 ltr:border-l-2 border-gray-200 rtl:pr-4 ltr:pl-4">
+                    <h2 class="text-primary font-black text-sm md:text-lg leading-tight" data-ar="المؤتمر الدولي الثاني" data-en="2nd International Conference">المؤتمر الدولي الثاني</h2>
+                    <p class="text-accent font-bold text-xs md:text-sm" data-ar="قضايا اقتصادية معاصرة" data-en="Contemporary Economic Issues">قضايا اقتصادية معاصرة</p>
                 </div>
-            </a>
-            <div class="flex items-center gap-4 md:gap-6">
-                <button onclick="toggleLang()" class="bg-bgLight hover:bg-gray-200 text-primary px-4 py-2 rounded-xl font-bold text-sm transition-colors border border-gray-200 flex items-center gap-2 shadow-sm">
+            </div>
+
+            <!-- أقصى اليسار (زر تغيير اللغة) -->
+            <div class="flex items-center shrink-0">
+                <button onclick="toggleLang()" class="bg-gray-50 hover:bg-gray-200 text-primary px-3 py-2 md:px-4 md:py-2 rounded-xl font-bold text-sm transition-colors border border-gray-200 flex items-center gap-2 shadow-sm">
                     <i class="fas fa-globe text-accent"></i> <span id="lang-text">English</span>
                 </button>
-                <a href="#home"><img src="1000033819.jpg" alt="CEIC 2027" class="h-16 md:h-20 object-contain transform hover:scale-105 transition duration-300"></a>
             </div>
+            
         </div>
     </header>
 
+    <!-- ========================================== -->
+    <!-- NAVIGATION (القائمة الرئيسية)                -->
+    <!-- ========================================== -->
     <nav id="navbar" class="bg-primary text-white sticky top-0 z-40 transition-all duration-300 shadow-lg border-b border-white/10">
         <div class="container mx-auto px-4 sm:px-8">
             <div class="flex justify-between items-center py-4" id="nav-container">
@@ -190,7 +207,7 @@
             </div>
         </div>
 
-        <!-- Mobile Menu (Fixed Missing Links & Logic) -->
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden xl:hidden bg-primary/95 backdrop-blur-xl absolute w-full border-t border-white/10 shadow-2xl max-h-[85vh] overflow-y-auto z-50">
             <ul class="flex flex-col p-6 text-center space-y-2">
                 <li><a href="#home" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
