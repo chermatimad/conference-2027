@@ -969,6 +969,10 @@
                 el.innerHTML = el.getAttribute(`data-${currentLang}`);
             });
             handleRouting(); 
+
+            // إعادة تحديث البيانات من Sanity باللغة الجديدة
+            fetchSpeakers();
+            fetchCommittees();
         }
 
         // ==========================================
@@ -1133,7 +1137,7 @@
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('flex'); document.body.style.overflow = 'auto'; }
 
         // ==========================================
-        // SANITY API CONNECTION (الجسر الذي يجلب البيانات)
+        // SANITY API CONNECTION (الجسر ثنائي اللغة)
         // ==========================================
         const PROJECT_ID = '57kwqs97'; 
         const DATASET = 'production';
@@ -1144,14 +1148,15 @@
             if (!container) return;
 
             try {
-                const query = encodeURIComponent('*[_type == "speaker"]{name, role, bio, "imageUrl": image.asset->url}');
+                const query = encodeURIComponent('*[_type == "speaker"]{name_ar, name_en, role_ar, role_en, bio_ar, bio_en, "imageUrl": image.asset->url}');
                 const url = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${query}`;
                 
                 const response = await fetch(url);
                 const data = await response.json();
                 
                 if (!data.result || data.result.length === 0) {
-                    container.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500">لا يوجد متحدثين مضافين حالياً.</div>`;
+                    const emptyMsg = currentLang === 'ar' ? 'لا يوجد متحدثين مضافين حالياً.' : 'No speakers added yet.';
+                    container.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500 font-bold">${emptyMsg}</div>`;
                     return;
                 }
 
@@ -1162,134 +1167,134 @@
                     const color = colors[index % colors.length];
                     const imgUrl = speaker.imageUrl || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=256&h=256&fit=crop';
                     
+                    const name = currentLang === 'ar' ? (speaker.name_ar || '') : (speaker.name_en || speaker.name_ar || '');
+                    const role = currentLang === 'ar' ? (speaker.role_ar || '') : (speaker.role_en || speaker.role_ar || '');
+                    const bio = currentLang === 'ar' ? (speaker.bio_ar || '') : (speaker.bio_en || speaker.bio_ar || '');
+
                     html += `
                     <div class="bg-white rounded-[2rem] p-8 shadow-xl border border-gray-100 text-center relative overflow-hidden group">
                         <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r ${color.gradient}"></div>
                         <div class="w-40 h-40 mx-auto rounded-full bg-gradient-to-tr ${color.gradient} p-1 mb-6 mt-4 shadow-lg group-hover:scale-105 transition-transform duration-500">
-                            <img src="${imgUrl}" alt="${speaker.name}" class="w-full h-full object-cover rounded-full border-4 border-white bg-white">
+                            <img src="${imgUrl}" alt="${name}" class="w-full h-full object-cover rounded-full border-4 border-white bg-white">
                         </div>
-                        <h3 class="text-2xl font-black text-primary mb-1">${speaker.name || 'بدون اسم'}</h3>
-                        <p class="text-accent font-bold mb-4 text-sm uppercase tracking-wide">${speaker.role || ''}</p>
-                        <p class="text-gray-500 text-sm leading-relaxed mb-6">${speaker.bio || ''}</p>
+                        <h3 class="text-2xl font-black text-primary mb-1">${name}</h3>
+                        <p class="text-accent font-bold mb-4 text-sm uppercase tracking-wide">${role}</p>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-6">${bio}</p>
                     </div>`;
                 });
                 container.innerHTML = html;
                 
             } catch (error) {
-                console.log('Sanity API fetch failed for speakers (likely CORS). Using fallback data.');
-                const fallbackData = [
-                    { name: 'أ.د. أحمد بن عبد الله', role: 'خبير في الاقتصاد الزراعي', bio: 'أستاذ باحث بجامعة أكسفورد، يمتلك أكثر من 50 ورقة بحثية محكمة في مجال الاستدامة الزراعية.', imageUrl: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=256&h=256&fit=crop' },
-                    { name: 'د. سارة الإدريسي', role: 'مختصة في التنمية المستدامة', bio: 'ممثلة منظمة الأغذية والزراعة (FAO)، تمتلك خبرة ميدانية واسعة في تطوير السياسات المائية في إفريقيا.', imageUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=256&h=256&fit=crop' },
-                    { name: 'أ.د. جون سميث', role: 'خبير التجارة الدولية', bio: 'مستشار بالبنك الدولي، متخصص في تحليل سلاسل التوريد وتأثير الأزمات الجيوسياسية على الأسواق.', imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=256&h=256&fit=crop' }
-                ];
-                let html = '<div class="col-span-full bg-yellow-50 border-r-4 border-yellow-400 p-4 mb-4 text-yellow-800 text-sm font-bold text-center rounded">ملاحظة: المتصفح يمنع الاتصال بلوحة تحكم Sanity حالياً (بسبب إعدادات CORS). نعرض لك بيانات تجريبية مؤقتاً لتجنب إفساد التصميم.</div>';
-                const colors = [{ gradient: 'from-primary to-blue-500' }, { gradient: 'from-accent to-yellow-400' }, { gradient: 'from-secondary to-green-400' }];
-                fallbackData.forEach((speaker, index) => {
-                    const color = colors[index % colors.length];
-                    html += `
-                    <div class="bg-white rounded-[2rem] p-8 shadow-xl border border-gray-100 text-center relative overflow-hidden group opacity-80 grayscale-[20%]">
-                        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r ${color.gradient}"></div>
-                        <div class="w-40 h-40 mx-auto rounded-full bg-gradient-to-tr ${color.gradient} p-1 mb-6 mt-4 shadow-lg transition-transform duration-500">
-                            <img src="${speaker.imageUrl}" alt="${speaker.name}" class="w-full h-full object-cover rounded-full border-4 border-white bg-white">
-                        </div>
-                        <h3 class="text-2xl font-black text-gray-700 mb-1">${speaker.name}</h3>
-                        <p class="text-gray-500 font-bold mb-4 text-sm uppercase tracking-wide">${speaker.role}</p>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">${speaker.bio}</p>
-                    </div>`;
-                });
-                container.innerHTML = html;
+                console.log('Sanity API fetch failed for speakers (CORS).');
+                // بيانات مؤقتة لتجنب انهيار التصميم
+                const fallbackMsg = currentLang === 'ar' ? 'بيانات تجريبية (CORS غير مفعل)' : 'Fallback Data (CORS disabled)';
+                container.innerHTML = `<div class="col-span-full bg-yellow-50 border-r-4 border-yellow-400 p-4 text-yellow-800 text-sm font-bold text-center rounded">${fallbackMsg}</div>`;
             }
         }
 
-        // 2. جلب اللجان
+        // 2. جلب اللجان (مع التنسيق الجديد لفصل الرئيس)
         async function fetchCommittees() {
             const highContainer = document.getElementById('high-members');
             const scientificContainer = document.getElementById('scientific-members');
             const organizingContainer = document.getElementById('organizing-members');
 
             try {
-                // أمر جلب أعضاء اللجان مرتبين حسب الرقم الذي تدخله
-                const query = encodeURIComponent('*[_type == "committee"] | order(order asc) {name, role, institution, committeeType}');
+                const query = encodeURIComponent('*[_type == "committee"] | order(order asc) {name_ar, name_en, role_ar, role_en, institution_ar, institution_en, committeeType, order, "imageUrl": image.asset->url}');
                 const url = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${query}`;
                 
                 const response = await fetch(url);
                 const data = await response.json();
                 
+                const emptyMsg = currentLang === 'ar' ? 'لا يوجد أعضاء مضافين حالياً.' : 'No members added yet.';
+
                 if (data.result) {
-                    // فرز اللجان
                     const highMembers = data.result.filter(c => c.committeeType === 'high');
                     const scientificMembers = data.result.filter(c => c.committeeType === 'scientific');
                     const organizingMembers = data.result.filter(c => c.committeeType === 'organizing');
 
-                    // تعبئة اللجنة العليا (تصميم مميز وكبير)
+                    // 1. بناء اللجنة العليا (صور + أسطر مستقلة)
                     if (highMembers.length > 0 && highContainer) {
-                        let html = '';
+                        let html = '<div class="flex flex-col gap-6 w-full">';
                         highMembers.forEach(member => {
+                            const name = currentLang === 'ar' ? (member.name_ar || '') : (member.name_en || member.name_ar || '');
+                            const role = currentLang === 'ar' ? (member.role_ar || '') : (member.role_en || member.role_ar || '');
+                            const inst = currentLang === 'ar' ? (member.institution_ar || '') : (member.institution_en || member.institution_ar || '');
+                            const imgUrl = member.imageUrl || 'https://via.placeholder.com/150';
+
                             html += `
-                            <div class="bg-bgLight p-6 rounded-2xl inline-block w-full max-w-lg mb-4 border border-gray-200">
-                                <p class="text-xl text-gray-800 font-bold mb-1">${member.name || 'بدون اسم'}</p>
-                                <p class="text-accent font-bold">${member.role || ''} ${member.institution ? ' - ' + member.institution : ''}</p>
-                            </div><br>`;
+                            <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-lg border border-gray-100 flex flex-col md:flex-row items-center gap-6 max-w-4xl mx-auto w-full hover:-translate-y-1 transition transform group">
+                                <img src="${imgUrl}" alt="${name}" class="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover border-4 border-accent shadow-sm group-hover:scale-105 transition-transform">
+                                <div class="text-center md:text-start rtl:md:text-right ltr:md:text-left flex-grow">
+                                    <h4 class="text-2xl font-black text-primary mb-2">${name}</h4>
+                                    <span class="inline-block bg-accent/10 text-accent font-bold px-4 py-1.5 rounded-full text-sm mb-2 border border-accent/20">${role}</span>
+                                    ${inst ? `<p class="text-gray-500 text-sm font-bold"><i class="fas fa-university text-gray-400"></i> ${inst}</p>` : ''}
+                                </div>
+                            </div>`;
                         });
+                        html += '</div>';
                         highContainer.innerHTML = html;
-                    } else if (highContainer) {
-                        highContainer.innerHTML = `<div class="text-gray-400 font-bold py-5">لا يوجد أعضاء مضافين حالياً.</div>`;
-                    }
+                    } else if (highContainer) { highContainer.innerHTML = `<div class="text-gray-400 font-bold py-5">${emptyMsg}</div>`; }
 
-                    // تعبئة اللجنة العلمية (تصميم شبكي)
-                    if (scientificMembers.length > 0 && scientificContainer) {
+                    // 2. دالة مساعدة لطباعة اللجان العادية (فصل الرئيس في سطر مستقل)
+                    const renderGridCommittee = (members, colorClass, container) => {
+                        if (!container) return;
+                        if (members.length === 0) {
+                            container.innerHTML = `<div class="col-span-full text-center text-gray-400 font-bold py-5">${emptyMsg}</div>`;
+                            return;
+                        }
+
                         let html = '';
-                        scientificMembers.forEach(member => {
+                        // البحث عن الرئيس (الذي يملك رقم الترتيب 1)
+                        const president = members.find(m => m.order === 1);
+                        const others = members.filter(m => m.order !== 1);
+
+                        // رسم الرئيس في الأعلى (مستقل)
+                        if (president) {
+                            const pName = currentLang === 'ar' ? (president.name_ar || '') : (president.name_en || president.name_ar || '');
+                            const pRole = currentLang === 'ar' ? (president.role_ar || '') : (president.role_en || president.role_ar || '');
+                            const pInst = currentLang === 'ar' ? (president.institution_ar || '') : (president.institution_en || president.institution_ar || '');
+
                             html += `
-                            <div class="bg-bgLight p-5 rounded-2xl border border-gray-100">
-                                <span class="font-bold text-primary text-lg">${member.name || 'بدون اسم'}</span><br>
-                                <span class="text-sm text-accent font-bold">${member.role || ''}</span><br>
-                                <span class="text-sm text-gray-500"><i class="fas fa-university mr-1 text-accent"></i> ${member.institution || 'بدون مؤسسة'}</span>
+                            <div class="col-span-full mb-8">
+                                <div class="bg-${colorClass}/5 p-8 rounded-3xl border-2 border-${colorClass}/20 max-w-lg mx-auto text-center shadow-sm relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-full h-1 bg-${colorClass}"></div>
+                                    <i class="fas fa-star text-${colorClass}/20 text-6xl absolute -bottom-2 -left-2 rotate-12"></i>
+                                    <span class="font-black text-primary text-2xl relative z-10 block mb-2">${pName}</span>
+                                    <span class="text-base text-${colorClass} font-bold inline-block px-4 py-1 bg-white rounded-full shadow-sm relative z-10 mb-3 border border-gray-100">${pRole}</span>
+                                    ${pInst ? `<p class="text-sm text-gray-500 font-bold relative z-10"><i class="fas fa-university text-${colorClass}"></i> ${pInst}</p>` : ''}
+                                </div>
+                            </div>`;
+                        }
+
+                        // رسم باقي الأعضاء في الشبكة
+                        others.forEach(member => {
+                            const mName = currentLang === 'ar' ? (member.name_ar || '') : (member.name_en || member.name_ar || '');
+                            const mRole = currentLang === 'ar' ? (member.role_ar || '') : (member.role_en || member.role_ar || '');
+                            const mInst = currentLang === 'ar' ? (member.institution_ar || '') : (member.institution_en || member.institution_ar || '');
+
+                            html += `
+                            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition hover:-translate-y-1 relative group">
+                                <div class="w-1 h-full bg-${colorClass} absolute top-0 rtl:right-0 ltr:left-0 rounded-r-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <span class="font-black text-primary text-lg block mb-1">${mName}</span>
+                                <span class="text-sm text-${colorClass} font-bold block mb-3">${mRole}</span>
+                                ${mInst ? `<span class="text-sm text-gray-500 font-bold"><i class="fas fa-university text-gray-400"></i> ${mInst}</span>` : ''}
                             </div>`;
                         });
-                        scientificContainer.innerHTML = html;
-                    } else if (scientificContainer) {
-                        scientificContainer.innerHTML = `<div class="col-span-full text-center text-gray-400 font-bold py-5">لا يوجد أعضاء مضافين حالياً.</div>`;
-                    }
 
-                    // تعبئة اللجنة التنظيمية (تصميم شبكي)
-                    if (organizingMembers.length > 0 && organizingContainer) {
-                        let html = '';
-                        organizingMembers.forEach(member => {
-                            html += `
-                            <div class="bg-bgLight p-5 rounded-2xl border border-gray-100">
-                                <span class="font-bold text-primary text-lg">${member.name || 'بدون اسم'}</span><br>
-                                <span class="text-sm text-blue-500 font-bold">${member.role || ''}</span><br>
-                                <span class="text-sm text-gray-500"><i class="fas fa-university mr-1 text-blue-500"></i> ${member.institution || 'بدون مؤسسة'}</span>
-                            </div>`;
-                        });
-                        organizingContainer.innerHTML = html;
-                    } else if (organizingContainer) {
-                        organizingContainer.innerHTML = `<div class="col-span-full text-center text-gray-400 font-bold py-5">لا يوجد أعضاء مضافين حالياً.</div>`;
-                    }
+                        container.innerHTML = html;
+                    };
+
+                    // تطبيق الدالة على اللجنة العلمية والتنظيمية
+                    renderGridCommittee(scientificMembers, 'accent', scientificContainer);
+                    renderGridCommittee(organizingMembers, 'blue-500', organizingContainer);
                 }
                 
             } catch (error) {
                 console.log('Sanity API fetch failed for committees. Using fallback data.');
-                // Fallback for Committees
-                if (highContainer) highContainer.innerHTML = `
-                    <div class="bg-yellow-50 p-4 mb-4 text-yellow-800 text-sm font-bold text-center rounded">بيانات تجريبية (CORS غير مفعل)</div>
-                    <div class="bg-bgLight p-6 rounded-2xl inline-block w-full max-w-lg mb-4 border border-gray-200">
-                        <p class="text-xl text-gray-800 font-bold mb-1">أ.د. مدير جامعة سطيف 1</p>
-                        <p class="text-accent font-bold">رئيساً شرفياً</p>
-                    </div><br>
-                    <div class="bg-bgLight p-6 rounded-2xl inline-block w-full max-w-lg border border-gray-200">
-                        <p class="text-xl text-gray-800 font-bold mb-1">أ.د. عميد كلية العلوم الاقتصادية</p>
-                        <p class="text-primary font-bold">رئيساً للمؤتمر</p>
-                    </div>`;
-                    
-                if (scientificContainer) scientificContainer.innerHTML = `
-                    <div class="col-span-full bg-yellow-50 p-4 mb-4 text-yellow-800 text-sm font-bold text-center rounded">بيانات تجريبية</div>
-                    <div class="bg-bgLight p-5 rounded-2xl border border-gray-100"><span class="font-bold text-primary text-lg">أ.د. اسم اللقب التجريبي</span><br><span class="text-sm text-gray-500"><i class="fas fa-university mr-1 text-accent"></i> جامعة سطيف 1</span></div>`;
-                    
-                if (organizingContainer) organizingContainer.innerHTML = `
-                    <div class="col-span-full bg-yellow-50 p-4 mb-4 text-yellow-800 text-sm font-bold text-center rounded">بيانات تجريبية</div>
-                    <div class="bg-bgLight p-5 rounded-2xl border border-gray-100"><span class="font-bold text-primary text-lg">د. اسم اللقب التجريبي</span><br><span class="text-sm text-gray-500"><i class="fas fa-university mr-1 text-blue-500"></i> جامعة سطيف 1</span></div>`;
+                const fallbackMsg = currentLang === 'ar' ? 'بيانات تجريبية (CORS غير مفعل)' : 'Fallback Data (CORS disabled)';
+                if (highContainer) highContainer.innerHTML = `<div class="bg-yellow-50 p-4 mb-4 text-yellow-800 text-sm font-bold text-center rounded">${fallbackMsg}</div>`;
+                if (scientificContainer) scientificContainer.innerHTML = `<div class="col-span-full bg-yellow-50 p-4 mb-4 text-yellow-800 text-sm font-bold text-center rounded">${fallbackMsg}</div>`;
+                if (organizingContainer) organizingContainer.innerHTML = `<div class="col-span-full bg-yellow-50 p-4 mb-4 text-yellow-800 text-sm font-bold text-center rounded">${fallbackMsg}</div>`;
             }
         }
 
