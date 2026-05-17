@@ -55,6 +55,7 @@
     </script>
 
     <style>
+        /* الأساسيات */
         html { scroll-behavior: smooth; }
         body { overflow-x: hidden; background-color: #F4F7FA; }
         ::-webkit-scrollbar { width: 8px; }
@@ -62,6 +63,7 @@
         ::-webkit-scrollbar-thumb { background: #15254A; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #BE9238; }
 
+        /* الخلفيات الاحترافية */
         .hero-bg {
             background: linear-gradient(135deg, #0a1128, #15254A, #064e3b, #1A8140);
             background-size: 400% 400%;
@@ -80,6 +82,7 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
+        /* القوائم والروابط */
         .nav-link { position: relative; transition: color 0.3s ease; cursor: pointer; padding-bottom: 5px;}
         .nav-link::after {
             content: ''; position: absolute; width: 0; height: 3px; border-radius: 3px;
@@ -92,6 +95,7 @@
         .dropdown-menu { display: none; opacity: 0; transform: translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .group:hover .dropdown-menu { display: block; opacity: 1; transform: translateY(0); }
 
+        /* نظام الصفحات المستقر (SPA Engine) */
         @keyframes customFadeIn {
             0% { opacity: 0; transform: translateY(15px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -102,7 +106,10 @@
         .detail-section { display: none; }
         .detail-section.active { display: block; animation: customFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
 
+        /* نصوص مبررة ومريحة للقراءة */
         .text-justify-custom { text-align: justify; text-justify: inter-word; }
+        
+        /* Modals */
         .modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
         .modal.hidden { opacity: 0; visibility: hidden; }
         .modal.flex { opacity: 1; visibility: visible; }
@@ -110,11 +117,13 @@
 </head>
 <body class="font-cairo text-gray-800 transition-all duration-300 flex flex-col min-h-screen">
 
-    <!-- HEADER & NAVIGATION -->
+    <!-- ========================================== -->
+    <!-- HEADER & NAVIGATION                        -->
+    <!-- ========================================== -->
     <header class="bg-white py-2 px-4 sm:px-8 relative z-50 shadow-sm border-b border-gray-100">
         <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <a href="#home" class="flex items-center gap-4 hover:opacity-80 transition">
-                <img src="1000007105.jpg" alt="Faculty Logo" class="h-12 md:h-16 object-contain">
+                <img src="1000007105.jpg" alt="Logo" class="h-12 md:h-16 object-contain">
                 <div class="hidden md:block">
                     <h2 class="text-primary font-bold text-sm md:text-lg leading-tight" data-ar="كلية العلوم الاقتصادية والتجارية<br>وعلوم التسيير" data-en="Faculty of Economics, Commerce<br>& Management Sciences">كلية العلوم الاقتصادية والتجارية<br>وعلوم التسيير</h2>
                     <p class="text-[10px] md:text-xs text-gray-500 font-bold" data-ar="جامعة سطيف 1 - فرحات عباس" data-en="Setif 1 University - Ferhat Abbas">جامعة سطيف 1 - فرحات عباس</p>
@@ -146,12 +155,13 @@
                         </ul>
                     </li>
 
-                    <li><a href="#history" class="nav-link" data-ar="النسخ السابقة" data-en="Previous Editions">النسخ السابقة</a></li>
+                    <li><a href="#history" class="nav-link" data-ar="التاريخ" data-en="History">التاريخ</a></li>
                     
                     <li class="group relative py-2">
                         <span class="nav-link flex items-center gap-1 cursor-pointer" data-ar="اللجان <i class='fas fa-chevron-down text-[10px] mt-1'></i>" data-en="Committees <i class='fas fa-chevron-down text-[10px] mt-1'></i>">اللجان <i class="fas fa-chevron-down text-[10px] mt-1"></i></span>
                         <ul class="dropdown-menu absolute rtl:right-0 ltr:left-0 bg-white text-gray-800 shadow-2xl rounded-xl mt-2 w-56 py-3 border border-gray-100 z-50">
                             <li><a href="#committees?tab=high" class="block px-5 py-2 hover:bg-bgLight hover:text-primary transition" data-ar="اللجنة العليا" data-en="High Committee">اللجنة العليا</a></li>
+                            <li><a href="#committees?tab=steering" class="block px-5 py-2 hover:bg-bgLight hover:text-primary transition" data-ar="اللجنة التوجيهية" data-en="Steering Committee">اللجنة التوجيهية</a></li>
                             <li><a href="#committees?tab=scientific" class="block px-5 py-2 hover:bg-bgLight hover:text-primary transition" data-ar="اللجنة العلمية" data-en="Scientific Committee">اللجنة العلمية</a></li>
                             <li><a href="#committees?tab=organizing" class="block px-5 py-2 hover:bg-bgLight hover:text-primary transition" data-ar="اللجنة التنظيمية" data-en="Organizing Committee">اللجنة التنظيمية</a></li>
                         </ul>
@@ -165,7 +175,7 @@
                         <ul class="dropdown-menu absolute rtl:right-0 ltr:left-0 bg-white text-gray-800 shadow-2xl rounded-xl mt-2 w-64 py-3 border border-gray-100 z-50">
                             <li><a href="#submission?section=sub-guidelines" class="block px-5 py-2 hover:bg-bgLight hover:text-secondary transition" data-ar="إرشادات المؤلف" data-en="Author Guidelines">إرشادات المؤلف</a></li>
                             <li><a href="#submission?section=sub-dates" class="block px-5 py-2 hover:bg-bgLight hover:text-secondary transition" data-ar="تواريخ مهمة" data-en="Important Dates">تواريخ مهمة</a></li>
-                            <li><a href="https://events.univ-setif.dz/" target="_blank" class="w-full text-start block px-5 py-2 hover:bg-bgLight text-secondary font-black transition" data-ar="إرسال الورقة (Upload)" data-en="Paper Submission">إرسال الورقة (Upload)</a></li>
+                            <li><button onclick="openModal('submissionModal')" class="w-full text-start block px-5 py-2 hover:bg-bgLight text-secondary font-black transition" data-ar="إرسال الورقة (Upload)" data-en="Paper Submission">إرسال الورقة (Upload)</button></li>
                         </ul>
                     </li>
 
@@ -180,13 +190,13 @@
             </div>
         </div>
 
-        <!-- Mobile Menu -->
+        <!-- Mobile Menu (Fixed Missing Links & Logic) -->
         <div id="mobile-menu" class="hidden xl:hidden bg-primary/95 backdrop-blur-xl absolute w-full border-t border-white/10 shadow-2xl max-h-[85vh] overflow-y-auto z-50">
             <ul class="flex flex-col p-6 text-center space-y-2">
                 <li><a href="#home" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
                 <li><a href="#about" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="حول المؤتمر" data-en="About">حول المؤتمر</a></li>
                 <li><a href="#topics" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="محاور المؤتمر" data-en="Topics">محاور المؤتمر</a></li>
-                <li><a href="#history" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="النسخ السابقة" data-en="Previous Editions">النسخ السابقة</a></li>
+                <li><a href="#history" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="تاريخ المؤتمر" data-en="History">تاريخ المؤتمر</a></li>
                 <li><a href="#committees" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="اللجان" data-en="Committees">اللجان</a></li>
                 <li><a href="#speakers" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="المتحدثون" data-en="Speakers">المتحدثون</a></li>
                 <li><a href="#program" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="البرنامج" data-en="Program">البرنامج</a></li>
@@ -210,8 +220,8 @@
             <div class="hero-pattern"></div>
             
             <div class="container mx-auto px-4 relative z-10 text-center">
-                <div data-aos="fade-down" data-aos-duration="1000" class="mb-8">
-                    <span class="inline-flex items-center gap-3 glass-panel text-accent px-8 py-2.5 rounded-full font-black tracking-widest text-sm md:text-base border-t border-white/20">
+                <div data-aos="fade-down" data-aos-duration="1000" class="mb-8 mt-10">
+                    <span class="inline-flex items-center gap-3 glass-panel text-accent px-8 py-2.5 rounded-full font-black tracking-widest text-sm md:text-base border-t border-white/20 shadow-[0_0_30px_rgba(190,146,56,0.3)]">
                         <i class="fas fa-award"></i> <span data-ar="النسخة الثانية - 2027" data-en="Second Edition - 2027">النسخة الثانية - 2027</span> <i class="fas fa-award"></i>
                     </span>
                 </div>
@@ -279,34 +289,29 @@
                     </div>
 
                     <!-- Side Stats & Images Box -->
-                    <div class="lg:col-span-5 grid grid-cols-2 gap-4 md:gap-6" data-aos="fade-right">
-                        <!-- Card 1 -->
-                        <div class="bg-primary rounded-[2rem] p-6 flex flex-col justify-center items-center text-center text-white shadow-lg transform hover:-translate-y-2 transition-transform h-48">
+                    <div class="lg:col-span-5 grid grid-cols-2 gap-6" data-aos="fade-right">
+                        <div class="bg-gradient-to-br from-primary to-blue-900 rounded-[2rem] p-6 flex flex-col justify-center items-center text-center text-white shadow-lg transform hover:-translate-y-2 transition-transform">
                             <i class="fas fa-globe-americas text-4xl text-lightBlue mb-3"></i>
                             <h5 class="text-4xl font-black mb-1">+15</h5>
                             <p class="text-sm font-bold text-gray-300" data-ar="دولة مشاركة" data-en="Participating Countries">دولة مشاركة</p>
                         </div>
-                        <!-- Card 2 (New Field) -->
-                        <div class="bg-white border border-gray-100 rounded-[2rem] p-6 flex flex-col justify-center items-center text-center shadow-sm hover:shadow-lg transform hover:-translate-y-2 transition-all h-48">
-                            <i class="fas fa-project-diagram text-4xl text-accent mb-3"></i>
-                            <h5 class="text-4xl font-black text-accent mb-1">6</h5>
-                            <p class="text-sm font-bold text-gray-500" data-ar="محاور علمية" data-en="Scientific Tracks">محاور علمية</p>
+                        <div class="rounded-[2rem] overflow-hidden shadow-sm border-4 border-white">
+                            <img src="1000034819.jpg" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700" alt="Economy">
                         </div>
-                        <!-- Card 3 -->
-                        <div class="rounded-[2rem] overflow-hidden shadow-sm bg-secondary relative group flex items-center justify-center h-48">
+                        <div class="rounded-[2rem] overflow-hidden shadow-sm bg-secondary relative group flex items-center justify-center">
                             <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1592982537447-6f2b6dbf58d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')] bg-cover bg-center mix-blend-overlay group-hover:scale-110 transition-transform duration-700"></div>
                             <div class="relative z-10 text-center text-white p-4">
-                                <i class="fas fa-leaf text-4xl mb-2 text-green-200"></i>
-                                <h5 class="font-bold text-lg" data-ar="زراعة مستدامة" data-en="Sustainable Agri">زراعة مستدامة</h5>
+                                <i class="fas fa-leaf text-3xl mb-2 text-green-200"></i>
+                                <h5 class="font-bold text-sm" data-ar="زراعة مستدامة" data-en="Sustainable Agri">زراعة مستدامة</h5>
                             </div>
                         </div>
-                        <!-- Card 4 -->
-                        <div class="bg-white border border-gray-100 rounded-[2rem] p-6 flex flex-col justify-center items-center text-center shadow-sm hover:shadow-lg transform hover:-translate-y-2 transition-all h-48">
-                            <i class="fas fa-users text-4xl text-primary mb-3"></i>
-                            <h5 class="text-4xl font-black text-primary mb-1">+150</h5>
-                            <p class="text-sm font-bold text-gray-500" data-ar="خبيراً وباحثاً" data-en="Experts & Researchers">خبيراً وباحثاً</p>
+                        <div class="bg-white border border-gray-100 rounded-[2rem] p-6 flex flex-col justify-center items-center text-center shadow-sm hover:shadow-lg transform hover:-translate-y-2 transition-all">
+                            <i class="fas fa-users text-4xl text-secondary mb-3"></i>
+                            <h5 class="text-4xl font-black text-primary mb-1">+500</h5>
+                            <p class="text-sm font-bold text-gray-500" data-ar="باحث وخبير" data-en="Researchers">باحث وخبير</p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -374,11 +379,12 @@
         <!-- The Details Container -->
         <div class="container mx-auto px-4 sm:px-8 py-16 relative z-20">
             
-            <!-- PAGE: ABOUT -->
+            <!-- PAGE: ABOUT (خرافي ومنهجي) -->
             <section id="detail-about" class="detail-section">
                 <div class="max-w-7xl mx-auto space-y-10">
-                    <!-- الديباجة -->
-                    <div class="bg-white rounded-[2.5rem] p-8 md:p-14 shadow-xl border border-gray-100 relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
+                    
+                    <!-- 1. الديباجة (Preamble) -->
+                    <div class="bg-white rounded-[2.5rem] p-8 md:p-14 shadow-xl border border-gray-100 relative overflow-hidden group hover:shadow-2xl transition-all duration-500" data-aos="fade-up">
                         <div class="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-bl-[100%] transition-transform duration-700 group-hover:scale-125"></div>
                         <div class="absolute bottom-0 left-0 w-40 h-40 bg-primary/5 rounded-tr-[100%] transition-transform duration-700 group-hover:scale-125"></div>
                         
@@ -396,16 +402,18 @@
                             <div class="lg:w-5/12 w-full relative">
                                 <div class="absolute inset-0 bg-gradient-to-tr from-primary to-accent opacity-20 rounded-[2rem] transform translate-x-3 translate-y-3"></div>
                                 <div class="relative rounded-[2rem] overflow-hidden shadow-lg group-hover:shadow-xl transition-all border-4 border-white">
-                                    <img src="1000007105.jpg" alt="Preamble Image" class="w-full h-[350px] object-cover transform group-hover:scale-110 transition-transform duration-700 bg-white p-4">
+                                    <img src="1000034819.jpg" alt="Preamble Image" class="w-full h-[350px] object-cover transform group-hover:scale-110 transition-transform duration-700">
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                        <!-- الأهمية -->
-                        <div class="bg-gradient-to-br from-primary to-blue-900 text-white p-10 md:p-14 rounded-[2.5rem] shadow-xl relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group">
+                        <!-- 2. الأهمية (Importance) -->
+                        <div class="bg-gradient-to-br from-primary to-blue-900 text-white p-10 md:p-14 rounded-[2.5rem] shadow-xl relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="100">
                             <i class="fas fa-star absolute -bottom-10 rtl:-left-10 ltr:-right-10 text-9xl text-white/5 transform -rotate-12 group-hover:rotate-0 transition-transform duration-700"></i>
+                            <div class="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
+                            
                             <div class="relative z-10">
                                 <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl text-accent mb-8 backdrop-blur-sm border border-white/20 shadow-inner">
                                     <i class="fas fa-gem"></i>
@@ -417,10 +425,11 @@
                             </div>
                         </div>
 
-                        <!-- الإشكالية -->
-                        <div class="bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                        <!-- 3. الإشكالية (Problem Statement) -->
+                        <div class="bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="200">
                             <div class="absolute top-0 rtl:left-0 ltr:right-0 w-2 h-full bg-secondary"></div>
                             <i class="fas fa-question-circle absolute -top-10 rtl:-right-10 ltr:-left-10 text-9xl text-gray-50"></i>
+                            
                             <div class="relative z-10">
                                 <div class="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center text-3xl text-secondary mb-8 border border-secondary/20 shadow-sm">
                                     <i class="fas fa-lightbulb"></i>
@@ -438,9 +447,10 @@
                         </div>
                     </div>
 
-                    <!-- الأهداف -->
-                    <div class="bg-white rounded-[2.5rem] p-10 md:p-14 shadow-xl border border-gray-100 relative overflow-hidden">
+                    <!-- 4. الأهداف (Objectives) -->
+                    <div class="bg-white rounded-[2.5rem] p-10 md:p-14 shadow-xl border border-gray-100 relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
                         <div class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-bgLight to-transparent z-0"></div>
+                        
                         <div class="relative z-10 text-center mb-14 mt-4">
                             <span class="inline-flex items-center gap-2 bg-accent/10 text-accent px-6 py-2 rounded-full font-bold text-sm mb-4 border border-accent/20">
                                 <i class="fas fa-bullseye"></i> <span data-ar="غاياتنا ومقاصدنا" data-en="Our Goals & Purposes">غاياتنا ومقاصدنا</span>
@@ -449,6 +459,7 @@
                         </div>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+                            <!-- Obj 1 -->
                             <div class="flex items-start gap-5 p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:border-accent hover:shadow-md transition-all group">
                                 <div class="w-14 h-14 bg-bgLight text-accent rounded-full flex items-center justify-center text-xl shrink-0 border border-gray-200 group-hover:bg-accent group-hover:text-white transition-colors">1</div>
                                 <div>
@@ -456,6 +467,7 @@
                                     <p class="text-gray-500 text-sm leading-relaxed" data-ar="جمع الباحثين والخبراء لتبادل الرؤى والخبرات حول أحدث التوجهات في الاقتصاد والتنمية المستدامة والأمن الغذائي." data-en="Gathering researchers and experts to exchange visions and experiences on the latest trends in economics, sustainable development, and food security.">جمع الباحثين والخبراء لتبادل الرؤى والخبرات حول أحدث التوجهات في الاقتصاد والتنمية المستدامة والأمن الغذائي.</p>
                                 </div>
                             </div>
+                            <!-- Obj 2 -->
                             <div class="flex items-start gap-5 p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:border-secondary hover:shadow-md transition-all group">
                                 <div class="w-14 h-14 bg-bgLight text-secondary rounded-full flex items-center justify-center text-xl shrink-0 border border-gray-200 group-hover:bg-secondary group-hover:text-white transition-colors">2</div>
                                 <div>
@@ -463,6 +475,7 @@
                                     <p class="text-gray-500 text-sm leading-relaxed" data-ar="تحليل مدى نجاعة السياسات الزراعية والاقتصادية المطبقة حالياً في مواجهة الأزمات، والبحث عن الثغرات لتداركها." data-en="Analyzing the effectiveness of agricultural and economic policies currently applied in facing crises, and looking for gaps to address them.">تحليل مدى نجاعة السياسات الزراعية والاقتصادية المطبقة حالياً في مواجهة الأزمات، والبحث عن الثغرات لتداركها.</p>
                                 </div>
                             </div>
+                            <!-- Obj 3 -->
                             <div class="flex items-start gap-5 p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:border-primary hover:shadow-md transition-all group">
                                 <div class="w-14 h-14 bg-bgLight text-primary rounded-full flex items-center justify-center text-xl shrink-0 border border-gray-200 group-hover:bg-primary group-hover:text-white transition-colors">3</div>
                                 <div>
@@ -470,6 +483,7 @@
                                     <p class="text-gray-500 text-sm leading-relaxed" data-ar="تسليط الضوء على تقنيات الذكاء الاصطناعي وإنترنت الأشياء والزراعة الذكية كأدوات محورية لتحقيق الاستدامة." data-en="Shedding light on artificial intelligence, IoT, and smart agriculture technologies as pivotal tools to achieve sustainability.">تسليط الضوء على تقنيات الذكاء الاصطناعي وإنترنت الأشياء والزراعة الذكية كأدوات محورية لتحقيق الاستدامة.</p>
                                 </div>
                             </div>
+                            <!-- Obj 4 -->
                             <div class="flex items-start gap-5 p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:border-blue-500 hover:shadow-md transition-all group">
                                 <div class="w-14 h-14 bg-bgLight text-blue-500 rounded-full flex items-center justify-center text-xl shrink-0 border border-gray-200 group-hover:bg-blue-500 group-hover:text-white transition-colors">4</div>
                                 <div>
@@ -532,19 +546,19 @@
                 <div class="max-w-5xl mx-auto bg-white rounded-[2rem] p-10 md:p-16 shadow-xl border border-gray-100 text-center relative overflow-hidden">
                     <div class="absolute top-0 right-0 w-40 h-40 bg-accent/5 rounded-bl-full"></div>
                     <div class="inline-block p-6 rounded-full bg-primary/5 text-primary mb-6 border border-primary/10 relative z-10"><i class="fas fa-landmark text-6xl"></i></div>
-                    <h3 class="text-3xl font-black text-primary mb-6 relative z-10" data-ar="النسخ السابقة للمؤتمر" data-en="Previous Editions">النسخ السابقة للمؤتمر</h3>
-                    <p class="text-gray-600 text-lg leading-relaxed mb-12 max-w-3xl mx-auto relative z-10" data-ar="يأتي هذا المؤتمر في نسخته الثانية استكمالاً للنجاح الباهر الذي حققته النسخة الأولى، والموسومة بـ &quot;استخدامات الذكاء الاصطناعي في الخدمات المالية&quot;، والتي جمعت مئات الباحثين وصناع القرار لمناقشة تحديات الاقتصاد المعاصر." data-en="This second edition builds upon the resounding success of the first edition, titled &quot;Applications of Artificial Intelligence in Financial Services&quot;, which gathered hundreds of researchers and decision-makers.">يأتي هذا المؤتمر في نسخته الثانية استكمالاً للنجاح الباهر الذي حققته النسخة الأولى، والموسومة بـ "استخدامات الذكاء الاصطناعي في الخدمات المالية"، والتي جمعت مئات الباحثين وصناع القرار لمناقشة تحديات الاقتصاد المعاصر.</p>
+                    <h3 class="text-3xl font-black text-primary mb-6 relative z-10" data-ar="تاريخ المؤتمر والنسخ السابقة" data-en="Conference History & Editions">تاريخ المؤتمر والنسخ السابقة</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-12 max-w-3xl mx-auto relative z-10" data-ar="يأتي هذا المؤتمر في نسخته الثانية استكمالاً للنجاح الباهر الذي حققته النسخة الأولى، والتي جمعت مئات الباحثين وصناع القرار لمناقشة تحديات الاقتصاد المعاصر." data-en="This second edition builds upon the resounding success of the first edition, which gathered hundreds of researchers and decision-makers.">يأتي هذا المؤتمر في نسخته الثانية استكمالاً للنجاح الباهر الذي حققته النسخة الأولى، والتي جمعت مئات الباحثين وصناع القرار لمناقشة تحديات الاقتصاد المعاصر.</p>
                     
                     <div class="bg-bgLight p-8 md:p-10 rounded-3xl border border-gray-200 text-right rtl:text-right ltr:text-left flex flex-col md:flex-row items-center gap-10 relative z-10 shadow-sm">
                         <div class="w-full md:w-1/3 text-center md:text-start rtl:md:text-right ltr:md:text-left">
-                            <h4 class="text-4xl font-black text-accent mb-4 drop-shadow-sm" data-ar="النسخة الأولى" data-en="First Edition">النسخة الأولى</h4>
-                            <p class="font-bold text-primary text-xl" data-ar="استخدامات الذكاء الاصطناعي في الخدمات المالية" data-en="Applications of Artificial Intelligence in Financial Services">استخدامات الذكاء الاصطناعي في الخدمات المالية</p>
+                            <h4 class="text-7xl font-black text-accent mb-2 drop-shadow-sm">2025</h4>
+                            <p class="font-bold text-primary text-xl" data-ar="النسخة الأولى للمؤتمر" data-en="First Edition">النسخة الأولى للمؤتمر</p>
                         </div>
                         <div class="w-full md:w-2/3 border-r-4 rtl:border-r-4 ltr:border-l-4 ltr:border-r-0 border-accent rtl:pr-8 ltr:pl-8">
                             <ul class="space-y-5 text-gray-700 font-semibold text-lg">
                                 <li class="flex items-start gap-3"><i class="fas fa-check-circle text-secondary mt-1"></i> <span data-ar="مشاركة أكثر من 200 باحث من 15 دولة." data-en="Participation of over 200 researchers from 15 countries.">مشاركة أكثر من 200 باحث من 15 دولة.</span></li>
                                 <li class="flex items-start gap-3"><i class="fas fa-check-circle text-secondary mt-1"></i> <span data-ar="نشر 50 ورقة بحثية في مجلات علمية محكمة عالية التصنيف." data-en="50 papers published in highly ranked peer-reviewed journals.">نشر 50 ورقة بحثية في مجلات علمية محكمة عالية التصنيف.</span></li>
-                                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-secondary mt-1"></i> <span data-ar="صياغة توصيات تم تبنيها من طرف جهات رسمية لدعم القطاع المالي." data-en="Recommendations formulated and adopted by official bodies to support the financial sector.">صياغة توصيات تم تبنيها من طرف جهات رسمية لدعم القطاع المالي.</span></li>
+                                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-secondary mt-1"></i> <span data-ar="صياغة توصيات تم تبنيها من طرف جهات رسمية لدعم الأمن الغذائي." data-en="Recommendations formulated and adopted by official bodies.">صياغة توصيات تم تبنيها من طرف جهات رسمية لدعم الأمن الغذائي.</span></li>
                             </ul>
                         </div>
                     </div>
@@ -556,6 +570,7 @@
                 <div class="max-w-6xl mx-auto">
                     <div class="flex flex-wrap justify-center gap-3 mb-10">
                         <button onclick="switchComTab('high')" id="btn-com-high" class="com-tab active-tab flex-1 py-4 px-6 rounded-2xl font-bold transition-all bg-primary text-white shadow-lg text-sm md:text-base border border-transparent" data-ar="اللجنة العليا" data-en="High Committee">اللجنة العليا</button>
+                        <button onclick="switchComTab('steering')" id="btn-com-steering" class="com-tab flex-1 py-4 px-6 rounded-2xl font-bold transition-all bg-white text-gray-500 hover:text-primary shadow-sm border border-gray-200 text-sm md:text-base" data-ar="اللجنة التوجيهية" data-en="Steering Committee">اللجنة التوجيهية</button>
                         <button onclick="switchComTab('scientific')" id="btn-com-scientific" class="com-tab flex-1 py-4 px-6 rounded-2xl font-bold transition-all bg-white text-gray-500 hover:text-primary shadow-sm border border-gray-200 text-sm md:text-base" data-ar="اللجنة العلمية" data-en="Scientific Committee">اللجنة العلمية</button>
                         <button onclick="switchComTab('organizing')" id="btn-com-organizing" class="com-tab flex-1 py-4 px-6 rounded-2xl font-bold transition-all bg-white text-gray-500 hover:text-primary shadow-sm border border-gray-200 text-sm md:text-base" data-ar="اللجنة التنظيمية" data-en="Organizing Committee">اللجنة التنظيمية</button>
                     </div>
@@ -574,6 +589,14 @@
                                 <p class="text-xl text-gray-800 font-bold mb-1" data-ar="أ.د. عميد كلية العلوم الاقتصادية" data-en="Prof. Dean of Economics Faculty">أ.د. عميد كلية العلوم الاقتصادية</p>
                                 <p class="text-primary font-bold" data-ar="رئيساً للمؤتمر" data-en="Conference Chair">رئيساً للمؤتمر</p>
                             </div>
+                        </div>
+
+                        <!-- Steering Committee -->
+                        <div id="com-steering" class="com-content hidden w-full text-center py-4 relative z-10">
+                            <div class="inline-block p-5 rounded-full bg-secondary/10 text-secondary mb-4"><i class="fas fa-compass text-5xl"></i></div>
+                            <h3 class="text-3xl font-black text-primary mb-6" data-ar="اللجنة التوجيهية" data-en="Steering Committee">اللجنة التوجيهية</h3>
+                            <p class="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed bg-bgLight p-6 rounded-2xl border border-gray-100 mb-8" data-ar="تتولى رسم السياسات العامة للمؤتمر ومتابعة التنسيق بين مختلف اللجان والجهات الداعمة لضمان تحقيق الأهداف الاستراتيجية." data-en="Responsible for drawing the general policies and following up coordination.">تتولى رسم السياسات العامة للمؤتمر ومتابعة التنسيق بين مختلف اللجان والجهات الداعمة لضمان تحقيق الأهداف الاستراتيجية.</p>
+                            <div class="border-2 border-dashed border-gray-200 p-6 rounded-xl max-w-lg mx-auto text-gray-400 font-bold text-xl" data-ar="[ سيتم الإعلان عن الأعضاء قريباً ]" data-en="[ Members List TBA ]">[ سيتم الإعلان عن الأعضاء قريباً ]</div>
                         </div>
                         
                         <!-- Scientific Committee -->
@@ -638,8 +661,8 @@
             <section id="detail-program" class="detail-section">
                 <div class="max-w-4xl mx-auto bg-white rounded-[2rem] shadow-xl border border-gray-100 overflow-hidden">
                     <div class="flex flex-col sm:flex-row border-b border-gray-200">
-                        <button onclick="switchProgramTab('day1')" id="btn-day1" class="program-tab active flex-1 py-6 font-bold text-xl bg-primary text-white transition-colors" data-ar="اليوم الأول (13 أفريل)" data-en="Day 1 (Apr 13)">اليوم الأول (13 أفريل)</button>
-                        <button onclick="switchProgramTab('day2')" id="btn-day2" class="program-tab flex-1 py-6 font-bold text-xl bg-gray-50 text-gray-500 hover:bg-gray-100 transition-colors border-r rtl:border-r-0 rtl:border-l border-gray-200" data-ar="اليوم الثاني (14 أفريل)" data-en="Day 2 (Apr 14)">اليوم الثاني (14 أفريل)</button>
+                        <button onclick="switchProgramTab('day1')" id="btn-day1" class="program-tab active flex-1 py-6 font-bold text-xl bg-primary text-white transition-colors" data-ar="اليوم الأول (20 أكتوبر)" data-en="Day 1 (Oct 20)">اليوم الأول (20 أكتوبر)</button>
+                        <button onclick="switchProgramTab('day2')" id="btn-day2" class="program-tab flex-1 py-6 font-bold text-xl bg-gray-50 text-gray-500 hover:bg-gray-100 transition-colors border-r rtl:border-r-0 rtl:border-l border-gray-200" data-ar="اليوم الثاني (21 أكتوبر)" data-en="Day 2 (Oct 21)">اليوم الثاني (21 أكتوبر)</button>
                     </div>
                     
                     <div id="prog-day1" class="prog-content p-8 md:p-12 space-y-4">
@@ -705,26 +728,21 @@
                     <!-- Important Dates -->
                     <div id="sub-dates" class="bg-white p-10 rounded-[2rem] shadow-xl border border-gray-100 scroll-mt-24">
                         <h3 class="text-2xl font-black mb-8 text-primary border-b-2 pb-4 inline-block" data-ar="تواريخ مهمة" data-en="Important Dates">تواريخ مهمة</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="bg-bgLight p-8 rounded-2xl border border-gray-200 shadow-sm text-center transform transition hover:-translate-y-2 hover:shadow-md">
                                 <div class="w-14 h-14 bg-accent/20 text-accent rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="far fa-calendar-check"></i></div>
                                 <h4 class="font-bold text-gray-800 mb-2" data-ar="آخر أجل للمُلخصات" data-en="Deadline for Abstracts">آخر أجل للمُلخصات</h4>
-                                <p class="text-accent font-black text-xl" dir="ltr">15 Jan 2027</p>
+                                <p class="text-accent font-black text-xl" dir="ltr">15 Jul 2027</p>
                             </div>
                             <div class="bg-bgLight p-8 rounded-2xl border border-gray-200 shadow-sm text-center transform transition hover:-translate-y-2 hover:shadow-md">
                                 <div class="w-14 h-14 bg-secondary/20 text-secondary rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="far fa-envelope-open"></i></div>
                                 <h4 class="font-bold text-gray-800 mb-2" data-ar="الرد على الملخصات" data-en="Notification of Acceptance">الرد على الملخصات</h4>
-                                <p class="text-secondary font-black text-xl" dir="ltr">01 Feb 2027</p>
+                                <p class="text-secondary font-black text-xl" dir="ltr">01 Aug 2027</p>
                             </div>
                             <div class="bg-bgLight p-8 rounded-2xl border border-gray-200 shadow-sm text-center transform transition hover:-translate-y-2 hover:shadow-md">
                                 <div class="w-14 h-14 bg-primary/20 text-primary rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fas fa-file-pdf"></i></div>
-                                <h4 class="font-bold text-gray-800 mb-2" data-ar="المداخلات كاملة" data-en="Full Paper Submission">المداخلات كاملة</h4>
-                                <p class="text-primary font-black text-xl" dir="ltr">15 Mar 2027</p>
-                            </div>
-                            <div class="bg-gradient-to-br from-accent to-yellow-600 p-8 rounded-2xl border border-gray-200 shadow-lg text-center transform transition hover:-translate-y-2 hover:shadow-xl text-white">
-                                <div class="w-14 h-14 bg-white/20 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fas fa-bullhorn"></i></div>
-                                <h4 class="font-bold text-white mb-2" data-ar="أيام المؤتمر" data-en="Conference Dates">أيام المؤتمر</h4>
-                                <p class="text-white font-black text-xl" dir="ltr">13-14 Apr 2027</p>
+                                <h4 class="font-bold text-gray-800 mb-2" data-ar="استقبال المداخلات كاملة" data-en="Full Paper Submission">استقبال المداخلات كاملة</h4>
+                                <p class="text-primary font-black text-xl" dir="ltr">15 Sep 2027</p>
                             </div>
                         </div>
                     </div>
@@ -758,41 +776,10 @@
                             <div class="w-28 h-28 bg-secondary/10 text-secondary rounded-full flex items-center justify-center text-5xl mb-6"><i class="fas fa-cloud-upload-alt"></i></div>
                             <h3 class="text-3xl font-black text-primary mb-4" data-ar="إرسال الورقة البحثية" data-en="Paper Submission">إرسال الورقة البحثية</h3>
                             <p class="text-gray-500 mb-8 text-lg" data-ar="قم برفع ورقتك البحثية عبر منصتنا الإلكترونية الآمنة لمراجعتها من قبل اللجنة العلمية." data-en="Upload your research paper via our secure electronic platform for review by the scientific committee.">قم برفع ورقتك البحثية عبر منصتنا الإلكترونية الآمنة لمراجعتها من قبل اللجنة العلمية.</p>
-                            <a href="https://events.univ-setif.dz/" target="_blank" class="bg-secondary hover:bg-green-700 text-white font-bold py-4 px-10 rounded-2xl transition-all shadow-xl transform hover:-translate-y-1 text-xl w-full block" data-ar="تقديم الورقة الآن" data-en="Submit Paper Now">تقديم الورقة الآن</a>
+                            <button onclick="openModal('submissionModal')" class="bg-secondary hover:bg-green-700 text-white font-bold py-4 px-10 rounded-2xl transition-all shadow-xl transform hover:-translate-y-1 text-xl w-full" data-ar="تقديم الورقة الآن" data-en="Submit Paper Now">تقديم الورقة الآن</button>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- PAGE: DATES (Alternative independent route if accessed directly via Dates in main menu) -->
-            <section id="detail-dates" class="detail-section">
-                 <div class="max-w-5xl mx-auto bg-white p-10 md:p-14 rounded-[2rem] shadow-xl border border-gray-100 text-center">
-                     <div class="inline-block p-6 rounded-full bg-blue-50 text-blue-500 mb-6"><i class="fas fa-clock text-6xl"></i></div>
-                     <h3 class="text-3xl font-black text-primary mb-10" data-ar="الجدول الزمني للمؤتمر" data-en="Conference Timeline">الجدول الزمني للمؤتمر</h3>
-                     
-                     <div class="relative border-r-4 rtl:border-r-4 ltr:border-l-4 ltr:border-r-0 border-gray-100 rtl:pr-8 ltr:pl-8 space-y-8 text-right rtl:text-right ltr:text-left max-w-3xl mx-auto">
-                        <div class="relative bg-bgLight p-6 rounded-2xl border border-gray-200">
-                            <div class="absolute rtl:-right-[44px] ltr:-left-[44px] top-1/2 -translate-y-1/2 w-6 h-6 bg-accent rounded-full border-4 border-white shadow"></div>
-                            <h4 class="text-xl font-bold text-gray-800 mb-1" data-ar="آخر أجل لاستقبال المُلخصات" data-en="Deadline for Abstracts">آخر أجل لاستقبال المُلخصات</h4>
-                            <p class="text-accent font-black text-lg" dir="ltr">15 Jan 2027</p>
-                        </div>
-                        <div class="relative bg-bgLight p-6 rounded-2xl border border-gray-200">
-                            <div class="absolute rtl:-right-[44px] ltr:-left-[44px] top-1/2 -translate-y-1/2 w-6 h-6 bg-secondary rounded-full border-4 border-white shadow"></div>
-                            <h4 class="text-xl font-bold text-gray-800 mb-1" data-ar="الرد على الملخصات" data-en="Notification of Acceptance">الرد على الملخصات</h4>
-                            <p class="text-secondary font-black text-lg" dir="ltr">01 Feb 2027</p>
-                        </div>
-                        <div class="relative bg-bgLight p-6 rounded-2xl border border-gray-200">
-                            <div class="absolute rtl:-right-[44px] ltr:-left-[44px] top-1/2 -translate-y-1/2 w-6 h-6 bg-primary rounded-full border-4 border-white shadow"></div>
-                            <h4 class="text-xl font-bold text-gray-800 mb-1" data-ar="استقبال المداخلات كاملة" data-en="Full Paper Submission">استقبال المداخلات كاملة</h4>
-                            <p class="text-primary font-black text-lg" dir="ltr">15 Mar 2027</p>
-                        </div>
-                        <div class="relative bg-gradient-to-r from-accent to-yellow-600 p-6 rounded-2xl text-white shadow-lg">
-                            <div class="absolute rtl:-right-[44px] ltr:-left-[44px] top-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full border-4 border-accent shadow"></div>
-                            <h4 class="text-xl font-bold mb-1" data-ar="أيام انعقاد المؤتمر" data-en="Conference Dates">أيام انعقاد المؤتمر</h4>
-                            <p class="font-black text-lg" dir="ltr">13-14 Apr 2027</p>
-                        </div>
-                     </div>
-                 </div>
             </section>
 
             <!-- PAGE: SPONSORS -->
@@ -848,7 +835,7 @@
                             <div class="w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center text-3xl shrink-0"><i class="fas fa-envelope"></i></div>
                             <div>
                                 <h4 class="text-xl font-bold text-gray-800 mb-1" data-ar="البريد الإلكتروني" data-en="Email Address">البريد الإلكتروني</h4>
-                                <p class="text-gray-600 font-mono text-lg" dir="ltr">Iceic2027@univ-setif.dz</p>
+                                <p class="text-gray-600 font-mono text-lg" dir="ltr">ceic2027@univ-setif.dz</p>
                             </div>
                         </div>
                         <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-md flex items-center gap-6 hover:-translate-y-1 transition transform">
@@ -892,7 +879,7 @@
         <div class="container mx-auto px-4 sm:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                 <div>
-                    <h3 class="text-2xl font-bold mb-6 text-accent flex items-center gap-2"><img src="1000033819.jpg" class="h-10 brightness-0 invert" alt="Conference Logo"> <span data-ar="عن المؤتمر" data-en="About Conference">عن المؤتمر</span></h3>
+                    <h3 class="text-2xl font-bold mb-6 text-accent flex items-center gap-2"><img src="1000033819.jpg" class="h-10 brightness-0 invert" alt=""> <span data-ar="عن المؤتمر" data-en="About Conference">عن المؤتمر</span></h3>
                     <p class="text-gray-300 leading-relaxed text-justify-custom text-sm" data-ar="المؤتمر الدولي الثاني لقضايا اقتصادية معاصرة، منبر أكاديمي يجمع الخبراء لمناقشة التحديات وبناء سياسات مستدامة للأمن الغذائي." data-en="An academic platform gathering experts to discuss challenges and build sustainable food security policies amidst global transformations.">المؤتمر الدولي الثاني لقضايا اقتصادية معاصرة، منبر أكاديمي يجمع الخبراء لمناقشة التحديات وبناء سياسات مستدامة للأمن الغذائي.</p>
                 </div>
                 <div>
@@ -908,7 +895,7 @@
                     <ul class="space-y-4 text-gray-300">
                         <li class="flex items-center gap-3 bg-white/5 p-3 rounded-lg border border-white/10 hover:bg-white/10 transition">
                             <i class="fas fa-envelope text-secondary text-lg"></i>
-                            <span dir="ltr" class="font-mono text-sm">Iceic2027@univ-setif.dz</span>
+                            <span dir="ltr" class="font-mono text-sm">ceic2027@univ-setif.dz</span>
                         </li>
                         <li class="flex items-start gap-3 bg-white/5 p-3 rounded-lg border border-white/10 hover:bg-white/10 transition">
                             <i class="fas fa-map-marker-alt text-secondary text-lg mt-1"></i>
@@ -927,7 +914,7 @@
         </div>
     </footer>
 
-    <!-- Modals -->
+    <!-- Modals (Register & Submit) -->
     <div id="registerModal" class="modal hidden fixed inset-0 z-[100] items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-md" onclick="closeModal('registerModal')"></div>
         <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl relative z-10 overflow-hidden transform transition-all">
@@ -946,6 +933,30 @@
                     <input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition bg-gray-50 focus:bg-white" dir="ltr">
                 </div>
                 <button type="submit" class="w-full bg-accent hover:bg-yellow-600 text-white font-bold py-4 rounded-xl mt-4 transition shadow-lg text-lg" data-ar="تأكيد التسجيل" data-en="Confirm Registration">تأكيد التسجيل</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="submissionModal" class="modal hidden fixed inset-0 z-[100] items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-md" onclick="closeModal('submissionModal')"></div>
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl relative z-10 overflow-hidden transform transition-all">
+            <div class="bg-gradient-to-r from-secondary to-green-700 p-6 text-white text-center relative">
+                <button onclick="closeModal('submissionModal')" class="absolute rtl:left-4 ltr:right-4 top-4 text-white/70 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+                <i class="fas fa-cloud-upload-alt text-4xl text-white mb-2"></i>
+                <h3 class="text-2xl font-bold" data-ar="إرسال ورقة بحثية" data-en="Submit Paper">إرسال ورقة بحثية</h3>
+            </div>
+            <form class="p-8 space-y-5" onsubmit="event.preventDefault(); alert(currentLang==='ar'?'تم رفع الملف بنجاح!':'File uploaded successfully!'); closeModal('submissionModal');">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2" data-ar="عنوان المداخلة" data-en="Paper Title">عنوان المداخلة</label>
+                    <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition bg-gray-50 focus:bg-white">
+                </div>
+                <div class="border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center hover:bg-green-50 hover:border-secondary transition cursor-pointer group">
+                    <i class="fas fa-file-upload text-4xl text-gray-400 mb-3 group-hover:text-secondary transition"></i>
+                    <p class="text-sm font-bold text-gray-600 mb-1" data-ar="اضغط هنا لرفع الملف" data-en="Click here to upload file">اضغط هنا لرفع الملف</p>
+                    <p class="text-xs text-gray-400">(PDF, DOCX)</p>
+                    <input type="file" required class="hidden">
+                </div>
+                <button type="submit" class="w-full bg-secondary hover:bg-green-800 text-white font-bold py-4 rounded-xl mt-4 transition shadow-lg text-lg" data-ar="إرسال المداخلة" data-en="Submit Paper">إرسال المداخلة</button>
             </form>
         </div>
     </div>
@@ -987,7 +998,7 @@
         };
         const sectionTitles = {
             'about': { ar: 'حول المؤتمر', en: 'About Conference' },
-            'history': { ar: 'النسخ السابقة', en: 'Previous Editions' },
+            'history': { ar: 'تاريخ المؤتمر', en: 'Conference History' },
             'topics': { ar: 'محاور المؤتمر', en: 'Conference Tracks' },
             'speakers': { ar: 'المتحدثون الرئيسيون', en: 'Keynote Speakers' },
             'program': { ar: 'برنامج المؤتمر', en: 'Conference Program' },
@@ -1017,7 +1028,6 @@
                     if(baseHash === 'home') {
                         const homeView = document.getElementById('view-home');
                         homeView.style.display = 'block';
-                        homeView.offsetHeight; 
                         homeView.classList.add('active');
                         document.getElementById('subpage-header').classList.add('hidden');
                     } else {
@@ -1034,7 +1044,6 @@
                         const targetSec = document.getElementById('detail-' + baseHash);
                         if(targetSec) {
                             targetSec.style.display = 'block';
-                            targetSec.offsetHeight; 
                             targetSec.classList.add('active');
                         }
 
@@ -1048,7 +1057,7 @@
                     }
 
                     document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
-                        link.classList.remove('active');
+                        link.classList.remove('active', 'text-accent', 'text-secondary');
                         const href = link.getAttribute('href');
                         if (href === `#${baseHash}` || href === `#${fullHash}`) {
                             link.classList.add('active');
@@ -1069,9 +1078,7 @@
                             let secId = params.get('section');
                             let el = document.getElementById(secId);
                             if (el) {
-                                setTimeout(() => {
-                                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                }, 300);
+                                setTimeout(() => { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 300);
                             }
                         } else { window.scrollTo({ top: 0, behavior: 'smooth' }); }
                     } else { window.scrollTo({ top: 0, behavior: 'smooth' }); }
@@ -1089,7 +1096,7 @@
         window.addEventListener('hashchange', handleRouting);
         window.addEventListener('load', handleRouting);
 
-        const countDownDate = new Date("Apr 13, 2027 08:00:00").getTime();
+        const countDownDate = new Date("Oct 20, 2027 08:00:00").getTime();
         setInterval(function() {
             const now = new Date().getTime();
             const distance = countDownDate - now;
@@ -1121,57 +1128,25 @@
         document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', () => menu.classList.add('hidden')));
 
         function switchComTab(tabName) {
-            document.querySelectorAll('.com-content').forEach(el => {
-                el.classList.add('hidden');
-                el.classList.remove('animate-fade-in');
-            });
-            document.querySelectorAll('.com-tab').forEach(el => {
-                el.classList.remove('bg-primary', 'text-white', 'shadow-lg');
-                el.classList.add('text-gray-500', 'bg-white', 'shadow-sm');
-            });
+            document.querySelectorAll('.com-content').forEach(el => { el.classList.add('hidden'); el.classList.remove('active'); });
+            document.querySelectorAll('.com-tab').forEach(el => { el.classList.remove('bg-primary', 'text-white', 'shadow-md'); el.classList.add('text-gray-500', 'bg-white', 'shadow-sm'); });
             const target = document.getElementById('com-' + tabName);
-            if(target) {
-                target.classList.remove('hidden');
-                setTimeout(() => target.classList.add('animate-fade-in'), 10);
-            }
+            if(target) { target.classList.remove('hidden'); setTimeout(() => target.classList.add('active'), 10); }
             const activeBtn = document.getElementById('btn-com-' + tabName);
-            if(activeBtn) {
-                activeBtn.classList.remove('text-gray-500', 'bg-white', 'shadow-sm');
-                activeBtn.classList.add('bg-primary', 'text-white', 'shadow-lg');
-            }
+            if(activeBtn) { activeBtn.classList.remove('text-gray-500', 'bg-white', 'shadow-sm'); activeBtn.classList.add('bg-primary', 'text-white', 'shadow-md'); }
         }
 
         function switchProgramTab(tabName) {
-            document.querySelectorAll('.prog-content').forEach(el => {
-                el.classList.add('hidden');
-                el.classList.remove('animate-fade-in');
-            });
-            document.querySelectorAll('.program-tab').forEach(el => {
-                el.classList.remove('bg-primary', 'text-white');
-                el.classList.add('bg-gray-50', 'text-gray-500');
-            });
+            document.querySelectorAll('.prog-content').forEach(el => { el.classList.add('hidden'); el.classList.remove('active'); });
+            document.querySelectorAll('.program-tab').forEach(el => { el.classList.remove('bg-primary', 'text-white'); el.classList.add('bg-gray-50', 'text-gray-500'); });
             const target = document.getElementById('prog-' + tabName);
-            if(target){
-                target.classList.remove('hidden');
-                setTimeout(() => target.classList.add('animate-fade-in'), 10);
-            }
+            if(target){ target.classList.remove('hidden'); setTimeout(() => target.classList.add('active'), 10); }
             const activeBtn = document.getElementById('btn-' + tabName);
-            if(activeBtn){
-                activeBtn.classList.remove('bg-gray-50', 'text-gray-500');
-                activeBtn.classList.add('bg-primary', 'text-white');
-            }
+            if(activeBtn){ activeBtn.classList.remove('bg-gray-50', 'text-gray-500'); activeBtn.classList.add('bg-primary', 'text-white'); }
         }
 
-        function openModal(id) { 
-            document.getElementById(id).classList.remove('hidden'); 
-            document.getElementById(id).classList.add('flex'); 
-            document.body.style.overflow = 'hidden'; 
-        }
-        function closeModal(id) { 
-            document.getElementById(id).classList.add('hidden'); 
-            document.getElementById(id).classList.remove('flex'); 
-            document.body.style.overflow = 'auto'; 
-        }
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); document.getElementById(id).classList.add('flex'); document.body.style.overflow = 'hidden'; }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('flex'); document.body.style.overflow = 'auto'; }
     </script>
 </body>
 </html>
