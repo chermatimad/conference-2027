@@ -570,7 +570,6 @@
                             <h4 class="text-7xl font-black text-accent mb-2 drop-shadow-sm">2025</h4>
                             <p class="font-bold text-primary text-lg leading-relaxed mb-4" data-ar="المؤتمر الدولي الأول للقضايا الاقتصادية المعاصرة &quot;استخدامات الذكاء الاصطناعي في الخدمات المالية&quot;" data-en="1st International Conference on Contemporary Economic Issues &quot;Uses of AI in Financial Services&quot;">المؤتمر الدولي الأول للقضايا الاقتصادية المعاصرة "استخدامات الذكاء الاصطناعي في الخدمات المالية"</p>
                             <div class="rounded-xl overflow-hidden shadow-md border-2 border-white">
-                                <!-- استخدام Fallback للحماية من خطأ عدم وجود الصورة -->
                                 <img src="Iceic_2025.png" alt="ICEIC 2025" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1540317580384-e5d43867caa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'; this.onerror=null;">
                             </div>
                         </div>
@@ -595,41 +594,40 @@
                     </div>
                     
                     <div class="bg-white border border-gray-100 rounded-[2rem] p-8 md:p-14 shadow-xl min-h-[400px]">
+                        
                         <!-- High Committee -->
                         <div id="com-high" class="com-content w-full text-center py-4 relative z-10">
                             <div class="inline-block p-6 rounded-full bg-accent/10 text-accent mb-6"><i class="fas fa-crown text-6xl"></i></div>
                             <h3 class="text-3xl font-black text-primary mb-8" data-ar="اللجنة العليا للمؤتمر" data-en="High Committee">اللجنة العليا للمؤتمر</h3>
-                            <div class="bg-bgLight p-6 rounded-2xl inline-block w-full max-w-lg mb-4 border border-gray-200">
-                                <p class="text-xl text-gray-800 font-bold mb-1" data-ar="أ.د. مدير جامعة سطيف 1" data-en="Prof. Rector of Setif 1 University">أ.د. مدير جامعة سطيف 1</p>
-                                <p class="text-accent font-bold" data-ar="رئيساً شرفياً" data-en="Honorary President">رئيساً شرفياً</p>
-                            </div>
-                            <br>
-                            <div class="bg-bgLight p-6 rounded-2xl inline-block w-full max-w-lg border border-gray-200">
-                                <p class="text-xl text-gray-800 font-bold mb-1" data-ar="أ.د. عميد كلية العلوم الاقتصادية" data-en="Prof. Dean of Economics Faculty">أ.د. عميد كلية العلوم الاقتصادية</p>
-                                <p class="text-primary font-bold" data-ar="رئيساً للمؤتمر" data-en="Conference Chair">رئيساً للمؤتمر</p>
+                            
+                            <!-- هنا سيتم حقن أعضاء اللجنة العليا برمجياً -->
+                            <div id="high-members" class="space-y-4">
+                                <div class="text-center py-10"><i class="fas fa-spinner fa-spin text-3xl text-accent"></i></div>
                             </div>
                         </div>
 
                         <!-- Scientific Committee -->
                         <div id="com-scientific" class="com-content hidden w-full text-center py-4 relative z-10">
                             <div class="inline-block p-5 rounded-full bg-primary/10 text-primary mb-4"><i class="fas fa-microscope text-5xl"></i></div>
-                            <h3 class="text-3xl font-black text-primary mb-2" data-ar="اللجنة العلمية" data-en="Scientific Committee">اللجنة العلمية</h3>
-                            <p class="text-xl text-accent font-bold mb-10" data-ar="رئيس اللجنة: يُحدد لاحقاً" data-en="Chair: To Be Announced">رئيس اللجنة: يُحدد لاحقاً</p>
+                            <h3 class="text-3xl font-black text-primary mb-8" data-ar="اللجنة العلمية" data-en="Scientific Committee">اللجنة العلمية</h3>
                             
-                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-right rtl:text-right ltr:text-left">
-                                <div class="bg-bgLight p-5 rounded-2xl border border-gray-100"><span class="font-bold text-primary text-lg">أ.د. اسم اللقب</span><br><span class="text-sm text-gray-500"><i class="fas fa-university mr-1 text-accent"></i> جامعة سطيف 1</span></div>
-                                <div class="bg-bgLight p-5 rounded-2xl border border-gray-100"><span class="font-bold text-primary text-lg">أ.د. اسم اللقب</span><br><span class="text-sm text-gray-500"><i class="fas fa-university mr-1 text-accent"></i> جامعة الجزائر</span></div>
-                                <div class="bg-bgLight p-5 rounded-2xl border border-gray-100"><span class="font-bold text-primary text-lg">د. اسم اللقب</span><br><span class="text-sm text-gray-500"><i class="fas fa-globe mr-1 text-accent"></i> خبير دولي</span></div>
+                            <!-- هنا سيتم حقن أعضاء اللجنة العلمية برمجياً -->
+                            <div id="scientific-members" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-right rtl:text-right ltr:text-left">
+                                <div class="col-span-full text-center py-10"><i class="fas fa-spinner fa-spin text-3xl text-primary"></i></div>
                             </div>
                         </div>
 
                         <!-- Organizing Committee -->
                         <div id="com-organizing" class="com-content hidden w-full text-center py-4 relative z-10">
                             <div class="inline-block p-5 rounded-full bg-blue-500/10 text-blue-500 mb-4"><i class="fas fa-users-cog text-5xl"></i></div>
-                            <h3 class="text-3xl font-black text-primary mb-2" data-ar="اللجنة التنظيمية" data-en="Organizing Committee">اللجنة التنظيمية</h3>
-                            <p class="text-xl text-accent font-bold mb-8" data-ar="رئيس اللجنة: يُحدد لاحقاً" data-en="Chair: To Be Announced">رئيس اللجنة: يُحدد لاحقاً</p>
-                            <p class="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed bg-bgLight p-6 rounded-2xl border border-gray-100" data-ar="تضم اللجنة التنظيمية فريقاً متكاملاً من الأساتذة وطلبة الدكتوراه، يسهرون على تقديم أفضل تجربة للمشاركين وتوفير كافة المتطلبات اللوجستية والتقنية." data-en="The organizing committee includes a team ensuring the best experience for participants.">تضم اللجنة التنظيمية فريقاً متكاملاً من الأساتذة وطلبة الدكتوراه، يسهرون على تقديم أفضل تجربة للمشاركين وتوفير كافة المتطلبات اللوجستية والتقنية.</p>
+                            <h3 class="text-3xl font-black text-primary mb-8" data-ar="اللجنة التنظيمية" data-en="Organizing Committee">اللجنة التنظيمية</h3>
+                            
+                            <!-- هنا سيتم حقن أعضاء اللجنة التنظيمية برمجياً -->
+                            <div id="organizing-members" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-right rtl:text-right ltr:text-left">
+                                <div class="col-span-full text-center py-10"><i class="fas fa-spinner fa-spin text-3xl text-blue-500"></i></div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </section>
@@ -1135,18 +1133,17 @@
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('flex'); document.body.style.overflow = 'auto'; }
 
         // ==========================================
-        // SANITY API CONNECTION (الجسر الذي يجلب المتحدثين)
+        // SANITY API CONNECTION (الجسر الذي يجلب البيانات)
         // ==========================================
-        // تم دمج رقم مشروعك الخاص بشكل آلي!
         const PROJECT_ID = '57kwqs97'; 
         const DATASET = 'production';
         
+        // 1. جلب المتحدثين
         async function fetchSpeakers() {
             const container = document.getElementById('speakers-container');
             if (!container) return;
 
             try {
-                // أمر جلب البيانات (GROQ Query) يطلب الاسم، التخصص، النبذة ورابط الصورة
                 const query = encodeURIComponent('*[_type == "speaker"]{name, role, bio, "imageUrl": image.asset->url}');
                 const url = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${query}`;
                 
@@ -1159,15 +1156,10 @@
                 }
 
                 let html = '';
-                const colors = [
-                    { gradient: 'from-primary to-blue-500' },
-                    { gradient: 'from-accent to-yellow-400' },
-                    { gradient: 'from-secondary to-green-400' }
-                ];
+                const colors = [{ gradient: 'from-primary to-blue-500' }, { gradient: 'from-accent to-yellow-400' }, { gradient: 'from-secondary to-green-400' }];
 
                 data.result.forEach((speaker, index) => {
                     const color = colors[index % colors.length];
-                    // إذا لم ترفع صورة له، سيضع هذه الصورة الافتراضية الأنيقة
                     const imgUrl = speaker.imageUrl || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=256&h=256&fit=crop';
                     
                     html += `
@@ -1179,30 +1171,19 @@
                         <h3 class="text-2xl font-black text-primary mb-1">${speaker.name || 'بدون اسم'}</h3>
                         <p class="text-accent font-bold mb-4 text-sm uppercase tracking-wide">${speaker.role || ''}</p>
                         <p class="text-gray-500 text-sm leading-relaxed mb-6">${speaker.bio || ''}</p>
-                    </div>
-                    `;
+                    </div>`;
                 });
-
                 container.innerHTML = html;
                 
             } catch (error) {
-                console.log('Sanity API fetch failed (likely CORS). Using fallback data to avoid layout breaks.');
-                
-                // --- إضافة بيانات تجريبية كبديل في حال منع المتصفح الاتصال (CORS Error) ---
+                console.log('Sanity API fetch failed for speakers (likely CORS). Using fallback data.');
                 const fallbackData = [
                     { name: 'أ.د. أحمد بن عبد الله', role: 'خبير في الاقتصاد الزراعي', bio: 'أستاذ باحث بجامعة أكسفورد، يمتلك أكثر من 50 ورقة بحثية محكمة في مجال الاستدامة الزراعية.', imageUrl: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=256&h=256&fit=crop' },
                     { name: 'د. سارة الإدريسي', role: 'مختصة في التنمية المستدامة', bio: 'ممثلة منظمة الأغذية والزراعة (FAO)، تمتلك خبرة ميدانية واسعة في تطوير السياسات المائية في إفريقيا.', imageUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=256&h=256&fit=crop' },
                     { name: 'أ.د. جون سميث', role: 'خبير التجارة الدولية', bio: 'مستشار بالبنك الدولي، متخصص في تحليل سلاسل التوريد وتأثير الأزمات الجيوسياسية على الأسواق.', imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=256&h=256&fit=crop' }
                 ];
-                
                 let html = '<div class="col-span-full bg-yellow-50 border-r-4 border-yellow-400 p-4 mb-4 text-yellow-800 text-sm font-bold text-center rounded">ملاحظة: المتصفح يمنع الاتصال بلوحة تحكم Sanity حالياً (بسبب إعدادات CORS). نعرض لك بيانات تجريبية مؤقتاً لتجنب إفساد التصميم.</div>';
-                
-                const colors = [
-                    { gradient: 'from-primary to-blue-500' },
-                    { gradient: 'from-accent to-yellow-400' },
-                    { gradient: 'from-secondary to-green-400' }
-                ];
-
+                const colors = [{ gradient: 'from-primary to-blue-500' }, { gradient: 'from-accent to-yellow-400' }, { gradient: 'from-secondary to-green-400' }];
                 fallbackData.forEach((speaker, index) => {
                     const color = colors[index % colors.length];
                     html += `
@@ -1214,16 +1195,109 @@
                         <h3 class="text-2xl font-black text-gray-700 mb-1">${speaker.name}</h3>
                         <p class="text-gray-500 font-bold mb-4 text-sm uppercase tracking-wide">${speaker.role}</p>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6">${speaker.bio}</p>
-                    </div>
-                    `;
+                    </div>`;
                 });
-                
                 container.innerHTML = html;
             }
         }
 
-        // جلب البيانات بمجرد تحميل الصفحة
-        window.addEventListener('DOMContentLoaded', fetchSpeakers);
+        // 2. جلب اللجان
+        async function fetchCommittees() {
+            const highContainer = document.getElementById('high-members');
+            const scientificContainer = document.getElementById('scientific-members');
+            const organizingContainer = document.getElementById('organizing-members');
+
+            try {
+                // أمر جلب أعضاء اللجان مرتبين حسب الرقم الذي تدخله
+                const query = encodeURIComponent('*[_type == "committee"] | order(order asc) {name, role, institution, committeeType}');
+                const url = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${query}`;
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.result) {
+                    // فرز اللجان
+                    const highMembers = data.result.filter(c => c.committeeType === 'high');
+                    const scientificMembers = data.result.filter(c => c.committeeType === 'scientific');
+                    const organizingMembers = data.result.filter(c => c.committeeType === 'organizing');
+
+                    // تعبئة اللجنة العليا (تصميم مميز وكبير)
+                    if (highMembers.length > 0 && highContainer) {
+                        let html = '';
+                        highMembers.forEach(member => {
+                            html += `
+                            <div class="bg-bgLight p-6 rounded-2xl inline-block w-full max-w-lg mb-4 border border-gray-200">
+                                <p class="text-xl text-gray-800 font-bold mb-1">${member.name || 'بدون اسم'}</p>
+                                <p class="text-accent font-bold">${member.role || ''} ${member.institution ? ' - ' + member.institution : ''}</p>
+                            </div><br>`;
+                        });
+                        highContainer.innerHTML = html;
+                    } else if (highContainer) {
+                        highContainer.innerHTML = `<div class="text-gray-400 font-bold py-5">لا يوجد أعضاء مضافين حالياً.</div>`;
+                    }
+
+                    // تعبئة اللجنة العلمية (تصميم شبكي)
+                    if (scientificMembers.length > 0 && scientificContainer) {
+                        let html = '';
+                        scientificMembers.forEach(member => {
+                            html += `
+                            <div class="bg-bgLight p-5 rounded-2xl border border-gray-100">
+                                <span class="font-bold text-primary text-lg">${member.name || 'بدون اسم'}</span><br>
+                                <span class="text-sm text-accent font-bold">${member.role || ''}</span><br>
+                                <span class="text-sm text-gray-500"><i class="fas fa-university mr-1 text-accent"></i> ${member.institution || 'بدون مؤسسة'}</span>
+                            </div>`;
+                        });
+                        scientificContainer.innerHTML = html;
+                    } else if (scientificContainer) {
+                        scientificContainer.innerHTML = `<div class="col-span-full text-center text-gray-400 font-bold py-5">لا يوجد أعضاء مضافين حالياً.</div>`;
+                    }
+
+                    // تعبئة اللجنة التنظيمية (تصميم شبكي)
+                    if (organizingMembers.length > 0 && organizingContainer) {
+                        let html = '';
+                        organizingMembers.forEach(member => {
+                            html += `
+                            <div class="bg-bgLight p-5 rounded-2xl border border-gray-100">
+                                <span class="font-bold text-primary text-lg">${member.name || 'بدون اسم'}</span><br>
+                                <span class="text-sm text-blue-500 font-bold">${member.role || ''}</span><br>
+                                <span class="text-sm text-gray-500"><i class="fas fa-university mr-1 text-blue-500"></i> ${member.institution || 'بدون مؤسسة'}</span>
+                            </div>`;
+                        });
+                        organizingContainer.innerHTML = html;
+                    } else if (organizingContainer) {
+                        organizingContainer.innerHTML = `<div class="col-span-full text-center text-gray-400 font-bold py-5">لا يوجد أعضاء مضافين حالياً.</div>`;
+                    }
+                }
+                
+            } catch (error) {
+                console.log('Sanity API fetch failed for committees. Using fallback data.');
+                // Fallback for Committees
+                if (highContainer) highContainer.innerHTML = `
+                    <div class="bg-yellow-50 p-4 mb-4 text-yellow-800 text-sm font-bold text-center rounded">بيانات تجريبية (CORS غير مفعل)</div>
+                    <div class="bg-bgLight p-6 rounded-2xl inline-block w-full max-w-lg mb-4 border border-gray-200">
+                        <p class="text-xl text-gray-800 font-bold mb-1">أ.د. مدير جامعة سطيف 1</p>
+                        <p class="text-accent font-bold">رئيساً شرفياً</p>
+                    </div><br>
+                    <div class="bg-bgLight p-6 rounded-2xl inline-block w-full max-w-lg border border-gray-200">
+                        <p class="text-xl text-gray-800 font-bold mb-1">أ.د. عميد كلية العلوم الاقتصادية</p>
+                        <p class="text-primary font-bold">رئيساً للمؤتمر</p>
+                    </div>`;
+                    
+                if (scientificContainer) scientificContainer.innerHTML = `
+                    <div class="col-span-full bg-yellow-50 p-4 mb-4 text-yellow-800 text-sm font-bold text-center rounded">بيانات تجريبية</div>
+                    <div class="bg-bgLight p-5 rounded-2xl border border-gray-100"><span class="font-bold text-primary text-lg">أ.د. اسم اللقب التجريبي</span><br><span class="text-sm text-gray-500"><i class="fas fa-university mr-1 text-accent"></i> جامعة سطيف 1</span></div>`;
+                    
+                if (organizingContainer) organizingContainer.innerHTML = `
+                    <div class="col-span-full bg-yellow-50 p-4 mb-4 text-yellow-800 text-sm font-bold text-center rounded">بيانات تجريبية</div>
+                    <div class="bg-bgLight p-5 rounded-2xl border border-gray-100"><span class="font-bold text-primary text-lg">د. اسم اللقب التجريبي</span><br><span class="text-sm text-gray-500"><i class="fas fa-university mr-1 text-blue-500"></i> جامعة سطيف 1</span></div>`;
+            }
+        }
+
+        // تشغيل كل الدوال بمجرد فتح الصفحة
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchSpeakers();
+            fetchCommittees();
+        });
 
     </script>
 </body>
