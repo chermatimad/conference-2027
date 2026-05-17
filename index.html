@@ -106,7 +106,6 @@
         .detail-section { display: none; }
         .detail-section.active { display: block; animation: customFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
 
-        /* نصوص مبررة ومريحة للقراءة */
         .text-justify-custom { text-align: justify; text-justify: inter-word; }
         
         /* Modals */
@@ -123,11 +122,11 @@
     <header class="bg-white py-3 px-4 sm:px-8 relative z-50 shadow-sm border-b border-gray-100">
         <div class="container mx-auto flex justify-between items-center gap-4">
             
-            <!-- مجموعة الشعارات والعنوان (في اليمين باللغة العربية وفي اليسار باللغة الإنجليزية) -->
+            <!-- مجموعة الشعارات والعنوان -->
             <div class="flex items-center gap-3 sm:gap-6">
                 <!-- 1. لوغو الكلية (الديناميكي) -->
                 <a href="#home" class="shrink-0 hover:opacity-80 transition transform hover:scale-105">
-                    <img id="faculty-logo-img" src="faculty_logo_ar.png" alt="Faculty Logo" class="h-12 sm:h-16 object-contain">
+                    <img id="faculty-logo-img" src="faculty_logo_ar.png" alt="Faculty Logo" class="h-12 sm:h-16 object-contain" onerror="this.src='1000007105.jpg';">
                 </a>
                 
                 <!-- 2. لوغو المؤتمر -->
@@ -135,7 +134,7 @@
                     <img src="1000033819.jpg" alt="Conference Logo" class="h-14 sm:h-20 object-contain">
                 </a>
                 
-                <!-- 3. عنوان المؤتمر (يظهر في الشاشات الكبيرة والمتوسطة لتجنب التزاحم في الهاتف) -->
+                <!-- 3. عنوان المؤتمر -->
                 <div class="hidden md:flex flex-col justify-center rtl:border-r-2 ltr:border-l-2 border-gray-200 rtl:pr-4 ltr:pl-4 max-w-md lg:max-w-xl">
                     <h2 class="text-primary font-black text-sm md:text-base leading-tight mb-1" data-ar="المؤتمر الدولي الثاني: قضايا اقتصادية معاصرة" data-en="2nd International Conference: Contemporary Economic Issues">المؤتمر الدولي الثاني: قضايا اقتصادية معاصرة</h2>
                     <p class="text-accent font-bold text-[10px] md:text-xs leading-snug" data-ar="الأمن الغذائي في ظل التحديات العالمية : الابتكار والسياسات الاقتصادية لتحقيق الاستدامة" data-en="Food Security Amidst Global Challenges: Innovation & Economic Policies for Sustainability">الأمن الغذائي في ظل التحديات العالمية : الابتكار والسياسات الاقتصادية لتحقيق الاستدامة</p>
@@ -172,6 +171,7 @@
                         </ul>
                     </li>
 
+                    <!-- تم تغيير النص هنا إلى "تاريخ المؤتمر" -->
                     <li><a href="#history" class="nav-link" data-ar="تاريخ المؤتمر" data-en="Conference History">تاريخ المؤتمر</a></li>
                     
                     <li class="group relative py-2">
@@ -212,7 +212,8 @@
                 <li><a href="#home" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
                 <li><a href="#about" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="حول المؤتمر" data-en="About">حول المؤتمر</a></li>
                 <li><a href="#topics" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="محاور المؤتمر" data-en="Topics">محاور المؤتمر</a></li>
-                <li><a href="#history" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="تاريخ المؤتمر" data-en="History">تاريخ المؤتمر</a></li>
+                <!-- تم تغيير النص هنا إلى "تاريخ المؤتمر" -->
+                <li><a href="#history" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="تاريخ المؤتمر" data-en="Conference History">تاريخ المؤتمر</a></li>
                 <li><a href="#committees" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="اللجان" data-en="Committees">اللجان</a></li>
                 <li><a href="#speakers" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="المتحدثون" data-en="Speakers">المتحدثون</a></li>
                 <li><a href="#program" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="البرنامج" data-en="Program">البرنامج</a></li>
@@ -305,7 +306,7 @@
                         </div>
                     </div>
 
-                    <!-- Side Stats & Images Box -->
+                    <!-- Side Stats & Images Box (تم استبدال الصورة الخاطئة بصورة اقتصادية احترافية) -->
                     <div class="lg:col-span-5 grid grid-cols-2 gap-6" data-aos="fade-right">
                         <div class="bg-gradient-to-br from-primary to-blue-900 rounded-[2rem] p-6 flex flex-col justify-center items-center text-center text-white shadow-lg transform hover:-translate-y-2 transition-transform">
                             <i class="fas fa-globe-americas text-4xl text-lightBlue mb-3"></i>
@@ -313,7 +314,7 @@
                             <p class="text-sm font-bold text-gray-300" data-ar="دولة مشاركة" data-en="Participating Countries">دولة مشاركة</p>
                         </div>
                         <div class="rounded-[2rem] overflow-hidden shadow-sm border-4 border-white">
-                            <img src="1000034819.jpg" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700" alt="Economy">
+                            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700" alt="Economy">
                         </div>
                         <div class="rounded-[2rem] overflow-hidden shadow-sm bg-secondary relative group flex items-center justify-center">
                             <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1592982537447-6f2b6dbf58d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')] bg-cover bg-center mix-blend-overlay group-hover:scale-110 transition-transform duration-700"></div>
@@ -401,7 +402,7 @@
                 <div class="max-w-7xl mx-auto space-y-10">
                     
                     <!-- 1. الديباجة (Preamble) -->
-                    <div class="bg-white rounded-[2.5rem] p-8 md:p-14 shadow-xl border border-gray-100 relative overflow-hidden group hover:shadow-2xl transition-all duration-500" data-aos="fade-up">
+                    <div class="bg-white rounded-[2.5rem] p-8 md:p-14 shadow-xl border border-gray-100 relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
                         <div class="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-bl-[100%] transition-transform duration-700 group-hover:scale-125"></div>
                         <div class="absolute bottom-0 left-0 w-40 h-40 bg-primary/5 rounded-tr-[100%] transition-transform duration-700 group-hover:scale-125"></div>
                         
@@ -419,7 +420,8 @@
                             <div class="lg:w-5/12 w-full relative">
                                 <div class="absolute inset-0 bg-gradient-to-tr from-primary to-accent opacity-20 rounded-[2rem] transform translate-x-3 translate-y-3"></div>
                                 <div class="relative rounded-[2rem] overflow-hidden shadow-lg group-hover:shadow-xl transition-all border-4 border-white">
-                                    <img src="1000034819.jpg" alt="Preamble Image" class="w-full h-[350px] object-cover transform group-hover:scale-110 transition-transform duration-700">
+                                    <!-- تم استبدال الصورة الخاطئة هنا أيضاً بصورة احترافية -->
+                                    <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Preamble Image" class="w-full h-[350px] object-cover transform group-hover:scale-110 transition-transform duration-700">
                                 </div>
                             </div>
                         </div>
@@ -427,7 +429,7 @@
 
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
                         <!-- 2. الأهمية (Importance) -->
-                        <div class="bg-gradient-to-br from-primary to-blue-900 text-white p-10 md:p-14 rounded-[2.5rem] shadow-xl relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="100">
+                        <div class="bg-gradient-to-br from-primary to-blue-900 text-white p-10 md:p-14 rounded-[2.5rem] shadow-xl relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
                             <i class="fas fa-star absolute -bottom-10 rtl:-left-10 ltr:-right-10 text-9xl text-white/5 transform -rotate-12 group-hover:rotate-0 transition-transform duration-700"></i>
                             <div class="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
                             
@@ -443,7 +445,7 @@
                         </div>
 
                         <!-- 3. الإشكالية (Problem Statement) -->
-                        <div class="bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="200">
+                        <div class="bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
                             <div class="absolute top-0 rtl:left-0 ltr:right-0 w-2 h-full bg-secondary"></div>
                             <i class="fas fa-question-circle absolute -top-10 rtl:-right-10 ltr:-left-10 text-9xl text-gray-50"></i>
                             
@@ -465,7 +467,7 @@
                     </div>
 
                     <!-- 4. الأهداف (Objectives) -->
-                    <div class="bg-white rounded-[2.5rem] p-10 md:p-14 shadow-xl border border-gray-100 relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-white rounded-[2.5rem] p-10 md:p-14 shadow-xl border border-gray-100 relative overflow-hidden">
                         <div class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-bgLight to-transparent z-0"></div>
                         
                         <div class="relative z-10 text-center mb-14 mt-4">
@@ -571,7 +573,8 @@
                             <h4 class="text-7xl font-black text-accent mb-2 drop-shadow-sm">2025</h4>
                             <p class="font-bold text-primary text-lg leading-relaxed mb-4" data-ar="المؤتمر الدولي الأول للقضايا الاقتصادية المعاصرة &quot;استخدامات الذكاء الاصطناعي في الخدمات المالية&quot;" data-en="1st International Conference on Contemporary Economic Issues &quot;Uses of AI in Financial Services&quot;">المؤتمر الدولي الأول للقضايا الاقتصادية المعاصرة "استخدامات الذكاء الاصطناعي في الخدمات المالية"</p>
                             <div class="rounded-xl overflow-hidden shadow-md border-2 border-white">
-                                <img src="Iceic_2025.png" alt="ICEIC 2025" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500">
+                                <!-- استخدام Fallback للحماية من خطأ عدم وجود الصورة -->
+                                <img src="Iceic_2025.png" alt="ICEIC 2025" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1540317580384-e5d43867caa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'; this.onerror=null;">
                             </div>
                         </div>
                         <div class="w-full md:w-2/3 border-r-4 rtl:border-r-4 ltr:border-l-4 ltr:border-r-0 border-accent rtl:pr-8 ltr:pl-8 mt-4 md:mt-0">
@@ -872,7 +875,7 @@
             <!-- PAGE: VENUE -->
             <section id="detail-venue" class="detail-section">
                 <div class="max-w-5xl mx-auto bg-white rounded-[3rem] shadow-2xl border border-gray-100 overflow-hidden text-center relative">
-                    <img id="venue-faculty-logo" src="faculty_logo_ar.png" alt="University Logo" class="h-32 mx-auto mt-14 mb-8 object-contain relative z-10">
+                    <img id="venue-faculty-logo" src="faculty_logo_ar.png" alt="University Logo" class="h-32 mx-auto mt-14 mb-8 object-contain relative z-10" onerror="this.src='1000007105.jpg';">
                     <h3 class="text-4xl font-black text-primary mb-4 relative z-10" data-ar="جامعة سطيف 1 - فرحات عباس" data-en="Setif 1 University - Ferhat Abbas">جامعة سطيف 1 - فرحات عباس</h3>
                     <p class="text-gray-600 text-xl mb-12 max-w-2xl mx-auto font-bold relative z-10" data-ar="كلية العلوم الاقتصادية والتجارية وعلوم التسيير، القطب الجامعي المعبودة." data-en="Faculty of Economics, Commerce & Management Sciences, El Maabouda University Pole.">كلية العلوم الاقتصادية والتجارية وعلوم التسيير، القطب الجامعي المعبودة.</p>
                     
@@ -928,7 +931,7 @@
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
                 <p data-ar="&copy; 2027 جامعة سطيف 1. جميع الحقوق محفوظة." data-en="&copy; 2027 Setif 1 University. All rights reserved.">&copy; 2027 جامعة سطيف 1. جميع الحقوق محفوظة.</p>
                 <div class="mt-4 md:mt-0 flex gap-4">
-                    <img id="footer-faculty-logo-img" src="faculty_logo_ar.png" alt="Faculty of Economics" class="h-8 brightness-0 invert opacity-50 hover:opacity-100 transition-opacity">
+                    <img id="footer-faculty-logo-img" src="faculty_logo_ar.png" alt="Faculty of Economics" class="h-8 brightness-0 invert opacity-50 hover:opacity-100 transition-opacity" onerror="this.src='1000007105.jpg';">
                     <img src="1000033819.jpg" alt="ICEIC 2027" class="h-8 brightness-0 invert opacity-50 hover:opacity-100 transition-opacity">
                 </div>
             </div>
