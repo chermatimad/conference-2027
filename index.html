@@ -38,6 +38,7 @@
                     animation: {
                         'gradient-x': 'gradient-x 15s ease infinite',
                         'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
                         'gradient-x': {
@@ -55,7 +56,6 @@
     </script>
 
     <style>
-        /* الأساسيات */
         html { scroll-behavior: smooth; }
         body { overflow-x: hidden; background-color: #F4F7FA; }
         ::-webkit-scrollbar { width: 8px; }
@@ -63,7 +63,6 @@
         ::-webkit-scrollbar-thumb { background: #15254A; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #BE9238; }
 
-        /* الخلفيات الاحترافية */
         .hero-bg {
             background: linear-gradient(135deg, #0a1128, #15254A, #064e3b, #1A8140);
             background-size: 400% 400%;
@@ -82,7 +81,6 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
-        /* القوائم والروابط */
         .nav-link { position: relative; transition: color 0.3s ease; cursor: pointer; padding-bottom: 5px;}
         .nav-link::after {
             content: ''; position: absolute; width: 0; height: 3px; border-radius: 3px;
@@ -95,7 +93,6 @@
         .dropdown-menu { display: none; opacity: 0; transform: translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .group:hover .dropdown-menu { display: block; opacity: 1; transform: translateY(0); }
 
-        /* نظام الصفحات المستقر (SPA Engine) */
         @keyframes customFadeIn {
             0% { opacity: 0; transform: translateY(15px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -108,40 +105,40 @@
 
         .text-justify-custom { text-align: justify; text-justify: inter-word; }
         
-        /* Modals */
         .modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
         .modal.hidden { opacity: 0; visibility: hidden; }
         .modal.flex { opacity: 1; visibility: visible; }
+        
+        /* شبكة معرض الصور */
+        .masonry-grid { column-count: 1; column-gap: 1.5rem; }
+        @media (min-width: 768px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 1.5rem; }
     </style>
 </head>
 <body class="font-cairo text-gray-800 transition-all duration-300 flex flex-col min-h-screen">
 
     <!-- ========================================== -->
-    <!-- HEADER (التصميم الجديد المنسق للشعارات والعنوان) -->
+    <!-- HEADER -->
     <!-- ========================================== -->
     <header class="bg-white py-3 px-4 sm:px-8 relative z-50 shadow-sm border-b border-gray-100">
         <div class="container mx-auto flex justify-between items-center gap-4">
             
-            <!-- مجموعة الشعارات والعنوان -->
             <div class="flex items-center gap-3 sm:gap-6">
-                <!-- 1. لوغو الكلية (الديناميكي) -->
                 <a href="#home" class="shrink-0 hover:opacity-80 transition transform hover:scale-105">
                     <img id="faculty-logo-img" src="faculty_logo_ar.png" alt="Faculty Logo" class="h-12 sm:h-16 object-contain" onerror="this.src='1000007105.jpg';">
                 </a>
                 
-                <!-- 2. لوغو المؤتمر -->
                 <a href="#home" class="shrink-0 hover:opacity-80 transition transform hover:scale-105">
                     <img src="1000033819.jpg" alt="Conference Logo" class="h-14 sm:h-20 object-contain">
                 </a>
                 
-                <!-- 3. عنوان المؤتمر -->
                 <div class="hidden md:flex flex-col justify-center rtl:border-r-2 ltr:border-l-2 border-gray-200 rtl:pr-4 ltr:pl-4 max-w-md lg:max-w-xl">
                     <h2 class="text-primary font-black text-sm md:text-base leading-tight mb-1" data-ar="المؤتمر الدولي الثاني: قضايا اقتصادية معاصرة" data-en="2nd International Conference: Contemporary Economic Issues">المؤتمر الدولي الثاني: قضايا اقتصادية معاصرة</h2>
                     <p class="text-accent font-bold text-[10px] md:text-xs leading-snug" data-ar="الأمن الغذائي في ظل التحديات العالمية : الابتكار والسياسات الاقتصادية لتحقيق الاستدامة" data-en="Food Security Amidst Global Challenges: Innovation & Economic Policies for Sustainability">الأمن الغذائي في ظل التحديات العالمية : الابتكار والسياسات الاقتصادية لتحقيق الاستدامة</p>
                 </div>
             </div>
 
-            <!-- أقصى اليسار (زر تغيير اللغة) -->
             <div class="flex items-center shrink-0">
                 <button onclick="toggleLang()" class="bg-gray-50 hover:bg-gray-200 text-primary px-3 py-2 md:px-4 md:py-2 rounded-xl font-bold text-sm transition-colors border border-gray-200 flex items-center gap-2 shadow-sm">
                     <i class="fas fa-globe text-accent"></i> <span id="lang-text">English</span>
@@ -152,7 +149,7 @@
     </header>
 
     <!-- ========================================== -->
-    <!-- NAVIGATION (القائمة الرئيسية)                -->
+    <!-- NAVIGATION -->
     <!-- ========================================== -->
     <nav id="navbar" class="bg-primary text-white sticky top-0 z-40 transition-all duration-300 shadow-lg border-b border-white/10">
         <div class="container mx-auto px-4 sm:px-8">
@@ -228,7 +225,7 @@
     </nav>
 
     <!-- ========================================== -->
-    <!-- VIEW 1: HOME (THE GRAND LANDING PAGE)      -->
+    <!-- VIEW 1: HOME -->
     <!-- ========================================== -->
     <main id="view-home" class="spa-view active flex-grow">
         
@@ -289,7 +286,6 @@
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-7xl mx-auto">
                     
-                    <!-- Main Text Box -->
                     <div class="lg:col-span-7 bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-gray-100 flex flex-col justify-center relative overflow-hidden group hover:shadow-xl transition-all" data-aos="fade-left">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-bgLight to-transparent rounded-bl-full"></div>
                         <i class="fas fa-quote-right text-5xl text-gray-100 absolute top-8 rtl:left-8 ltr:right-8"></i>
@@ -304,7 +300,6 @@
                         </div>
                     </div>
 
-                    <!-- Side Stats & Images Box -->
                     <div class="lg:col-span-5 grid grid-cols-2 gap-6" data-aos="fade-right">
                         <div class="bg-gradient-to-br from-primary to-blue-900 rounded-[2rem] p-6 flex flex-col justify-center items-center text-center text-white shadow-lg transform hover:-translate-y-2 transition-transform">
                             <i class="fas fa-globe-americas text-4xl text-lightBlue mb-3"></i>
@@ -370,7 +365,7 @@
     </main>
 
     <!-- ========================================== -->
-    <!-- DYNAMIC SUB-PAGES ENGINE (النطاقات المعزولة)-->
+    <!-- DYNAMIC SUB-PAGES ENGINE -->
     <!-- ========================================== -->
     <main id="view-details" class="spa-view flex-grow bg-bgLight">
         
@@ -399,7 +394,6 @@
             <section id="detail-about" class="detail-section">
                 <div class="max-w-7xl mx-auto space-y-10">
                     
-                    <!-- 1. الديباجة (Preamble) -->
                     <div class="bg-white rounded-[2.5rem] p-8 md:p-14 shadow-xl border border-gray-100 relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
                         <div class="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-bl-[100%] transition-transform duration-700 group-hover:scale-125"></div>
                         <div class="absolute bottom-0 left-0 w-40 h-40 bg-primary/5 rounded-tr-[100%] transition-transform duration-700 group-hover:scale-125"></div>
@@ -425,7 +419,6 @@
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                        <!-- 2. الأهمية (Importance) -->
                         <div class="bg-gradient-to-br from-primary to-blue-900 text-white p-10 md:p-14 rounded-[2.5rem] shadow-xl relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
                             <i class="fas fa-star absolute -bottom-10 rtl:-left-10 ltr:-right-10 text-9xl text-white/5 transform -rotate-12 group-hover:rotate-0 transition-transform duration-700"></i>
                             <div class="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
@@ -441,7 +434,6 @@
                             </div>
                         </div>
 
-                        <!-- 3. الإشكالية (Problem Statement) -->
                         <div class="bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
                             <div class="absolute top-0 rtl:left-0 ltr:right-0 w-2 h-full bg-secondary"></div>
                             <i class="fas fa-question-circle absolute -top-10 rtl:-right-10 ltr:-left-10 text-9xl text-gray-50"></i>
@@ -463,7 +455,6 @@
                         </div>
                     </div>
 
-                    <!-- 4. الأهداف (Objectives) -->
                     <div class="bg-white rounded-[2.5rem] p-10 md:p-14 shadow-xl border border-gray-100 relative overflow-hidden">
                         <div class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-bgLight to-transparent z-0"></div>
                         
@@ -557,31 +548,127 @@
                 </div>
             </section>
 
-            <!-- PAGE: HISTORY -->
+            <!-- PAGE: HISTORY (التعديل الجديد: واجهة تعريفية مع زر التفاصيل) -->
             <section id="detail-history" class="detail-section">
-                <div class="max-w-5xl mx-auto bg-white rounded-[2rem] p-10 md:p-16 shadow-xl border border-gray-100 text-center relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-40 h-40 bg-accent/5 rounded-bl-full"></div>
-                    <div class="inline-block p-6 rounded-full bg-primary/5 text-primary mb-6 border border-primary/10 relative z-10"><i class="fas fa-landmark text-6xl"></i></div>
-                    <h3 class="text-3xl font-black text-primary mb-6 relative z-10" data-ar="تاريخ المؤتمر والنسخ السابقة" data-en="Conference History & Editions">تاريخ المؤتمر والنسخ السابقة</h3>
-                    <p class="text-gray-600 text-lg leading-relaxed mb-12 max-w-3xl mx-auto relative z-10" data-ar="يأتي هذا المؤتمر في نسخته الثانية استكمالاً للنجاح الباهر الذي حققته النسخة الأولى، والتي جمعت مئات الباحثين وصناع القرار لمناقشة تحديات الاقتصاد المعاصر." data-en="This second edition builds upon the resounding success of the first edition, which gathered hundreds of researchers and decision-makers.">يأتي هذا المؤتمر في نسخته الثانية استكمالاً للنجاح الباهر الذي حققته النسخة الأولى، والتي جمعت مئات الباحثين وصناع القرار لمناقشة تحديات الاقتصاد المعاصر.</p>
-                    
-                    <div class="bg-bgLight p-8 md:p-10 rounded-3xl border border-gray-200 text-right rtl:text-right ltr:text-left flex flex-col md:flex-row items-start gap-10 relative z-10 shadow-sm">
-                        <div class="w-full md:w-1/3 text-center md:text-start rtl:md:text-right ltr:md:text-left">
-                            <h4 class="text-7xl font-black text-accent mb-2 drop-shadow-sm">2025</h4>
-                            <p class="font-bold text-primary text-lg leading-relaxed mb-4" data-ar="المؤتمر الدولي الأول للقضايا الاقتصادية المعاصرة &quot;استخدامات الذكاء الاصطناعي في الخدمات المالية&quot;" data-en="1st International Conference on Contemporary Economic Issues &quot;Uses of AI in Financial Services&quot;">المؤتمر الدولي الأول للقضايا الاقتصادية المعاصرة "استخدامات الذكاء الاصطناعي في الخدمات المالية"</p>
-                            <div class="rounded-xl overflow-hidden shadow-md border-2 border-white">
-                                <img src="Iceic_2025.png" alt="ICEIC 2025" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1540317580384-e5d43867caa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'; this.onerror=null;">
-                            </div>
+                <div class="max-w-4xl mx-auto text-center mb-12">
+                    <h3 class="text-3xl md:text-5xl font-black text-primary mb-4" data-ar="تاريخ المؤتمر والنسخ السابقة" data-en="Conference History & Editions">تاريخ المؤتمر والنسخ السابقة</h3>
+                    <div class="w-24 h-1.5 bg-accent mx-auto rounded-full mb-6"></div>
+                    <p class="text-gray-600 text-lg" data-ar="نظرة عامة على النسخ السابقة والإنجازات الأكاديمية التي حققها المؤتمر." data-en="An overview of past editions and academic achievements of the conference.">نظرة عامة على النسخ السابقة والإنجازات الأكاديمية التي حققها المؤتمر.</p>
+                </div>
+
+                <div class="max-w-5xl mx-auto bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden group hover:shadow-2xl transition-all duration-500">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-5/12 bg-gray-50 p-8 h-full flex justify-center items-center border-b md:border-b-0 rtl:md:border-l ltr:md:border-r border-gray-100 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <img src="Iceic_2025.png" alt="ICEIC 2025" class="w-full h-auto object-cover rounded-xl shadow-md border-2 border-white transform group-hover:scale-105 transition-transform duration-500 z-10" onerror="this.src='https://images.unsplash.com/photo-1540317580384-e5d43867caa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';">
                         </div>
-                        <div class="w-full md:w-2/3 border-r-4 rtl:border-r-4 ltr:border-l-4 ltr:border-r-0 border-accent rtl:pr-8 ltr:pl-8 mt-4 md:mt-0">
-                            <ul class="space-y-5 text-gray-700 font-semibold text-lg">
-                                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-secondary mt-1"></i> <span data-ar="مشاركة أكثر من 200 باحث من 15 دولة." data-en="Participation of over 200 researchers from 15 countries.">مشاركة أكثر من 200 باحث من 15 دولة.</span></li>
-                                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-secondary mt-1"></i> <span data-ar="نشر 50 ورقة بحثية في مجلات علمية محكمة عالية التصنيف." data-en="50 papers published in highly ranked peer-reviewed journals.">نشر 50 ورقة بحثية في مجلات علمية محكمة عالية التصنيف.</span></li>
-                                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-secondary mt-1"></i> <span data-ar="صياغة توصيات تم تبنيها من طرف جهات رسمية لدعم الأمن الغذائي." data-en="Recommendations formulated and adopted by official bodies.">صياغة توصيات تم تبنيها من طرف جهات رسمية لدعم الأمن الغذائي.</span></li>
-                            </ul>
+                        <div class="md:w-7/12 p-8 md:p-12 text-center md:text-start rtl:md:text-right ltr:md:text-left relative">
+                            <span class="inline-block bg-accent/10 text-accent font-bold px-4 py-1 rounded-full text-sm mb-4 border border-accent/20">14-15 أفريل 2025</span>
+                            <h4 class="text-2xl md:text-3xl font-black text-primary mb-4 leading-snug" data-ar="المؤتمر الدولي الأول للقضايا الاقتصادية المعاصرة: &quot;استخدامات الذكاء الاصطناعي في الخدمات المالية&quot;" data-en="1st International Conference on Contemporary Economic Issues: &quot;Uses of AI in Financial Services&quot;">المؤتمر الدولي الأول للقضايا الاقتصادية المعاصرة: "استخدامات الذكاء الاصطناعي في الخدمات المالية"</h4>
+                            <p class="text-gray-500 leading-relaxed mb-8" data-ar="حدث علمي دولي نوعي احتضنته جامعة فرحات عباس سطيف 1، بمشاركة أكثر من 150 باحث من 6 دول مختلفة، لتبادل الرؤى حول تقاطع الذكاء الاصطناعي مع القطاع المالي." data-en="A qualitative international scientific event hosted by Ferhat Abbas Setif 1 University, with the participation of more than 150 researchers from 6 different countries.">حدث علمي دولي نوعي احتضنته جامعة فرحات عباس سطيف 1، بمشاركة أكثر من 150 باحث من 6 دول مختلفة، لتبادل الرؤى حول تقاطع الذكاء الاصطناعي مع القطاع المالي.</p>
+                            <a href="#history-2025" class="inline-flex items-center gap-2 bg-primary hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-md hover:-translate-y-1">
+                                <span data-ar="تفاصيل أكثر" data-en="More Details">تفاصيل أكثر</span> <i class="fas fa-arrow-left rtl:rotate-0 ltr:rotate-180"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
+            </section>
+
+            <!-- PAGE: HISTORY 2025 (الصفحة الجديدة الخرافية للنسخة الأولى) -->
+            <section id="detail-history-2025" class="detail-section">
+                
+                <!-- هيدر الصفحة الخاصة بالنسخة الأولى -->
+                <div class="bg-gradient-to-br from-primary to-blue-900 rounded-[3rem] p-10 md:p-16 shadow-2xl relative overflow-hidden text-white mb-12">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl"></div>
+                    
+                    <div class="relative z-10 flex flex-col md:flex-row items-center gap-10">
+                        <div class="md:w-3/4 text-center md:text-start rtl:md:text-right ltr:md:text-left">
+                            <span class="inline-block bg-white/10 backdrop-blur-sm text-accent font-bold px-5 py-2 rounded-full text-sm mb-6 border border-white/20">14-15 أفريل 2025 • جامعة سطيف 1</span>
+                            <h2 class="text-3xl md:text-5xl font-black mb-6 leading-tight drop-shadow-md" data-ar="استخدامات الذكاء الاصطناعي في الخدمات المالية" data-en="Uses of Artificial Intelligence in Financial Services">استخدامات الذكاء الاصطناعي في الخدمات المالية</h2>
+                            <p class="text-gray-300 text-lg md:text-xl max-w-3xl leading-relaxed" data-ar="حدث أكاديمي دولي رسم ملامح التميز العلمي، شكل نموذجاً متميزاً في تعزيز إشعاع الكلية وتأكيد ريادتها الفكرية في مجال التكنولوجيا المالية." data-en="An international academic event that painted the features of scientific excellence, forming a distinguished model in enhancing the faculty's radiance.">حدث أكاديمي دولي رسم ملامح التميز العلمي، شكل نموذجاً متميزاً في تعزيز إشعاع الكلية وتأكيد ريادتها الفكرية في مجال التكنولوجيا المالية.</p>
+                        </div>
+                        <div class="md:w-1/4 flex justify-center">
+                            <img src="Iceic_2025.png" alt="ICEIC 2025 Logo" class="w-48 h-auto object-contain drop-shadow-2xl bg-white p-2 rounded-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1540317580384-e5d43867caa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- إحصائيات 2025 -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 text-center transform hover:-translate-y-2 transition-all">
+                        <div class="text-4xl text-accent mb-4"><i class="fas fa-users"></i></div>
+                        <h4 class="text-4xl font-black text-primary mb-2">+150</h4>
+                        <p class="text-gray-500 font-bold" data-ar="مشارك" data-en="Participants">مشارك</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 text-center transform hover:-translate-y-2 transition-all">
+                        <div class="text-4xl text-secondary mb-4"><i class="fas fa-globe"></i></div>
+                        <h4 class="text-4xl font-black text-primary mb-2">06</h4>
+                        <p class="text-gray-500 font-bold" data-ar="دول مشاركة" data-en="Countries">دول مشاركة</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 text-center transform hover:-translate-y-2 transition-all">
+                        <div class="text-4xl text-blue-500 mb-4"><i class="fas fa-file-alt"></i></div>
+                        <h4 class="text-4xl font-black text-primary mb-2">40</h4>
+                        <p class="text-gray-500 font-bold" data-ar="ورقة بحثية" data-en="Papers">ورقة بحثية</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 text-center transform hover:-translate-y-2 transition-all">
+                        <div class="text-4xl text-purple-500 mb-4"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <h4 class="text-4xl font-black text-primary mb-2">06</h4>
+                        <p class="text-gray-500 font-bold" data-ar="ورشات علمية" data-en="Workshops">ورشات علمية</p>
+                    </div>
+                </div>
+
+                <!-- محتوى PDF - 3 أعمدة -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <div class="bg-bgLight p-8 rounded-[2rem] border border-gray-200">
+                        <h4 class="text-xl font-black text-primary mb-4 flex items-center gap-3"><i class="fas fa-medal text-accent text-2xl"></i> <span data-ar="التميز العلمي" data-en="Scientific Excellence">التميز العلمي</span></h4>
+                        <p class="text-gray-600 text-justify-custom leading-relaxed" data-ar="شهدت جامعة فرحات عباس سطيف 1 تنظيم المؤتمر الدولي الأول بمشاركة نخبة من الباحثين والخبراء، حيث أشرف على الفعاليات مدير الجامعة وعميد الكلية، بحضور ممثلين عن الهيئات الاقتصادية والبنوك." data-en="The university hosted the first international conference with the participation of elite researchers, overseen by the University Rector and Faculty Dean.">شهدت جامعة فرحات عباس سطيف 1 تنظيم المؤتمر الدولي الأول بمشاركة نخبة من الباحثين والخبراء، حيث أشرف على الفعاليات مدير الجامعة وعميد الكلية، بحضور ممثلين عن الهيئات الاقتصادية والبنوك.</p>
+                    </div>
+                    <div class="bg-bgLight p-8 rounded-[2rem] border border-gray-200">
+                        <h4 class="text-xl font-black text-primary mb-4 flex items-center gap-3"><i class="fas fa-search-dollar text-accent text-2xl"></i> <span data-ar="محاور النقاش" data-en="Key Topics">محاور النقاش</span></h4>
+                        <p class="text-gray-600 text-justify-custom leading-relaxed" data-ar="ركزت الفعاليات على استكشاف التطبيقات العملية للذكاء الاصطناعي في تحليل البيانات المالية، إدارة المخاطر، واستشراف مستقبل التكنولوجيا المالية (FinTech) في الجزائر مع استعراض التحديات التشريعية والأخلاقية." data-en="Events focused on exploring practical AI applications in financial data analysis, risk management, and the future of FinTech in Algeria.">ركزت الفعاليات على استكشاف التطبيقات العملية للذكاء الاصطناعي في تحليل البيانات المالية، إدارة المخاطر، واستشراف مستقبل التكنولوجيا المالية (FinTech) في الجزائر مع استعراض التحديات التشريعية والأخلاقية.</p>
+                    </div>
+                    <div class="bg-bgLight p-8 rounded-[2rem] border border-gray-200">
+                        <h4 class="text-xl font-black text-primary mb-4 flex items-center gap-3"><i class="fas fa-trophy text-accent text-2xl"></i> <span data-ar="إنجاز وطموح" data-en="Achievement">إنجاز وطموح</span></h4>
+                        <p class="text-gray-600 text-justify-custom leading-relaxed" data-ar="شكل هذا المؤتمر نموذجاً في تعزيز الإشعاع العلمي للكلية، وترسيخ ثقافة البحث الجماعي، وتأكيد الريادة الفكرية في موضوع الذكاء الاصطناعي، وتحفيز الكفاءات الشابة على البحث التطبيقي المبتكر." data-en="This conference was a model in enhancing scientific radiance, establishing collective research culture, and stimulating young competencies.">شكل هذا المؤتمر نموذجاً في تعزيز الإشعاع العلمي للكلية، وترسيخ ثقافة البحث الجماعي، وتأكيد الريادة الفكرية في موضوع الذكاء الاصطناعي، وتحفيز الكفاءات الشابة على البحث التطبيقي المبتكر.</p>
+                    </div>
+                </div>
+
+                <!-- الدول المشاركة -->
+                <div class="mb-16">
+                    <div class="text-center mb-10">
+                        <h3 class="text-3xl font-black text-primary mb-2" data-ar="حضور دولي واسع" data-en="Wide International Presence">حضور دولي واسع</h3>
+                        <div class="w-16 h-1 bg-secondary mx-auto rounded-full"></div>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <span class="bg-white border border-gray-200 px-6 py-3 rounded-xl font-bold text-gray-700 shadow-sm flex items-center gap-2"><img src="https://flagcdn.com/w40/dz.png" class="w-6 h-auto"> الجزائر</span>
+                        <span class="bg-white border border-gray-200 px-6 py-3 rounded-xl font-bold text-gray-700 shadow-sm flex items-center gap-2"><img src="https://flagcdn.com/w40/gb.png" class="w-6 h-auto"> المملكة المتحدة</span>
+                        <span class="bg-white border border-gray-200 px-6 py-3 rounded-xl font-bold text-gray-700 shadow-sm flex items-center gap-2"><img src="https://flagcdn.com/w40/pl.png" class="w-6 h-auto"> بولندا</span>
+                        <span class="bg-white border border-gray-200 px-6 py-3 rounded-xl font-bold text-gray-700 shadow-sm flex items-center gap-2"><img src="https://flagcdn.com/w40/kr.png" class="w-6 h-auto"> كوريا الجنوبية</span>
+                        <span class="bg-white border border-gray-200 px-6 py-3 rounded-xl font-bold text-gray-700 shadow-sm flex items-center gap-2"><img src="https://flagcdn.com/w40/tn.png" class="w-6 h-auto"> تونس</span>
+                        <span class="bg-white border border-gray-200 px-6 py-3 rounded-xl font-bold text-gray-700 shadow-sm flex items-center gap-2"><img src="https://flagcdn.com/w40/om.png" class="w-6 h-auto"> عُمان</span>
+                        <span class="bg-white border border-gray-200 px-6 py-3 rounded-xl font-bold text-gray-700 shadow-sm flex items-center gap-2"><img src="https://flagcdn.com/w40/my.png" class="w-6 h-auto"> ماليزيا</span>
+                    </div>
+                </div>
+
+                <!-- قسم معرض الصور والفيديو (ديناميكي من Sanity) -->
+                <div class="bg-white rounded-[3rem] p-8 md:p-14 shadow-xl border border-gray-100">
+                    <div class="text-center mb-12">
+                        <h3 class="text-3xl font-black text-primary mb-2" data-ar="معرض صور النسخة الأولى" data-en="1st Edition Gallery">معرض صور النسخة الأولى</h3>
+                        <div class="w-16 h-1 bg-accent mx-auto rounded-full"></div>
+                    </div>
+                    
+                    <!-- حاوية الفيديو -->
+                    <div id="gallery-video-container" class="mb-10 w-full max-w-4xl mx-auto hidden">
+                        <!-- Video iframe will be injected here -->
+                    </div>
+
+                    <!-- حاوية الصور (Masonry) -->
+                    <div id="gallery-images-container" class="masonry-grid">
+                        <div class="text-center py-10 w-full text-gray-400"><i class="fas fa-spinner fa-spin text-3xl mb-3"></i><br>جاري تحميل المعرض...</div>
+                    </div>
+                </div>
+
             </section>
 
             <!-- PAGE: COMMITTEES -->
@@ -595,34 +682,25 @@
                     
                     <div class="bg-white border border-gray-100 rounded-[2rem] p-8 md:p-14 shadow-xl min-h-[400px]">
                         
-                        <!-- High Committee -->
                         <div id="com-high" class="com-content w-full text-center py-4 relative z-10">
                             <div class="inline-block p-6 rounded-full bg-accent/10 text-accent mb-6"><i class="fas fa-crown text-6xl"></i></div>
                             <h3 class="text-3xl font-black text-primary mb-8" data-ar="اللجنة العليا للمؤتمر" data-en="High Committee">اللجنة العليا للمؤتمر</h3>
-                            
-                            <!-- هنا سيتم حقن أعضاء اللجنة العليا برمجياً -->
                             <div id="high-members" class="space-y-4">
                                 <div class="text-center py-10"><i class="fas fa-spinner fa-spin text-3xl text-accent"></i></div>
                             </div>
                         </div>
 
-                        <!-- Scientific Committee -->
                         <div id="com-scientific" class="com-content hidden w-full text-center py-4 relative z-10">
                             <div class="inline-block p-5 rounded-full bg-primary/10 text-primary mb-4"><i class="fas fa-microscope text-5xl"></i></div>
                             <h3 class="text-3xl font-black text-primary mb-8" data-ar="اللجنة العلمية" data-en="Scientific Committee">اللجنة العلمية</h3>
-                            
-                            <!-- هنا سيتم حقن أعضاء اللجنة العلمية برمجياً -->
                             <div id="scientific-members" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-right rtl:text-right ltr:text-left">
                                 <div class="col-span-full text-center py-10"><i class="fas fa-spinner fa-spin text-3xl text-primary"></i></div>
                             </div>
                         </div>
 
-                        <!-- Organizing Committee -->
                         <div id="com-organizing" class="com-content hidden w-full text-center py-4 relative z-10">
                             <div class="inline-block p-5 rounded-full bg-blue-500/10 text-blue-500 mb-4"><i class="fas fa-users-cog text-5xl"></i></div>
                             <h3 class="text-3xl font-black text-primary mb-8" data-ar="اللجنة التنظيمية" data-en="Organizing Committee">اللجنة التنظيمية</h3>
-                            
-                            <!-- هنا سيتم حقن أعضاء اللجنة التنظيمية برمجياً -->
                             <div id="organizing-members" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-right rtl:text-right ltr:text-left">
                                 <div class="col-span-full text-center py-10"><i class="fas fa-spinner fa-spin text-3xl text-blue-500"></i></div>
                             </div>
@@ -634,7 +712,6 @@
 
             <!-- PAGE: SPEAKERS -->
             <section id="detail-speakers" class="detail-section">
-                <!-- تم تفريغ هذا القسم ليتم ملؤه تلقائياً من Sanity -->
                 <div id="speakers-container" class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
                     <div class="col-span-full text-center py-20">
                         <i class="fas fa-spinner fa-spin text-5xl text-accent mb-4"></i>
@@ -711,7 +788,6 @@
             <!-- PAGE: SUBMISSION -->
             <section id="detail-submission" class="detail-section">
                 <div class="max-w-6xl mx-auto space-y-12">
-                    <!-- Important Dates -->
                     <div id="sub-dates" class="bg-white p-10 rounded-[2rem] shadow-xl border border-gray-100 scroll-mt-24">
                         <h3 class="text-2xl font-black mb-8 text-primary border-b-2 pb-4 inline-block" data-ar="تواريخ مهمة" data-en="Important Dates">تواريخ مهمة</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -733,7 +809,6 @@
                         </div>
                     </div>
 
-                    <!-- Guidelines & Submit -->
                     <div id="sub-guidelines" class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch scroll-mt-24">
                         <div class="bg-primary text-white p-10 rounded-[2rem] shadow-xl relative overflow-hidden">
                             <div class="absolute inset-0 bg-gradient-to-br from-transparent to-blue-900 opacity-50"></div>
@@ -910,7 +985,7 @@
         </div>
     </footer>
 
-    <!-- Modals (Register) -->
+    <!-- Modals -->
     <div id="registerModal" class="modal hidden fixed inset-0 z-[100] items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-md" onclick="closeModal('registerModal')"></div>
         <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl relative z-10 overflow-hidden transform transition-all">
@@ -945,7 +1020,6 @@
             document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
             document.getElementById('lang-text').innerText = currentLang === 'ar' ? 'English' : 'العربية';
             
-            // Font Switch
             if(currentLang === 'en') {
                 document.body.classList.remove('font-cairo');
                 document.body.classList.add('font-poppins');
@@ -954,7 +1028,6 @@
                 document.body.classList.add('font-cairo');
             }
             
-            // Dynamic Logo Switch based on language
             const facultyLogoImg = document.getElementById('faculty-logo-img');
             const venueFacultyLogo = document.getElementById('venue-faculty-logo');
             const footerFacultyLogo = document.getElementById('footer-faculty-logo-img');
@@ -964,13 +1037,11 @@
             if(venueFacultyLogo) venueFacultyLogo.src = newLogoSrc;
             if(footerFacultyLogo) footerFacultyLogo.src = newLogoSrc;
 
-            // Update Translations
             document.querySelectorAll('[data-ar]').forEach(el => {
                 el.innerHTML = el.getAttribute(`data-${currentLang}`);
             });
             handleRouting(); 
 
-            // إعادة تحديث البيانات من Sanity باللغة الجديدة
             fetchSpeakers();
             fetchCommittees();
         }
@@ -978,15 +1049,16 @@
         // ==========================================
         // SPA ROUTING ENGINE
         // ==========================================
-        const validRoutes = ['home', 'about', 'history', 'topics', 'speakers', 'program', 'committees', 'submission', 'contact', 'venue', 'sponsors'];
+        const validRoutes = ['home', 'about', 'history', 'history-2025', 'topics', 'speakers', 'program', 'committees', 'submission', 'contact', 'venue', 'sponsors'];
         const sectionIcons = {
-            'about': 'fa-info-circle', 'history': 'fa-landmark', 'topics': 'fa-project-diagram',
+            'about': 'fa-info-circle', 'history': 'fa-landmark', 'history-2025': 'fa-calendar-check', 'topics': 'fa-project-diagram',
             'speakers': 'fa-users', 'program': 'fa-calendar-alt', 'committees': 'fa-sitemap',
             'submission': 'fa-upload', 'contact': 'fa-envelope', 'venue': 'fa-map-marker-alt', 'sponsors': 'fa-handshake'
         };
         const sectionTitles = {
             'about': { ar: 'حول المؤتمر', en: 'About Conference' },
             'history': { ar: 'تاريخ المؤتمر', en: 'Conference History' },
+            'history-2025': { ar: 'تفاصيل نسخة 2025', en: '2025 Edition Details' },
             'topics': { ar: 'محاور المؤتمر', en: 'Conference Tracks' },
             'speakers': { ar: 'المتحدثون الرئيسيون', en: 'Keynote Speakers' },
             'program': { ar: 'برنامج المؤتمر', en: 'Conference Program' },
@@ -1033,6 +1105,11 @@
                         if(targetSec) {
                             targetSec.style.display = 'block';
                             targetSec.classList.add('active');
+                            
+                            // إذا فتح صفحة تاريخ 2025، نقوم بتفعيل تحميل صور Sanity
+                            if(baseHash === 'history-2025') {
+                                fetchHistory2025Media();
+                            }
                         }
 
                         if(sectionTitles[baseHash]) {
@@ -1047,7 +1124,8 @@
                     document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
                         link.classList.remove('active', 'text-accent', 'text-secondary');
                         const href = link.getAttribute('href');
-                        if (href === `#${baseHash}` || href === `#${fullHash}`) {
+                        // تجنب تحديد زر "تاريخ المؤتمر" إذا كنا في صفحة "history-2025" ما لم نعالجها برمجياً
+                        if (href === `#${baseHash}` || href === `#${fullHash}` || (baseHash === 'history-2025' && href === '#history')) {
                             link.classList.add('active');
                             if (link.closest('li.group')) {
                                 let spanLink = link.closest('li.group').querySelector('span.nav-link');
@@ -1076,9 +1154,7 @@
                         AOS.refresh();
                     }, 100);
                 });
-            } catch (e) {
-                console.error("Routing Error:", e);
-            }
+            } catch (e) { console.error("Routing Error:", e); }
         }
 
         window.addEventListener('hashchange', handleRouting);
@@ -1137,28 +1213,21 @@
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('flex'); document.body.style.overflow = 'auto'; }
 
         // ==========================================
-        // SANITY API CONNECTION (الجسر ثنائي اللغة)
+        // SANITY API CONNECTION (الجسر)
         // ==========================================
         const PROJECT_ID = '57kwqs97'; 
         const DATASET = 'production';
         
-        // 1. جلب المتحدثين
         async function fetchSpeakers() {
             const container = document.getElementById('speakers-container');
             if (!container) return;
-
             try {
                 const query = encodeURIComponent('*[_type == "speaker"]{name_ar, name_en, role_ar, role_en, bio_ar, bio_en, "imageUrl": image.asset->url}');
                 const url = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${query}`;
-                
                 const response = await fetch(url);
                 const data = await response.json();
                 
-                if (!data.result || data.result.length === 0) {
-                    const emptyMsg = currentLang === 'ar' ? 'لا يوجد متحدثين مضافين حالياً.' : 'No speakers added yet.';
-                    container.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500 font-bold">${emptyMsg}</div>`;
-                    return;
-                }
+                if (!data.result || data.result.length === 0) throw new Error("Empty");
 
                 let html = '';
                 const colors = [{ gradient: 'from-primary to-blue-500' }, { gradient: 'from-accent to-yellow-400' }, { gradient: 'from-secondary to-green-400' }];
@@ -1166,7 +1235,6 @@
                 data.result.forEach((speaker, index) => {
                     const color = colors[index % colors.length];
                     const imgUrl = speaker.imageUrl || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=256&h=256&fit=crop';
-                    
                     const name = currentLang === 'ar' ? (speaker.name_ar || '') : (speaker.name_en || speaker.name_ar || '');
                     const role = currentLang === 'ar' ? (speaker.role_ar || '') : (speaker.role_en || speaker.role_ar || '');
                     const bio = currentLang === 'ar' ? (speaker.bio_ar || '') : (speaker.bio_en || speaker.bio_ar || '');
@@ -1183,16 +1251,12 @@
                     </div>`;
                 });
                 container.innerHTML = html;
-                
             } catch (error) {
-                console.log('Sanity API fetch failed for speakers (CORS).');
-                // بيانات مؤقتة لتجنب انهيار التصميم
                 const fallbackMsg = currentLang === 'ar' ? 'بيانات تجريبية (CORS غير مفعل)' : 'Fallback Data (CORS disabled)';
                 container.innerHTML = `<div class="col-span-full bg-yellow-50 border-r-4 border-yellow-400 p-4 text-yellow-800 text-sm font-bold text-center rounded">${fallbackMsg}</div>`;
             }
         }
 
-        // 2. جلب اللجان (مع التنسيق الجديد لفصل الرئيس)
         async function fetchCommittees() {
             const highContainer = document.getElementById('high-members');
             const scientificContainer = document.getElementById('scientific-members');
@@ -1201,10 +1265,8 @@
             try {
                 const query = encodeURIComponent('*[_type == "committee"] | order(order asc) {name_ar, name_en, role_ar, role_en, institution_ar, institution_en, committeeType, order, "imageUrl": image.asset->url}');
                 const url = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${query}`;
-                
                 const response = await fetch(url);
                 const data = await response.json();
-                
                 const emptyMsg = currentLang === 'ar' ? 'لا يوجد أعضاء مضافين حالياً.' : 'No members added yet.';
 
                 if (data.result) {
@@ -1212,7 +1274,6 @@
                     const scientificMembers = data.result.filter(c => c.committeeType === 'scientific');
                     const organizingMembers = data.result.filter(c => c.committeeType === 'organizing');
 
-                    // 1. بناء اللجنة العليا (صور + أسطر مستقلة)
                     if (highMembers.length > 0 && highContainer) {
                         let html = '<div class="flex flex-col gap-6 w-full">';
                         highMembers.forEach(member => {
@@ -1235,7 +1296,6 @@
                         highContainer.innerHTML = html;
                     } else if (highContainer) { highContainer.innerHTML = `<div class="text-gray-400 font-bold py-5">${emptyMsg}</div>`; }
 
-                    // 2. دالة مساعدة لطباعة اللجان العادية (فصل الرئيس في سطر مستقل)
                     const renderGridCommittee = (members, colorClass, container) => {
                         if (!container) return;
                         if (members.length === 0) {
@@ -1244,11 +1304,9 @@
                         }
 
                         let html = '';
-                        // البحث عن الرئيس (الذي يملك رقم الترتيب 1)
                         const president = members.find(m => m.order === 1);
                         const others = members.filter(m => m.order !== 1);
 
-                        // رسم الرئيس في الأعلى (مستقل)
                         if (president) {
                             const pName = currentLang === 'ar' ? (president.name_ar || '') : (president.name_en || president.name_ar || '');
                             const pRole = currentLang === 'ar' ? (president.role_ar || '') : (president.role_en || president.role_ar || '');
@@ -1266,7 +1324,6 @@
                             </div>`;
                         }
 
-                        // رسم باقي الأعضاء في الشبكة
                         others.forEach(member => {
                             const mName = currentLang === 'ar' ? (member.name_ar || '') : (member.name_en || member.name_ar || '');
                             const mRole = currentLang === 'ar' ? (member.role_ar || '') : (member.role_en || member.role_ar || '');
@@ -1280,17 +1337,13 @@
                                 ${mInst ? `<span class="text-sm text-gray-500 font-bold"><i class="fas fa-university text-gray-400"></i> ${mInst}</span>` : ''}
                             </div>`;
                         });
-
                         container.innerHTML = html;
                     };
 
-                    // تطبيق الدالة على اللجنة العلمية والتنظيمية
                     renderGridCommittee(scientificMembers, 'accent', scientificContainer);
                     renderGridCommittee(organizingMembers, 'blue-500', organizingContainer);
                 }
-                
             } catch (error) {
-                console.log('Sanity API fetch failed for committees. Using fallback data.');
                 const fallbackMsg = currentLang === 'ar' ? 'بيانات تجريبية (CORS غير مفعل)' : 'Fallback Data (CORS disabled)';
                 if (highContainer) highContainer.innerHTML = `<div class="bg-yellow-50 p-4 mb-4 text-yellow-800 text-sm font-bold text-center rounded">${fallbackMsg}</div>`;
                 if (scientificContainer) scientificContainer.innerHTML = `<div class="col-span-full bg-yellow-50 p-4 mb-4 text-yellow-800 text-sm font-bold text-center rounded">${fallbackMsg}</div>`;
@@ -1298,7 +1351,76 @@
             }
         }
 
-        // تشغيل كل الدوال بمجرد فتح الصفحة
+        // 3. جلب معرض صور وفيديو النسخة الأولى 2025
+        async function fetchHistory2025Media() {
+            const imgContainer = document.getElementById('gallery-images-container');
+            const videoContainer = document.getElementById('gallery-video-container');
+            if (!imgContainer) return;
+
+            try {
+                // نبحث عن أول معرض تم إنشاؤه في Sanity
+                const query = encodeURIComponent('*[_type == "gallery"][0]{videoUrl, "imageUrls": images[].asset->url}');
+                const url = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${query}`;
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.result) {
+                    // معالجة الفيديو (تحويل رابط يوتيوب العادي إلى رابط Embed ليتم تشغيله داخل الموقع)
+                    if (data.result.videoUrl && videoContainer) {
+                        let videoId = '';
+                        const urlStr = data.result.videoUrl;
+                        if (urlStr.includes('youtube.com/watch?v=')) {
+                            videoId = urlStr.split('v=')[1].split('&')[0];
+                        } else if (urlStr.includes('youtu.be/')) {
+                            videoId = urlStr.split('youtu.be/')[1].split('?')[0];
+                        }
+                        
+                        if(videoId) {
+                            videoContainer.classList.remove('hidden');
+                            videoContainer.innerHTML = `
+                                <div class="relative w-full overflow-hidden rounded-[2rem] shadow-xl border-4 border-white" style="padding-top: 56.25%;">
+                                    <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            `;
+                        }
+                    }
+
+                    // معالجة الصور (Masonry Layout)
+                    if (data.result.imageUrls && data.result.imageUrls.length > 0) {
+                        let html = '';
+                        data.result.imageUrls.forEach(url => {
+                            html += `
+                            <div class="masonry-item rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300">
+                                <img src="${url}" alt="Conference Photo" class="w-full h-auto hover:scale-105 transition-transform duration-500 cursor-pointer">
+                            </div>`;
+                        });
+                        imgContainer.innerHTML = html;
+                    } else {
+                        imgContainer.innerHTML = `<div class="text-center py-10 w-full text-gray-500 font-bold">سيتم إضافة صور المؤتمر قريباً.</div>`;
+                    }
+                } else { throw new Error("No gallery data"); }
+            } catch (error) {
+                // صور مؤقتة تجريبية لتوضيح الفكرة إذا فشل الاتصال (CORS) أو لم تُرفع صور بعد
+                const demoImages = [
+                    'https://images.unsplash.com/photo-1540317580384-e5d43867caa6?w=600&q=80',
+                    'https://images.unsplash.com/photo-1475721025505-c33cb6c9a101?w=600&q=80',
+                    'https://images.unsplash.com/photo-1556761175-5973dc0f32b7?w=600&q=80',
+                    'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=600&q=80',
+                    'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600&q=80'
+                ];
+                let html = '';
+                demoImages.forEach(url => {
+                    html += `
+                    <div class="masonry-item rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 relative group">
+                        <div class="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 backdrop-blur-sm"><span class="text-white font-bold text-sm">بيانات تجريبية مؤقتة</span></div>
+                        <img src="${url}" alt="Demo Photo" class="w-full h-auto transform transition-transform duration-500">
+                    </div>`;
+                });
+                imgContainer.innerHTML = html;
+            }
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             fetchSpeakers();
             fetchCommittees();
