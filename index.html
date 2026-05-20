@@ -1377,7 +1377,16 @@
             }
         }
 
+        // ... كود سابق ...
+
         async function fetchHistory2025Media() {
+            // ← الكود الجديد من الملف المحمّل
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchSpeakers();
+            fetchCommittees();
+        });
             const imgContainer = document.getElementById('gallery-images-container');
             const videoContainer = document.getElementById('gallery-video-container');
             const titleContainer = document.getElementById('gallery-dynamic-title');
