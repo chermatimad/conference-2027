@@ -1377,22 +1377,21 @@
             }
         }
 
-        // ... كود سابق ...
-
-        async function fetchHistory2025Media() {
-            // ← الكود الجديد من الملف المحمّل
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            fetchSpeakers();
-            fetchCommittees();
-        });
+async function fetchHistory2025Media() {
             const imgContainer = document.getElementById('gallery-images-container');
             const videoContainer = document.getElementById('gallery-video-container');
             const titleContainer = document.getElementById('gallery-dynamic-title');
             const recContainer = document.getElementById('history-2025-recommendations');
             if (!imgContainer) return;
 
+            // ... باقي الكود من الملف المحمّل ...
+
+        }  // ← القوس المغلق للدالة
+
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchSpeakers();
+            fetchCommittees();
+        });
             try {
                 // جلب بيانات تاريخ 2025 الشاملة (توصيات، صور، ملف PDF، فيديو)
                 const query = encodeURIComponent('*[_type == "history" && editionYear == "2025"][0]{title_ar, title_en, recommendations_ar, recommendations_en, videoUrl_ar, videoUrl_en, "programPdfUrl": programPdf.asset->url, "img1": image1.asset->url, "img2": image2.asset->url, "img3": image3.asset->url, "img4": image4.asset->url, "img5": image5.asset->url, "img6": image6.asset->url}');
