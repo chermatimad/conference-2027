@@ -21,6 +21,7 @@ export const siteSettings = defineType({
     {name: 'contact', title: 'الاتصال والمكان'},
     {name: 'social', title: 'التواصل الاجتماعي'},
     {name: 'footer', title: 'التذييل والسيو'},
+    {name: 'logos', title: 'الشعارات (3 في الأعلى والأسفل)'},
     {name: 'theme', title: 'الألوان والمظهر'},
   ],
   fields: [
@@ -28,9 +29,13 @@ export const siteSettings = defineType({
     ...bilingual('heroTitle', 'العنوان الرئيسي في الواجهة', {required: true}).map((f) => ({...f, group: 'identity'})),
     ...bilingual('theme', 'محور/شعار المؤتمر', {type: 'text', rows: 3, required: true}).map((f) => ({...f, group: 'identity'})),
     ...bilingual('editionLabel', 'شارة النسخة (مثال: النسخة الثانية - 2027)').map((f) => ({...f, group: 'identity'})),
-    {...imageField('facultyLogoAr', 'شعار الكلية (عربي)'), group: 'identity'},
-    {...imageField('facultyLogoEn', 'شعار الكلية (إنجليزي)'), group: 'identity'},
-    {...imageField('conferenceLogo', 'شعار المؤتمر'), group: 'identity'},
+    {...imageField('universityLogoAr', 'شعار الجامعة (النسخة العربية)'), group: 'logos'},
+    {...imageField('universityLogoEn', 'شعار الجامعة (النسخة الإنجليزية)'), group: 'logos'},
+    {...imageField('facultyLogoAr', 'شعار الكلية (النسخة العربية)'), group: 'logos'},
+    {...imageField('facultyLogoEn', 'شعار الكلية (النسخة الإنجليزية)'), group: 'logos'},
+    {...imageField('conferenceLogoAr', 'شعار المؤتمر (النسخة العربية)'), group: 'logos'},
+    {...imageField('conferenceLogoEn', 'شعار المؤتمر (النسخة الإنجليزية)'), group: 'logos'},
+    {...imageField('conferenceLogo', 'شعار المؤتمر (قديم - احتياطي، يمكن تركه فارغاً)'), group: 'logos'},
     {...imageField('heroBackground', 'صورة خلفية الواجهة (اختياري)', 'تظهر بشفافية فوق التدرج اللوني'), group: 'identity'},
 
     defineField({

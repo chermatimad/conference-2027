@@ -118,7 +118,7 @@
   // ---------- جلب البيانات ----------
   const img = (f) => `"${f}": ${f}.asset->url`;
   const QUERY = `{
-    "settings": *[_id == "siteSettings"][0]{ ..., ${img('facultyLogoAr')}, ${img('facultyLogoEn')}, ${img('conferenceLogo')}, ${img('heroBackground')}, ${img('shareImage')} },
+    "settings": *[_id == "siteSettings"][0]{ ..., ${img('facultyLogoAr')}, ${img('facultyLogoEn')}, ${img('conferenceLogo')}, ${img('conferenceLogoAr')}, ${img('conferenceLogoEn')}, ${img('universityLogoAr')}, ${img('universityLogoEn')}, ${img('heroBackground')}, ${img('shareImage')} },
     "home": *[_id == "homePage"][0]{ ..., ${img('welcomeImage')}, ${img('welcomeImage2')} },
     "about": *[_id == "aboutPage"][0]{ ..., ${img('preambleImage')} },
     "submission": *[_id == "submissionPage"][0]{ ..., "templateUrl": templateFile.asset->url },
@@ -174,7 +174,11 @@
     const home = DATA.home || {};
     const isAr = lang === 'ar';
     const facLogo = safeImg(isAr ? s.facultyLogoAr : s.facultyLogoEn, 400) || `assets/img/faculty_logo_${lang}.png`;
-    const confLogo = safeImg(s.conferenceLogo, 300) || 'assets/img/conference_logo.png';
+    const confLogo = safeImg(isAr ? s.conferenceLogoAr : s.conferenceLogoEn, 300) || safeImg(s.conferenceLogo, 300) || 'assets/img/conference_logo.png';
+    const uniLogo = safeImg(isAr ? s.universityLogoAr : s.universityLogoEn, 400) || safeImg(isAr ? s.universityLogoEn : s.universityLogoAr, 400) || 'assets/img/university_logo.png';
+    ['univ-logo-img', 'footer-univ-logo-img'].forEach((id) => {
+      const el = byId(id); if (el) { el.dataset.fallback = 'assets/img/university_logo.png'; el.src = uniLogo; }
+    });
     [['faculty-logo-img', facLogo], ['venue-faculty-logo', facLogo], ['footer-faculty-logo-img', facLogo]].forEach(([id, src]) => {
       const el = byId(id); if (el) { el.dataset.fallback = `assets/img/faculty_logo_${lang}.png`; el.src = src; }
     });
