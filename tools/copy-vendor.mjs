@@ -1,0 +1,22 @@
+// ينسخ المكتبات (خطوط، Font Awesome، AOS) إلى assets/vendor ليخدمها الموقع من نطاقه فقط (CSP صارم، بلا CDN)
+import {cpSync, mkdirSync, rmSync} from 'node:fs'
+import {resolve, dirname} from 'node:path'
+import {fileURLToPath} from 'node:url'
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+const nm = (p) => resolve(root, 'node_modules', p)
+const out = (p) => resolve(root, 'assets/vendor', p)
+rmSync(out('.'), {recursive: true, force: true})
+mkdirSync(out('fonts'), {recursive: true})
+for (const f of ['cairo-arabic-wght-normal.woff2', 'cairo-latin-wght-normal.woff2'])
+  cpSync(nm(`@fontsource-variable/cairo/files/${f}`), out(`fonts/${f}`))
+for (const w of [400, 600, 700, 800, 900])
+  cpSync(nm(`@fontsource/poppins/files/poppins-latin-${w}-normal.woff2`), out(`fonts/poppins-latin-${w}-normal.woff2`))
+mkdirSync(out('fa/css'), {recursive: true})
+cpSync(nm('@fortawesome/fontawesome-free/css/all.min.css'), out('fa/css/all.min.css'))
+mkdirSync(out('fa/webfonts'), {recursive: true})
+for (const f of ['fa-solid-900', 'fa-regular-400', 'fa-brands-400'])
+  cpSync(nm(`@fortawesome/fontawesome-free/webfonts/${f}.woff2`), out(`fa/webfonts/${f}.woff2`))
+mkdirSync(out('aos'), {recursive: true})
+cpSync(nm('aos/dist/aos.js'), out('aos/aos.js'))
+cpSync(nm('aos/dist/aos.css'), out('aos/aos.css'))
+console.log('vendor copied')

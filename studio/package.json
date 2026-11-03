@@ -1,0 +1,23 @@
+{
+  "name": "conference-2027-studio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "seed": "node seed/build-seed.mjs",
+    "import-seed": "node seed/build-seed.mjs && sanity dataset import seed/seed.ndjson production --missing"
+  },
+  "dependencies": {
+    "@sanity/vision": "^4",
+    "react": "^19",
+    "react-dom": "^19",
+    "sanity": "^4",
+    "styled-components": "^6.1.15"
+  },
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}

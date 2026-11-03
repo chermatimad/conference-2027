@@ -1,0 +1,164 @@
+// المصدر الوحيد للمحتوى الابتدائي: يُولِّد seed.ndjson (للاستيراد إلى Sanity) و assets/data/fallback.json (احتياطي للواجهة)
+const img = (src) => ({__img: src})
+const doc = (type, id, data) => ({_type: type, _id: id, ...data})
+
+export const documents = [
+  doc('siteSettings', 'siteSettings', {
+    siteTitle_ar: 'المؤتمر الدولي الثاني: قضايا اقتصادية معاصرة',
+    siteTitle_en: '2nd International Conference: Contemporary Economic Issues',
+    heroTitle_ar: 'قضايا اقتصادية معاصرة',
+    heroTitle_en: 'Contemporary Economic Issues',
+    theme_ar: 'الأمن الغذائي في ظل التحديات العالمية : الابتكار والسياسات الاقتصادية لتحقيق الاستدامة',
+    theme_en: 'Food Security Amidst Global Challenges: Innovation & Economic Policies for Sustainability',
+    editionLabel_ar: 'النسخة الثانية - 2027',
+    editionLabel_en: 'Second Edition - 2027',
+    facultyLogoAr: img('assets/img/faculty_logo_ar.png'),
+    facultyLogoEn: img('assets/img/faculty_logo_en.png'),
+    conferenceLogo: img('assets/img/conference_logo.png'),
+    eventStart: '2027-10-20T07:00:00.000Z',
+    eventEnd: '2027-10-21T17:00:00.000Z',
+    registrationOpen: true,
+    paperSubmissionUrl: 'https://events.univ-setif.dz/',
+    contactEmail: 'digitalcell.fsecg@gmail.com',
+    venueName_ar: 'جامعة سطيف 1 - فرحات عباس',
+    venueName_en: 'Setif 1 University - Ferhat Abbas',
+    venueDescription_ar: 'كلية العلوم الاقتصادية والتجارية وعلوم التسيير، القطب الجامعي المعبودة.',
+    venueDescription_en: 'Faculty of Economics, Commerce & Management Sciences, El Maabouda University Pole.',
+    address_ar: 'جامعة سطيف 1، القطب الجامعي، سطيف، الجزائر.',
+    address_en: 'Setif 1 University, University Pole, Setif, Algeria.',
+    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3202.9342792611634!2d5.3952402!3d36.1916474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12f3158c3539bc7b%3A0x6b24d77054f15d2a!2sFaculty%20of%20Economics%2C%20Commerce%20and%20Management%20Sciences!5e0!3m2!1sen!2sdz!4v1700000000000!5m2!1sen!2sdz',
+    mapLinkUrl: 'https://maps.app.goo.gl/xHB9GtWvQpGnTqDV8',
+    footerAbout_ar: 'المؤتمر الدولي الثاني لقضايا اقتصادية معاصرة، منبر أكاديمي يجمع الخبراء لمناقشة التحديات وبناء سياسات مستدامة للأمن الغذائي.',
+    footerAbout_en: 'An academic platform gathering experts to discuss challenges and build sustainable food security policies amidst global transformations.',
+    copyright_ar: '© 2027 جامعة سطيف 1. جميع الحقوق محفوظة.',
+    copyright_en: '© 2027 Setif 1 University. All rights reserved.',
+    seoDescription_ar: 'الموقع الرسمي للمؤتمر الدولي الثاني: قضايا اقتصادية معاصرة — الأمن الغذائي في ظل التحديات العالمية. جامعة سطيف 1، الجزائر.',
+    seoDescription_en: 'Official website of the 2nd International Conference on Contemporary Economic Issues — Food Security Amidst Global Challenges. Setif 1 University, Algeria.',
+  }),
+
+  doc('homePage', 'homePage', {
+    welcomeKicker_ar: 'مرحباً بكم', welcomeKicker_en: 'Welcome',
+    welcomeTitle_ar: 'نظرة عامة على المؤتمر', welcomeTitle_en: 'Conference Overview',
+    welcomeHeading_ar: 'منصة عالمية لاستدامة الغذاء والاقتصاد',
+    welcomeHeading_en: 'A Global Platform for Food & Economic Sustainability',
+    welcomeText_ar: 'يركز المؤتمر في نسخته الثانية على التحديات الراهنة للأمن الغذائي في ظل الأزمات العالمية المتقلبة. نحن نجمع الخبراء، الأكاديميين، وصناع القرار لاستكشاف كيف يمكن للابتكار التكنولوجي والسياسات الاقتصادية الذكية أن تخلق حلولاً مستدامة تضمن مستقبلاً غذائياً آمناً للأجيال القادمة.',
+    welcomeText_en: 'The second edition focuses on current food security challenges amidst global crises. We bring together experts, academics, and decision-makers to explore how technological innovation and smart policies create sustainable solutions for a secure future.',
+    welcomeImage: img('https://images.unsplash.com/photo-1542838132-92c53300491e?fm=jpg&fit=crop&w=600&q=80'),
+    welcomeImage2: img('https://images.unsplash.com/photo-1592982537447-6f2b6dbf58d9?fm=jpg&fit=crop&w=600&q=80'),
+    welcomeImage2Label_ar: 'زراعة مستدامة', welcomeImage2Label_en: 'Sustainable Agri',
+    stats: [
+      {_key: 's1', value: '+15', label_ar: 'دولة مشاركة', label_en: 'Participating Countries'},
+      {_key: 's2', value: '+500', label_ar: 'باحث وخبير', label_en: 'Researchers'},
+    ],
+  }),
+
+  doc('aboutPage', 'aboutPage', {
+    preambleTitle_ar: 'نحو رؤية متجددة للاقتصاد العالمي',
+    preambleTitle_en: 'Towards a Renewed Vision of the Global Economy',
+    preamble_ar: 'يشهد العالم في العقد الحالي تحولات جيوسياسية وبيئية متسارعة، ألقت بظلالها على مختلف القطاعات الاقتصادية، وفي مقدمتها قطاع الغذاء. لقد أثبتت الأزمات المتتالية أن الاعتماد على النظم التقليدية لم يعد كافياً لضمان الأمن الغذائي للشعوب. من هنا، تنبثق الحاجة الماسة إلى إعادة هندسة السياسات الاقتصادية وتبني ابتكارات تكنولوجية وزراعية تساهم في تحقيق تنمية مستدامة تحافظ على الموارد للأجيال القادمة.',
+    preamble_en: 'In the current decade, the world is witnessing rapid geopolitical and environmental transformations that have cast their shadows on various economic sectors, primarily the food sector. Successive crises have proven that relying on traditional systems is no longer sufficient to ensure food security. Hence, there is an urgent need to re-engineer economic policies and adopt innovations that contribute to achieving sustainable development.',
+    preambleImage: img('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?fm=jpg&fit=crop&w=1000&q=80'),
+    importance_ar: 'تتجلى أهمية المؤتمر في كونه استجابة علمية وأكاديمية حتمية لواقع مليء بالتحديات. فهو يوفر مساحة حيوية لصناع القرار، الباحثين، والفاعلين الاقتصاديين للوقوف على مكامن الضعف في سلاسل التوريد الحالية، وتسليط الضوء على الحلول المبتكرة (كالزراعة الذكية والاقتصاد الدائري) التي باتت تشكل طوق النجاة لتجاوز الفجوة الغذائية محلياً ودولياً.',
+    importance_en: 'The importance of the conference is manifested in its role as an inevitable academic response to a challenging reality. It provides a vital space for decision-makers and researchers to identify weaknesses in current supply chains and highlight innovative solutions (such as smart agriculture and the circular economy) that have become the lifeline to bridge the food gap.',
+    problemIntro_ar: 'انطلاقاً من المعطيات السابقة، وما يشهده العالم من تقلبات غير مسبوقة، تتبلور الإشكالية المحورية للمؤتمر في التساؤل الرئيسي التالي:',
+    problemIntro_en: 'Based on the previous data, and the unprecedented fluctuations the world is experiencing, the core problem of the conference crystallizes in the following main question:',
+    problemQuestion_ar: '« كيف يمكن هندسة سياسات اقتصادية مرنة وتوظيف الابتكار التكنولوجي لخلق نظم أمن غذائي مستدامة، قادرة على الصمود أمام التحديات والأزمات العالمية الراهنة والمستقبلية؟ »',
+    problemQuestion_en: '« How can flexible economic policies be engineered and technological innovation be utilized to create sustainable food security systems, capable of withstanding current and future global challenges? »',
+    objectives: [
+      {_key: 'o1', title_ar: 'توفير منصة حيوية للنقاش', title_en: 'Provide a Vital Platform for Discussion', text_ar: 'جمع الباحثين والخبراء لتبادل الرؤى والخبرات حول أحدث التوجهات في الاقتصاد والتنمية المستدامة والأمن الغذائي.', text_en: 'Gathering researchers and experts to exchange visions and experiences on the latest trends in economics, sustainable development, and food security.'},
+      {_key: 'o2', title_ar: 'تقييم السياسات الحالية', title_en: 'Evaluate Current Policies', text_ar: 'تحليل مدى نجاعة السياسات الزراعية والاقتصادية المطبقة حالياً في مواجهة الأزمات، والبحث عن الثغرات لتداركها.', text_en: 'Analyzing the effectiveness of agricultural and economic policies currently applied in facing crises, and looking for gaps to address them.'},
+      {_key: 'o3', title_ar: 'إبراز دور التكنولوجيا الحديثة', title_en: "Highlight Technology's Role", text_ar: 'تسليط الضوء على تقنيات الذكاء الاصطناعي وإنترنت الأشياء والزراعة الذكية كأدوات محورية لتحقيق الاستدامة.', text_en: 'Shedding light on artificial intelligence, IoT, and smart agriculture technologies as pivotal tools to achieve sustainability.'},
+      {_key: 'o4', title_ar: 'صياغة استراتيجيات وتوصيات', title_en: 'Formulate Strategies & Recommendations', text_ar: 'الخروج بنماذج اقتصادية قابلة للتطبيق العملي (كالاقتصاد الدائري) لمساعدة صناع القرار في رسم خطط مستقبلية مرنة.', text_en: 'Developing actionable economic models (like the circular economy) to assist decision-makers in drawing flexible future plans.'},
+    ],
+    tracksIntro_ar: 'يستقبل المؤتمر الأوراق البحثية الأصيلة والمبتكرة التي تندرج ضمن المحاور الأساسية التالية، بهدف إيجاد حلول عملية وفعالة لتحديات الأمن الغذائي.',
+    tracksIntro_en: 'The conference accepts original and innovative research papers falling under the following main tracks, aiming to find practical solutions.',
+  }),
+
+  doc('submissionPage', 'submissionPage', {
+    guidelines: [
+      {_key: 'g1', text_ar: 'أن يكون البحث أصيلاً، لم يسبق نشره أو تقديمه في أي تظاهرة علمية أخرى.', text_en: 'Research must be original, unpublished and not presented at any other scientific event.'},
+      {_key: 'g2', text_ar: 'يجب ألا يتجاوز عدد صفحات البحث 20 صفحة ولا يقل عن 12 صفحة.', text_en: 'Paper length must be between 12 and 20 pages.'},
+      {_key: 'g3', text_ar: 'اللغات المقبولة لكتابة البحث: العربية، الإنجليزية، والفرنسية.', text_en: 'Accepted languages: Arabic, English, and French.'},
+    ],
+    platformNote_ar: 'يتم تقديم الأوراق البحثية للمراجعة حصرياً عبر المنصة الإلكترونية المخصصة للمؤتمر.',
+    platformNote_en: 'Research papers must be submitted exclusively via the dedicated conference electronic platform for review.',
+  }),
+
+  ...[
+    ['1', 'المحور الأول', 'Track 1', 'واقع الأمن الغذائي عالمياً', 'Global Food Security Reality', 'تحليل تأثير التغيرات المناخية، الأزمات الصحية والجيوسياسية على سلاسل التوريد والإنتاج.', 'Analyzing the impact of climate change, health & geopolitical crises on supply chains and production.', 'shield', 'primary'],
+    ['2', 'المحور الثاني', 'Track 2', 'الابتكار والزراعة الذكية', 'Innovation & Smart Agriculture', 'دور الذكاء الاصطناعي، التكنولوجيا الحيوية، وإنترنت الأشياء في زيادة الإنتاجية وتحقيق الاستدامة.', 'The role of AI, biotechnology, and IoT in increasing productivity and achieving sustainability.', 'chip', 'secondary'],
+    ['3', 'المحور الثالث', 'Track 3', 'السياسات الاقتصادية', 'Economic Policies', 'تقييم السياسات الزراعية، التمويل الأخضر، ودور المؤسسات في دعم الأمن الغذائي المستدام.', 'Assessing agricultural policies, green financing, and institutional roles in supporting food security.', 'coins', 'accent'],
+    ['4', 'المحور الرابع', 'Track 4', 'التجارة الدولية والأمن الغذائي', 'Intl. Trade & Food Security', 'استراتيجيات تحقيق الاكتفاء الذاتي، وتقليل الفجوة الغذائية والتبعية للأسواق الخارجية.', 'Strategies to achieve self-sufficiency, reduce the food gap, and limit external market dependence.', 'ship', 'blue'],
+    ['5', 'المحور الخامس', 'Track 5', 'الاقتصاد الدائري', 'Circular Economy', 'نماذج الاقتصاد الدائري في الزراعة، استراتيجيات إدارة النفايات، وثقافة الاستهلاك الرشيد.', 'Circular economy models in agriculture, waste management strategies, and rational consumption.', 'recycle', 'gray'],
+    ['6', 'المحور السادس', 'Track 6', 'المقاولاتية الزراعية', 'Agricultural Entrepreneurship', 'دور المؤسسات الناشئة، حاضنات الأعمال، والشباب في تقديم حلول ريادية.', 'The role of Startups, incubators, and youth in providing entrepreneurial solutions.', 'rocket', 'purple'],
+  ].map(([n, kAr, kEn, tAr, tEn, dAr, dEn, icon, color]) =>
+    doc('track', `track-${n}`, {order: Number(n), kicker_ar: kAr, kicker_en: kEn, title_ar: tAr, title_en: tEn, description_ar: dAr, description_en: dEn, icon, color})),
+
+  doc('programDay', 'programDay-1', {
+    dayNumber: 1, date: '2027-10-20',
+    sessions: [
+      {_key: 'a', timeFrom: '08:30', timeTo: '09:30', color: 'accent', title_ar: 'استقبال وتسجيل المشاركين', title_en: 'Registration & Welcome', place_ar: 'بهو قاعة المحاضرات الكبرى', place_en: 'Main Auditorium Lobby'},
+      {_key: 'b', timeFrom: '09:30', timeTo: '10:30', color: 'primary', title_ar: 'الجلسة الافتتاحية الرسمية', title_en: 'Official Opening Ceremony', place_ar: 'كلمة السيد مدير الجامعة وعميد الكلية', place_en: 'Speech by the University Rector & Faculty Dean'},
+      {_key: 'c', timeFrom: '11:00', timeTo: '13:00', color: 'secondary', title_ar: 'الجلسة العامة الأولى (المتحدثون الرئيسيون)', title_en: 'First Plenary Session (Keynotes)', place_ar: 'مداخلات الخبراء حول واقع الأمن الغذائي العالمي', place_en: 'Expert talks on global food security reality'},
+      {_key: 'd', timeFrom: '14:30', timeTo: '17:00', color: 'blue', title_ar: 'الجلسات العلمية الموازية (ورشات العمل)', title_en: 'Parallel Scientific Sessions (Workshops)', place_ar: 'مناقشة الأبحاث المقبولة في المحورين الأول والثاني', place_en: 'Discussion of accepted papers in Tracks 1 & 2'},
+    ],
+  }),
+  doc('programDay', 'programDay-2', {
+    dayNumber: 2, date: '2027-10-21',
+    sessions: [
+      {_key: 'a', timeFrom: '09:00', timeTo: '12:30', color: 'primary', title_ar: 'الجلسات العلمية الموازية', title_en: 'Parallel Scientific Sessions', place_ar: 'عروض ومناقشات المحاور 3، 4، 5، و 6', place_en: 'Presentations for Tracks 3, 4, 5, & 6'},
+      {_key: 'b', timeFrom: '14:00', timeTo: '15:30', color: 'accent', title_ar: 'جلسة تفاعلية للطلبة والباحثين', title_en: 'Interactive Session for Students', place_ar: 'منهجية النشر في المجلات المصنفة', place_en: 'Publishing methodology in indexed journals'},
+      {_key: 'c', timeFrom: '16:00', timeTo: '17:00', color: 'secondary', title_ar: 'الجلسة الختامية وتلاوة التوصيات', title_en: 'Closing Ceremony & Recommendations', place_ar: 'توزيع الشهادات واختتام الفعاليات', place_en: 'Distribution of certificates and closing'},
+    ],
+  }),
+
+  doc('importantDate', 'date-1', {order: 1, date: '2027-07-15', icon: 'calendar', title_ar: 'آخر أجل للمُلخصات', title_en: 'Deadline for Abstracts'}),
+  doc('importantDate', 'date-2', {order: 2, date: '2027-08-01', icon: 'mail', title_ar: 'الرد على الملخصات', title_en: 'Notification of Acceptance'}),
+  doc('importantDate', 'date-3', {order: 3, date: '2027-09-15', icon: 'file', title_ar: 'استقبال المداخلات كاملة', title_en: 'Full Paper Submission'}),
+
+  doc('history', 'history-2025', {
+    editionYear: '2025',
+    dateLabel_ar: '14-15 أفريل 2025', dateLabel_en: '14-15 April 2025',
+    title_ar: 'استخدامات الذكاء الاصطناعي في الخدمات المالية',
+    title_en: 'Uses of Artificial Intelligence in Financial Services',
+    summary_ar: 'حدث علمي دولي نوعي احتضنته جامعة فرحات عباس سطيف 1، بمشاركة أكثر من 150 باحث من 6 دول مختلفة، لتبادل الرؤى حول تقاطع الذكاء الاصطناعي مع القطاع المالي.',
+    summary_en: 'A qualitative international scientific event hosted by Ferhat Abbas Setif 1 University, with the participation of more than 150 researchers from 6 different countries.',
+    intro_ar: 'حدث أكاديمي دولي رسم ملامح التميز العلمي، شكل نموذجاً متميزاً في تعزيز إشعاع الكلية وتأكيد ريادتها الفكرية في مجال التكنولوجيا المالية.',
+    intro_en: "An international academic event that painted the features of scientific excellence, forming a distinguished model in enhancing the faculty's radiance.",
+    logo: img('assets/img/iceic_2025.png'),
+    stats: [
+      {_key: 'a', value: '06', label_ar: 'دول مشاركة', label_en: 'Participating Countries'},
+      {_key: 'b', value: '+50', label_ar: 'ورقة بحثية', label_en: 'Papers'},
+      {_key: 'c', value: '02', label_ar: 'أيام', label_en: 'Days'},
+      {_key: 'd', value: '06', label_ar: 'جلسات رئيسية', label_en: 'Plenary Sessions'},
+      {_key: 'e', value: '06', label_ar: 'ورشات علمية', label_en: 'Workshops'},
+      {_key: 'f', value: '15', label_ar: 'ملصق علمي', label_en: 'Scientific Posters'},
+    ],
+    excellence_ar: 'شهدت جامعة فرحات عباس سطيف 1 تنظيم المؤتمر الدولي الأول بمشاركة نخبة من الباحثين والخبراء، حيث أشرف على الفعاليات مدير الجامعة وعميد الكلية، بحضور ممثلين عن الهيئات الاقتصادية والبنوك.',
+    excellence_en: 'The university hosted the first international conference with the participation of elite researchers, overseen by the University Rector and Faculty Dean.',
+    topics_ar: 'ركزت الفعاليات على استكشاف التطبيقات العملية للذكاء الاصطناعي في تحليل البيانات المالية، إدارة المخاطر، واستشراف مستقبل التكنولوجيا المالية (FinTech) في الجزائر مع استعراض التحديات التشريعية والأخلاقية.',
+    topics_en: 'Events focused on exploring practical AI applications in financial data analysis, risk management, and the future of FinTech in Algeria.',
+    achievement_ar: 'شكل هذا المؤتمر نموذجاً في تعزيز الإشعاع العلمي للكلية، وترسيخ ثقافة البحث الجماعي، وتأكيد الريادة الفكرية في موضوع الذكاء الاصطناعي، وتحفيز الكفاءات الشابة على البحث التطبيقي المبتكر.',
+    achievement_en: 'This conference was a model in enhancing scientific radiance, establishing collective research culture, and stimulating young competencies.',
+    galleryTitle_ar: 'معرض صور النسخة الأولى', galleryTitle_en: '1st Edition Gallery',
+  }),
+
+  // أمثلة للإعلانات — عدّلها أو احذفها من لوحة التحكم
+  doc('announcement', 'announcement-welcome', {
+    kind: 'important', pinned: true, popup: false,
+    publishAt: '2026-11-03T00:00:00.000Z',
+    title_ar: 'تم إطلاق الموقع الرسمي للمؤتمر الدولي الثاني: قضايا اقتصادية معاصرة',
+    title_en: 'The official website of the 2nd International Conference is now live',
+    body_ar: 'يمكنكم من خلال هذا الموقع متابعة كل مستجدات المؤتمر: المحاور، البرنامج، اللجان، التواريخ المهمة وإرشادات النشر.',
+    body_en: 'Follow all conference updates here: tracks, program, committees, important dates and submission guidelines.',
+  }),
+  doc('announcement', 'announcement-dates', {
+    kind: 'periodic', pinned: false, popup: false,
+    publishAt: '2026-11-03T00:00:00.000Z',
+    title_ar: 'التواريخ المهمة للمشاركة في المؤتمر',
+    title_en: 'Important dates for participation',
+    body_ar: 'آخر أجل لإرسال الملخصات: 15 جويلية 2027.\nالرد على الملخصات: 01 أوت 2027.\nاستقبال المداخلات كاملة: 15 سبتمبر 2027.',
+    body_en: 'Abstract deadline: 15 July 2027.\nNotification of acceptance: 01 August 2027.\nFull paper submission: 15 September 2027.',
+    linkUrl: 'https://events.univ-setif.dz/', linkLabel_ar: 'منصة إرسال الأوراق', linkLabel_en: 'Paper submission platform',
+  }),
+]

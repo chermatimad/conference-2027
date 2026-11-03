@@ -1,0 +1,9 @@
+# يعمل على Netlify / Cloudflare Pages. (GitHub Pages لا يدعم ترويسات مخصصة — الـ CSP موجودة أيضاً كوسم meta في index.html)
+/*
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: https://cdn.sanity.io https://images.unsplash.com; font-src 'self'; connect-src 'self' https://k6sogxhu.apicdn.sanity.io https://k6sogxhu.api.sanity.io; frame-src https://www.google.com/maps/ https://www.youtube-nocookie.com; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Cross-Origin-Opener-Policy: same-origin
