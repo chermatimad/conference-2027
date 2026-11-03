@@ -118,7 +118,7 @@
   // ---------- جلب البيانات ----------
   const img = (f) => `"${f}": ${f}.asset->url`;
   const QUERY = `{
-    "settings": *[_id == "siteSettings"][0]{ ..., ${img('facultyLogoAr')}, ${img('facultyLogoEn')}, ${img('conferenceLogo')}, ${img('conferenceLogoAr')}, ${img('conferenceLogoEn')}, ${img('universityLogoAr')}, ${img('universityLogoEn')}, ${img('heroBackground')}, ${img('shareImage')} },
+    "settings": *[_id == "siteSettings"][0]{ ..., ${img('facultyLogoAr')}, ${img('facultyLogoEn')}, ${img('conferenceLogo')}, ${img('conferenceLogoAr')}, ${img('conferenceLogoEn')}, ${img('universityLogoAr')}, ${img('universityLogoEn')}, ${img('footerUnivLogoAr')}, ${img('footerUnivLogoEn')}, ${img('footerFacultyLogoAr')}, ${img('footerFacultyLogoEn')}, ${img('footerConfLogoAr')}, ${img('footerConfLogoEn')}, ${img('heroBackground')}, ${img('shareImage')} },
     "home": *[_id == "homePage"][0]{ ..., ${img('welcomeImage')}, ${img('welcomeImage2')} },
     "about": *[_id == "aboutPage"][0]{ ..., ${img('preambleImage')} },
     "submission": *[_id == "submissionPage"][0]{ ..., "templateUrl": templateFile.asset->url },
@@ -176,14 +176,18 @@
     const facLogo = safeImg(isAr ? s.facultyLogoAr : s.facultyLogoEn, 400) || `assets/img/faculty_logo_${lang}.png`;
     const confLogo = safeImg(isAr ? s.conferenceLogoAr : s.conferenceLogoEn, 300) || safeImg(s.conferenceLogo, 300) || 'assets/img/conference_logo.png';
     const uniLogo = safeImg(isAr ? s.universityLogoAr : s.universityLogoEn, 400) || safeImg(isAr ? s.universityLogoEn : s.universityLogoAr, 400) || 'assets/img/university_logo.png';
-    ['univ-logo-img', 'footer-univ-logo-img'].forEach((id) => {
-      const el = byId(id); if (el) { el.dataset.fallback = 'assets/img/university_logo.png'; el.src = uniLogo; }
+    const pick = (a, b, w) => safeImg(isAr ? a : b, w) || safeImg(isAr ? b : a, w);
+    const fUni = pick(s.footerUnivLogoAr, s.footerUnivLogoEn, 400) || uniLogo;
+    [['univ-logo-img', uniLogo], ['footer-univ-logo-img', fUni]].forEach(([id, src]) => {
+      const el = byId(id); if (el) { el.dataset.fallback = 'assets/img/university_logo.png'; el.src = src; }
     });
-    [['faculty-logo-img', facLogo], ['venue-faculty-logo', facLogo], ['footer-faculty-logo-img', facLogo]].forEach(([id, src]) => {
+    const fFac = safeImg(isAr ? s.footerFacultyLogoAr : s.footerFacultyLogoEn, 400) || facLogo;
+    [['faculty-logo-img', facLogo], ['venue-faculty-logo', facLogo], ['footer-faculty-logo-img', fFac]].forEach(([id, src]) => {
       const el = byId(id); if (el) { el.dataset.fallback = `assets/img/faculty_logo_${lang}.png`; el.src = src; }
     });
-    ['conf-logo-img', 'footer-conf-logo', 'footer-conf-logo2'].forEach((id) => {
-      const el = byId(id); if (el) { el.dataset.fallback = 'assets/img/conference_logo.png'; el.src = confLogo; }
+    const fConf = safeImg(isAr ? s.footerConfLogoAr : s.footerConfLogoEn, 300) || confLogo;
+    [['conf-logo-img', confLogo], ['footer-conf-logo', confLogo], ['footer-conf-logo2', fConf]].forEach(([id, src]) => {
+      const el = byId(id); if (el) { el.dataset.fallback = 'assets/img/conference_logo.png'; el.src = src; }
     });
 
     const title = t(s, 'siteTitle');
@@ -222,6 +226,7 @@
     if (pc) { pc.classList.toggle('hidden', !phone); pc.classList.toggle('flex', !!phone); setText('contact-phone', phone); }
     setText('venue-name', t(s, 'venueName')); setText('venue-desc', t(s, 'venueDescription'));
     setText('footer-address', t(s, 'address')); setText('footer-about', t(s, 'footerAbout')); setText('footer-copy', t(s, 'copyright'));
+    setText('footer-line', t(s, 'footerLine') || (isAr ? 'كلية العلوم الاقتصادية والتجارية وعلوم التسيير | جامعة سطيف 1 - فرحات عباس، الجزائر' : 'Faculty of Economics, Business and Management Sciences | Setif 1 University - Ferhat ABBAS, Algeria'));
     const map = byId('venue-map'), mapUrl = safeHttps(s.mapEmbedUrl);
     if (map && mapUrl.startsWith('https://www.google.com/maps/embed') && map.getAttribute('src') !== mapUrl) map.src = mapUrl;
     const ml = byId('venue-link'), mlu = safeHttps(s.mapLinkUrl); if (ml && mlu) ml.href = mlu;
@@ -231,10 +236,16 @@
     $$('[data-register]').forEach((b) => b.classList.toggle('hidden', s.registrationOpen === false));
 
     const soc = byId('social-links');
-    if (soc) soc.innerHTML = SOCIAL.map(([k, icon, hover, name]) => {
-      const u = safeHttps(s[k]);
-      return u ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer" aria-label="${name}" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center ${hover} transition-colors shadow-sm"><i class="fab ${icon} text-white" aria-hidden="true"></i></a>` : '';
-    }).join('');
+    if (soc) {
+      const fixed = SOCIAL.map(([k, icon, hover, name]) => ({u: safeHttps(s[k]), cls: `fab ${icon}`, name, hover}));
+      const custom = (Array.isArray(s.socialLinks) ? s.socialLinks : []).map((x) => {
+        const m = FA_RE.exec(String((x && x.icon) || '').trim());
+        return {u: safeHttps(x && x.url), cls: m ? `${m[1] || 'fab'} ${m[2]}` : 'fas fa-link', name: String((x && x.label) || '').slice(0, 40), hover: 'hover:bg-accent'};
+      });
+      const all = [...custom, ...fixed].filter((x) => x.u);
+      soc.innerHTML = all.map((x) => `<a href="${esc(x.u)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(x.name)}" title="${esc(x.name)}" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center ${x.hover} transition-colors shadow-sm"><i class="${esc(x.cls)} text-white" aria-hidden="true"></i></a>`).join('');
+      const wrap = byId('social-wrap'); if (wrap) { wrap.classList.toggle('hidden', !all.length); wrap.classList.toggle('flex', !!all.length); }
+    }
 
     startCountdown(s.eventStart);
   }
@@ -753,6 +764,12 @@
     try { const q = new URLSearchParams(location.search).get('lang'); const saved = q || localStorage.getItem('lang'); if (saved === 'en' || saved === 'ar') lang = saved; } catch { /* */ }
     window.AOS && AOS.init({once: true, offset: 50, duration: 800, disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches});
     bindEvents();
+    const topBtn = byId('to-top');
+    if (topBtn) {
+      const onScroll = () => { const show = window.scrollY > 400; topBtn.classList.toggle('hidden', !show); topBtn.classList.toggle('flex', show); };
+      window.addEventListener('scroll', onScroll, {passive: true}); onScroll();
+      topBtn.addEventListener('click', () => window.scrollTo({top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'}));
+    }
     const {data, live} = await loadData();
     DATA = data || {};
     document.documentElement.dataset.source = live ? 'sanity' : 'fallback';

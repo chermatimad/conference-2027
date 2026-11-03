@@ -387,7 +387,10 @@
                 <div>
                     <h3 class="text-2xl font-bold mb-6 text-accent flex items-center gap-3"><img id="footer-conf-logo" src="assets/img/conference_logo.png" class="h-10 bg-white rounded-lg p-1" alt="ICEIC"> <span data-ar="عن المؤتمر" data-en="About Conference">عن المؤتمر</span></h3>
                     <p id="footer-about" class="text-gray-300 leading-relaxed text-justify-custom text-sm mb-6"></p>
-                    <div id="social-links" class="flex gap-4"></div>
+                    <div id="social-wrap" class="hidden flex-wrap items-center gap-3">
+                        <span class="text-sm font-bold text-white" data-ar="تابعنا على:" data-en="Follow us:">تابعنا على:</span>
+                        <div id="social-links" class="flex flex-wrap gap-3"></div>
+                    </div>
                 </div>
                 <div>
                     <h3 class="text-xl font-bold mb-6 text-white border-b border-white/10 pb-2 inline-block" data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
@@ -413,11 +416,14 @@
                 </div>
             </div>
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-400 text-sm">
-                <p id="footer-copy"></p>
+                <div class="text-center md:text-start">
+                    <p id="footer-line" class="font-bold text-gray-200"></p>
+                    <p id="footer-copy" class="mt-1"></p>
+                </div>
                 <div class="flex items-center gap-3">
-                    <img id="footer-univ-logo-img" src="assets/img/university_logo.png" alt="University" class="h-10 bg-white rounded-md p-1 opacity-90 hover:opacity-100 transition-opacity">
-                    <img id="footer-faculty-logo-img" src="assets/img/faculty_logo_ar.png" alt="Faculty of Economics" class="h-10 bg-white rounded-md p-1 opacity-90 hover:opacity-100 transition-opacity">
-                    <img id="footer-conf-logo2" src="assets/img/conference_logo.png" alt="ICEIC 2027" class="h-10 bg-white rounded-md p-1 opacity-90 hover:opacity-100 transition-opacity">
+                    <img id="footer-univ-logo-img" src="assets/img/university_logo.png" alt="University" class="h-12 bg-white rounded-md p-1 opacity-90 hover:opacity-100 transition-opacity">
+                    <img id="footer-faculty-logo-img" src="assets/img/faculty_logo_ar.png" alt="Faculty of Economics" class="h-12 bg-white rounded-md p-1 opacity-90 hover:opacity-100 transition-opacity">
+                    <img id="footer-conf-logo2" src="assets/img/conference_logo.png" alt="ICEIC 2027" class="h-12 bg-white rounded-md p-1 opacity-90 hover:opacity-100 transition-opacity">
                 </div>
             </div>
             <!-- نص الاعتماد ثابت عمداً (غير قابل للتعديل من لوحة التحكم) -->
@@ -427,6 +433,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- زر الرجوع إلى الأعلى -->
+    <button id="to-top" type="button" aria-label="Back to top" class="hidden fixed bottom-6 rtl:left-6 ltr:right-6 z-[60] w-12 h-12 rounded-full bg-secondary text-white shadow-xl hover:bg-accent transition items-center justify-center">
+        <i class="fas fa-chevron-up" aria-hidden="true"></i>
+    </button>
 
     <!-- Registration modal -->
     <div id="registerModal" class="modal hidden fixed inset-0 z-[100] items-center justify-center px-4" role="dialog" aria-modal="true" aria-labelledby="reg-title">

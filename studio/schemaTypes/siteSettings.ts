@@ -1,5 +1,5 @@
 import {defineField, defineType} from 'sanity'
-import {bilingual, imageField, safeUrl} from './helpers'
+import {bilingual, iconField, imageField, safeUrl} from './helpers'
 
 const colorField = (name: string, title: string, def: string) =>
   defineField({
@@ -35,6 +35,12 @@ export const siteSettings = defineType({
     {...imageField('facultyLogoEn', 'شعار الكلية (النسخة الإنجليزية)'), group: 'logos'},
     {...imageField('conferenceLogoAr', 'شعار المؤتمر (النسخة العربية)'), group: 'logos'},
     {...imageField('conferenceLogoEn', 'شعار المؤتمر (النسخة الإنجليزية)'), group: 'logos'},
+    {...imageField('footerUnivLogoAr', 'شعار الجامعة في التذييل (عربي)'), group: 'logos'},
+    {...imageField('footerUnivLogoEn', 'شعار الجامعة في التذييل (إنجليزي)'), group: 'logos'},
+    {...imageField('footerFacultyLogoAr', 'شعار الكلية في التذييل (عربي)'), group: 'logos'},
+    {...imageField('footerFacultyLogoEn', 'شعار الكلية في التذييل (إنجليزي)'), group: 'logos'},
+    {...imageField('footerConfLogoAr', 'شعار المؤتمر في التذييل (عربي)'), group: 'logos'},
+    {...imageField('footerConfLogoEn', 'شعار المؤتمر في التذييل (إنجليزي)'), group: 'logos'},
     {...imageField('conferenceLogo', 'شعار المؤتمر (قديم - احتياطي، يمكن تركه فارغاً)'), group: 'logos'},
     {...imageField('heroBackground', 'صورة خلفية الواجهة (اختياري)', 'تظهر بشفافية فوق التدرج اللوني'), group: 'identity'},
 
@@ -68,12 +74,31 @@ export const siteSettings = defineType({
     }),
     defineField({name: 'mapLinkUrl', title: 'رابط فتح الخريطة', type: 'url', group: 'contact', validation: safeUrl()}),
 
+    defineField({
+      name: 'socialLinks',
+      title: 'منصات إضافية (تظهر بعد «تابعنا على»)',
+      description: 'أضف أي منصة: الاسم + الأيقونة + الرابط. الأيقونة مثل: fab fa-telegram أو fab fa-x-twitter أو fab fa-tiktok أو fab fa-whatsapp',
+      type: 'array',
+      group: 'social',
+      of: [{
+        type: 'object',
+        name: 'socialLink',
+        fields: [
+          defineField({name: 'label', title: 'اسم المنصة', type: 'string', validation: (R) => R.required().max(40)}),
+          iconField('الأيقونة (Font Awesome Brands)', 'fab fa-telegram'),
+          defineField({name: 'url', title: 'الرابط', type: 'url', validation: safeUrl()}),
+        ],
+        preview: {select: {title: 'label', subtitle: 'url'}},
+      }],
+      validation: (R) => R.max(10),
+    }),
     defineField({name: 'facebookUrl', title: 'فيسبوك', type: 'url', group: 'social', validation: safeUrl()}),
     defineField({name: 'linkedinUrl', title: 'لينكد إن', type: 'url', group: 'social', validation: safeUrl()}),
     defineField({name: 'youtubeUrl', title: 'يوتيوب', type: 'url', group: 'social', validation: safeUrl()}),
     defineField({name: 'instagramUrl', title: 'انستغرام', type: 'url', group: 'social', validation: safeUrl()}),
 
     ...bilingual('footerAbout', 'نبذة التذييل', {type: 'text', rows: 3}).map((f) => ({...f, group: 'footer'})),
+    ...bilingual('footerLine', 'سطر العنوان في التذييل (مثال: كلية ... | جامعة سطيف 1 - فرحات عباس، الجزائر)').map((f) => ({...f, group: 'footer'})),
     ...bilingual('copyright', 'نص حقوق النشر').map((f) => ({...f, group: 'footer'})),
     ...bilingual('seoDescription', 'وصف محركات البحث (SEO)', {type: 'text', rows: 2, max: 300}).map((f) => ({...f, group: 'footer'})),
     {...imageField('shareImage', 'صورة المشاركة (Open Graph)'), group: 'footer'},
