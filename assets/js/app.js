@@ -122,7 +122,7 @@
     const ctl = new AbortController();
     const timer = setTimeout(() => ctl.abort(), ms);
     try {
-      const r = await fetch(url, {signal: ctl.signal, credentials: 'omit', headers: {Accept: 'application/json'}});
+      const r = await fetch(url, {signal: ctl.signal, credentials: 'omit', cache: 'no-cache', headers: {Accept: 'application/json'}});
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return await r.json();
     } finally { clearTimeout(timer); }
