@@ -3,7 +3,7 @@ module.exports = {
   content: ['./index.html', './assets/js/**/*.js'],
   theme: {
     extend: {
-      colors: {primary: '#15254A', secondary: '#1A8140', accent: '#BE9238', lightBlue: '#84C3E4', bgLight: '#F4F7FA'},
+      colors: {primary: 'rgb(var(--c-primary) / <alpha-value>)', secondary: 'rgb(var(--c-secondary) / <alpha-value>)', accent: 'rgb(var(--c-accent) / <alpha-value>)', lightBlue: 'rgb(var(--c-lightBlue) / <alpha-value>)', bgLight: 'rgb(var(--c-bgLight) / <alpha-value>)'},
       fontFamily: {cairo: ['Cairo', 'sans-serif'], poppins: ['Poppins', 'sans-serif']},
       animation: {
         'gradient-x': 'gradient-x 15s ease infinite',

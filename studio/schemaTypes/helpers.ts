@@ -38,3 +38,20 @@ export const imageField = (name: string, title: string, description?: string) =>
       defineField({name: 'alt_en', title: 'Alt text (English)', type: 'string', validation: (R) => R.max(160)}),
     ],
   })
+
+/** أيقونة Font Awesome مجانية: fa-leaf أو fa-solid fa-leaf أو fab fa-facebook ... */
+export const iconField = (title = 'الأيقونة (Font Awesome)', initial?: string) =>
+  defineField({
+    name: 'icon',
+    title,
+    type: 'string',
+    initialValue: initial,
+    description:
+      'اكتب اسم أيقونة مجانية من https://fontawesome.com/search?o=r&m=free — مثال: fa-leaf أو fa-solid fa-leaf. اتركه فارغاً للأيقونة الافتراضية.',
+    validation: (Rule) =>
+      Rule.custom((v?: string) =>
+        !v ||
+        /^(?:(?:fas|far|fab|fa-solid|fa-regular|fa-brands)\s+)?fa-[a-z0-9-]{2,40}$/.test(v.trim()) ||
+        /^(shield|chip|coins|ship|recycle|rocket|leaf|chart|globe|book|calendar|mail|file|award)$/.test(v.trim()) ||
+        'صيغة غير صحيحة. مثال: fa-leaf'),
+  })

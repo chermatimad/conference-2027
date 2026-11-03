@@ -1,5 +1,5 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
-import {bilingual, imageField, safeUrl} from './helpers'
+import {bilingual, iconField, imageField, safeUrl} from './helpers'
 
 
 export const homePage = defineType({
@@ -20,6 +20,7 @@ export const homePage = defineType({
         type: 'object',
         fields: [
           defineField({name: 'value', title: 'القيمة (مثال: +15)', type: 'string', validation: (R) => R.required().max(12)}),
+          iconField('أيقونة البطاقة (اختياري)'),
           ...bilingual('label', 'التسمية', {required: true}),
         ],
         preview: {select: {title: 'value', subtitle: 'label_ar'}},
@@ -85,10 +86,7 @@ export const importantDate = defineType({
   fields: [
     ...bilingual('title', 'العنوان', {required: true}),
     defineField({name: 'date', title: 'التاريخ', type: 'date', validation: (R) => R.required()}),
-    defineField({
-      name: 'icon', title: 'الأيقونة', type: 'string', initialValue: 'calendar',
-      options: {list: [{title: 'تقويم', value: 'calendar'}, {title: 'رسالة', value: 'mail'}, {title: 'ملف', value: 'file'}, {title: 'جائزة', value: 'award'}]},
-    }),
+    iconField('الأيقونة (Font Awesome)', 'fa-calendar-check'),
     defineField({name: 'order', title: 'الترتيب', type: 'number', initialValue: 10}),
   ],
   orderings: [{title: 'الترتيب', name: 'o', by: [{field: 'order', direction: 'asc'}]}],
@@ -104,10 +102,7 @@ export const track = defineType({
     ...bilingual('kicker', 'ترقيم المحور (المحور الأول...)'),
     ...bilingual('title', 'اسم المحور', {required: true}),
     ...bilingual('description', 'الوصف', {type: 'text', rows: 3, max: 600}),
-    defineField({
-      name: 'icon', title: 'الأيقونة', type: 'string', initialValue: 'shield',
-      options: {list: ['shield', 'chip', 'coins', 'ship', 'recycle', 'rocket', 'leaf', 'chart', 'globe', 'book'].map((v) => ({title: v, value: v}))},
-    }),
+    iconField('الأيقونة (Font Awesome)', 'fa-shield-alt'),
     defineField({
       name: 'color', title: 'اللون', type: 'string', initialValue: 'primary',
       options: {list: [{title: 'أزرق داكن', value: 'primary'}, {title: 'أخضر', value: 'secondary'}, {title: 'ذهبي', value: 'accent'}, {title: 'أزرق فاتح', value: 'blue'}, {title: 'رمادي', value: 'gray'}, {title: 'بنفسجي', value: 'purple'}]},

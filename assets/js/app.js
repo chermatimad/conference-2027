@@ -93,6 +93,26 @@
     ['youtubeUrl', 'fa-youtube', 'hover:bg-red-600', 'YouTube'],
     ['instagramUrl', 'fa-instagram', 'hover:bg-pink-600', 'Instagram'],
   ];
+  // أيقونات Font Awesome المجانية من لوحة التحكم: صيغة صارمة فقط (لا إدخال حر داخل class)
+  const FA_RE = /^(?:(fas|far|fab|fa-solid|fa-regular|fa-brands)\s+)?(fa-[a-z0-9-]{2,40})$/;
+  const faIcon = (v, fallback) => { const m = FA_RE.exec(String(v || '').trim()); return m ? `${m[1] || 'fas'} ${m[2]}` : fallback; };
+
+  // ألوان الموقع من لوحة التحكم (HEX فقط) عبر متغيّرات CSS
+  const HEX = /^#[0-9a-fA-F]{6}$/;
+  const THEME_KEYS = {colorPrimary: 'primary', colorSecondary: 'secondary', colorAccent: 'accent', colorLightBlue: 'lightBlue', colorBackground: 'bgLight'};
+  const rgbOf = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+  const darken = (h, f) => '#' + rgbOf(h).map((c) => Math.round(c * f).toString(16).padStart(2, '0')).join('');
+  function applyTheme(s) {
+    const root = document.documentElement.style;
+    for (const [k, name] of Object.entries(THEME_KEYS)) {
+      const v = String(s[k] || '').trim();
+      if (HEX.test(v)) root.setProperty(`--c-${name}`, rgbOf(v).join(' ')); else root.removeProperty(`--c-${name}`);
+    }
+    const p = String(s.colorPrimary || '').trim(), g = String(s.colorSecondary || '').trim();
+    if (HEX.test(p)) root.setProperty('--hero-a', darken(p, 0.5)); else root.removeProperty('--hero-a');
+    if (HEX.test(g)) root.setProperty('--hero-c', darken(g, 0.6)); else root.removeProperty('--hero-c');
+  }
+
   const AVATAR = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=256&h=256&fit=crop';
 
   // ---------- جلب البيانات ----------
@@ -150,6 +170,7 @@
   // ---------- الإعدادات العامة ----------
   function applySettings() {
     const s = DATA.settings || {};
+    applyTheme(s);
     const home = DATA.home || {};
     const isAr = lang === 'ar';
     const facLogo = safeImg(isAr ? s.facultyLogoAr : s.facultyLogoEn, 400) || `assets/img/faculty_logo_${lang}.png`;
@@ -180,7 +201,11 @@
     const i1 = byId('ov-img1'), i2 = byId('ov-img2');
     if (i1) i1.src = safeImg(home.welcomeImage, 700) || ''; if (i1) i1.alt = t(home, 'welcomeHeading');
     if (i2) i2.src = safeImg(home.welcomeImage2, 700) || '';
-    (home.stats || []).slice(0, 2).forEach((st, i) => { setText(`stat-${i}-value`, st.value); setText(`stat-${i}-label`, t(st, 'label')); });
+    (home.stats || []).slice(0, 2).forEach((st, i) => {
+      setText(`stat-${i}-value`, st.value); setText(`stat-${i}-label`, t(st, 'label'));
+      const icn = byId(`stat-${i}-icon`), cls = faIcon(st.icon, '');
+      if (icn && cls) icn.className = `${cls} text-4xl mb-3 ${i === 0 ? 'text-lightBlue' : 'text-secondary'}`;
+    });
 
     const nTracks = arr('tracks').length;
     setText('gw-tracks', nTracks ? L(`${nTracks} مسارات بحثية دقيقة.`, `${nTracks} specific research tracks.`) : L('مسارات بحثية دقيقة.', 'Specific research tracks.'));
@@ -350,9 +375,9 @@
     const intro = t(DATA.about || {}, 'tracksIntro');
     root.innerHTML = `${intro ? `<div class="text-center mb-12 max-w-3xl mx-auto"><p class="text-gray-600 text-lg leading-relaxed bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">${esc(intro)}</p></div>` : ''}
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">${tr.length ? tr.map((x, i) => {
-        const c = TRACK_COLOR[x.color] || TRACK_COLOR.primary, ic = TRACK_ICON[x.icon] || 'fa-shield-alt';
+        const c = TRACK_COLOR[x.color] || TRACK_COLOR.primary, ic = TRACK_ICON[x.icon] ? 'fas ' + TRACK_ICON[x.icon] : faIcon(x.icon, 'fas fa-shield-alt');
         return `<div class="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-          <div class="w-16 h-16 ${c.box} rounded-2xl flex items-center justify-center mb-6 text-3xl"><i class="fas ${ic}" aria-hidden="true"></i></div>
+          <div class="w-16 h-16 ${c.box} rounded-2xl flex items-center justify-center mb-6 text-3xl"><i class="${ic}" aria-hidden="true"></i></div>
           <h3 class="text-xl font-black text-gray-800 mb-2">${esc(t(x, 'kicker') || L(`المحور ${x.order ?? i + 1}`, `Track ${x.order ?? i + 1}`))}</h3>
           <p class="${c.text} font-bold mb-4 border-b pb-3">${esc(t(x, 'title'))}</p>
           <p class="text-gray-500 text-sm leading-relaxed">${esc(t(x, 'description'))}</p></div>`;
@@ -509,7 +534,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">${dates.length ? dates.map((d, i) => {
           const st = DATE_STYLE[i % DATE_STYLE.length];
           return `<div class="bg-bgLight p-8 rounded-2xl border border-gray-200 shadow-sm text-center transform transition hover:-translate-y-2 hover:shadow-md">
-            <div class="w-14 h-14 ${st.box} rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="${DATE_ICON[d.icon] || DATE_ICON.calendar}" aria-hidden="true"></i></div>
+            <div class="w-14 h-14 ${st.box} rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="${DATE_ICON[d.icon] || faIcon(d.icon, DATE_ICON.calendar)}" aria-hidden="true"></i></div>
             <h4 class="font-bold text-gray-800 mb-2">${esc(t(d, 'title'))}</h4><p class="${st.text} font-black text-xl">${esc(fmtDate(d.date, {day: '2-digit', month: lang === 'ar' ? 'long' : 'short', year: 'numeric'}))}</p></div>`;
         }).join('') : emptyBox(EMPTY())}</div></div>
       <div id="sub-guidelines" class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch scroll-mt-24">
@@ -591,11 +616,11 @@
     document.body.classList.toggle('font-cairo', lang === 'ar');
     byId('mobile-menu-btn').setAttribute('aria-label', L('القائمة', 'Menu'));
   }
-  function renderAll() {
+  function renderAll(silent) {
     applyStaticI18n(); applySettings(); renderAnnouncements(); renderAbout(); renderTopics(); renderHistoryList();
     renderCommittees(); renderSpeakers(); renderProgram(); renderSubmission(); renderSponsors();
     const m = location.hash.slice(1).split('?')[0].match(/^history-(\d{4})$/); if (m) renderEdition(m[1]);
-    route(true);
+    if (!silent) route(true);
   }
   function toggleLang() {
     lang = lang === 'ar' ? 'en' : 'ar';
@@ -728,6 +753,18 @@
     DATA = data || {};
     document.documentElement.dataset.source = live ? 'sanity' : 'fallback';
     renderAll();
+
+    // تحديث تلقائي: كل دقيقة وعند العودة إلى التبويب — بلا إعادة تحميل ولا قفز في الصفحة
+    let lastSig = JSON.stringify(DATA);
+    const refresh = async () => {
+      if (document.hidden) return;
+      const r = await loadData();
+      if (!r.live) return;
+      const sig = JSON.stringify(r.data);
+      if (sig !== lastSig) { lastSig = sig; DATA = r.data; renderAll(true); }
+    };
+    setInterval(refresh, 60000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
   }
   init();
 })();

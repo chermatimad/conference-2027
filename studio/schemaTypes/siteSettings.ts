@@ -1,6 +1,16 @@
 import {defineField, defineType} from 'sanity'
 import {bilingual, imageField, safeUrl} from './helpers'
 
+const colorField = (name: string, title: string, def: string) =>
+  defineField({
+    name,
+    title,
+    type: 'string',
+    group: 'theme',
+    description: `لون بصيغة HEX مثل ${def} — اتركه فارغاً لاستعمال اللون الأصلي للتصميم`,
+    validation: (Rule) => Rule.regex(/^#[0-9a-fA-F]{6}$/, {name: 'hex'}).error('الصيغة الصحيحة: #RRGGBB'),
+  })
+
 export const siteSettings = defineType({
   name: 'siteSettings',
   title: 'إعدادات الموقع العامة',
@@ -11,6 +21,7 @@ export const siteSettings = defineType({
     {name: 'contact', title: 'الاتصال والمكان'},
     {name: 'social', title: 'التواصل الاجتماعي'},
     {name: 'footer', title: 'التذييل والسيو'},
+    {name: 'theme', title: 'الألوان والمظهر'},
   ],
   fields: [
     ...bilingual('siteTitle', 'عنوان المؤتمر', {required: true}).map((f) => ({...f, group: 'identity'})),
@@ -61,6 +72,11 @@ export const siteSettings = defineType({
     ...bilingual('copyright', 'نص حقوق النشر').map((f) => ({...f, group: 'footer'})),
     ...bilingual('seoDescription', 'وصف محركات البحث (SEO)', {type: 'text', rows: 2, max: 300}).map((f) => ({...f, group: 'footer'})),
     {...imageField('shareImage', 'صورة المشاركة (Open Graph)'), group: 'footer'},
+    colorField('colorPrimary', 'اللون الأساسي (الأزرق الداكن)', '#15254A'),
+    colorField('colorSecondary', 'اللون الثانوي (الأخضر)', '#1A8140'),
+    colorField('colorAccent', 'لون التمييز (الذهبي)', '#BE9238'),
+    colorField('colorLightBlue', 'الأزرق الفاتح', '#84C3E4'),
+    colorField('colorBackground', 'لون خلفية الصفحات', '#F4F7FA'),
     // نص الاعتماد ثابت في الواجهة ولا يُدار من هنا عمداً: "تطوير خلية الرقمنة ..."
   ],
   preview: {prepare: () => ({title: 'إعدادات الموقع العامة'})},
