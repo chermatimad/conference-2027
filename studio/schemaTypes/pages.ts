@@ -7,6 +7,31 @@ export const homePage = defineType({
   title: 'الصفحة الرئيسية',
   type: 'document',
   fields: [
+    ...bilingual('gatewayTitle', 'عنوان قسم البطاقات (استكشف تفاصيل المؤتمر)'),
+    defineField({
+      name: 'gatewayCards',
+      title: 'بطاقات الاستكشاف في الصفحة الرئيسية',
+      description: 'اتركها فارغة لاستعمال البطاقات الافتراضية الأربع. الترقيم يتبع الترتيب. حتى 8 بطاقات.',
+      type: 'array',
+      of: [defineArrayMember({
+        type: 'object',
+        fields: [
+          ...bilingual('title', 'العنوان', {required: true}),
+          ...bilingual('text', 'الوصف القصير', {max: 120}),
+          defineField({
+            name: 'target', title: 'الصفحة التي تفتحها', type: 'string', validation: (R) => R.required(),
+            options: {list: [
+              {title: 'المحاور', value: 'topics'}, {title: 'المتحدثون', value: 'speakers'}, {title: 'البرنامج', value: 'program'},
+              {title: 'المشاركة والنشر', value: 'submission'}, {title: 'الإعلانات', value: 'news'}, {title: 'حول المؤتمر', value: 'about'},
+              {title: 'تاريخ المؤتمر', value: 'history'}, {title: 'اللجان', value: 'committees'}, {title: 'الرعاة', value: 'sponsors'},
+              {title: 'المكان', value: 'venue'}, {title: 'اتصل بنا', value: 'contact'},
+            ]},
+          }),
+        ],
+        preview: {select: {title: 'title_ar', subtitle: 'target'}},
+      })],
+      validation: (R) => R.max(8),
+    }),
     ...bilingual('welcomeKicker', 'عنوان صغير (مرحباً بكم)'),
     ...bilingual('welcomeTitle', 'عنوان القسم (نظرة عامة)'),
     ...bilingual('welcomeHeading', 'عنوان البطاقة الكبيرة'),

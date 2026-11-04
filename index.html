@@ -225,31 +225,10 @@
         <section class="py-24 bg-bgLight border-t border-gray-100">
             <div class="container mx-auto px-4 sm:px-8">
                 <div class="text-center mb-16" data-aos="fade-up">
-                    <h2 class="text-3xl md:text-4xl font-black text-primary mb-4" data-ar="استكشف تفاصيل المؤتمر" data-en="Explore Conference Hub">استكشف تفاصيل المؤتمر</h2>
+                    <h2 id="gw-title" class="text-3xl md:text-4xl font-black text-primary mb-4" data-ar="استكشف تفاصيل المؤتمر" data-en="Explore Conference Hub">استكشف تفاصيل المؤتمر</h2>
                     <div class="w-20 h-1.5 bg-accent mx-auto rounded-full"></div>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-                    <a href="#topics" data-aos="fade-up" data-aos-delay="100" class="group block bg-white p-8 rounded-[2rem] border border-gray-100 hover:border-primary transition-all duration-300 text-center hover:bg-primary hover:shadow-2xl">
-                        <div class="w-16 h-16 bg-bgLight text-primary rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform"><i class="fas fa-project-diagram" aria-hidden="true"></i></div>
-                        <h3 class="text-xl font-bold text-gray-800 group-hover:text-white mb-2 transition-colors" data-ar="المحاور العلمية" data-en="Scientific Tracks">المحاور العلمية</h3>
-                        <p id="gw-tracks" class="text-gray-500 text-sm group-hover:text-gray-300 transition-colors">مسارات بحثية دقيقة.</p>
-                    </a>
-                    <a href="#speakers" data-aos="fade-up" data-aos-delay="200" class="group block bg-white p-8 rounded-[2rem] border border-gray-100 hover:border-secondary transition-all duration-300 text-center hover:bg-secondary hover:shadow-2xl">
-                        <div class="w-16 h-16 bg-bgLight text-secondary rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform"><i class="fas fa-user-tie" aria-hidden="true"></i></div>
-                        <h3 class="text-xl font-bold text-gray-800 group-hover:text-white mb-2 transition-colors" data-ar="المتحدثون" data-en="Speakers">المتحدثون</h3>
-                        <p class="text-gray-500 text-sm group-hover:text-gray-200 transition-colors" data-ar="خبراء وصناع قرار دوليون." data-en="International experts & leaders.">خبراء وصناع قرار دوليون.</p>
-                    </a>
-                    <a href="#program" data-aos="fade-up" data-aos-delay="300" class="group block bg-white p-8 rounded-[2rem] border border-gray-100 hover:border-accent transition-all duration-300 text-center hover:bg-accent hover:shadow-2xl">
-                        <div class="w-16 h-16 bg-bgLight text-accent rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform"><i class="fas fa-calendar-alt" aria-hidden="true"></i></div>
-                        <h3 class="text-xl font-bold text-gray-800 group-hover:text-white mb-2 transition-colors" data-ar="البرنامج" data-en="Program">البرنامج</h3>
-                        <p class="text-gray-500 text-sm group-hover:text-white/80 transition-colors" data-ar="الجدول الزمني للفعاليات." data-en="Event schedule and timeline.">الجدول الزمني للفعاليات.</p>
-                    </a>
-                    <a href="#submission" data-aos="fade-up" data-aos-delay="400" class="group block bg-white p-8 rounded-[2rem] border border-gray-100 hover:border-blue-600 transition-all duration-300 text-center hover:bg-blue-600 hover:shadow-2xl">
-                        <div class="w-16 h-16 bg-bgLight text-blue-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform"><i class="fas fa-upload" aria-hidden="true"></i></div>
-                        <h3 class="text-xl font-bold text-gray-800 group-hover:text-white mb-2 transition-colors" data-ar="المشاركة والنشر" data-en="Submission">المشاركة والنشر</h3>
-                        <p class="text-gray-500 text-sm group-hover:text-blue-100 transition-colors" data-ar="الشروط، التواريخ، والتقديم." data-en="Rules, dates, and submission.">الشروط، التواريخ، والتقديم.</p>
-                    </a>
-                </div>
+                <div id="gateway-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto"></div>
             </div>
         </section>
     </div>
@@ -260,7 +239,7 @@
             <div class="absolute inset-0 opacity-10 dots-pattern"></div>
             <div class="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl"></div>
             <div class="container mx-auto px-4 relative z-10">
-                <div class="w-16 h-16 mx-auto bg-white/10 rounded-2xl flex items-center justify-center text-3xl text-accent mb-4 backdrop-blur-md border border-white/20">
+                <div class="ico-tile w-16 h-16 mx-auto bg-white/10 rounded-2xl flex items-center justify-center text-3xl text-accent mb-4 backdrop-blur-md border border-white/20">
                     <i id="subpage-icon" class="fas fa-file-alt" aria-hidden="true"></i>
                 </div>
                 <h1 id="subpage-title" class="text-4xl md:text-5xl font-black mb-4 tracking-tight drop-shadow-lg"></h1>
@@ -336,21 +315,21 @@
 
                     <div class="flex flex-col gap-6 justify-center">
                         <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-md flex items-center gap-6 hover:-translate-y-1 transition transform">
-                            <div class="w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center text-3xl shrink-0"><i class="fas fa-envelope" aria-hidden="true"></i></div>
+                            <div class="ico-tile w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center text-3xl shrink-0"><i class="fas fa-envelope" aria-hidden="true"></i></div>
                             <div>
                                 <h4 class="text-xl font-bold text-gray-800 mb-1" data-ar="البريد الإلكتروني" data-en="Email Address">البريد الإلكتروني</h4>
                                 <a id="contact-email" href="mailto:digitalcell.fsecg@gmail.com" class="text-gray-600 font-mono text-lg break-all hover:text-primary" dir="ltr">digitalcell.fsecg@gmail.com</a>
                             </div>
                         </div>
                         <div id="contact-phone-card" class="hidden bg-white p-8 rounded-3xl border border-gray-100 shadow-md items-center gap-6 hover:-translate-y-1 transition transform">
-                            <div class="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center text-3xl shrink-0"><i class="fas fa-phone" aria-hidden="true"></i></div>
+                            <div class="ico-tile w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center text-3xl shrink-0"><i class="fas fa-phone" aria-hidden="true"></i></div>
                             <div>
                                 <h4 class="text-xl font-bold text-gray-800 mb-1" data-ar="رقم الهاتف" data-en="Phone Number">رقم الهاتف</h4>
                                 <p id="contact-phone" class="text-gray-600 font-mono text-lg" dir="ltr"></p>
                             </div>
                         </div>
                         <div class="bg-gradient-to-r from-accent to-yellow-600 p-8 rounded-3xl text-white shadow-xl flex items-center gap-6 mt-4 hover:shadow-2xl transition transform hover:-translate-y-1">
-                            <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-3xl shrink-0 backdrop-blur-sm"><i class="fas fa-headset" aria-hidden="true"></i></div>
+                            <div class="ico-tile w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-3xl shrink-0 backdrop-blur-sm"><i class="fas fa-headset" aria-hidden="true"></i></div>
                             <div>
                                 <h4 class="text-xl font-black mb-1" data-ar="الدعم الفني" data-en="Technical Support">الدعم الفني</h4>
                                 <p class="text-white/90 text-sm" data-ar="فريقنا متاح للرد على استفساراتكم بخصوص النشر والتسجيل." data-en="Our team is available to answer your inquiries regarding publication and registration.">فريقنا متاح للرد على استفساراتكم بخصوص النشر والتسجيل.</p>

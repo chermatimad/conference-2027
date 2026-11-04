@@ -216,7 +216,8 @@
     });
 
     const nTracks = arr('tracks').length;
-    setText('gw-tracks', nTracks ? L(`${nTracks} مسارات بحثية دقيقة.`, `${nTracks} specific research tracks.`) : L('مسارات بحثية دقيقة.', 'Specific research tracks.'));
+    document.documentElement.dataset.icons = ['none', 'plain', 'tile'].includes(s.iconStyle) ? s.iconStyle : 'none';
+    renderGateway(home, nTracks);
 
     // الاتصال والمكان
     const email = isEmail(s.contactEmail || '') ? s.contactEmail : DEFAULT_EMAIL;
@@ -248,6 +249,28 @@
     }
 
     startCountdown(s.eventStart);
+  }
+
+  // ---------- بطاقات الاستكشاف (قابلة للتعديل من لوحة التحكم) ----------
+  const GATE_TARGETS = ['topics', 'speakers', 'program', 'submission', 'news', 'about', 'history', 'committees', 'sponsors', 'venue', 'contact'];
+  function renderGateway(home, nTracks) {
+    const root = byId('gateway-grid'); if (!root) return;
+    const gt = t(home, 'gatewayTitle'); if (gt) setText('gw-title', gt);
+    const custom = (Array.isArray(home.gatewayCards) ? home.gatewayCards : []).filter((c) => c && GATE_TARGETS.includes(c.target));
+    const cards = custom.length ? custom.map((c) => ({target: c.target, title: t(c, 'title'), text: t(c, 'text')})) : [
+      {target: 'topics', title: L('المحاور العلمية', 'Scientific Tracks'), text: nTracks ? L(`${nTracks} مسارات بحثية دقيقة.`, `${nTracks} specific research tracks.`) : L('مسارات بحثية دقيقة.', 'Specific research tracks.')},
+      {target: 'speakers', title: L('المتحدثون', 'Speakers'), text: L('خبراء وصناع قرار دوليون.', 'International experts & leaders.')},
+      {target: 'program', title: L('البرنامج', 'Program'), text: L('الجدول الزمني للفعاليات.', 'Event schedule and timeline.')},
+      {target: 'submission', title: L('المشاركة والنشر', 'Submission'), text: L('الشروط، التواريخ، والتقديم.', 'Rules, dates, and submission.')},
+    ];
+    const colors = ['hover:border-primary', 'hover:border-secondary', 'hover:border-accent', 'hover:border-primary'];
+    root.innerHTML = cards.slice(0, 8).map((c, i) => `
+      <a href="#${esc(c.target)}" class="group relative block bg-white p-8 pt-7 rounded-xl border border-gray-200 border-t-4 border-t-gray-200 ${colors[i % 4]} hover:shadow-xl transition-all duration-300 text-start">
+        <span class="block text-5xl font-black text-gray-200 group-hover:text-accent/50 transition-colors mb-5" dir="ltr">${String(i + 1).padStart(2, '0')}</span>
+        <h3 class="text-xl font-black text-primary mb-2">${esc(c.title)}</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">${esc(c.text)}</p>
+        <span class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-secondary">${L('اكتشف', 'Explore')} <span aria-hidden="true" class="transition-transform group-hover:-translate-x-1 rtl:group-hover:-translate-x-1 ltr:group-hover:translate-x-1">${lang === 'ar' ? '←' : '→'}</span></span>
+      </a>`).join('');
   }
 
   // ---------- العدّ التنازلي ----------
@@ -358,18 +381,18 @@
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <div class="bg-gradient-to-br from-primary to-blue-900 text-white p-10 md:p-14 rounded-[2.5rem] shadow-xl relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-          <i class="fas fa-star absolute -bottom-10 rtl:-left-10 ltr:-right-10 text-9xl text-white/5 transform -rotate-12" aria-hidden="true"></i>
+          <i class="ico-decor fas fa-star absolute -bottom-10 rtl:-left-10 ltr:-right-10 text-9xl text-white/5 transform -rotate-12" aria-hidden="true"></i>
           <div class="relative z-10">
-            <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl text-accent mb-8 backdrop-blur-sm border border-white/20 shadow-inner"><i class="fas fa-gem" aria-hidden="true"></i></div>
+            <div class="ico-tile w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl text-accent mb-8 backdrop-blur-sm border border-white/20 shadow-inner"><i class="fas fa-gem" aria-hidden="true"></i></div>
             <h3 class="text-3xl font-black mb-6 drop-shadow-md">${L('أهمية المؤتمر', 'Conference Importance')}</h3>
             <p class="text-gray-200 leading-loose text-lg text-justify-custom pre-line">${esc(t(a, 'importance'))}</p>
           </div>
         </div>
         <div class="bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
           <div class="absolute top-0 rtl:left-0 ltr:right-0 w-2 h-full bg-secondary"></div>
-          <i class="fas fa-question-circle absolute -top-10 rtl:-right-10 ltr:-left-10 text-9xl text-gray-50" aria-hidden="true"></i>
+          <i class="ico-decor fas fa-question-circle absolute -top-10 rtl:-right-10 ltr:-left-10 text-9xl text-gray-50" aria-hidden="true"></i>
           <div class="relative z-10">
-            <div class="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center text-3xl text-secondary mb-8 border border-secondary/20 shadow-sm"><i class="fas fa-lightbulb" aria-hidden="true"></i></div>
+            <div class="ico-tile w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center text-3xl text-secondary mb-8 border border-secondary/20 shadow-sm"><i class="fas fa-lightbulb" aria-hidden="true"></i></div>
             <h3 class="text-3xl font-black text-gray-800 mb-6">${L('إشكالية المؤتمر', 'Problem Statement')}</h3>
             <p class="text-gray-600 leading-relaxed text-lg text-justify-custom mb-6">${esc(t(a, 'problemIntro'))}</p>
             <div class="bg-bgLight p-6 rounded-2xl border border-gray-200 border-r-4 rtl:border-r-secondary ltr:border-l-secondary ltr:border-r-0 shadow-inner"><p class="text-primary font-bold text-xl leading-relaxed text-center">${esc(t(a, 'problemQuestion'))}</p></div>
@@ -392,7 +415,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">${tr.length ? tr.map((x, i) => {
         const c = TRACK_COLOR[x.color] || TRACK_COLOR.primary, ic = TRACK_ICON[x.icon] ? 'fas ' + TRACK_ICON[x.icon] : faIcon(x.icon, 'fas fa-shield-alt');
         return `<div class="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-          <div class="w-16 h-16 ${c.box} rounded-2xl flex items-center justify-center mb-6 text-3xl"><i class="${ic}" aria-hidden="true"></i></div>
+          <div class="ico-tile w-16 h-16 ${c.box} rounded-2xl flex items-center justify-center mb-6 text-3xl"><i class="${ic}" aria-hidden="true"></i></div>
           <h3 class="text-xl font-black text-gray-800 mb-2">${esc(t(x, 'kicker') || L(`المحور ${x.order ?? i + 1}`, `Track ${x.order ?? i + 1}`))}</h3>
           <p class="${c.text} font-bold mb-4 border-b pb-3">${esc(t(x, 'title'))}</p>
           <p class="text-gray-500 text-sm leading-relaxed">${esc(t(x, 'description'))}</p></div>`;
@@ -452,7 +475,7 @@
       <div class="bg-white rounded-[3rem] p-8 md:p-14 shadow-xl border border-gray-100 mb-16 relative overflow-hidden">
         <div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-bl-full"></div>
         <div class="flex items-center gap-4 mb-8 relative z-10">
-          <div class="w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center text-3xl shrink-0"><i class="fas fa-scroll" aria-hidden="true"></i></div>
+          <div class="ico-tile w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center text-3xl shrink-0"><i class="fas fa-scroll" aria-hidden="true"></i></div>
           <div><h3 class="text-2xl md:text-3xl font-black text-primary">${L('توصيات المؤتمر', 'Conference Recommendations')}</h3><p class="text-gray-500 font-bold">${L(`النسخة ${esc(e.editionYear)}`, `Edition ${esc(e.editionYear)}`)}</p></div>
         </div>
         <div class="bg-bgLight p-8 md:p-10 rounded-3xl border border-gray-200 border-r-4 rtl:border-r-secondary ltr:border-l-secondary ltr:border-r-0 relative z-10">
@@ -493,7 +516,7 @@
           <div class="text-center md:text-start rtl:md:text-right ltr:md:text-left flex-grow z-10 relative"><span class="font-black text-primary text-2xl block mb-2">${esc(personName(pres))}</span>
             <span class="text-sm ${c.text} font-bold inline-block px-4 py-1.5 ${c.soft} rounded-full mb-2 border ${c.ring}">${esc(t(pres, 'role'))}</span>
             ${inst ? `<p class="text-sm text-gray-500 font-bold mt-1"><i class="fas fa-university text-gray-400" aria-hidden="true"></i> ${esc(inst)}</p>` : ''}</div>
-          <i class="fas fa-star ${c.star} text-8xl absolute -bottom-4 rtl:-left-4 ltr:-right-4 rotate-12 group-hover:rotate-0 transition-transform duration-500" aria-hidden="true"></i></div></div>`;
+          <i class="ico-decor fas fa-star ${c.star} text-8xl absolute -bottom-4 rtl:-left-4 ltr:-right-4 rotate-12 group-hover:rotate-0 transition-transform duration-500" aria-hidden="true"></i></div></div>`;
       })() : '';
       box.innerHTML = presHtml + others.map((m) => {
         const inst = t(m, 'institution');
@@ -549,19 +572,19 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">${dates.length ? dates.map((d, i) => {
           const st = DATE_STYLE[i % DATE_STYLE.length];
           return `<div class="bg-bgLight p-8 rounded-2xl border border-gray-200 shadow-sm text-center transform transition hover:-translate-y-2 hover:shadow-md">
-            <div class="w-14 h-14 ${st.box} rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="${DATE_ICON[d.icon] || faIcon(d.icon, DATE_ICON.calendar)}" aria-hidden="true"></i></div>
+            <div class="ico-tile w-14 h-14 ${st.box} rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="${DATE_ICON[d.icon] || faIcon(d.icon, DATE_ICON.calendar)}" aria-hidden="true"></i></div>
             <h4 class="font-bold text-gray-800 mb-2">${esc(t(d, 'title'))}</h4><p class="${st.text} font-black text-xl">${esc(fmtDate(d.date, {day: '2-digit', month: lang === 'ar' ? 'long' : 'short', year: 'numeric'}))}</p></div>`;
         }).join('') : emptyBox(EMPTY())}</div></div>
       <div id="sub-guidelines" class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch scroll-mt-24">
         <div class="bg-primary text-white p-10 rounded-[2rem] shadow-xl relative overflow-hidden">
           <div class="absolute inset-0 bg-gradient-to-br from-transparent to-blue-900 opacity-50"></div>
-          <i class="fas fa-file-signature absolute -bottom-10 rtl:-left-10 ltr:-right-10 text-9xl text-white/5 transform -rotate-12" aria-hidden="true"></i>
+          <i class="ico-decor fas fa-file-signature absolute -bottom-10 rtl:-left-10 ltr:-right-10 text-9xl text-white/5 transform -rotate-12" aria-hidden="true"></i>
           <h3 class="text-2xl font-black mb-6 text-accent border-b border-white/20 pb-4 relative z-10">${L('إرشادات المؤلف وقواعد النشر', 'Author & Submission Guidelines')}</h3>
           <ul class="space-y-4 relative z-10">${(sub.guidelines || []).map((g) => `<li class="flex items-start gap-4 bg-white/5 p-4 rounded-xl"><div class="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-accent shrink-0 mt-1"><i class="fas fa-check text-xs" aria-hidden="true"></i></div><span class="text-base leading-relaxed">${esc(t(g, 'text'))}</span></li>`).join('')}</ul>
           ${tpl ? `<div class="mt-8 relative z-10"><a href="${esc(tpl)}" target="_blank" rel="noopener noreferrer" download class="w-full bg-white text-primary hover:bg-accent hover:text-white font-bold py-4 rounded-xl transition shadow-lg flex items-center justify-center gap-3 text-lg"><i class="fas fa-download" aria-hidden="true"></i> ${L('تحميل قالب البحث (Template)', 'Download Paper Template')}</a></div>` : ''}
         </div>
         <div class="bg-white p-10 rounded-[2rem] shadow-xl border border-gray-100 flex flex-col justify-center items-center text-center">
-          <div class="w-28 h-28 bg-secondary/10 text-secondary rounded-full flex items-center justify-center text-5xl mb-6"><i class="fas fa-external-link-alt" aria-hidden="true"></i></div>
+          <div class="ico-tile w-28 h-28 bg-secondary/10 text-secondary rounded-full flex items-center justify-center text-5xl mb-6"><i class="fas fa-external-link-alt" aria-hidden="true"></i></div>
           <h3 class="text-3xl font-black text-primary mb-4">${L('إرسال الورقة البحثية', 'Paper Submission')}</h3>
           <p class="text-gray-500 mb-8 text-lg">${esc(t(sub, 'platformNote'))}</p>
           ${url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="bg-secondary hover:bg-green-700 text-white font-bold py-4 px-10 rounded-2xl transition-all shadow-xl transform hover:-translate-y-1 text-xl w-full text-center flex justify-center items-center gap-3"><i class="fas fa-paper-plane" aria-hidden="true"></i> <span>${L('تقديم الورقة عبر المنصة', 'Submit via Platform')}</span></a>` : ''}

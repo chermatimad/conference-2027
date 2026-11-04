@@ -102,6 +102,21 @@ export const siteSettings = defineType({
     ...bilingual('copyright', 'نص حقوق النشر').map((f) => ({...f, group: 'footer'})),
     ...bilingual('seoDescription', 'وصف محركات البحث (SEO)', {type: 'text', rows: 2, max: 300}).map((f) => ({...f, group: 'footer'})),
     {...imageField('shareImage', 'صورة المشاركة (Open Graph)'), group: 'footer'},
+    defineField({
+      name: 'iconStyle',
+      title: 'مربعات الأيقونات الزخرفية في الموقع',
+      type: 'string',
+      group: 'theme',
+      initialValue: 'none',
+      options: {
+        layout: 'radio',
+        list: [
+          {title: 'إخفاؤها كلياً (تصميم نظيف)', value: 'none'},
+          {title: 'أيقونة بسيطة بلا مربع', value: 'plain'},
+          {title: 'مربعات الأيقونات (التصميم القديم)', value: 'tile'},
+        ],
+      },
+    }),
     colorField('colorPrimary', 'اللون الأساسي (الأزرق الداكن)', '#15254A'),
     colorField('colorSecondary', 'اللون الثانوي (الأخضر)', '#1A8140'),
     colorField('colorAccent', 'لون التمييز (الذهبي)', '#BE9238'),
