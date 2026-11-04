@@ -28,6 +28,7 @@ export const siteSettings = defineType({
     ...bilingual('siteTitle', 'عنوان المؤتمر', {required: true}).map((f) => ({...f, group: 'identity'})),
     ...bilingual('heroTitle', 'العنوان الرئيسي في الواجهة', {required: true}).map((f) => ({...f, group: 'identity'})),
     ...bilingual('theme', 'محور/شعار المؤتمر', {type: 'text', rows: 3, required: true}).map((f) => ({...f, group: 'identity'})),
+    ...bilingual('eventDateText', 'تاريخ المؤتمر المعروض تحت العنوان (مثال: 20-21 أفريل 2027)', {max: 60}).map((f) => ({...f, group: 'identity'})),
     ...bilingual('editionLabel', 'شارة النسخة (مثال: النسخة الثانية - 2027)').map((f) => ({...f, group: 'identity'})),
     {...imageField('universityLogoAr', 'شعار الجامعة (النسخة العربية)'), group: 'logos'},
     {...imageField('universityLogoEn', 'شعار الجامعة (النسخة الإنجليزية)'), group: 'logos'},
