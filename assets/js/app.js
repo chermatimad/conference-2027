@@ -192,7 +192,8 @@
 
     const title = t(s, 'siteTitle');
     setText('hdr-title', title); setText('hdr-theme', t(s, 'theme'));
-    setText('hdr-date', t(s, 'eventDateText') || L('20-21 أفريل 2027', '20-21 April 2027'));
+    const dateTxt = t(s, 'eventDateText') || L('20-21 أفريل 2027', '20-21 April 2027');
+    setText('hdr-date', dateTxt); setText('hero-date', dateTxt);
     setText('hero-edition', t(s, 'editionLabel')); setText('hero-title', t(s, 'heroTitle'));
     const theme = t(s, 'theme'); if (theme) setText('hero-theme', theme.replace(/\.?$/, '.'));
     if (title) document.title = title;
