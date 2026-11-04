@@ -8,7 +8,9 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "seed": "node seed/build-seed.mjs",
-    "import-seed": "node seed/build-seed.mjs && sanity dataset import seed/seed.ndjson production --missing"
+    "import-seed": "node seed/build-seed.mjs && sanity dataset import seed/seed.ndjson production --missing",
+    "import-docx": "node seed/build-seed.mjs && sanity dataset import seed/seed-docx.ndjson production --replace",
+    "patch-settings": "sanity exec seed/patch-settings.mjs --with-user-token"
   },
   "dependencies": {
     "@sanity/vision": "^4",

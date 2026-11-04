@@ -118,17 +118,17 @@
   // ---------- جلب البيانات ----------
   const img = (f) => `"${f}": ${f}.asset->url`;
   const QUERY = `{
-    "settings": *[_id == "siteSettings"][0]{ ..., ${img('facultyLogoAr')}, ${img('facultyLogoEn')}, ${img('conferenceLogo')}, ${img('conferenceLogoAr')}, ${img('conferenceLogoEn')}, ${img('universityLogoAr')}, ${img('universityLogoEn')}, ${img('footerUnivLogoAr')}, ${img('footerUnivLogoEn')}, ${img('footerFacultyLogoAr')}, ${img('footerFacultyLogoEn')}, ${img('footerConfLogoAr')}, ${img('footerConfLogoEn')}, ${img('heroBackground')}, ${img('shareImage')} },
+    "settings": *[_id == "siteSettings"][0]{ ..., ${img('facultyLogoAr')}, ${img('facultyLogoEn')}, ${img('conferenceLogo')}, ${img('conferenceLogoAr')}, ${img('conferenceLogoEn')}, ${img('universityLogoAr')}, ${img('universityLogoEn')}, ${img('footerUnivLogoAr')}, ${img('footerUnivLogoEn')}, ${img('footerFacultyLogoAr')}, ${img('footerFacultyLogoEn')}, ${img('footerConfLogoAr')}, ${img('footerConfLogoEn')}, ${img('heroBackground')}, ${img('shareImage')}, "callPdfArUrl": callPdfAr.asset->url, "callPdfEnUrl": callPdfEn.asset->url },
     "home": *[_id == "homePage"][0]{ ..., ${img('welcomeImage')}, ${img('welcomeImage2')} },
     "about": *[_id == "aboutPage"][0]{ ..., ${img('preambleImage')} },
     "submission": *[_id == "submissionPage"][0]{ ..., "templateUrl": templateFile.asset->url },
     "announcements": *[_type == "announcement" && publishAt <= now() && (!defined(expireAt) || expireAt > now())] | order(pinned desc, publishAt desc)[0...60]{
       _id, kind, title_ar, title_en, body_ar, body_en, linkUrl, linkLabel_ar, linkLabel_en, publishAt, expireAt, pinned, popup, "imageUrl": image.asset->url },
-    "tracks": *[_type == "track"] | order(order asc){ _id, order, kicker_ar, kicker_en, title_ar, title_en, description_ar, description_en, icon, color },
+    "tracks": *[_type == "track"] | order(order asc){ _id, order, kicker_ar, kicker_en, title_ar, title_en, description_ar, description_en, topics, icon, color },
     "speakers": *[_type == "speaker"] | order(order asc){ _id, name_ar, name_en, role_ar, role_en, bio_ar, bio_en, order, "imageUrl": image.asset->url },
     "committee": *[_type == "committee"] | order(order asc){ _id, committeeType, name_ar, name_en, role_ar, role_en, institution_ar, institution_en, order, "imageUrl": image.asset->url },
     "program": *[_type == "programDay"] | order(dayNumber asc){ _id, dayNumber, date, label_ar, label_en, sessions },
-    "dates": *[_type == "importantDate"] | order(order asc){ _id, title_ar, title_en, date, icon, order },
+    "dates": *[_type == "importantDate"] | order(order asc){ _id, title_ar, title_en, dateLabel_ar, dateLabel_en, date, icon, order },
     "editions": *[_type == "history"] | order(editionYear desc){
       _id, editionYear, dateLabel_ar, dateLabel_en, title_ar, title_en, summary_ar, summary_en, intro_ar, intro_en, stats,
       excellence_ar, excellence_en, topics_ar, topics_en, achievement_ar, achievement_en, recommendations_ar, recommendations_en,
@@ -194,6 +194,8 @@
     setText('hdr-title', title); setText('hdr-theme', t(s, 'theme'));
     const dateTxt = t(s, 'eventDateText') || L('20-21 أفريل 2027', '20-21 April 2027');
     setText('hdr-date', dateTxt); setText('hero-date', dateTxt);
+    const callPdf = safeFile(isAr ? s.callPdfArUrl || s.callPdfEnUrl : s.callPdfEnUrl || s.callPdfArUrl), hp = byId('hero-pdf');
+    if (hp) { hp.classList.toggle('hidden', !callPdf); hp.classList.toggle('inline-flex', !!callPdf); if (callPdf) hp.href = callPdf; setText('hero-pdf-label', L('تحميل إعلان المؤتمر (PDF)', 'Download the Call for Papers (PDF)')); }
     setText('hero-edition', t(s, 'editionLabel')); setText('hero-title', t(s, 'heroTitle'));
     const theme = t(s, 'theme'); if (theme) setText('hero-theme', theme.replace(/\.?$/, '.'));
     if (title) document.title = title;
@@ -358,97 +360,78 @@
   }
 
   // ---------- صفحة: حول المؤتمر ----------
+  const paras = (txt, cls) => String(txt || '').split(/\n+/).map((p) => p.trim()).filter(Boolean).map((p) => `<p class="${cls}">${esc(p)}</p>`).join('');
+  const secHead = (kicker, title) => `<div class="mb-8"><span class="text-accent font-bold text-sm">${esc(kicker)}</span><h3 class="text-3xl md:text-4xl font-black text-primary mt-1 leading-tight">${esc(title)}</h3><div class="w-16 h-1 bg-accent mt-4 rounded-full"></div></div>`;
+  const CARD = 'bg-white rounded-3xl p-8 md:p-12 border border-gray-100 shadow-sm';
+
   function renderAbout() {
     const a = DATA.about || {}, root = byId('about-root'); if (!root) return;
     const pim = safeImg(a.preambleImage, 1000);
-    const objs = (a.objectives || []).map((o, i) => {
-      const s = OBJ_STYLE[i % OBJ_STYLE.length];
-      return `<div class="flex items-start gap-5 p-6 bg-white rounded-2xl shadow-sm border border-gray-100 ${s.b} hover:shadow-md transition-all group">
-        <div class="w-14 h-14 bg-bgLight ${s.c} rounded-full flex items-center justify-center text-xl shrink-0 border border-gray-200 ${s.h} group-hover:text-white transition-colors">${i + 1}</div>
-        <div><h4 class="text-xl font-bold text-gray-800 mb-2">${esc(t(o, 'title'))}</h4><p class="text-gray-500 text-sm leading-relaxed">${esc(t(o, 'text'))}</p></div></div>`;
-    }).join('');
-    root.innerHTML = `
-      <div class="bg-white rounded-[2.5rem] p-8 md:p-14 shadow-xl border border-gray-100 relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-bl-[100%] transition-transform duration-700 group-hover:scale-125"></div>
-        <div class="absolute bottom-0 left-0 w-40 h-40 bg-primary/5 rounded-tr-[100%] transition-transform duration-700 group-hover:scale-125"></div>
-        <div class="flex flex-col lg:flex-row items-center gap-12 relative z-10">
-          <div class="${pim ? 'lg:w-7/12' : 'w-full'}">
-            <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-primary/5 text-primary font-bold mb-6 border border-primary/10"><i class="fas fa-book-open text-accent" aria-hidden="true"></i><span>${L('ديباجة المؤتمر', 'Conference Preamble')}</span></div>
-            <h2 class="text-3xl md:text-5xl font-black text-gray-800 mb-6 leading-tight">${esc(t(a, 'preambleTitle'))}</h2>
-            <p class="text-gray-600 leading-loose text-lg text-justify-custom pre-line">${esc(t(a, 'preamble'))}</p>
-          </div>
-          ${pim ? `<div class="lg:w-5/12 w-full relative"><div class="absolute inset-0 bg-gradient-to-tr from-primary to-accent opacity-20 rounded-[2rem] transform translate-x-3 translate-y-3"></div>
-            <div class="relative rounded-[2rem] overflow-hidden shadow-lg border-4 border-white"><img src="${esc(pim)}" alt="" class="w-full h-[350px] object-cover transform group-hover:scale-110 transition-transform duration-700"></div></div>` : ''}
-        </div>
-      </div>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <div class="bg-gradient-to-br from-primary to-blue-900 text-white p-10 md:p-14 rounded-[2.5rem] shadow-xl relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-          <i class="ico-decor fas fa-star absolute -bottom-10 rtl:-left-10 ltr:-right-10 text-9xl text-white/5 transform -rotate-12" aria-hidden="true"></i>
-          <div class="relative z-10">
-            <div class="ico-tile w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl text-accent mb-8 backdrop-blur-sm border border-white/20 shadow-inner"><i class="fas fa-gem" aria-hidden="true"></i></div>
-            <h3 class="text-3xl font-black mb-6 drop-shadow-md">${L('أهمية المؤتمر', 'Conference Importance')}</h3>
-            <p class="text-gray-200 leading-loose text-lg text-justify-custom pre-line">${esc(t(a, 'importance'))}</p>
-          </div>
-        </div>
-        <div class="bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-gray-100 relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-          <div class="absolute top-0 rtl:left-0 ltr:right-0 w-2 h-full bg-secondary"></div>
-          <i class="ico-decor fas fa-question-circle absolute -top-10 rtl:-right-10 ltr:-left-10 text-9xl text-gray-50" aria-hidden="true"></i>
-          <div class="relative z-10">
-            <div class="ico-tile w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center text-3xl text-secondary mb-8 border border-secondary/20 shadow-sm"><i class="fas fa-lightbulb" aria-hidden="true"></i></div>
-            <h3 class="text-3xl font-black text-gray-800 mb-6">${L('إشكالية المؤتمر', 'Problem Statement')}</h3>
-            <p class="text-gray-600 leading-relaxed text-lg text-justify-custom mb-6">${esc(t(a, 'problemIntro'))}</p>
-            <div class="bg-bgLight p-6 rounded-2xl border border-gray-200 border-r-4 rtl:border-r-secondary ltr:border-l-secondary ltr:border-r-0 shadow-inner"><p class="text-primary font-bold text-xl leading-relaxed text-center">${esc(t(a, 'problemQuestion'))}</p></div>
-          </div>
-        </div>
-      </div>
-      ${objs ? `<div class="bg-white rounded-[2.5rem] p-10 md:p-14 shadow-xl border border-gray-100 relative overflow-hidden">
-        <div class="relative z-10 text-center mb-14 mt-4">
-          <span class="inline-flex items-center gap-2 bg-accent/10 text-accent px-6 py-2 rounded-full font-bold text-sm mb-4 border border-accent/20"><i class="fas fa-bullseye" aria-hidden="true"></i> ${L('غاياتنا ومقاصدنا', 'Our Goals & Purposes')}</span>
-          <h3 class="text-3xl md:text-5xl font-black text-primary drop-shadow-sm">${L('الأهداف الرئيسية للمؤتمر', 'Main Conference Objectives')}</h3>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">${objs}</div></div>` : ''}`;
+    const eds = a.editionsTable || [], objs = a.objectives || [], aud = a.audience || [];
+    const intro = t(a, 'aboutIntro'), pre = t(a, 'preamble'), imp = t(a, 'importance'), q = t(a, 'problemQuestion'), pi = t(a, 'problemIntro');
+    const out = [];
+    if (intro || eds.length) out.push(`<section class="${CARD}">${secHead(L('نبذة', 'Overview'), L('نبذة عن المؤتمر', 'About the Conference'))}
+      <div class="grid grid-cols-1 ${eds.length ? 'lg:grid-cols-5' : ''} gap-10">
+        <div class="${eds.length ? 'lg:col-span-3' : ''} space-y-5">${paras(intro, 'text-gray-600 leading-loose text-lg text-justify-custom')}</div>
+        ${eds.length ? `<div class="lg:col-span-2"><div class="rounded-2xl border border-gray-200 overflow-hidden">
+          <div class="bg-primary text-white px-5 py-3 font-bold text-sm grid grid-cols-6 gap-3"><span class="col-span-2">${L('الطبعة', 'Edition')}</span><span class="col-span-4">${L('الموضوع', 'Theme')}</span></div>
+          ${eds.map((r) => `<div class="px-5 py-4 grid grid-cols-6 gap-3 items-start border-t border-gray-100"><span class="col-span-2 font-black text-primary text-sm">${esc(t(r, 'label'))}<span class="block text-accent font-bold" dir="ltr">${esc(r.year)}</span></span><span class="col-span-4 text-gray-600 text-sm leading-relaxed">${esc(t(r, 'topic'))}</span></div>`).join('')}
+        </div></div>` : ''}</div></section>`);
+    if (pre) out.push(`<section class="${CARD}">${secHead(L('الديباجة', 'Preamble'), t(a, 'preambleTitle') || L('ديباجة المؤتمر', 'Conference Preamble'))}
+      <div class="flex flex-col lg:flex-row gap-10 items-start"><div class="${pim ? 'lg:w-7/12' : 'w-full'} space-y-5">${paras(pre, 'text-gray-600 leading-loose text-lg text-justify-custom')}</div>
+      ${pim ? `<div class="lg:w-5/12 w-full"><img src="${esc(pim)}" alt="" class="w-full h-[360px] object-cover rounded-2xl border border-gray-100"></div>` : ''}</div></section>`);
+    if (imp) out.push(`<section class="${CARD}">${secHead(L('أهمية', 'Importance'), L('أهمية المؤتمر', 'Conference Importance'))}<div class="space-y-5">${paras(imp, 'text-gray-600 leading-loose text-lg text-justify-custom')}</div></section>`);
+    if (q) out.push(`<section class="bg-primary text-white rounded-3xl p-8 md:p-14 relative overflow-hidden"><div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
+      <div class="max-w-4xl mx-auto text-center"><span class="text-accent font-bold text-sm">${L('الإشكالية', 'Problem Statement')}</span><h3 class="text-3xl md:text-4xl font-black mt-1 mb-6">${L('إشكالية المؤتمر', 'Conference Problem Statement')}</h3>
+      ${pi ? `<p class="text-gray-300 leading-relaxed text-lg mb-6">${esc(pi)}</p>` : ''}<p class="text-2xl md:text-3xl font-black leading-relaxed">${esc(q)}</p></div></section>`);
+    if (objs.length) out.push(`<section class="${CARD}">${secHead(L('الأهداف', 'Objectives'), L('أهداف المؤتمر', 'Conference Objectives'))}
+      <ol class="grid grid-cols-1 md:grid-cols-2 md:gap-x-14">${objs.map((o, i) => `<li class="flex gap-4 py-5 border-b border-gray-100"><span class="text-accent font-black text-3xl leading-none w-9 shrink-0" dir="ltr">${i + 1}</span><div>${t(o, 'title') ? `<h4 class="font-black text-primary mb-1">${esc(t(o, 'title'))}</h4>` : ''}<p class="text-gray-600 leading-relaxed">${esc(t(o, 'text'))}</p></div></li>`).join('')}</ol></section>`);
+    if (aud.length) out.push(`<section class="${CARD}">${secHead(L('الفئات المستهدفة', 'Audience'), L('الفئات المعنية بالمؤتمر', 'Who Should Participate'))}
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">${aud.map((x) => `<li class="p-5 rounded-2xl bg-bgLight border border-gray-100 border-0 rtl:border-r-4 ltr:border-l-4 border-accent text-gray-700 leading-relaxed font-semibold">${esc(t(x, 'text'))}</li>`).join('')}</ul></section>`);
+    root.innerHTML = out.length ? out.join('') : emptyBox(EMPTY());
   }
 
   // ---------- المحاور ----------
   function renderTopics() {
     const root = byId('topics-root'), tr = arr('tracks'); if (!root) return;
-    const intro = t(DATA.about || {}, 'tracksIntro');
-    root.innerHTML = `${intro ? `<div class="text-center mb-12 max-w-3xl mx-auto"><p class="text-gray-600 text-lg leading-relaxed bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">${esc(intro)}</p></div>` : ''}
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">${tr.length ? tr.map((x, i) => {
-        const c = TRACK_COLOR[x.color] || TRACK_COLOR.primary, ic = TRACK_ICON[x.icon] ? 'fas ' + TRACK_ICON[x.icon] : faIcon(x.icon, 'fas fa-shield-alt');
-        return `<div class="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-          <div class="ico-tile w-16 h-16 ${c.box} rounded-2xl flex items-center justify-center mb-6 text-3xl"><i class="${ic}" aria-hidden="true"></i></div>
-          <h3 class="text-xl font-black text-gray-800 mb-2">${esc(t(x, 'kicker') || L(`المحور ${x.order ?? i + 1}`, `Track ${x.order ?? i + 1}`))}</h3>
-          <p class="${c.text} font-bold mb-4 border-b pb-3">${esc(t(x, 'title'))}</p>
-          <p class="text-gray-500 text-sm leading-relaxed">${esc(t(x, 'description'))}</p></div>`;
-      }).join('') : emptyBox(EMPTY())}</div>`;
+    const a = DATA.about || {}, intro = t(a, 'tracksIntro'), note = t(a, 'tracksNote');
+    root.innerHTML = `<div class="max-w-6xl mx-auto space-y-6">
+      ${intro ? `<p class="text-gray-600 text-lg leading-loose bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm text-justify-custom">${esc(intro)}</p>` : ''}
+      ${tr.length ? tr.map((x, i) => {
+        const c = TRACK_COLOR[x.color] || TRACK_COLOR.primary, pts = x.topics || [], desc = t(x, 'description');
+        return `<article class="bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-lg transition-shadow overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+          <header class="lg:col-span-4 p-8 ${c.box}"><div class="ico-tile w-14 h-14 bg-white/70 rounded-2xl flex items-center justify-center text-2xl mb-4 ${c.text}"><i class="${TRACK_ICON[x.icon] ? 'fas ' + TRACK_ICON[x.icon] : faIcon(x.icon, 'fas fa-shield-alt')}" aria-hidden="true"></i></div><span class="${c.text} font-black text-sm">${esc(t(x, 'kicker') || L(`المحور ${x.order ?? i + 1}`, `Track ${x.order ?? i + 1}`))}</span>
+            <h3 class="text-xl md:text-2xl font-black text-primary mt-2 leading-snug">${esc(t(x, 'title'))}</h3>
+            </header>
+          <div class="lg:col-span-8 p-8">${desc ? `<p class="text-gray-500 leading-relaxed mb-4">${esc(desc)}</p>` : ''}
+            ${pts.length ? `<ul class="space-y-3">${pts.map((p) => `<li class="flex gap-3 text-gray-600 leading-relaxed"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span><span>${esc(t(p, 'text'))}</span></li>`).join('')}</ul>` : ''}</div></article>`;
+      }).join('') : emptyBox(EMPTY())}
+      ${note ? `<div class="rounded-2xl border-2 border-dashed border-accent/40 bg-accent/5 p-6 text-center text-primary font-bold leading-relaxed">${esc(note)}</div>` : ''}</div>`;
   }
 
   // ---------- تاريخ المؤتمر ----------
   function renderHistoryList() {
     const root = byId('history-root'); if (!root) return;
     const eds = arr('editions');
-    root.innerHTML = `<div class="max-w-4xl mx-auto text-center mb-12">
-      <h3 class="text-3xl md:text-5xl font-black text-primary mb-4">${L('النسخ السابقة للمؤتمر', 'Previous Editions')}</h3>
-      <div class="w-24 h-1.5 bg-accent mx-auto rounded-full mb-6"></div>
-      <p class="text-gray-600 text-lg">${L('نظرة عامة على النسخ السابقة والإنجازات الأكاديمية التي حققها المؤتمر.', 'An overview of past editions and academic achievements of the conference.')}</p></div>
-      <div class="space-y-10">${eds.length ? eds.map((e) => {
-        const logo = safeImg(e.logoUrl, 600);
-        return `<div class="max-w-5xl mx-auto bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden group hover:shadow-2xl transition-all duration-500">
-          <div class="flex flex-col md:flex-row items-center">
-            <div class="md:w-5/12 bg-gray-50 p-8 h-full flex justify-center items-center border-b md:border-b-0 rtl:md:border-l ltr:md:border-r border-gray-100 relative overflow-hidden">
-              <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              ${logo ? `<img src="${esc(logo)}" alt="ICEIC ${esc(e.editionYear)}" class="w-full h-auto object-cover rounded-xl shadow-md border-2 border-white transform group-hover:scale-105 transition-transform duration-500 z-10">` : `<i class="fas fa-landmark text-7xl text-primary/20" aria-hidden="true"></i>`}
-            </div>
-            <div class="md:w-7/12 p-8 md:p-12 text-center md:text-start rtl:md:text-right ltr:md:text-left relative">
-              <span class="inline-block bg-accent/10 text-accent font-bold px-4 py-1 rounded-full text-sm mb-4 border border-accent/20">${esc(t(e, 'dateLabel') || e.editionYear)}</span>
-              <h4 class="text-2xl md:text-3xl font-black text-primary mb-4 leading-snug">${esc(t(e, 'title'))}</h4>
-              <p class="text-gray-500 leading-relaxed mb-8">${esc(t(e, 'summary'))}</p>
-              <a href="#history-${esc(e.editionYear)}" class="inline-flex items-center gap-2 bg-primary hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-md hover:-translate-y-1"><span>${L('تفاصيل أكثر', 'More Details')}</span> <i class="fas fa-arrow-left rtl:rotate-0 ltr:rotate-180" aria-hidden="true"></i></a>
-            </div></div></div>`;
-      }).join('') : emptyBox(EMPTY())}</div>`;
+    root.innerHTML = `<div class="max-w-5xl mx-auto">
+      <div class="mb-10"><span class="text-accent font-bold text-sm">${L('الأرشيف', 'Archive')}</span>
+        <h3 class="text-3xl md:text-5xl font-black text-primary mt-1">${L('النسخ السابقة للمؤتمر', 'Previous Editions')}</h3>
+        <div class="w-16 h-1 bg-accent mt-4 rounded-full"></div>
+        <p class="text-gray-600 text-lg mt-5 max-w-3xl leading-relaxed">${L('محطات المؤتمر السابقة وما حققته من إسهامات علمية وتوصيات.', 'Milestones of past editions, with their scientific contributions and recommendations.')}</p></div>
+      <div class="bg-white rounded-3xl border border-gray-100 shadow-sm divide-y divide-gray-100">${eds.length ? eds.map((e) => {
+        const logo = safeImg(e.logoUrl, 400), st = (e.stats || []).slice(0, 3);
+        return `<a href="#history-${esc(e.editionYear)}" class="group grid grid-cols-1 md:grid-cols-12 gap-6 p-8 md:p-10 items-center hover:bg-bgLight transition-colors first:rounded-t-3xl last:rounded-b-3xl">
+          <div class="md:col-span-3"><span class="block text-6xl md:text-7xl font-black text-primary/15 group-hover:text-accent/40 transition-colors leading-none" dir="ltr">${esc(e.editionYear)}</span>
+            <span class="block mt-3 text-accent font-bold text-sm">${esc(t(e, 'dateLabel'))}</span></div>
+          <div class="${logo ? 'md:col-span-7' : 'md:col-span-9'}"><h4 class="text-2xl font-black text-primary leading-snug mb-3">${esc(t(e, 'title'))}</h4>
+            <p class="text-gray-500 leading-relaxed mb-4">${esc(t(e, 'summary'))}</p>
+            ${st.length ? `<p class="flex flex-wrap gap-x-6 gap-y-1 text-sm text-gray-500 mb-4">${st.map((s) => `<span><b class="text-primary font-black" dir="ltr">${esc(s.value)}</b> ${esc(t(s, 'label'))}</span>`).join('')}</p>` : ''}
+            <span class="inline-flex items-center gap-2 text-secondary font-black group-hover:gap-3 transition-all">${L('تفاصيل النسخة', 'Edition details')} <span aria-hidden="true">${lang === 'ar' ? '←' : '→'}</span></span></div>
+          ${logo ? `<div class="md:col-span-2 flex justify-center"><img src="${esc(logo)}" alt="${esc(t(e, 'title'))}" loading="lazy" class="w-32 h-32 object-contain"></div>` : ''}</a>`;
+      }).join('') : emptyBox(EMPTY())}</div></div>`;
   }
 
+  const STAT_COLS = {1: 'md:grid-cols-1', 2: 'md:grid-cols-2', 3: 'md:grid-cols-3', 4: 'md:grid-cols-4', 5: 'md:grid-cols-5', 6: 'md:grid-cols-6'};
   function renderEdition(year) {
     const root = byId('edition-root'); if (!root) return;
     const e = arr('editions').find((x) => String(x.editionYear) === String(year));
@@ -457,38 +440,28 @@
     const vid = youtubeId(lang === 'ar' ? e.videoUrl_ar || e.videoUrl_en : e.videoUrl_en || e.videoUrl_ar);
     const photos = [...(e.gallery || []).map((g) => ({url: g.url, cap: t(g, 'caption')})), ...(e.legacyImages || []).filter(Boolean).map((u) => ({url: u, cap: ''}))]
       .map((p) => ({full: safeImg(p.url, 1600), thumb: safeImg(p.url, 800), cap: p.cap})).filter((p) => p.thumb);
-    const recs = t(e, 'recommendations');
-    const pillars = [['fa-medal', L('التميز العلمي', 'Scientific Excellence'), t(e, 'excellence')], ['fa-search-dollar', L('محاور النقاش', 'Key Topics'), t(e, 'topics')], ['fa-trophy', L('إنجاز وطموح', 'Achievement'), t(e, 'achievement')]].filter((p) => p[2]);
-    root.innerHTML = `
-      <div class="bg-gradient-to-br from-primary to-blue-900 rounded-[3rem] p-10 md:p-16 shadow-2xl relative overflow-hidden text-white mb-12">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl"></div>
-        <div class="relative z-10 flex flex-col md:flex-row items-center gap-10">
-          <div class="${logo ? 'md:w-3/4' : 'w-full'} text-center md:text-start rtl:md:text-right ltr:md:text-left">
-            <span class="inline-block bg-white/10 backdrop-blur-sm text-accent font-bold px-5 py-2 rounded-full text-sm mb-6 border border-white/20">${esc(t(e, 'dateLabel') || e.editionYear)}</span>
-            <h2 class="text-3xl md:text-5xl font-black mb-6 leading-tight drop-shadow-md">${esc(t(e, 'title'))}</h2>
-            <p class="text-gray-300 text-lg md:text-xl max-w-3xl leading-relaxed">${esc(t(e, 'intro'))}</p>
-            ${pdf ? `<div class="mt-8"><a href="${esc(pdf)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-white hover:bg-gray-100 text-primary font-black py-4 px-8 rounded-xl transition-all shadow-xl hover:-translate-y-1"><i class="fas fa-file-pdf text-2xl text-red-600" aria-hidden="true"></i> <span>${L('تحميل برنامج المؤتمر (PDF)', 'Download Conference Program (PDF)')}</span></a></div>` : ''}
-          </div>
-          ${logo ? `<div class="md:w-1/4 flex justify-center"><img src="${esc(logo)}" alt="ICEIC ${esc(e.editionYear)}" class="w-48 h-auto object-contain drop-shadow-2xl bg-white p-2 rounded-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500"></div>` : ''}
-        </div>
-      </div>
-      ${(e.stats || []).length ? `<div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-16">${e.stats.map((s, i) => `<div class="${STAT_BG[i % STAT_BG.length]} p-6 rounded-3xl shadow-sm text-center transform hover:-translate-y-2 transition-all border"><h4 class="text-5xl font-black text-gray-900 mb-2" dir="ltr">${esc(s.value)}</h4><p class="text-gray-600 font-bold text-lg">${esc(t(s, 'label'))}</p></div>`).join('')}</div>` : ''}
-      ${pillars.length ? `<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">${pillars.map(([ic, ttl, txt]) => `<div class="bg-bgLight p-8 rounded-[2rem] border border-gray-200 shadow-sm hover:shadow-md transition"><h4 class="text-xl font-black text-primary mb-4 flex items-center gap-3"><i class="fas ${ic} text-accent text-2xl" aria-hidden="true"></i> <span>${ttl}</span></h4><p class="text-gray-600 text-justify-custom leading-relaxed pre-line">${esc(txt)}</p></div>`).join('')}</div>` : ''}
-      <div class="bg-white rounded-[3rem] p-8 md:p-14 shadow-xl border border-gray-100 mb-16 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-bl-full"></div>
-        <div class="flex items-center gap-4 mb-8 relative z-10">
-          <div class="ico-tile w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center text-3xl shrink-0"><i class="fas fa-scroll" aria-hidden="true"></i></div>
-          <div><h3 class="text-2xl md:text-3xl font-black text-primary">${L('توصيات المؤتمر', 'Conference Recommendations')}</h3><p class="text-gray-500 font-bold">${L(`النسخة ${esc(e.editionYear)}`, `Edition ${esc(e.editionYear)}`)}</p></div>
-        </div>
-        <div class="bg-bgLight p-8 md:p-10 rounded-3xl border border-gray-200 border-r-4 rtl:border-r-secondary ltr:border-l-secondary ltr:border-r-0 relative z-10">
-          ${recs ? `<p class="text-gray-800 font-bold text-lg leading-loose pre-line">${esc(recs)}</p>` : `<p class="text-gray-500 text-lg leading-loose italic">${L('سيتم إدراج نص التوصيات والنتائج التي خلص إليها المؤتمر هنا قريباً...', 'The recommendations and conclusions of the conference will be listed here soon...')}</p>`}
-        </div>
-      </div>
-      <div class="bg-white rounded-[3rem] p-8 md:p-14 shadow-xl border border-gray-100 mb-16">
-        <div class="text-center mb-12"><h3 class="text-3xl font-black text-primary mb-2">${esc(t(e, 'galleryTitle') || L('معرض الصور', 'Gallery'))}</h3><div class="w-16 h-1 bg-accent mx-auto rounded-full"></div></div>
-        ${vid ? `<div class="mb-10 w-full max-w-4xl mx-auto"><div class="relative w-full aspect-video overflow-hidden rounded-[2rem] shadow-xl border-4 border-white"><iframe class="absolute inset-0 w-full h-full" src="https://www.youtube-nocookie.com/embed/${esc(vid)}" title="Video" loading="lazy" sandbox="allow-scripts allow-same-origin allow-presentation" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div></div>` : ''}
-        ${photos.length ? `<div class="masonry-grid">${photos.map((p) => `<button type="button" data-action="open-img" data-src="${esc(p.full)}" data-alt="${esc(p.cap)}" class="masonry-item block w-full rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300"><img src="${esc(p.thumb)}" alt="${esc(p.cap || t(e, 'title'))}" loading="lazy" class="w-full h-auto hover:scale-105 transition-transform duration-500"></button>`).join('')}</div>` : `<div class="text-center py-10 w-full text-gray-500 font-bold">${L('سيتم إضافة صور المؤتمر قريباً.', 'Conference photos will be added soon.')}</div>`}
-      </div>`;
+    const recs = t(e, 'recommendations'), stats = (e.stats || []).slice(0, 6);
+    const pillars = [[L('التميز العلمي', 'Scientific Excellence'), t(e, 'excellence')], [L('محاور النقاش', 'Key Topics'), t(e, 'topics')], [L('إنجاز وطموح', 'Achievement'), t(e, 'achievement')]].filter((p) => p[1]);
+    root.innerHTML = `<div class="max-w-6xl mx-auto space-y-10">
+      <a href="#history" class="inline-flex items-center gap-2 text-gray-500 hover:text-primary font-bold transition-colors"><span aria-hidden="true">${lang === 'ar' ? '→' : '←'}</span> ${L('كل النسخ السابقة', 'All editions')}</a>
+      <header class="bg-white rounded-3xl border border-gray-100 shadow-sm p-8 md:p-14 relative overflow-hidden">
+        <span class="absolute -top-6 rtl:-left-2 ltr:-right-2 text-[9rem] md:text-[13rem] font-black text-primary/5 leading-none select-none" dir="ltr" aria-hidden="true">${esc(e.editionYear)}</span>
+        <div class="relative flex flex-col md:flex-row gap-10 items-center">
+          <div class="${logo ? 'md:w-8/12' : 'w-full'}"><span class="text-accent font-black">${esc(t(e, 'dateLabel') || e.editionYear)}</span>
+            <h2 class="text-3xl md:text-5xl font-black text-primary leading-tight mt-2 mb-5">${esc(t(e, 'title'))}</h2>
+            <p class="text-gray-600 text-lg leading-loose max-w-3xl">${esc(t(e, 'intro'))}</p>
+            ${pdf ? `<a href="${esc(pdf)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-8 bg-primary hover:bg-secondary text-white font-black py-3.5 px-7 rounded-xl transition-colors">${L('تحميل برنامج المؤتمر (PDF)', 'Download Conference Program (PDF)')}</a>` : ''}</div>
+          ${logo ? `<div class="md:w-4/12 flex justify-center"><img src="${esc(logo)}" alt="${esc(t(e, 'title'))}" class="w-48 h-48 md:w-56 md:h-56 object-contain"></div>` : ''}</div></header>
+      ${stats.length ? `<div class="grid grid-cols-2 ${STAT_COLS[Math.min(stats.length, 6)]} gap-px bg-gray-200 rounded-2xl overflow-hidden border border-gray-200">${stats.map((s) => `<div class="bg-white p-6 text-center"><b class="block text-4xl font-black text-primary mb-1" dir="ltr">${esc(s.value)}</b><span class="text-gray-500 font-bold text-sm">${esc(t(s, 'label'))}</span></div>`).join('')}</div>` : ''}
+      ${pillars.length ? `<div class="grid grid-cols-1 md:grid-cols-3 gap-8">${pillars.map(([ttl, txt]) => `<div class="bg-white rounded-2xl border border-gray-100 border-t-4 border-t-accent p-8 shadow-sm"><h4 class="text-xl font-black text-primary mb-4">${esc(ttl)}</h4><p class="text-gray-600 leading-loose text-justify-custom pre-line">${esc(txt)}</p></div>`).join('')}</div>` : ''}
+      <section class="bg-primary text-white rounded-3xl p-8 md:p-14 relative overflow-hidden"><div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
+        <span class="text-accent font-bold text-sm">${L(`النسخة ${esc(e.editionYear)}`, `Edition ${esc(e.editionYear)}`)}</span>
+        <h3 class="text-3xl font-black mt-1 mb-6">${L('توصيات المؤتمر', 'Conference Recommendations')}</h3>
+        ${recs ? `<p class="text-gray-100 text-lg leading-loose pre-line">${esc(recs)}</p>` : `<p class="text-gray-300 text-lg leading-loose">${L('ستُنشر التوصيات والنتائج التي خلص إليها المؤتمر هنا قريباً.', 'The conference recommendations will be published here soon.')}</p>`}</section>
+      <section class="bg-white rounded-3xl border border-gray-100 shadow-sm p-8 md:p-12">
+        <div class="mb-8"><h3 class="text-3xl font-black text-primary">${esc(t(e, 'galleryTitle') || L('معرض الصور', 'Gallery'))}</h3><div class="w-16 h-1 bg-accent mt-4 rounded-full"></div></div>
+        ${vid ? `<div class="mb-10 w-full max-w-4xl"><div class="relative w-full aspect-video overflow-hidden rounded-2xl border border-gray-200"><iframe class="absolute inset-0 w-full h-full" src="https://www.youtube-nocookie.com/embed/${esc(vid)}" title="Video" loading="lazy" sandbox="allow-scripts allow-same-origin allow-presentation" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div></div>` : ''}
+        ${photos.length ? `<div class="masonry-grid">${photos.map((p) => `<button type="button" data-action="open-img" data-src="${esc(p.full)}" data-alt="${esc(p.cap)}" class="masonry-item block w-full rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300"><img src="${esc(p.thumb)}" alt="${esc(p.cap || t(e, 'title'))}" loading="lazy" class="w-full h-auto hover:scale-105 transition-transform duration-500"></button>`).join('')}</div>` : `<p class="text-gray-500 font-bold">${L('ستُضاف صور المؤتمر قريباً.', 'Conference photos will be added soon.')}</p>`}</section></div>`;
   }
 
   // ---------- اللجان ----------
@@ -501,7 +474,7 @@
       return `<div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-lg border border-gray-100 flex flex-col md:flex-row items-center gap-6 max-w-4xl mx-auto w-full hover:-translate-y-1 transition transform group">
         <img src="${esc(im)}" alt="${esc(personName(m))}" loading="lazy" class="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover border-4 border-accent shadow-sm group-hover:scale-105 transition-transform">
         <div class="text-center md:text-start rtl:md:text-right ltr:md:text-left flex-grow"><h4 class="text-2xl font-black text-primary mb-2">${esc(personName(m))}</h4>
-          <span class="inline-block bg-accent/10 text-accent font-bold px-4 py-1.5 rounded-full text-sm mb-2 border border-accent/20">${esc(t(m, 'role'))}</span>
+          ${t(m, 'role') ? `<span class="inline-block bg-accent/10 text-accent font-bold px-4 py-1.5 rounded-full text-sm mb-2 border border-accent/20">${esc(t(m, 'role'))}</span>` : ''}
           ${inst ? `<p class="text-gray-500 text-sm font-bold"><i class="fas fa-university text-gray-400" aria-hidden="true"></i> ${esc(inst)}</p>` : ''}</div></div>`;
     }).join('')}</div>` : `<div class="text-gray-400 font-bold py-5">${L('لا يوجد أعضاء مضافين حالياً.', 'No members added yet.')}</div>`;
 
@@ -516,7 +489,7 @@
           <div class="absolute top-0 right-0 w-2 h-full ${c.bar}"></div>
           <img src="${esc(im)}" alt="${esc(personName(pres))}" loading="lazy" class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md z-10 relative">
           <div class="text-center md:text-start rtl:md:text-right ltr:md:text-left flex-grow z-10 relative"><span class="font-black text-primary text-2xl block mb-2">${esc(personName(pres))}</span>
-            <span class="text-sm ${c.text} font-bold inline-block px-4 py-1.5 ${c.soft} rounded-full mb-2 border ${c.ring}">${esc(t(pres, 'role'))}</span>
+            ${t(pres, 'role') ? `<span class="text-sm ${c.text} font-bold inline-block px-4 py-1.5 ${c.soft} rounded-full mb-2 border ${c.ring}">${esc(t(pres, 'role'))}</span>` : ''}
             ${inst ? `<p class="text-sm text-gray-500 font-bold mt-1"><i class="fas fa-university text-gray-400" aria-hidden="true"></i> ${esc(inst)}</p>` : ''}</div>
           <i class="ico-decor fas fa-star ${c.star} text-8xl absolute -bottom-4 rtl:-left-4 ltr:-right-4 rotate-12 group-hover:rotate-0 transition-transform duration-500" aria-hidden="true"></i></div></div>`;
       })() : '';
@@ -524,7 +497,7 @@
         const inst = t(m, 'institution');
         return `<div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition hover:-translate-y-1 relative group">
           <div class="w-1 h-full ${c.bar} absolute top-0 rtl:right-0 ltr:left-0 rounded-r-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <span class="font-black text-primary text-lg block mb-1">${esc(personName(m))}</span><span class="text-sm ${c.text} font-bold block mb-3">${esc(t(m, 'role'))}</span>
+          <span class="font-black text-primary text-lg block mb-1">${esc(personName(m))}</span>${t(m, 'role') ? `<span class="text-sm ${c.text} font-bold block mb-3">${esc(t(m, 'role'))}</span>` : ''}
           ${inst ? `<span class="text-sm text-gray-500 font-bold"><i class="fas fa-university text-gray-400" aria-hidden="true"></i> ${esc(inst)}</span>` : ''}</div>`;
       }).join('');
     };
@@ -568,30 +541,26 @@
     const root = byId('submission-root'); if (!root) return;
     const sub = DATA.submission || {}, s = DATA.settings || {}, dates = arr('dates');
     const url = safeHttps(s.paperSubmissionUrl), tpl = safeFile(sub.templateUrl);
+    const pdf = safeFile(lang === 'ar' ? s.callPdfArUrl || s.callPdfEnUrl : s.callPdfEnUrl || s.callPdfArUrl);
+    const dnote = t(sub, 'datesNote'), pintro = t(sub, 'participationIntro'), ben = sub.benefits || [], pub = sub.publishing || [];
+    const dot = '<span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span>';
+    const list = (items) => `<ul class="space-y-3">${items.map((g) => `<li class="flex gap-3 text-gray-600 leading-relaxed">${dot}<span>${esc(t(g, 'text'))}</span></li>`).join('')}</ul>`;
+    const last = dates.length - 1;
     root.innerHTML = `
-      <div id="sub-dates" class="bg-white p-10 rounded-[2rem] shadow-xl border border-gray-100 scroll-mt-24">
-        <h3 class="text-2xl font-black mb-8 text-primary border-b-2 pb-4 inline-block">${L('تواريخ مهمة', 'Important Dates')}</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">${dates.length ? dates.map((d, i) => {
-          const st = DATE_STYLE[i % DATE_STYLE.length];
-          return `<div class="bg-bgLight p-8 rounded-2xl border border-gray-200 shadow-sm text-center transform transition hover:-translate-y-2 hover:shadow-md">
-            <div class="ico-tile w-14 h-14 ${st.box} rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="${DATE_ICON[d.icon] || faIcon(d.icon, DATE_ICON.calendar)}" aria-hidden="true"></i></div>
-            <h4 class="font-bold text-gray-800 mb-2">${esc(t(d, 'title'))}</h4><p class="${st.text} font-black text-xl">${esc(fmtDate(d.date, {day: '2-digit', month: lang === 'ar' ? 'long' : 'short', year: 'numeric'}))}</p></div>`;
-        }).join('') : emptyBox(EMPTY())}</div></div>
-      <div id="sub-guidelines" class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch scroll-mt-24">
-        <div class="bg-primary text-white p-10 rounded-[2rem] shadow-xl relative overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-br from-transparent to-blue-900 opacity-50"></div>
-          <i class="ico-decor fas fa-file-signature absolute -bottom-10 rtl:-left-10 ltr:-right-10 text-9xl text-white/5 transform -rotate-12" aria-hidden="true"></i>
-          <h3 class="text-2xl font-black mb-6 text-accent border-b border-white/20 pb-4 relative z-10">${L('إرشادات المؤلف وقواعد النشر', 'Author & Submission Guidelines')}</h3>
-          <ul class="space-y-4 relative z-10">${(sub.guidelines || []).map((g) => `<li class="flex items-start gap-4 bg-white/5 p-4 rounded-xl"><div class="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-accent shrink-0 mt-1"><i class="fas fa-check text-xs" aria-hidden="true"></i></div><span class="text-base leading-relaxed">${esc(t(g, 'text'))}</span></li>`).join('')}</ul>
-          ${tpl ? `<div class="mt-8 relative z-10"><a href="${esc(tpl)}" target="_blank" rel="noopener noreferrer" download class="w-full bg-white text-primary hover:bg-accent hover:text-white font-bold py-4 rounded-xl transition shadow-lg flex items-center justify-center gap-3 text-lg"><i class="fas fa-download" aria-hidden="true"></i> ${L('تحميل قالب البحث (Template)', 'Download Paper Template')}</a></div>` : ''}
-        </div>
-        <div class="bg-white p-10 rounded-[2rem] shadow-xl border border-gray-100 flex flex-col justify-center items-center text-center">
-          <div class="ico-tile w-28 h-28 bg-secondary/10 text-secondary rounded-full flex items-center justify-center text-5xl mb-6"><i class="fas fa-external-link-alt" aria-hidden="true"></i></div>
-          <h3 class="text-3xl font-black text-primary mb-4">${L('إرسال الورقة البحثية', 'Paper Submission')}</h3>
-          <p class="text-gray-500 mb-8 text-lg">${esc(t(sub, 'platformNote'))}</p>
-          ${url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="bg-secondary hover:bg-green-700 text-white font-bold py-4 px-10 rounded-2xl transition-all shadow-xl transform hover:-translate-y-1 text-xl w-full text-center flex justify-center items-center gap-3"><i class="fas fa-paper-plane" aria-hidden="true"></i> <span>${L('تقديم الورقة عبر المنصة', 'Submit via Platform')}</span></a>` : ''}
-        </div>
-      </div>`;
+      ${pdf ? `<a href="${esc(pdf)}" target="_blank" rel="noopener noreferrer" class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-accent/10 border border-accent/30 hover:bg-accent/20 rounded-2xl p-6 transition-colors"><span class="text-primary font-black text-lg">${L('تحميل إعلان المؤتمر (PDF)', 'Download the Call for Papers (PDF)')}</span><span class="bg-primary text-white font-bold px-6 py-2.5 rounded-xl">${L('تحميل', 'Download')}</span></a>` : ''}
+      <section id="sub-dates" class="${CARD} scroll-mt-24">${secHead(L('المواعيد', 'Timeline'), L('تواريخ مهمة', 'Important Dates'))}
+        ${dates.length ? `<ol class="rounded-2xl border border-gray-200 overflow-hidden">${dates.map((d, i) => `<li class="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-4 px-6 py-4 items-center ${i ? 'border-t border-gray-100' : ''} ${i === last ? 'bg-primary text-white' : i % 2 ? 'bg-bgLight' : 'bg-white'}"><span class="sm:col-span-7 font-bold">${esc(t(d, 'title'))}</span><span class="sm:col-span-5 font-black ${i === last ? 'text-accent' : 'text-primary'}" dir="auto">${esc(t(d, 'dateLabel') || fmtDate(d.date, {day: '2-digit', month: lang === 'ar' ? 'long' : 'short', year: 'numeric'}))}</span></li>`).join('')}</ol>` : emptyBox(EMPTY())}
+        ${dnote ? `<p class="mt-5 text-sm font-bold text-red-700 bg-red-50 border border-red-100 rounded-xl px-5 py-3">${esc(dnote)}</p>` : ''}</section>
+      <section id="sub-guidelines" class="${CARD} scroll-mt-24">${secHead(L('الشروط', 'Guidelines'), L('شروط المشاركة في المؤتمر', 'Participation Requirements'))}
+        ${list(sub.guidelines || [])}
+        ${tpl ? `<a href="${esc(tpl)}" target="_blank" rel="noopener noreferrer" download class="inline-flex items-center gap-2 mt-8 bg-primary hover:bg-secondary text-white font-black py-3.5 px-7 rounded-xl transition-colors">${L('تحميل قالب البحث (Template)', 'Download Paper Template')}</a>` : ''}</section>
+      ${(pintro || ben.length || pub.length) ? `<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        ${(pintro || ben.length) ? `<section class="${CARD}">${secHead(L('المشاركة', 'Participation'), L('المشاركة في المؤتمر', 'Attending the Conference'))}${pintro ? `<p class="text-gray-700 font-bold leading-relaxed mb-5">${esc(pintro)}</p>` : ''}${list(ben)}</section>` : ''}
+        ${pub.length ? `<section class="${CARD}">${secHead(L('النشر', 'Publication'), L('فرص النشر', 'Publication Opportunities'))}${list(pub)}</section>` : ''}</div>` : ''}
+      <section class="bg-primary text-white rounded-3xl p-8 md:p-12 text-center relative overflow-hidden"><div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
+        <h3 class="text-3xl font-black mb-4">${L('إرسال الورقة البحثية', 'Paper Submission')}</h3>
+        <p class="text-gray-300 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">${esc(t(sub, 'platformNote'))}</p>
+        ${url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-secondary hover:bg-accent text-white font-black py-4 px-10 rounded-xl transition-colors text-lg">${L('تقديم الورقة عبر المنصة', 'Submit via the Platform')}</a>` : ''}</section>`;
   }
 
   // ---------- الرعاة ----------

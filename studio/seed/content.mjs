@@ -1,8 +1,9 @@
 // المصدر الوحيد للمحتوى الابتدائي: يُولِّد seed.ndjson (للاستيراد إلى Sanity) و assets/data/fallback.json (احتياطي للواجهة)
 const img = (src) => ({__img: src})
+import {docxDocs, committeeDocs, announcementDocs, settingsPatch, homePatch} from './docx-content.mjs'
 const doc = (type, id, data) => ({_type: type, _id: id, ...data})
 
-export const documents = [
+const base = [
   doc('siteSettings', 'siteSettings', {
     siteTitle_ar: 'المؤتمر الدولي الثاني: قضايا اقتصادية معاصرة',
     siteTitle_en: '2nd International Conference: Contemporary Economic Issues',
@@ -161,4 +162,14 @@ export const documents = [
     body_en: 'Abstract deadline: 15 July 2027.\nNotification of acceptance: 01 August 2027.\nFull paper submission: 15 September 2027.',
     linkUrl: 'https://events.univ-setif.dz/', linkLabel_ar: 'منصة إرسال الأوراق', linkLabel_en: 'Paper submission platform',
   }),
+]
+
+// دمج محتوى الديباجة: يستبدل الوثائق المتعارضة ويحدّث حقولاً محددة في الإعدادات والصفحة الرئيسية
+const drop = new Set(['aboutPage', 'submissionPage', 'track', 'importantDate'])
+const override = new Set(announcementDocs.map((d) => d._id))
+export const documents = [
+  ...base
+    .filter((d) => !drop.has(d._type) && !override.has(d._id))
+    .map((d) => (d._id === 'siteSettings' ? {...d, ...settingsPatch} : d._id === 'homePage' ? {...d, ...homePatch} : d)),
+  ...docxDocs, ...committeeDocs, ...announcementDocs,
 ]

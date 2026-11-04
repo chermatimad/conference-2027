@@ -3,6 +3,7 @@ import {writeFileSync, mkdirSync} from 'node:fs'
 import {dirname, resolve} from 'node:path'
 import {fileURLToPath, pathToFileURL} from 'node:url'
 import {documents} from './content.mjs'
+import {importDocs} from './docx-content.mjs'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const root = resolve(here, '../..')
@@ -20,6 +21,9 @@ const toSanity = (v) => {
 }
 writeFileSync(resolve(here, 'seed.ndjson'), documents.map((d) => JSON.stringify(toSanity(d))).join('\n') + '\n')
 
+// 1b) ملف استيراد منفصل لمحتوى الديباجة فقط (لا يمسّ الإعدادات ولا الصور التي رفعتها)
+writeFileSync(resolve(here, 'seed-docx.ndjson'), importDocs.map((d) => JSON.stringify(toSanity(d))).join('\n') + '\n')
+
 // 2) JSON احتياطي بنفس شكل نتيجة استعلام GROQ في الواجهة
 const toUrl = (v) => (isMarker(v) ? v.__img : Array.isArray(v) ? v.map(toUrl) : v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, toUrl(x)])) : v)
 const by = (t) => documents.filter((d) => d._type === t).map(toUrl)
@@ -27,7 +31,7 @@ const one = (t) => by(t)[0] ?? null
 const history = by('history').map(({logo, ...r}) => ({...r, logoUrl: logo, gallery: [], legacyImages: []}))
 const fallback = {
   settings: one('siteSettings'), home: one('homePage'), about: one('aboutPage'), submission: one('submissionPage'),
-  announcements: by('announcement'), tracks: by('track'), speakers: [], committee: [],
+  announcements: by('announcement'), tracks: by('track'), speakers: [], committee: documents.filter((d) => d._type === 'committee'),
   program: by('programDay'), dates: by('importantDate'), editions: history, sponsors: [],
 }
 mkdirSync(resolve(root, 'assets/data'), {recursive: true})

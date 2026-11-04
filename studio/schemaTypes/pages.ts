@@ -61,7 +61,21 @@ export const aboutPage = defineType({
   title: 'صفحة: حول المؤتمر',
   type: 'document',
   fields: [
-    ...bilingual('preambleTitle', 'عنوان الديباجة'),
+    ...bilingual('aboutIntro', 'نبذة عن المؤتمر (افصل الفقرات بسطر فارغ)', {type: 'text', rows: 8, max: 3000}),
+    defineField({
+      name: 'editionsTable', title: 'جدول الطبعات (ضمن النبذة)', type: 'array',
+      of: [defineArrayMember({
+        type: 'object',
+        fields: [
+          ...bilingual('label', 'الطبعة (مثال: الأولى)'),
+          defineField({name: 'year', title: 'السنة', type: 'string', validation: (R) => R.max(10)}),
+          ...bilingual('topic', 'الموضوع', {type: 'text', rows: 2, max: 300}),
+        ],
+        preview: {select: {title: 'label_ar', subtitle: 'year'}},
+      })],
+      validation: (R) => R.max(10),
+    }),
+    ...bilingual('preambleTitle', 'عنوان الديباجة (اختياري)'),
     ...bilingual('preamble', 'نص الديباجة', {type: 'text', rows: 8, max: 3000}),
     imageField('preambleImage', 'صورة الديباجة'),
     ...bilingual('importance', 'أهمية المؤتمر', {type: 'text', rows: 8, max: 3000}),
@@ -71,11 +85,17 @@ export const aboutPage = defineType({
       name: 'objectives', title: 'الأهداف', type: 'array',
       of: [defineArrayMember({
         type: 'object',
-        fields: [...bilingual('title', 'العنوان', {required: true}), ...bilingual('text', 'الوصف', {type: 'text', rows: 3, max: 600})],
-        preview: {select: {title: 'title_ar', subtitle: 'title_en'}},
+        fields: [...bilingual('title', 'عنوان الهدف (اختياري)'), ...bilingual('text', 'نص الهدف', {type: 'text', rows: 4, max: 800})],
+        preview: {select: {title: 'text_ar', subtitle: 'title_ar'}},
       })],
       validation: (R) => R.max(12),
     }),
+    defineField({
+      name: 'audience', title: 'الفئات المعنية بالمؤتمر', type: 'array',
+      of: [defineArrayMember({type: 'object', fields: bilingual('text', 'الفئة', {type: 'text', rows: 2, max: 400, required: true}), preview: {select: {title: 'text_ar'}}})],
+      validation: (R) => R.max(15),
+    }),
+    ...bilingual('tracksNote', 'ملاحظة أسفل المحاور (مثال: ترحب اللجنة العلمية بالدراسات التطبيقية...)', {type: 'text', rows: 3, max: 600}),
     ...bilingual('tracksIntro', 'تمهيد صفحة المحاور', {type: 'text', rows: 3}),
   ],
   preview: {prepare: () => ({title: 'صفحة: حول المؤتمر'})},
@@ -100,6 +120,18 @@ export const submissionPage = defineType({
       options: {accept: '.doc,.docx,.pdf,.odt'},
     }),
     ...bilingual('platformNote', 'نص التقديم عبر المنصة', {type: 'text', rows: 2}),
+    ...bilingual('datesNote', 'تنبيه أسفل التواريخ المهمة', {type: 'text', rows: 2, max: 300}),
+    ...bilingual('participationIntro', 'المشاركة في المؤتمر (النص التمهيدي)', {type: 'text', rows: 3, max: 500}),
+    defineField({
+      name: 'benefits', title: 'ما يستفيد منه المشاركون', type: 'array',
+      of: [defineArrayMember({type: 'object', fields: bilingual('text', 'البند', {type: 'text', rows: 2, max: 300, required: true}), preview: {select: {title: 'text_ar'}}})],
+      validation: (R) => R.max(12),
+    }),
+    defineField({
+      name: 'publishing', title: 'فرص النشر', type: 'array',
+      of: [defineArrayMember({type: 'object', fields: bilingual('text', 'البند', {type: 'text', rows: 2, max: 400, required: true}), preview: {select: {title: 'text_ar'}}})],
+      validation: (R) => R.max(12),
+    }),
   ],
   preview: {prepare: () => ({title: 'صفحة: المشاركة والنشر'})},
 })
@@ -110,7 +142,8 @@ export const importantDate = defineType({
   type: 'document',
   fields: [
     ...bilingual('title', 'العنوان', {required: true}),
-    defineField({name: 'date', title: 'التاريخ', type: 'date', validation: (R) => R.required()}),
+    defineField({name: 'date', title: 'التاريخ (للترتيب)', type: 'date', validation: (R) => R.required()}),
+    ...bilingual('dateLabel', 'نص التاريخ المعروض (اختياري — مثال: 20–21 أفريل 2027)', {max: 60}),
     iconField('الأيقونة (Font Awesome)', 'fa-calendar-check'),
     defineField({name: 'order', title: 'الترتيب', type: 'number', initialValue: 10}),
   ],
@@ -126,8 +159,13 @@ export const track = defineType({
     defineField({name: 'order', title: 'رقم المحور', type: 'number', validation: (R) => R.required().integer().min(1).max(30)}),
     ...bilingual('kicker', 'ترقيم المحور (المحور الأول...)'),
     ...bilingual('title', 'اسم المحور', {required: true}),
-    ...bilingual('description', 'الوصف', {type: 'text', rows: 3, max: 600}),
-    iconField('الأيقونة (Font Awesome)', 'fa-shield-alt'),
+    ...bilingual('description', 'الوصف (اختياري)', {type: 'text', rows: 3, max: 600}),
+    defineField({
+      name: 'topics', title: 'نقاط المحور', type: 'array',
+      of: [defineArrayMember({type: 'object', fields: bilingual('text', 'النقطة', {type: 'text', rows: 2, max: 400, required: true}), preview: {select: {title: 'text_ar'}}})],
+      validation: (R) => R.max(12),
+    }),
+    iconField('الأيقونة (اختيارية، تظهر حسب إعداد مربعات الأيقونات)', 'fa-shield-alt'),
     defineField({
       name: 'color', title: 'اللون', type: 'string', initialValue: 'primary',
       options: {list: [{title: 'أزرق داكن', value: 'primary'}, {title: 'أخضر', value: 'secondary'}, {title: 'ذهبي', value: 'accent'}, {title: 'أزرق فاتح', value: 'blue'}, {title: 'رمادي', value: 'gray'}, {title: 'بنفسجي', value: 'purple'}]},

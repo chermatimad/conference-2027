@@ -103,6 +103,8 @@ export const siteSettings = defineType({
     ...bilingual('copyright', 'نص حقوق النشر').map((f) => ({...f, group: 'footer'})),
     ...bilingual('seoDescription', 'وصف محركات البحث (SEO)', {type: 'text', rows: 2, max: 300}).map((f) => ({...f, group: 'footer'})),
     {...imageField('shareImage', 'صورة المشاركة (Open Graph)'), group: 'footer'},
+    defineField({name: 'callPdfAr', title: 'ملف إعلان المؤتمر PDF (النسخة العربية) — يُحمَّل من الموقع', type: 'file', group: 'event', options: {accept: '.pdf'}}),
+    defineField({name: 'callPdfEn', title: 'ملف إعلان المؤتمر PDF (النسخة الإنجليزية)', type: 'file', group: 'event', options: {accept: '.pdf'}}),
     defineField({
       name: 'iconStyle',
       title: 'مربعات الأيقونات الزخرفية في الموقع',
