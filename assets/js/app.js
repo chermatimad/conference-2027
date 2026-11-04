@@ -121,7 +121,7 @@
     "settings": *[_id == "siteSettings"][0]{ ..., ${img('facultyLogoAr')}, ${img('facultyLogoEn')}, ${img('conferenceLogo')}, ${img('conferenceLogoAr')}, ${img('conferenceLogoEn')}, ${img('universityLogoAr')}, ${img('universityLogoEn')}, ${img('footerUnivLogoAr')}, ${img('footerUnivLogoEn')}, ${img('footerFacultyLogoAr')}, ${img('footerFacultyLogoEn')}, ${img('footerConfLogoAr')}, ${img('footerConfLogoEn')}, ${img('heroBackground')}, ${img('shareImage')}, "callPdfArUrl": callPdfAr.asset->url, "callPdfEnUrl": callPdfEn.asset->url },
     "home": *[_id == "homePage"][0]{ ..., ${img('welcomeImage')}, ${img('welcomeImage2')} },
     "about": *[_id == "aboutPage"][0]{ ..., ${img('preambleImage')} },
-    "submission": *[_id == "submissionPage"][0]{ ..., "templateUrl": templateFile.asset->url },
+    "submission": *[_id == "submissionPage"][0]{ ..., "templateUrl": templateFile.asset->url, "templateArUrl": templateFileAr.asset->url, "templateEnUrl": templateFileEn.asset->url },
     "announcements": *[_type == "announcement" && publishAt <= now() && (!defined(expireAt) || expireAt > now())] | order(pinned desc, publishAt desc)[0...60]{
       _id, kind, title_ar, title_en, body_ar, body_en, linkUrl, linkLabel_ar, linkLabel_en, publishAt, expireAt, pinned, popup, "imageUrl": image.asset->url },
     "tracks": *[_type == "track"] | order(order asc){ _id, order, kicker_ar, kicker_en, title_ar, title_en, description_ar, description_en, topics, icon, color },
@@ -541,7 +541,9 @@
   function renderSubmission() {
     const root = byId('submission-root'); if (!root) return;
     const sub = DATA.submission || {}, s = DATA.settings || {}, dates = arr('dates');
-    const url = safeHttps(s.paperSubmissionUrl), tpl = safeFile(sub.templateUrl);
+    const url = safeHttps(s.paperSubmissionUrl), tplAr = safeFile(sub.templateArUrl), tplEn = safeFile(sub.templateEnUrl), tplOld = safeFile(sub.templateUrl);
+    const tpls = [[tplAr, L('قالب البحث (عربي)', 'Paper Template (Arabic)')], [tplEn, L('قالب البحث (إنجليزي)', 'Paper Template (English)')]].filter((x) => x[0]);
+    if (!tpls.length && tplOld) tpls.push([tplOld, L('تحميل قالب البحث (Template)', 'Download Paper Template')]);
     const pdf = safeFile(lang === 'ar' ? s.callPdfArUrl || s.callPdfEnUrl : s.callPdfEnUrl || s.callPdfArUrl);
     const dnote = t(sub, 'datesNote'), pintro = t(sub, 'participationIntro'), ben = sub.benefits || [], pub = sub.publishing || [];
     const dot = '<span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span>';
@@ -554,7 +556,7 @@
         ${dnote ? `<p class="mt-5 text-sm font-bold text-red-700 bg-red-50 border border-red-100 rounded-xl px-5 py-3">${esc(dnote)}</p>` : ''}</section>
       <section id="sub-guidelines" class="${CARD} scroll-mt-24">${secHead(L('الشروط', 'Guidelines'), L('شروط المشاركة في المؤتمر', 'Participation Requirements'))}
         ${list(sub.guidelines || [])}
-        ${tpl ? `<a href="${esc(tpl)}" target="_blank" rel="noopener noreferrer" download class="inline-flex items-center gap-2 mt-8 bg-primary hover:bg-secondary text-white font-black py-3.5 px-7 rounded-xl transition-colors">${L('تحميل قالب البحث (Template)', 'Download Paper Template')}</a>` : ''}</section>
+        ${tpls.length ? `<div class="flex flex-wrap gap-4 mt-8">${tpls.map(([u, lb]) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer" download class="inline-flex items-center gap-2 bg-primary hover:bg-secondary text-white font-black py-3.5 px-7 rounded-xl transition-colors"><i class="fas fa-file-word" aria-hidden="true"></i> ${lb}</a>`).join('')}</div>` : ''}</section>
       ${(pintro || ben.length || pub.length) ? `<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         ${(pintro || ben.length) ? `<section class="${CARD}">${secHead(L('المشاركة', 'Participation'), L('المشاركة في المؤتمر', 'Attending the Conference'))}${pintro ? `<p class="text-gray-700 font-bold leading-relaxed mb-5">${esc(pintro)}</p>` : ''}${list(ben)}</section>` : ''}
         ${pub.length ? `<section class="${CARD}">${secHead(L('النشر', 'Publication'), L('فرص النشر', 'Publication Opportunities'))}${list(pub)}</section>` : ''}</div>` : ''}

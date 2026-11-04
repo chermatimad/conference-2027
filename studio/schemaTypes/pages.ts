@@ -115,7 +115,15 @@ export const submissionPage = defineType({
       validation: (R) => R.max(20),
     }),
     defineField({
-      name: 'templateFile', title: 'قالب البحث (ملف)', type: 'file',
+      name: 'templateFileAr', title: 'قالب البحث — النسخة العربية (ملف Word)', type: 'file',
+      options: {accept: '.doc,.docx,.pdf,.odt'},
+    }),
+    defineField({
+      name: 'templateFileEn', title: 'قالب البحث — النسخة الإنجليزية (ملف Word)', type: 'file',
+      options: {accept: '.doc,.docx,.pdf,.odt'},
+    }),
+    defineField({
+      name: 'templateFile', title: 'قالب البحث (قديم — استعمل الحقلين أعلاه)', type: 'file', hidden: true,
       options: {accept: '.doc,.docx,.pdf,.odt'},
     }),
     ...bilingual('platformNote', 'نص التقديم عبر المنصة', {type: 'text', rows: 2}),
