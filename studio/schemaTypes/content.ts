@@ -68,7 +68,7 @@ export const committee = defineType({
   fields: [
     defineField({
       name: 'committeeType', title: 'اللجنة', type: 'string',
-      options: {layout: 'radio', list: [{title: 'اللجنة العليا', value: 'high'}, {title: 'اللجنة العلمية', value: 'scientific'}, {title: 'اللجنة التنظيمية', value: 'organizing'}]},
+      options: {layout: 'radio', list: [{title: 'اللجنة الشرفية', value: 'high'}, {title: 'اللجنة العلمية', value: 'scientific'}, {title: 'اللجنة التنظيمية', value: 'organizing'}]},
       validation: (R) => R.required(),
     }),
     ...bilingual('name', 'الاسم', {required: true}),

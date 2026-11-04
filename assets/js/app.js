@@ -266,7 +266,7 @@
     const colors = ['hover:border-primary', 'hover:border-secondary', 'hover:border-accent', 'hover:border-primary'];
     root.innerHTML = cards.slice(0, 8).map((c, i) => `
       <a href="#${esc(c.target)}" class="group relative block bg-white p-8 pt-7 rounded-xl border border-gray-200 border-t-4 border-t-gray-200 ${colors[i % 4]} hover:shadow-xl transition-all duration-300 text-start">
-        <span class="block text-5xl font-black text-gray-200 group-hover:text-accent/50 transition-colors mb-5" dir="ltr">${String(i + 1).padStart(2, '0')}</span>
+        <span class="block h-1 w-10 bg-accent rounded-full mb-6 transition-all duration-500 group-hover:w-full" aria-hidden="true"></span>
         <h3 class="text-xl font-black text-primary mb-2">${esc(c.title)}</h3>
         <p class="text-gray-500 text-sm leading-relaxed">${esc(c.text)}</p>
         <span class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-secondary">${L('اكتشف', 'Explore')} <span aria-hidden="true" class="transition-transform group-hover:-translate-x-1 rtl:group-hover:-translate-x-1 ltr:group-hover:translate-x-1">${lang === 'ar' ? '←' : '→'}</span></span>
@@ -427,7 +427,7 @@
     const root = byId('history-root'); if (!root) return;
     const eds = arr('editions');
     root.innerHTML = `<div class="max-w-4xl mx-auto text-center mb-12">
-      <h3 class="text-3xl md:text-5xl font-black text-primary mb-4">${L('تاريخ المؤتمر والنسخ السابقة', 'Conference History & Editions')}</h3>
+      <h3 class="text-3xl md:text-5xl font-black text-primary mb-4">${L('النسخ السابقة للمؤتمر', 'Previous Editions')}</h3>
       <div class="w-24 h-1.5 bg-accent mx-auto rounded-full mb-6"></div>
       <p class="text-gray-600 text-lg">${L('نظرة عامة على النسخ السابقة والإنجازات الأكاديمية التي حققها المؤتمر.', 'An overview of past editions and academic achievements of the conference.')}</p></div>
       <div class="space-y-10">${eds.length ? eds.map((e) => {
@@ -670,7 +670,7 @@
   const ROUTES = ['home', 'news', 'about', 'history', 'topics', 'speakers', 'program', 'committees', 'submission', 'contact', 'venue', 'sponsors'];
   const ICONS = {news: 'fa-bullhorn', about: 'fa-info-circle', history: 'fa-landmark', edition: 'fa-calendar-check', topics: 'fa-project-diagram', speakers: 'fa-users', program: 'fa-calendar-alt', committees: 'fa-sitemap', submission: 'fa-upload', contact: 'fa-envelope', venue: 'fa-map-marker-alt', sponsors: 'fa-handshake'};
   const TITLES = () => ({
-    news: L('الإعلانات', 'Announcements'), about: L('حول المؤتمر', 'About Conference'), history: L('تاريخ المؤتمر', 'Conference History'),
+    news: L('الإعلانات', 'Announcements'), about: L('حول المؤتمر', 'About Conference'), history: L('النسخ السابقة للمؤتمر', 'Previous Editions'),
     topics: L('محاور المؤتمر', 'Conference Tracks'), speakers: L('المتحدثون الرئيسيون', 'Keynote Speakers'), program: L('برنامج المؤتمر', 'Conference Program'),
     committees: L('لجان المؤتمر', 'Committees'), submission: L('المشاركة والنشر', 'Submission & Publication'), contact: L('اتصل بنا', 'Contact Us'),
     venue: L('مكان الانعقاد', 'Venue'), sponsors: L('الرعاة والشركاء', 'Sponsors & Partners'),

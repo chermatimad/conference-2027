@@ -59,31 +59,23 @@
             <div class="flex justify-between items-center py-4" id="nav-container">
                 <button type="button" id="mobile-menu-btn" class="xl:hidden text-white hover:text-accent transition" aria-label="Menu" aria-expanded="false"><i class="fas fa-bars text-2xl" aria-hidden="true"></i></button>
 
-                <ul class="hidden xl:flex space-x-reverse space-x-6 font-bold text-sm w-full justify-center rtl:space-x-reverse ltr:space-x-5 items-center">
-                    <li><a href="#home" class="nav-link active" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
-                    <li><a href="#news" class="nav-link" data-ar="الإعلانات" data-en="News">الإعلانات</a></li>
-
-                    <li class="group relative py-2">
-                        <a href="#about" class="nav-link flex items-center gap-1" data-ar="حول المؤتمر <i class='fas fa-chevron-down text-[10px] mt-1'></i>" data-en="About <i class='fas fa-chevron-down text-[10px] mt-1'></i>">حول المؤتمر <i class="fas fa-chevron-down text-[10px] mt-1"></i></a>
-                        <ul class="dropdown-menu absolute rtl:right-0 ltr:left-0 bg-white text-gray-800 shadow-2xl rounded-xl mt-2 w-56 py-3 border border-gray-100 z-50">
-                            <li><a href="#about" class="block px-5 py-2 hover:bg-bgLight hover:text-primary transition" data-ar="الإشكالية والأهداف" data-en="Scope & Objectives">الإشكالية والأهداف</a></li>
-                            <li><a href="#topics" class="block px-5 py-2 hover:bg-bgLight hover:text-primary transition" data-ar="محاور المؤتمر" data-en="Conference Tracks">محاور المؤتمر</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a href="#history" class="nav-link" data-ar="تاريخ المؤتمر" data-en="Conference History">تاريخ المؤتمر</a></li>
+                <ul class="hidden xl:flex space-x-reverse space-x-4 2xl:space-x-6 font-bold text-[13px] 2xl:text-sm w-full justify-center rtl:space-x-reverse ltr:space-x-4 items-center">
+                    <li><a href="#home" class="nav-link" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                    <li><a href="#about" class="nav-link" data-ar="حول المؤتمر" data-en="About">حول المؤتمر</a></li>
+                    <li><a href="#topics" class="nav-link" data-ar="محاور المؤتمر" data-en="Conference Tracks">محاور المؤتمر</a></li>
+                    <li><a href="#history" class="nav-link" data-ar="النسخ السابقة" data-en="Previous Editions">النسخ السابقة</a></li>
 
                     <li class="group relative py-2">
                         <a href="#committees" class="nav-link flex items-center gap-1" data-ar="اللجان <i class='fas fa-chevron-down text-[10px] mt-1'></i>" data-en="Committees <i class='fas fa-chevron-down text-[10px] mt-1'></i>">اللجان <i class="fas fa-chevron-down text-[10px] mt-1"></i></a>
                         <ul class="dropdown-menu absolute rtl:right-0 ltr:left-0 bg-white text-gray-800 shadow-2xl rounded-xl mt-2 w-56 py-3 border border-gray-100 z-50">
-                            <li><a href="#committees?tab=high" class="block px-5 py-2 hover:bg-bgLight hover:text-primary transition" data-ar="اللجنة العليا" data-en="High Committee">اللجنة العليا</a></li>
+                            <li><a href="#committees?tab=high" class="block px-5 py-2 hover:bg-bgLight hover:text-primary transition" data-ar="اللجنة الشرفية" data-en="Honorary Committee">اللجنة الشرفية</a></li>
                             <li><a href="#committees?tab=scientific" class="block px-5 py-2 hover:bg-bgLight hover:text-primary transition" data-ar="اللجنة العلمية" data-en="Scientific Committee">اللجنة العلمية</a></li>
                             <li><a href="#committees?tab=organizing" class="block px-5 py-2 hover:bg-bgLight hover:text-primary transition" data-ar="اللجنة التنظيمية" data-en="Organizing Committee">اللجنة التنظيمية</a></li>
                         </ul>
                     </li>
 
                     <li><a href="#speakers" class="nav-link" data-ar="المتحدثون" data-en="Speakers">المتحدثون</a></li>
-                    <li><a href="#program" class="nav-link" data-ar="البرنامج" data-en="Program">البرنامج</a></li>
+                    <li><a href="#program" class="nav-link" data-ar="برنامج المؤتمر" data-en="Conference Program">برنامج المؤتمر</a></li>
 
                     <li class="group relative py-2">
                         <a href="#submission" class="nav-link flex items-center gap-1 text-accent" data-ar="المشاركة والنشر <i class='fas fa-chevron-down text-[10px] mt-1'></i>" data-en="Submission <i class='fas fa-chevron-down text-[10px] mt-1'></i>">المشاركة والنشر <i class="fas fa-chevron-down text-[10px] mt-1"></i></a>
@@ -94,13 +86,14 @@
                         </ul>
                     </li>
 
+                    <li><a href="#venue" class="nav-link" data-ar="مكان انعقاد المؤتمر" data-en="Venue">مكان انعقاد المؤتمر</a></li>
+                    <li><a href="#sponsors" class="nav-link" data-ar="الرعاة الرسميون" data-en="Official Sponsors">الرعاة الرسميون</a></li>
+                    <li><a href="#news" class="nav-link" data-ar="الإعلانات" data-en="News & Announcements">الإعلانات</a></li>
                     <li><a href="#contact" class="nav-link" data-ar="اتصل بنا" data-en="Contact">اتصل بنا</a></li>
-                    <li><a href="#venue" class="nav-link" data-ar="المكان" data-en="Venue">المكان</a></li>
-                    <li><a href="#sponsors" class="nav-link" data-ar="الرعاة" data-en="Sponsors">الرعاة</a></li>
                 </ul>
 
                 <div class="hidden xl:flex gap-3 ltr:ml-4 rtl:mr-4 shrink-0">
-                    <button type="button" data-action="open-modal" data-target="registerModal" data-register class="bg-secondary hover:bg-green-700 text-white px-8 py-2 rounded-xl font-bold transition-all shadow-lg transform hover:scale-105" data-ar="التسجيل" data-en="Register">التسجيل</button>
+                    <button type="button" data-action="open-modal" data-target="registerModal" data-register class="bg-secondary hover:bg-green-700 text-white px-6 py-2 rounded-xl font-bold transition-all shadow-lg transform hover:scale-105" data-ar="التسجيل" data-en="Register">التسجيل</button>
                 </div>
             </div>
         </div>
@@ -108,17 +101,17 @@
         <div id="mobile-menu" class="hidden xl:hidden bg-primary/95 backdrop-blur-xl absolute w-full border-t border-white/10 shadow-2xl max-h-[85vh] overflow-y-auto z-50">
             <ul class="flex flex-col p-6 text-center space-y-2">
                 <li><a href="#home" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
-                <li><a href="#news" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="الإعلانات" data-en="News">الإعلانات</a></li>
                 <li><a href="#about" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="حول المؤتمر" data-en="About">حول المؤتمر</a></li>
-                <li><a href="#topics" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="محاور المؤتمر" data-en="Topics">محاور المؤتمر</a></li>
-                <li><a href="#history" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="تاريخ المؤتمر" data-en="Conference History">تاريخ المؤتمر</a></li>
+                <li><a href="#topics" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="محاور المؤتمر" data-en="Conference Tracks">محاور المؤتمر</a></li>
+                <li><a href="#history" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="النسخ السابقة" data-en="Previous Editions">النسخ السابقة</a></li>
                 <li><a href="#committees" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="اللجان" data-en="Committees">اللجان</a></li>
                 <li><a href="#speakers" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="المتحدثون" data-en="Speakers">المتحدثون</a></li>
-                <li><a href="#program" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="البرنامج" data-en="Program">البرنامج</a></li>
+                <li><a href="#program" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="برنامج المؤتمر" data-en="Conference Program">برنامج المؤتمر</a></li>
                 <li><a href="#submission" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-accent transition" data-ar="المشاركة والنشر" data-en="Submission">المشاركة والنشر</a></li>
                 <li><a href="https://events.univ-setif.dz/" data-submit-link target="_blank" rel="noopener noreferrer" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-secondary transition" data-ar="إرسال الورقة البحثية" data-en="Paper Submission">إرسال الورقة البحثية</a></li>
-                <li><a href="#venue" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="المكان" data-en="Venue">المكان</a></li>
-                <li><a href="#sponsors" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="الرعاة" data-en="Sponsors">الرعاة</a></li>
+                <li><a href="#venue" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="مكان انعقاد المؤتمر" data-en="Venue">مكان انعقاد المؤتمر</a></li>
+                <li><a href="#sponsors" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="الرعاة الرسميون" data-en="Official Sponsors">الرعاة الرسميون</a></li>
+                <li><a href="#news" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="الإعلانات" data-en="News & Announcements">الإعلانات</a></li>
                 <li><a href="#contact" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="اتصل بنا" data-en="Contact">اتصل بنا</a></li>
                 <li><button type="button" data-action="open-modal" data-target="registerModal" data-register class="mobile-link w-full bg-secondary py-3 rounded-xl font-bold text-white transition" data-ar="التسجيل" data-en="Register">التسجيل</button></li>
             </ul>
@@ -261,14 +254,14 @@
             <section id="detail-committees" class="detail-section">
                 <div class="max-w-6xl mx-auto">
                     <div class="flex flex-wrap justify-center gap-3 mb-10" role="tablist">
-                        <button type="button" role="tab" data-action="com-tab" data-tab="high" id="btn-com-high" class="com-tab flex-1 py-4 px-6 rounded-2xl font-bold transition-all bg-primary text-white shadow-lg text-sm md:text-base border border-transparent" data-ar="اللجنة العليا" data-en="High Committee">اللجنة العليا</button>
+                        <button type="button" role="tab" data-action="com-tab" data-tab="high" id="btn-com-high" class="com-tab flex-1 py-4 px-6 rounded-2xl font-bold transition-all bg-primary text-white shadow-lg text-sm md:text-base border border-transparent" data-ar="اللجنة الشرفية" data-en="Honorary Committee">اللجنة الشرفية</button>
                         <button type="button" role="tab" data-action="com-tab" data-tab="scientific" id="btn-com-scientific" class="com-tab flex-1 py-4 px-6 rounded-2xl font-bold transition-all bg-white text-gray-500 hover:text-primary shadow-sm border border-gray-200 text-sm md:text-base" data-ar="اللجنة العلمية" data-en="Scientific Committee">اللجنة العلمية</button>
                         <button type="button" role="tab" data-action="com-tab" data-tab="organizing" id="btn-com-organizing" class="com-tab flex-1 py-4 px-6 rounded-2xl font-bold transition-all bg-white text-gray-500 hover:text-primary shadow-sm border border-gray-200 text-sm md:text-base" data-ar="اللجنة التنظيمية" data-en="Organizing Committee">اللجنة التنظيمية</button>
                     </div>
                     <div class="bg-white border border-gray-100 rounded-[2rem] p-8 md:p-14 shadow-xl min-h-[400px]">
                         <div id="com-high" class="com-content w-full text-center py-4 relative z-10">
                             <div class="inline-block p-6 rounded-full bg-accent/10 text-accent mb-6"><i class="fas fa-crown text-6xl" aria-hidden="true"></i></div>
-                            <h3 class="text-3xl font-black text-primary mb-8" data-ar="اللجنة العليا للمؤتمر" data-en="High Committee">اللجنة العليا للمؤتمر</h3>
+                            <h3 class="text-3xl font-black text-primary mb-8" data-ar="اللجنة الشرفية للمؤتمر" data-en="Honorary Committee">اللجنة الشرفية للمؤتمر</h3>
                             <div id="high-members" class="space-y-4"></div>
                         </div>
                         <div id="com-scientific" class="com-content hidden w-full text-center py-4 relative z-10">
