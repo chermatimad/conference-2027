@@ -78,7 +78,6 @@ export const aboutPage = defineType({
     ...bilingual('preambleTitle', 'عنوان الديباجة (اختياري)'),
     ...bilingual('preamble', 'نص الديباجة', {type: 'text', rows: 8, max: 3000}),
     imageField('preambleImage', 'صورة الديباجة'),
-    ...bilingual('importance', 'أهمية المؤتمر', {type: 'text', rows: 8, max: 3000}),
     ...bilingual('problemIntro', 'تمهيد الإشكالية', {type: 'text', rows: 3}),
     ...bilingual('problemQuestion', 'الإشكالية (السؤال الرئيسي)', {type: 'text', rows: 4}),
     defineField({

@@ -11,7 +11,7 @@ const base = [
     heroTitle_en: 'Contemporary Economic Issues',
     theme_ar: 'الأمن الغذائي في ظل التحديات العالمية : الابتكار والسياسات الاقتصادية لتحقيق الاستدامة',
     theme_en: 'Food Security Amidst Global Challenges: Innovation & Economic Policies for Sustainability',
-    editionLabel_ar: 'النسخة الثانية - 2027',
+    editionLabel_ar: 'الطبعة الثانية - 2027',
     editionLabel_en: 'Second Edition - 2027',
     facultyLogoAr: img('assets/img/faculty_logo_ar.png'),
     facultyLogoEn: img('assets/img/faculty_logo_en.png'),
@@ -141,7 +141,7 @@ const base = [
     topics_en: 'Events focused on exploring practical AI applications in financial data analysis, risk management, and the future of FinTech in Algeria.',
     achievement_ar: 'شكل هذا المؤتمر نموذجاً في تعزيز الإشعاع العلمي للكلية، وترسيخ ثقافة البحث الجماعي، وتأكيد الريادة الفكرية في موضوع الذكاء الاصطناعي، وتحفيز الكفاءات الشابة على البحث التطبيقي المبتكر.',
     achievement_en: 'This conference was a model in enhancing scientific radiance, establishing collective research culture, and stimulating young competencies.',
-    galleryTitle_ar: 'معرض صور النسخة الأولى', galleryTitle_en: '1st Edition Gallery',
+    galleryTitle_ar: 'معرض صور الطبعة الأولى', galleryTitle_en: '1st Edition Gallery',
   }),
 
   // أمثلة للإعلانات — عدّلها أو احذفها من لوحة التحكم

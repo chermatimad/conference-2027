@@ -181,6 +181,7 @@ export const announcementDocs = [announcementDates]
 
 // حقول تُحدَّث على الوثائق القائمة دون المساس ببقية ما عدّلتَه (patch-settings.mjs)
 export const settingsPatch = {
+  editionLabel_ar: 'الطبعة الثانية - 2027',
   siteTitle_ar: 'المؤتمر الدولي الثاني للقضايا الاقتصادية المعاصرة',
   siteTitle_en: '2nd International Conference on Contemporary Economic Issues (ICCEI)',
   theme_ar: 'الأمن الغذائي في ظل التحديات العالمية: الابتكار والسياسات الاقتصادية لتحقيق الاستدامة',

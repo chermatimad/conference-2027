@@ -126,17 +126,17 @@ export const programDay = defineType({
 /** نسخ المؤتمر السابقة (الاسم history محفوظ للتوافق) */
 export const history = defineType({
   name: 'history',
-  title: 'النسخ السابقة (التاريخ)',
+  title: 'الطبعات السابقة (التاريخ)',
   type: 'document',
   fieldsets: [{name: 'legacy', title: 'حقول قديمة (للتوافق)', options: {collapsible: true, collapsed: true}}],
   fields: [
-    defineField({name: 'editionYear', title: 'سنة النسخة (مثال: 2025)', type: 'string', validation: (R) => R.required().regex(/^\d{4}$/, {name: 'year'})}),
+    defineField({name: 'editionYear', title: 'سنة الطبعة (مثال: 2025)', type: 'string', validation: (R) => R.required().regex(/^\d{4}$/, {name: 'year'})}),
     defineField({name: 'dateLabel_ar', title: 'التاريخ (نص عربي)', type: 'string'}),
     defineField({name: 'dateLabel_en', title: 'Date (English text)', type: 'string'}),
-    ...bilingual('title', 'عنوان النسخة', {required: true}),
+    ...bilingual('title', 'عنوان الطبعة', {required: true}),
     ...bilingual('summary', 'ملخص قصير', {type: 'text', rows: 3, max: 600}),
     ...bilingual('intro', 'مقدمة الصفحة التفصيلية', {type: 'text', rows: 3, max: 800}),
-    imageField('logo', 'شعار/ملصق النسخة'),
+    imageField('logo', 'شعار/ملصق الطبعة'),
     defineField({
       name: 'stats', title: 'الإحصائيات', type: 'array',
       of: [defineArrayMember({

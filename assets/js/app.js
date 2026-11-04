@@ -368,7 +368,7 @@
     const a = DATA.about || {}, root = byId('about-root'); if (!root) return;
     const pim = safeImg(a.preambleImage, 1000);
     const eds = a.editionsTable || [], objs = a.objectives || [], aud = a.audience || [];
-    const intro = t(a, 'aboutIntro'), pre = t(a, 'preamble'), imp = t(a, 'importance'), q = t(a, 'problemQuestion'), pi = t(a, 'problemIntro');
+    const intro = t(a, 'aboutIntro'), pre = t(a, 'preamble'), q = t(a, 'problemQuestion'), pi = t(a, 'problemIntro');
     const out = [];
     if (intro || eds.length) out.push(`<section class="${CARD}">${secHead(L('نبذة', 'Overview'), L('نبذة عن المؤتمر', 'About the Conference'))}
       <div class="grid grid-cols-1 ${eds.length ? 'lg:grid-cols-5' : ''} gap-10">
@@ -380,7 +380,6 @@
     if (pre) out.push(`<section class="${CARD}">${secHead(L('الديباجة', 'Preamble'), t(a, 'preambleTitle') || L('ديباجة المؤتمر', 'Conference Preamble'))}
       <div class="flex flex-col lg:flex-row gap-10 items-start"><div class="${pim ? 'lg:w-7/12' : 'w-full'} space-y-5">${paras(pre, 'text-gray-600 leading-loose text-lg text-justify-custom')}</div>
       ${pim ? `<div class="lg:w-5/12 w-full"><img src="${esc(pim)}" alt="" class="w-full h-[360px] object-cover rounded-2xl border border-gray-100"></div>` : ''}</div></section>`);
-    if (imp) out.push(`<section class="${CARD}">${secHead(L('أهمية', 'Importance'), L('أهمية المؤتمر', 'Conference Importance'))}<div class="space-y-5">${paras(imp, 'text-gray-600 leading-loose text-lg text-justify-custom')}</div></section>`);
     if (q) out.push(`<section class="bg-primary text-white rounded-3xl p-8 md:p-14 relative overflow-hidden"><div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
       <div class="max-w-4xl mx-auto text-center"><span class="text-accent font-bold text-sm">${L('الإشكالية', 'Problem Statement')}</span><h3 class="text-3xl md:text-4xl font-black mt-1 mb-6">${L('إشكالية المؤتمر', 'Conference Problem Statement')}</h3>
       ${pi ? `<p class="text-gray-300 leading-relaxed text-lg mb-6">${esc(pi)}</p>` : ''}<p class="text-2xl md:text-3xl font-black leading-relaxed">${esc(q)}</p></div></section>`);
@@ -406,7 +405,7 @@
           <div class="lg:col-span-8 p-8">${desc ? `<p class="text-gray-500 leading-relaxed mb-4">${esc(desc)}</p>` : ''}
             ${pts.length ? `<ul class="space-y-3">${pts.map((p) => `<li class="flex gap-3 text-gray-600 leading-relaxed"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span><span>${esc(t(p, 'text'))}</span></li>`).join('')}</ul>` : ''}</div></article>`;
       }).join('') : emptyBox(EMPTY())}
-      ${note ? `<div class="rounded-2xl border-2 border-dashed border-accent/40 bg-accent/5 p-6 text-center text-primary font-bold leading-relaxed">${esc(note)}</div>` : ''}</div>`;
+      ${note ? `<aside class="relative rounded-3xl bg-primary text-white p-8 md:p-10 overflow-hidden"><div class="absolute inset-y-0 rtl:right-0 ltr:left-0 w-1.5 bg-accent"></div><p class="text-lg md:text-xl font-bold leading-loose text-center max-w-4xl mx-auto">${esc(note)}</p></aside>` : ''}</div>`;
   }
 
   // ---------- تاريخ المؤتمر ----------
@@ -415,7 +414,7 @@
     const eds = arr('editions');
     root.innerHTML = `<div class="max-w-5xl mx-auto">
       <div class="mb-10"><span class="text-accent font-bold text-sm">${L('الأرشيف', 'Archive')}</span>
-        <h3 class="text-3xl md:text-5xl font-black text-primary mt-1">${L('النسخ السابقة للمؤتمر', 'Previous Editions')}</h3>
+        <h3 class="text-3xl md:text-5xl font-black text-primary mt-1">${L('الطبعات السابقة للمؤتمر', 'Previous Editions')}</h3>
         <div class="w-16 h-1 bg-accent mt-4 rounded-full"></div>
         <p class="text-gray-600 text-lg mt-5 max-w-3xl leading-relaxed">${L('محطات المؤتمر السابقة وما حققته من إسهامات علمية وتوصيات.', 'Milestones of past editions, with their scientific contributions and recommendations.')}</p></div>
       <div class="bg-white rounded-3xl border border-gray-100 shadow-sm divide-y divide-gray-100">${eds.length ? eds.map((e) => {
@@ -426,7 +425,7 @@
           <div class="${logo ? 'md:col-span-7' : 'md:col-span-9'}"><h4 class="text-2xl font-black text-primary leading-snug mb-3">${esc(t(e, 'title'))}</h4>
             <p class="text-gray-500 leading-relaxed mb-4">${esc(t(e, 'summary'))}</p>
             ${st.length ? `<p class="flex flex-wrap gap-x-6 gap-y-1 text-sm text-gray-500 mb-4">${st.map((s) => `<span><b class="text-primary font-black" dir="ltr">${esc(s.value)}</b> ${esc(t(s, 'label'))}</span>`).join('')}</p>` : ''}
-            <span class="inline-flex items-center gap-2 text-secondary font-black group-hover:gap-3 transition-all">${L('تفاصيل النسخة', 'Edition details')} <span aria-hidden="true">${lang === 'ar' ? '←' : '→'}</span></span></div>
+            <span class="inline-flex items-center gap-2 text-secondary font-black group-hover:gap-3 transition-all">${L('تفاصيل الطبعة', 'Edition details')} <span aria-hidden="true">${lang === 'ar' ? '←' : '→'}</span></span></div>
           ${logo ? `<div class="md:col-span-2 flex justify-center"><img src="${esc(logo)}" alt="${esc(t(e, 'title'))}" loading="lazy" class="w-32 h-32 object-contain"></div>` : ''}</a>`;
       }).join('') : emptyBox(EMPTY())}</div></div>`;
   }
@@ -435,7 +434,7 @@
   function renderEdition(year) {
     const root = byId('edition-root'); if (!root) return;
     const e = arr('editions').find((x) => String(x.editionYear) === String(year));
-    if (!e) { root.innerHTML = emptyBox(L('النسخة غير موجودة.', 'Edition not found.')); return; }
+    if (!e) { root.innerHTML = emptyBox(L('الطبعة غير موجودة.', 'Edition not found.')); return; }
     const logo = safeImg(e.logoUrl, 500), pdf = safeFile(e.programPdfUrl);
     const vid = youtubeId(lang === 'ar' ? e.videoUrl_ar || e.videoUrl_en : e.videoUrl_en || e.videoUrl_ar);
     const photos = [...(e.gallery || []).map((g) => ({url: g.url, cap: t(g, 'caption')})), ...(e.legacyImages || []).filter(Boolean).map((u) => ({url: u, cap: ''}))]
@@ -443,7 +442,7 @@
     const recs = t(e, 'recommendations'), stats = (e.stats || []).slice(0, 6);
     const pillars = [[L('التميز العلمي', 'Scientific Excellence'), t(e, 'excellence')], [L('محاور النقاش', 'Key Topics'), t(e, 'topics')], [L('إنجاز وطموح', 'Achievement'), t(e, 'achievement')]].filter((p) => p[1]);
     root.innerHTML = `<div class="max-w-6xl mx-auto space-y-10">
-      <a href="#history" class="inline-flex items-center gap-2 text-gray-500 hover:text-primary font-bold transition-colors"><span aria-hidden="true">${lang === 'ar' ? '→' : '←'}</span> ${L('كل النسخ السابقة', 'All editions')}</a>
+      <a href="#history" class="inline-flex items-center gap-2 text-gray-500 hover:text-primary font-bold transition-colors"><span aria-hidden="true">${lang === 'ar' ? '→' : '←'}</span> ${L('كل الطبعات السابقة', 'All editions')}</a>
       <header class="bg-white rounded-3xl border border-gray-100 shadow-sm p-8 md:p-14 relative overflow-hidden">
         <span class="absolute -top-6 rtl:-left-2 ltr:-right-2 text-[9rem] md:text-[13rem] font-black text-primary/5 leading-none select-none" dir="ltr" aria-hidden="true">${esc(e.editionYear)}</span>
         <div class="relative flex flex-col md:flex-row gap-10 items-center">
@@ -455,7 +454,7 @@
       ${stats.length ? `<div class="grid grid-cols-2 ${STAT_COLS[Math.min(stats.length, 6)]} gap-px bg-gray-200 rounded-2xl overflow-hidden border border-gray-200">${stats.map((s) => `<div class="bg-white p-6 text-center"><b class="block text-4xl font-black text-primary mb-1" dir="ltr">${esc(s.value)}</b><span class="text-gray-500 font-bold text-sm">${esc(t(s, 'label'))}</span></div>`).join('')}</div>` : ''}
       ${pillars.length ? `<div class="grid grid-cols-1 md:grid-cols-3 gap-8">${pillars.map(([ttl, txt]) => `<div class="bg-white rounded-2xl border border-gray-100 border-t-4 border-t-accent p-8 shadow-sm"><h4 class="text-xl font-black text-primary mb-4">${esc(ttl)}</h4><p class="text-gray-600 leading-loose text-justify-custom pre-line">${esc(txt)}</p></div>`).join('')}</div>` : ''}
       <section class="bg-primary text-white rounded-3xl p-8 md:p-14 relative overflow-hidden"><div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
-        <span class="text-accent font-bold text-sm">${L(`النسخة ${esc(e.editionYear)}`, `Edition ${esc(e.editionYear)}`)}</span>
+        <span class="text-accent font-bold text-sm">${L(`الطبعة ${esc(e.editionYear)}`, `Edition ${esc(e.editionYear)}`)}</span>
         <h3 class="text-3xl font-black mt-1 mb-6">${L('توصيات المؤتمر', 'Conference Recommendations')}</h3>
         ${recs ? `<p class="text-gray-100 text-lg leading-loose pre-line">${esc(recs)}</p>` : `<p class="text-gray-300 text-lg leading-loose">${L('ستُنشر التوصيات والنتائج التي خلص إليها المؤتمر هنا قريباً.', 'The conference recommendations will be published here soon.')}</p>`}</section>
       <section class="bg-white rounded-3xl border border-gray-100 shadow-sm p-8 md:p-12">
@@ -641,7 +640,7 @@
   const ROUTES = ['home', 'news', 'about', 'history', 'topics', 'speakers', 'program', 'committees', 'submission', 'contact', 'venue', 'sponsors'];
   const ICONS = {news: 'fa-bullhorn', about: 'fa-info-circle', history: 'fa-landmark', edition: 'fa-calendar-check', topics: 'fa-project-diagram', speakers: 'fa-users', program: 'fa-calendar-alt', committees: 'fa-sitemap', submission: 'fa-upload', contact: 'fa-envelope', venue: 'fa-map-marker-alt', sponsors: 'fa-handshake'};
   const TITLES = () => ({
-    news: L('الإعلانات', 'Announcements'), about: L('حول المؤتمر', 'About Conference'), history: L('النسخ السابقة للمؤتمر', 'Previous Editions'),
+    news: L('الإعلانات', 'Announcements'), about: L('حول المؤتمر', 'About Conference'), history: L('الطبعات السابقة للمؤتمر', 'Previous Editions'),
     topics: L('محاور المؤتمر', 'Conference Tracks'), speakers: L('المتحدثون الرئيسيون', 'Keynote Speakers'), program: L('برنامج المؤتمر', 'Conference Program'),
     committees: L('لجان المؤتمر', 'Committees'), submission: L('المشاركة والنشر', 'Submission & Publication'), contact: L('اتصل بنا', 'Contact Us'),
     venue: L('مكان الانعقاد', 'Venue'), sponsors: L('الرعاة والشركاء', 'Sponsors & Partners'),
@@ -664,7 +663,7 @@
       $$('.detail-section').forEach((s) => s.classList.remove('active'));
       byId('detail-' + base).classList.add('active');
       let title = TITLES()[base];
-      if (edition) { renderEdition(edition); title = L(`تفاصيل نسخة ${edition}`, `${edition} Edition Details`); }
+      if (edition) { renderEdition(edition); title = L(`تفاصيل طبعة ${edition}`, `${edition} Edition Details`); }
       byId('subpage-title').textContent = title || '';
       byId('detail-breadcrumb').textContent = title || '';
       byId('subpage-icon').className = `fas ${ICONS[base] || 'fa-layer-group'}`;
