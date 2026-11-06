@@ -368,11 +368,12 @@
     const a = DATA.about || {}, root = byId('about-root'); if (!root) return;
     const pim = safeImg(a.preambleImage, 1000);
     const eds = a.editionsTable || [], objs = a.objectives || [], aud = a.audience || [];
+    const as = DATA.settings || {}, callPdf = safeFile(lang === 'ar' ? as.callPdfArUrl || as.callPdfEnUrl : as.callPdfEnUrl || as.callPdfArUrl);
     const intro = t(a, 'aboutIntro'), pre = t(a, 'preamble'), q = t(a, 'problemQuestion'), pi = t(a, 'problemIntro');
     const out = [];
     if (intro || eds.length) out.push(`<section class="${CARD}">${secHead(L('تعرّف علينا', 'Get to know us'), L('نبذة عن المؤتمر', 'About the Conference'))}
       <div class="grid grid-cols-1 ${eds.length ? 'lg:grid-cols-5' : ''} gap-10">
-        <div class="${eds.length ? 'lg:col-span-3' : ''} space-y-5">${paras(intro, 'text-gray-600 leading-loose text-lg text-justify-custom')}</div>
+        <div class="${eds.length ? 'lg:col-span-3' : ''} space-y-5">${paras(intro, 'text-gray-600 leading-loose text-lg text-justify-custom')}${callPdf ? `<a href="${esc(callPdf)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-2 bg-accent/10 hover:bg-accent text-primary hover:text-white border border-accent/40 font-bold text-sm py-2.5 px-5 rounded-full transition-colors"><i class="fas fa-file-pdf" aria-hidden="true"></i> ${L('تحميل إعلان المؤتمر (PDF)', 'Download the Call for Papers (PDF)')}</a>` : ''}</div>
         ${eds.length ? `<div class="lg:col-span-2"><div class="rounded-2xl border border-gray-200 overflow-hidden">
           <div class="bg-primary text-white px-5 py-3 font-bold text-sm grid grid-cols-6 gap-3"><span class="col-span-2">${L('الطبعة', 'Edition')}</span><span class="col-span-4">${L('الموضوع', 'Theme')}</span></div>
           ${eds.map((r) => `<div class="px-5 py-4 grid grid-cols-6 gap-3 items-start border-t border-gray-100"><span class="col-span-2 font-black text-primary text-sm">${esc(t(r, 'label'))}<span class="block text-accent font-bold" dir="ltr">${esc(r.year)}</span></span><span class="col-span-4 text-gray-600 text-sm leading-relaxed">${esc(t(r, 'topic'))}</span></div>`).join('')}
@@ -569,8 +570,7 @@
       <section class="bg-primary text-white rounded-3xl p-8 md:p-12 text-center relative overflow-hidden"><div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
         <h3 class="text-3xl font-black mb-4">${L('إرسال الورقة البحثية', 'Paper Submission')}</h3>
         <p class="text-gray-300 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">${esc(t(sub, 'platformNote'))}</p>
-        <div class="flex flex-wrap justify-center gap-4">${url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-secondary hover:bg-accent text-white font-black py-4 px-10 rounded-xl transition-colors text-lg">${L('تقديم الورقة عبر المنصة', 'Submit via the Platform')}</a>` : ''}
-          ${pdf ? `<a href="${esc(pdf)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 border-2 border-white/40 hover:bg-white hover:text-primary text-white font-black py-4 px-8 rounded-xl transition-colors text-lg"><i class="fas fa-file-pdf" aria-hidden="true"></i> ${L('تحميل إعلان المؤتمر (PDF)', 'Download the Call for Papers (PDF)')}</a>` : ''}</div></section>`;
+        <div class="flex flex-wrap justify-center gap-4">${url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-secondary hover:bg-accent text-white font-black py-4 px-10 rounded-xl transition-colors text-lg">${L('تقديم الورقة عبر المنصة', 'Submit via the Platform')}</a>` : ''}</div></section>`;
   }
 
   // ---------- الرعاة ----------
