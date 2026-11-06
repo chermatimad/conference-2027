@@ -42,15 +42,51 @@ const AR = {
   'د. Aranka Ignasiak-Szulc': 'د. أرانكا إغناسياك-شولتس', 'د. Davide Calandra': 'د. دافيدي كالاندرا', 'د. Kerstin Pezoldt': 'د. كيرستين بيزولدت',
   'د. Michał Buszko': 'د. ميشال بوشكو', 'د. Irfan Syauqi Beik': 'د. عرفان شوقي بيك', 'د. Sanaullah Ansari': 'د. ثناء الله أنصاري',
 }
+const EN = {
+  'بوقاعة زينب': 'Boukaa Zineb',
+  'لطرش ذهبية': 'Latrech Dahbia',
+  'بلعة جويدة': 'Bela Djouida',
+  'حرفوش سهام': 'Harfouche Siham',
+  'هباش فارس': 'Habbache Fares',
+  'بن عواق شرف الدين أمين': 'Benaouag Charaf Eddine Amine',
+  'زيات عادل': 'Ziat Adel',
+  'هواري عبد القادر': 'Houari Abdelkader',
+  'رقاد صليحة': 'Reggad Saliha',
+  'قطوش مريم': 'Guettouche Meriem',
+  'هادي صادق': 'Hadi Sadek',
+  'صحراوي إيمان': 'Sahraoui Imane',
+  'زيتوني هند': 'Zitouni Hind',
+  'قايدي خميسي': 'Kaidi Khemissi',
+  'سويسي عبد الوهاب': 'Souissi Abdelouahab',
+  'بلخباط جمال': 'Belkhabat Djamel',
+  'لعمارة حجو': 'Lamara Hadjou',
+  'ليماني وسيلة': 'Limani Wassila',
+  'بوشنقير إيمان': 'Bouchenguir Imane',
+  'بوراس نعيمة': 'Bouras Naima',
+  'عمروني حواء': 'Amrouni Hawa',
+  'باشا فضيلة': 'Bacha Fadila',
+  'دمدوم سمير': 'Demdoum Samir',
+  'داودي علي': 'Daoudi Ali',
+  'صبحي وداد': 'Sebhi Widad',
+  'محمد أسلم حنيف': 'Muhammad Aslam Haneef',
+  'أحمد بلوافي': 'Ahmed Belouafi',
+  'حرفوش أنيسة': 'Harfouche Anissa',
+  'خلفي رفيق': 'Khelfi Rafik',
+  'خواثرة سعيدة': 'Khouatra Saida',
+  'عماد شرماط': 'Imad Chermat',
+  'بن زيد يوسف': 'Benzid Youcef',
+  'بطوش أميمة': 'Batouche Oumaima'
+}
+const nameEn = (n) => { if (/[A-Za-z]/.test(n)) return n.replace(/^أ\.د\. /, 'Prof. ').replace(/^د\. /, 'Dr. '); const m = n.match(/^(أ\.د\. |د\. )(.*)$/); return m && EN[m[2]] ? (m[1] === 'د. ' ? 'Dr. ' : 'Prof. ') + EN[m[2]] : undefined }
 const latin = (n) => (/[A-Za-z]/.test(n) ? n.replace(/^أ\.د\. /, 'Prof. ').replace(/^د\. /, 'Dr. ') : undefined)
 
 const committees = [
   ...sci.map(([n, inst, ra, re], i) => doc('committee', `committee-sci-${String(i + 1).padStart(2, '0')}`, {
-    committeeType: 'scientific', order: i + 1, name_ar: AR[n] || n, name_en: latin(n),
+    committeeType: 'scientific', order: i + 1, name_ar: AR[n] || n, name_en: nameEn(n),
     role_ar: ra, role_en: re, institution_ar: inst, institution_en: INST[inst],
   })),
   ...org.map((n, i) => doc('committee', `committee-org-${String(i + 1).padStart(2, '0')}`, {
-    committeeType: 'organizing', order: 11 + i, name_ar: n, institution_ar: 'جامعة سطيف 1', institution_en: INST['جامعة سطيف 1'],
+    committeeType: 'organizing', order: 11 + i, name_ar: n, name_en: nameEn(n), institution_ar: 'جامعة سطيف 1', institution_en: INST['جامعة سطيف 1'],
   })),
 ]
 

@@ -482,6 +482,7 @@
    "committeeType": "scientific",
    "order": 1,
    "name_ar": "أ.د. بوقاعة زينب",
+   "name_en": "Prof. Boukaa Zineb",
    "role_ar": "رئيسة اللجنة العلمية",
    "role_en": "Chair of the Scientific Committee",
    "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
@@ -493,6 +494,7 @@
    "committeeType": "scientific",
    "order": 2,
    "name_ar": "أ.د. لطرش ذهبية",
+   "name_en": "Prof. Latrech Dahbia",
    "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
    "institution_en": "Ferhat Abbas University Setif 1, Algeria"
   },
@@ -502,6 +504,7 @@
    "committeeType": "scientific",
    "order": 3,
    "name_ar": "أ.د. بلعة جويدة",
+   "name_en": "Prof. Bela Djouida",
    "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
    "institution_en": "Ferhat Abbas University Setif 1, Algeria"
   },
@@ -511,6 +514,7 @@
    "committeeType": "scientific",
    "order": 4,
    "name_ar": "أ.د. حرفوش سهام",
+   "name_en": "Prof. Harfouche Siham",
    "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
    "institution_en": "Ferhat Abbas University Setif 1, Algeria"
   },
@@ -520,6 +524,7 @@
    "committeeType": "scientific",
    "order": 5,
    "name_ar": "أ.د. هباش فارس",
+   "name_en": "Prof. Habbache Fares",
    "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
    "institution_en": "Ferhat Abbas University Setif 1, Algeria"
   },
@@ -529,6 +534,7 @@
    "committeeType": "scientific",
    "order": 6,
    "name_ar": "أ.د. بن عواق شرف الدين أمين",
+   "name_en": "Prof. Benaouag Charaf Eddine Amine",
    "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
    "institution_en": "Ferhat Abbas University Setif 1, Algeria"
   },
@@ -538,6 +544,7 @@
    "committeeType": "scientific",
    "order": 7,
    "name_ar": "أ.د. زيات عادل",
+   "name_en": "Prof. Ziat Adel",
    "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
    "institution_en": "Ferhat Abbas University Setif 1, Algeria"
   },
@@ -547,6 +554,7 @@
    "committeeType": "scientific",
    "order": 8,
    "name_ar": "أ.د. هواري عبد القادر",
+   "name_en": "Prof. Houari Abdelkader",
    "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
    "institution_en": "Ferhat Abbas University Setif 1, Algeria"
   },
@@ -556,6 +564,7 @@
    "committeeType": "scientific",
    "order": 9,
    "name_ar": "أ.د. رقاد صليحة",
+   "name_en": "Prof. Reggad Saliha",
    "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
    "institution_en": "Ferhat Abbas University Setif 1, Algeria"
   },
@@ -565,6 +574,7 @@
    "committeeType": "scientific",
    "order": 10,
    "name_ar": "أ.د. قطوش مريم",
+   "name_en": "Prof. Guettouche Meriem",
    "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
    "institution_en": "Ferhat Abbas University Setif 1, Algeria"
   },
@@ -574,6 +584,7 @@
    "committeeType": "scientific",
    "order": 11,
    "name_ar": "د. هادي صادق",
+   "name_en": "Dr. Hadi Sadek",
    "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
    "institution_en": "Ferhat Abbas University Setif 1, Algeria"
   },
@@ -583,6 +594,7 @@
    "committeeType": "scientific",
    "order": 12,
    "name_ar": "د. صحراوي إيمان",
+   "name_en": "Dr. Sahraoui Imane",
    "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
    "institution_en": "Ferhat Abbas University Setif 1, Algeria"
   },
@@ -592,6 +604,7 @@
    "committeeType": "scientific",
    "order": 13,
    "name_ar": "د. زيتوني هند",
+   "name_en": "Dr. Zitouni Hind",
    "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
    "institution_en": "Ferhat Abbas University Setif 1, Algeria"
   },
@@ -601,6 +614,7 @@
    "committeeType": "scientific",
    "order": 14,
    "name_ar": "أ.د. قايدي خميسي",
+   "name_en": "Prof. Kaidi Khemissi",
    "institution_ar": "جامعة برج بوعريريج، الجزائر",
    "institution_en": "University of Bordj Bou Arreridj, Algeria"
   },
@@ -610,6 +624,7 @@
    "committeeType": "scientific",
    "order": 15,
    "name_ar": "أ.د. سويسي عبد الوهاب",
+   "name_en": "Prof. Souissi Abdelouahab",
    "institution_ar": "جامعة الجزائر 3، الجزائر",
    "institution_en": "University of Algiers 3, Algeria"
   },
@@ -619,6 +634,7 @@
    "committeeType": "scientific",
    "order": 16,
    "name_ar": "أ.د. بلخباط جمال",
+   "name_en": "Prof. Belkhabat Djamel",
    "institution_ar": "جامعة باتنة 1، الجزائر",
    "institution_en": "University of Batna 1, Algeria"
   },
@@ -628,6 +644,7 @@
    "committeeType": "scientific",
    "order": 17,
    "name_ar": "أ.د. لعمارة حجو",
+   "name_en": "Prof. Lamara Hadjou",
    "institution_ar": "جامعة تيزي وزو، الجزائر",
    "institution_en": "University of Tizi Ouzou, Algeria"
   },
@@ -637,6 +654,7 @@
    "committeeType": "scientific",
    "order": 18,
    "name_ar": "أ.د. ليماني وسيلة",
+   "name_en": "Prof. Limani Wassila",
    "institution_ar": "المعهد الوطني الجزائري للبحث الزراعي (INRAA)، الجزائر",
    "institution_en": "National Institute of Agronomic Research (INRAA), Algeria"
   },
@@ -646,6 +664,7 @@
    "committeeType": "scientific",
    "order": 19,
    "name_ar": "أ.د. بوشنقير إيمان",
+   "name_en": "Prof. Bouchenguir Imane",
    "institution_ar": "جامعة عنابة، الجزائر",
    "institution_en": "University of Annaba, Algeria"
   },
@@ -655,6 +674,7 @@
    "committeeType": "scientific",
    "order": 20,
    "name_ar": "د. بوراس نعيمة",
+   "name_en": "Dr. Bouras Naima",
    "institution_ar": "وزارة الفلاحة والتنمية الريفية والصيد البحري، الجزائر",
    "institution_en": "Ministry of Agriculture, Rural Development and Fisheries, Algeria"
   },
@@ -664,6 +684,7 @@
    "committeeType": "scientific",
    "order": 21,
    "name_ar": "د. عمروني حواء",
+   "name_en": "Dr. Amrouni Hawa",
    "institution_ar": "المعهد الوطني الجزائري للبحث الزراعي (INRAA)، الجزائر",
    "institution_en": "National Institute of Agronomic Research (INRAA), Algeria"
   },
@@ -673,6 +694,7 @@
    "committeeType": "scientific",
    "order": 22,
    "name_ar": "أ.د. باشا فضيلة",
+   "name_en": "Prof. Bacha Fadila",
    "institution_ar": "المعهد الوطني الجزائري للبحث الزراعي (INRAA)، الجزائر",
    "institution_en": "National Institute of Agronomic Research (INRAA), Algeria"
   },
@@ -682,6 +704,7 @@
    "committeeType": "scientific",
    "order": 23,
    "name_ar": "د. دمدوم سمير",
+   "name_en": "Dr. Demdoum Samir",
    "institution_ar": "منظمة الأغذية والزراعة للأمم المتحدة (FAO)، مكتب الجزائر",
    "institution_en": "Food and Agriculture Organization of the UN (FAO), Algeria Office"
   },
@@ -691,6 +714,7 @@
    "committeeType": "scientific",
    "order": 24,
    "name_ar": "د. داودي علي",
+   "name_en": "Dr. Daoudi Ali",
    "institution_ar": "المدرسة الوطنية العليا للفلاحة، الجزائر",
    "institution_en": "National Higher School of Agronomy, Algeria"
   },
@@ -700,6 +724,7 @@
    "committeeType": "scientific",
    "order": 25,
    "name_ar": "أ.د. صبحي وداد",
+   "name_en": "Prof. Sebhi Widad",
    "institution_ar": "جامعة سطيف 1 / مركز البحث في البيوتكنولوجيا (CRBt) قسنطينة، الجزائر",
    "institution_en": "Setif 1 University / Biotechnology Research Center (CRBt) Constantine, Algeria"
   },
@@ -749,6 +774,7 @@
    "committeeType": "scientific",
    "order": 30,
    "name_ar": "أ.د. محمد أسلم حنيف",
+   "name_en": "Prof. Muhammad Aslam Haneef",
    "institution_ar": "الجامعة الإسلامية العالمية، ماليزيا",
    "institution_en": "International Islamic University Malaysia"
   },
@@ -758,6 +784,7 @@
    "committeeType": "scientific",
    "order": 31,
    "name_ar": "أ.د. أحمد بلوافي",
+   "name_en": "Prof. Ahmed Belouafi",
    "institution_ar": "جامعة الملك عبد العزيز، جدة، المملكة العربية السعودية",
    "institution_en": "King Abdulaziz University, Jeddah, Saudi Arabia"
   },
@@ -787,6 +814,7 @@
    "committeeType": "organizing",
    "order": 11,
    "name_ar": "د. حرفوش أنيسة",
+   "name_en": "Dr. Harfouche Anissa",
    "institution_ar": "جامعة سطيف 1",
    "institution_en": "Setif 1 University"
   },
@@ -796,6 +824,7 @@
    "committeeType": "organizing",
    "order": 12,
    "name_ar": "د. خلفي رفيق",
+   "name_en": "Dr. Khelfi Rafik",
    "institution_ar": "جامعة سطيف 1",
    "institution_en": "Setif 1 University"
   },
@@ -805,6 +834,7 @@
    "committeeType": "organizing",
    "order": 13,
    "name_ar": "د. خواثرة سعيدة",
+   "name_en": "Dr. Khouatra Saida",
    "institution_ar": "جامعة سطيف 1",
    "institution_en": "Setif 1 University"
   },
@@ -814,6 +844,7 @@
    "committeeType": "organizing",
    "order": 14,
    "name_ar": "د. عماد شرماط",
+   "name_en": "Dr. Imad Chermat",
    "institution_ar": "جامعة سطيف 1",
    "institution_en": "Setif 1 University"
   },
@@ -823,6 +854,7 @@
    "committeeType": "organizing",
    "order": 15,
    "name_ar": "د. بن زيد يوسف",
+   "name_en": "Dr. Benzid Youcef",
    "institution_ar": "جامعة سطيف 1",
    "institution_en": "Setif 1 University"
   },
@@ -832,6 +864,7 @@
    "committeeType": "organizing",
    "order": 16,
    "name_ar": "د. بطوش أميمة",
+   "name_en": "Dr. Batouche Oumaima",
    "institution_ar": "جامعة سطيف 1",
    "institution_en": "Setif 1 University"
   }

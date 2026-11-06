@@ -557,7 +557,6 @@
     const list = (items) => `<ul class="space-y-3">${items.map((g) => `<li class="flex gap-3 text-gray-600 leading-relaxed">${dot}<span>${esc(t(g, 'text'))}</span></li>`).join('')}</ul>`;
     const last = dates.length - 1;
     root.innerHTML = `
-      ${pdf ? `<a href="${esc(pdf)}" target="_blank" rel="noopener noreferrer" class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-accent/10 border border-accent/30 hover:bg-accent/20 rounded-2xl p-6 transition-colors"><span class="text-primary font-black text-lg">${L('تحميل إعلان المؤتمر (PDF)', 'Download the Call for Papers (PDF)')}</span><span class="bg-primary text-white font-bold px-6 py-2.5 rounded-xl">${L('تحميل', 'Download')}</span></a>` : ''}
       <section id="sub-dates" class="${CARD} scroll-mt-24">${secHead(L('سجّلها في أجندتك', 'Mark your calendar'), L('تواريخ مهمة', 'Important Dates'))}
         ${dates.length ? `<ol class="rounded-2xl border border-gray-200 overflow-hidden">${dates.map((d, i) => `<li class="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-4 px-6 py-4 items-center ${i ? 'border-t border-gray-100' : ''} ${i === last ? 'bg-primary text-white' : i % 2 ? 'bg-bgLight' : 'bg-white'}"><span class="sm:col-span-7 font-bold">${esc(t(d, 'title'))}</span><span class="sm:col-span-5 font-black ${i === last ? 'text-accent' : 'text-primary'}" dir="auto">${esc(t(d, 'dateLabel') || fmtDate(d.date, {day: '2-digit', month: lang === 'ar' ? 'long' : 'short', year: 'numeric'}))}</span></li>`).join('')}</ol>` : emptyBox(EMPTY())}
         ${dnote ? `<p class="mt-5 text-sm font-bold text-red-700 bg-red-50 border border-red-100 rounded-xl px-5 py-3">${esc(dnote)}</p>` : ''}</section>
@@ -570,7 +569,8 @@
       <section class="bg-primary text-white rounded-3xl p-8 md:p-12 text-center relative overflow-hidden"><div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
         <h3 class="text-3xl font-black mb-4">${L('إرسال الورقة البحثية', 'Paper Submission')}</h3>
         <p class="text-gray-300 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">${esc(t(sub, 'platformNote'))}</p>
-        ${url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-secondary hover:bg-accent text-white font-black py-4 px-10 rounded-xl transition-colors text-lg">${L('تقديم الورقة عبر المنصة', 'Submit via the Platform')}</a>` : ''}</section>`;
+        <div class="flex flex-wrap justify-center gap-4">${url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-secondary hover:bg-accent text-white font-black py-4 px-10 rounded-xl transition-colors text-lg">${L('تقديم الورقة عبر المنصة', 'Submit via the Platform')}</a>` : ''}
+          ${pdf ? `<a href="${esc(pdf)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 border-2 border-white/40 hover:bg-white hover:text-primary text-white font-black py-4 px-8 rounded-xl transition-colors text-lg"><i class="fas fa-file-pdf" aria-hidden="true"></i> ${L('تحميل إعلان المؤتمر (PDF)', 'Download the Call for Papers (PDF)')}</a>` : ''}</div></section>`;
   }
 
   // ---------- الرعاة ----------
