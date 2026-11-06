@@ -105,6 +105,8 @@ export const siteSettings = defineType({
     {...imageField('shareImage', 'صورة المشاركة (Open Graph)'), group: 'footer'},
     defineField({name: 'callPdfAr', title: 'ملف إعلان المؤتمر PDF (النسخة العربية) — يُحمَّل من الموقع', type: 'file', group: 'event', options: {accept: '.pdf'}}),
     defineField({name: 'callPdfEn', title: 'ملف إعلان المؤتمر PDF (النسخة الإنجليزية)', type: 'file', group: 'event', options: {accept: '.pdf'}}),
+    defineField({name: 'programPdfAr', title: 'ملف برنامج المؤتمر PDF (النسخة العربية) — يظهر في صفحة البرنامج', type: 'file', group: 'event', options: {accept: '.pdf'}}),
+    defineField({name: 'programPdfEn', title: 'ملف برنامج المؤتمر PDF (النسخة الإنجليزية)', type: 'file', group: 'event', options: {accept: '.pdf'}}),
     defineField({
       name: 'iconStyle',
       title: 'مربعات الأيقونات الزخرفية في الموقع',

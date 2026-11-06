@@ -38,11 +38,15 @@ const sci = [
   ['أ.د. أحمد بلوافي', 'جامعة الملك عبد العزيز، جدة، المملكة العربية السعودية'], ['د. Irfan Syauqi Beik', 'جامعة IPB، بوغور، إندونيسيا'], ['د. Sanaullah Ansari', 'جامعة SZABIST، إسلام آباد، باكستان'],
 ]
 const org = ['د. حرفوش أنيسة', 'د. خلفي رفيق', 'د. خواثرة سعيدة', 'د. عماد شرماط', 'د. بن زيد يوسف', 'د. بطوش أميمة']
-const latin = (n) => (/[A-Za-z]/.test(n) ? n : undefined)
+const AR = {
+  'د. Aranka Ignasiak-Szulc': 'د. أرانكا إغناسياك-شولتس', 'د. Davide Calandra': 'د. دافيدي كالاندرا', 'د. Kerstin Pezoldt': 'د. كيرستين بيزولدت',
+  'د. Michał Buszko': 'د. ميشال بوشكو', 'د. Irfan Syauqi Beik': 'د. عرفان شوقي بيك', 'د. Sanaullah Ansari': 'د. ثناء الله أنصاري',
+}
+const latin = (n) => (/[A-Za-z]/.test(n) ? n.replace(/^أ\.د\. /, 'Prof. ').replace(/^د\. /, 'Dr. ') : undefined)
 
 const committees = [
   ...sci.map(([n, inst, ra, re], i) => doc('committee', `committee-sci-${String(i + 1).padStart(2, '0')}`, {
-    committeeType: 'scientific', order: i + 1, name_ar: n, name_en: latin(n),
+    committeeType: 'scientific', order: i + 1, name_ar: AR[n] || n, name_en: latin(n),
     role_ar: ra, role_en: re, institution_ar: inst, institution_en: INST[inst],
   })),
   ...org.map((n, i) => doc('committee', `committee-org-${String(i + 1).padStart(2, '0')}`, {

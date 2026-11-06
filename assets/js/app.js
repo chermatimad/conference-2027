@@ -118,7 +118,7 @@
   // ---------- جلب البيانات ----------
   const img = (f) => `"${f}": ${f}.asset->url`;
   const QUERY = `{
-    "settings": *[_id == "siteSettings"][0]{ ..., ${img('facultyLogoAr')}, ${img('facultyLogoEn')}, ${img('conferenceLogo')}, ${img('conferenceLogoAr')}, ${img('conferenceLogoEn')}, ${img('universityLogoAr')}, ${img('universityLogoEn')}, ${img('footerUnivLogoAr')}, ${img('footerUnivLogoEn')}, ${img('footerFacultyLogoAr')}, ${img('footerFacultyLogoEn')}, ${img('footerConfLogoAr')}, ${img('footerConfLogoEn')}, ${img('heroBackground')}, ${img('shareImage')}, "callPdfArUrl": callPdfAr.asset->url, "callPdfEnUrl": callPdfEn.asset->url },
+    "settings": *[_id == "siteSettings"][0]{ ..., ${img('facultyLogoAr')}, ${img('facultyLogoEn')}, ${img('conferenceLogo')}, ${img('conferenceLogoAr')}, ${img('conferenceLogoEn')}, ${img('universityLogoAr')}, ${img('universityLogoEn')}, ${img('footerUnivLogoAr')}, ${img('footerUnivLogoEn')}, ${img('footerFacultyLogoAr')}, ${img('footerFacultyLogoEn')}, ${img('footerConfLogoAr')}, ${img('footerConfLogoEn')}, ${img('heroBackground')}, ${img('shareImage')}, "callPdfArUrl": callPdfAr.asset->url, "callPdfEnUrl": callPdfEn.asset->url, "programPdfArUrl": programPdfAr.asset->url, "programPdfEnUrl": programPdfEn.asset->url },
     "home": *[_id == "homePage"][0]{ ..., ${img('welcomeImage')}, ${img('welcomeImage2')} },
     "about": *[_id == "aboutPage"][0]{ ..., ${img('preambleImage')} },
     "submission": *[_id == "submissionPage"][0]{ ..., "templateUrl": templateFile.asset->url, "templateArUrl": templateFileAr.asset->url, "templateEnUrl": templateFileEn.asset->url },
@@ -370,22 +370,22 @@
     const eds = a.editionsTable || [], objs = a.objectives || [], aud = a.audience || [];
     const intro = t(a, 'aboutIntro'), pre = t(a, 'preamble'), q = t(a, 'problemQuestion'), pi = t(a, 'problemIntro');
     const out = [];
-    if (intro || eds.length) out.push(`<section class="${CARD}">${secHead(L('نبذة', 'Overview'), L('نبذة عن المؤتمر', 'About the Conference'))}
+    if (intro || eds.length) out.push(`<section class="${CARD}">${secHead(L('تعرّف علينا', 'Get to know us'), L('نبذة عن المؤتمر', 'About the Conference'))}
       <div class="grid grid-cols-1 ${eds.length ? 'lg:grid-cols-5' : ''} gap-10">
         <div class="${eds.length ? 'lg:col-span-3' : ''} space-y-5">${paras(intro, 'text-gray-600 leading-loose text-lg text-justify-custom')}</div>
         ${eds.length ? `<div class="lg:col-span-2"><div class="rounded-2xl border border-gray-200 overflow-hidden">
           <div class="bg-primary text-white px-5 py-3 font-bold text-sm grid grid-cols-6 gap-3"><span class="col-span-2">${L('الطبعة', 'Edition')}</span><span class="col-span-4">${L('الموضوع', 'Theme')}</span></div>
           ${eds.map((r) => `<div class="px-5 py-4 grid grid-cols-6 gap-3 items-start border-t border-gray-100"><span class="col-span-2 font-black text-primary text-sm">${esc(t(r, 'label'))}<span class="block text-accent font-bold" dir="ltr">${esc(r.year)}</span></span><span class="col-span-4 text-gray-600 text-sm leading-relaxed">${esc(t(r, 'topic'))}</span></div>`).join('')}
         </div></div>` : ''}</div></section>`);
-    if (pre) out.push(`<section class="${CARD}">${secHead(L('الديباجة', 'Preamble'), t(a, 'preambleTitle') || L('ديباجة المؤتمر', 'Conference Preamble'))}
+    if (pre) out.push(`<section class="${CARD}">${secHead(L('السياق والرؤية', 'Context & vision'), t(a, 'preambleTitle') || L('ديباجة المؤتمر', 'Conference Preamble'))}
       <div class="flex flex-col lg:flex-row gap-10 items-start"><div class="${pim ? 'lg:w-7/12' : 'w-full'} space-y-5">${paras(pre, 'text-gray-600 leading-loose text-lg text-justify-custom')}</div>
       ${pim ? `<div class="lg:w-5/12 w-full"><img src="${esc(pim)}" alt="" class="w-full h-[360px] object-cover rounded-2xl border border-gray-100"></div>` : ''}</div></section>`);
     if (q) out.push(`<section class="bg-primary text-white rounded-3xl p-8 md:p-14 relative overflow-hidden"><div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
-      <div class="max-w-4xl mx-auto text-center"><span class="text-accent font-bold text-sm">${L('الإشكالية', 'Problem Statement')}</span><h3 class="text-3xl md:text-4xl font-black mt-1 mb-6">${L('إشكالية المؤتمر', 'Conference Problem Statement')}</h3>
+      <div class="max-w-4xl mx-auto text-center"><span class="text-accent font-bold text-sm">${L('السؤال المحوري', 'The central question')}</span><h3 class="text-3xl md:text-4xl font-black mt-1 mb-6">${L('إشكالية المؤتمر', 'Conference Problem Statement')}</h3>
       ${pi ? `<p class="text-gray-300 leading-relaxed text-lg mb-6">${esc(pi)}</p>` : ''}<p class="text-2xl md:text-3xl font-black leading-relaxed">${esc(q)}</p></div></section>`);
-    if (objs.length) out.push(`<section class="${CARD}">${secHead(L('الأهداف', 'Objectives'), L('أهداف المؤتمر', 'Conference Objectives'))}
+    if (objs.length) out.push(`<section class="${CARD}">${secHead(L('ما نسعى إليه', 'What we aim for'), L('أهداف المؤتمر', 'Conference Objectives'))}
       <ol class="grid grid-cols-1 md:grid-cols-2 md:gap-x-14">${objs.map((o, i) => `<li class="flex gap-4 py-5 border-b border-gray-100"><span class="text-accent font-black text-3xl leading-none w-9 shrink-0" dir="ltr">${i + 1}</span><div>${t(o, 'title') ? `<h4 class="font-black text-primary mb-1">${esc(t(o, 'title'))}</h4>` : ''}<p class="text-gray-600 leading-relaxed">${esc(t(o, 'text'))}</p></div></li>`).join('')}</ol></section>`);
-    if (aud.length) out.push(`<section class="${CARD}">${secHead(L('الفئات المستهدفة', 'Audience'), L('الفئات المعنية بالمؤتمر', 'Who Should Participate'))}
+    if (aud.length) out.push(`<section class="${CARD}">${secHead(L('من نخاطب', 'Who we address'), L('الفئات المعنية بالمؤتمر', 'Who Should Participate'))}
       <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">${aud.map((x) => `<li class="p-5 rounded-2xl bg-bgLight border border-gray-100 border-0 rtl:border-r-4 ltr:border-l-4 border-accent text-gray-700 leading-relaxed font-semibold">${esc(t(x, 'text'))}</li>`).join('')}</ul></section>`);
     root.innerHTML = out.length ? out.join('') : emptyBox(EMPTY());
   }
@@ -394,18 +394,22 @@
   function renderTopics() {
     const root = byId('topics-root'), tr = arr('tracks'); if (!root) return;
     const a = DATA.about || {}, intro = t(a, 'tracksIntro'), note = t(a, 'tracksNote');
-    root.innerHTML = `<div class="max-w-6xl mx-auto space-y-6">
-      ${intro ? `<p class="text-gray-600 text-lg leading-loose bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm text-justify-custom">${esc(intro)}</p>` : ''}
-      ${tr.length ? tr.map((x, i) => {
+    const BAR = {primary: 'bg-primary', secondary: 'bg-secondary', accent: 'bg-accent', blue: 'bg-blue-500', gray: 'bg-gray-700', purple: 'bg-purple-600'};
+    root.innerHTML = `<div class="max-w-6xl mx-auto">
+      ${intro ? `<p class="text-gray-600 text-lg leading-loose text-center max-w-3xl mx-auto mb-10">${esc(intro)}</p>` : ''}
+      ${tr.length ? `<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 items-start">${tr.map((x, i) => {
         const c = TRACK_COLOR[x.color] || TRACK_COLOR.primary, pts = x.topics || [], desc = t(x, 'description');
-        return `<article class="rise bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all overflow-hidden grid grid-cols-1 lg:grid-cols-12">
-          <header class="lg:col-span-4 p-8 ${c.box}"><div class="ico-tile w-14 h-14 bg-white/70 rounded-2xl flex items-center justify-center text-2xl mb-4 ${c.text}"><i class="${TRACK_ICON[x.icon] ? 'fas ' + TRACK_ICON[x.icon] : faIcon(x.icon, 'fas fa-shield-alt')}" aria-hidden="true"></i></div><span class="${c.text} font-black text-sm">${esc(t(x, 'kicker') || L(`المحور ${x.order ?? i + 1}`, `Track ${x.order ?? i + 1}`))}</span>
-            <h3 class="text-xl md:text-2xl font-black text-primary mt-2 leading-snug">${esc(t(x, 'title'))}</h3>
-            </header>
-          <div class="lg:col-span-8 p-8">${desc ? `<p class="text-gray-500 leading-relaxed mb-4">${esc(desc)}</p>` : ''}
-            ${pts.length ? `<ul class="space-y-3">${pts.map((p) => `<li class="flex gap-3 text-gray-600 leading-relaxed"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span><span>${esc(t(p, 'text'))}</span></li>`).join('')}</ul>` : ''}</div></article>`;
-      }).join('') : emptyBox(EMPTY())}
-      ${note ? `<aside class="relative rounded-3xl bg-primary text-white p-8 md:p-10 overflow-hidden"><div class="absolute inset-y-0 rtl:right-0 ltr:left-0 w-1.5 bg-accent"></div><p class="text-lg md:text-xl font-bold leading-loose text-center max-w-4xl mx-auto">${esc(note)}</p></aside>` : ''}</div>`;
+        return `<article class="rise group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+          <div class="h-1.5 ${BAR[x.color] || 'bg-primary'} group-hover:h-2.5 transition-all"></div>
+          <div class="p-6">
+            <span class="inline-block ${c.box} font-black text-xs px-3 py-1 rounded-full mb-3">${esc(t(x, 'kicker') || L(`المحور ${x.order ?? i + 1}`, `Track ${x.order ?? i + 1}`))}</span>
+            <h3 class="text-lg font-black text-primary leading-snug">${esc(t(x, 'title'))}</h3>
+            ${desc ? `<p class="text-gray-500 text-sm leading-relaxed mt-2">${esc(desc)}</p>` : ''}
+            ${pts.length ? `<button type="button" data-action="track-toggle" aria-expanded="false" class="mt-5 w-full flex items-center justify-between gap-3 text-sm font-bold ${c.text} hover:opacity-80 transition-opacity"><span>${L(`المحاور الفرعية (${pts.length})`, `Sub-topics (${pts.length})`)}</span><span class="track-chev inline-block transition-transform duration-300" aria-hidden="true">▾</span></button>
+            <ul class="track-pts hidden mt-4 space-y-3 border-t border-gray-100 pt-4">${pts.map((p) => `<li class="flex gap-3 text-gray-600 text-sm leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full ${BAR[x.color] || 'bg-primary'} shrink-0" aria-hidden="true"></span><span>${esc(t(p, 'text'))}</span></li>`).join('')}</ul>` : ''}
+          </div></article>`;
+      }).join('')}</div>` : emptyBox(EMPTY())}
+      ${note ? `<aside class="relative mt-10 rounded-3xl bg-primary text-white p-8 md:p-10 overflow-hidden"><div class="absolute inset-y-0 rtl:right-0 ltr:left-0 w-1.5 bg-accent"></div><p class="text-lg md:text-xl font-bold leading-loose text-center max-w-4xl mx-auto">${esc(note)}</p></aside>` : ''}</div>`;
   }
 
   // ---------- تاريخ المؤتمر ----------
@@ -482,6 +486,7 @@
     const grid = (type, color, id) => {
       const box = byId(id); if (!box) return;
       const ms = all.filter((c) => c.committeeType === type), c = COM_COLOR[color];
+      const defRole = type === 'scientific' ? L('عضو اللجنة العلمية', 'Scientific Committee Member') : L('عضو اللجنة التنظيمية', 'Organizing Committee Member');
       if (!ms.length) { box.innerHTML = none; return; }
       const pres = ms.find((m) => m.order === 1), others = ms.filter((m) => m !== pres);
       const presHtml = pres ? (() => {
@@ -498,7 +503,7 @@
         const inst = t(m, 'institution');
         return `<div class="rise bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition hover:-translate-y-1 relative group overflow-hidden">
           <div class="w-1 h-full ${c.bar} absolute top-0 rtl:right-0 ltr:left-0 rounded-r-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <span class="font-black text-primary text-lg block mb-1">${esc(personName(m))}</span>${t(m, 'role') ? `<span class="text-sm ${c.text} font-bold block mb-3">${esc(t(m, 'role'))}</span>` : ''}
+          <span class="font-black text-primary text-lg block mb-1">${esc(personName(m))}</span><span class="text-sm ${c.text} font-bold block mb-3">${esc(t(m, 'role') || defRole)}</span>
           ${inst ? `<span class="text-sm text-gray-500 font-bold"><i class="fas fa-university text-gray-400" aria-hidden="true"></i> ${esc(inst)}</span>` : ''}</div>`;
       }).join('');
     };
@@ -524,12 +529,14 @@
   let progTab = 0;
   function renderProgram() {
     const root = byId('program-root'), days = arr('program'); if (!root) return;
-    if (!days.length) { root.innerHTML = `<div class="p-12 text-center text-gray-400 font-bold">${L('سيتم نشر البرنامج قريباً.', 'The program will be published soon.')}</div>`; return; }
+    const ps = DATA.settings || {}, ppdf = safeFile(lang === 'ar' ? ps.programPdfArUrl || ps.programPdfEnUrl : ps.programPdfEnUrl || ps.programPdfArUrl);
+    const pbtn = ppdf ? `<div class="p-6 md:p-8 bg-accent/10 border-b border-accent/20 flex flex-col sm:flex-row items-center justify-between gap-4"><span class="text-primary font-black text-lg">${L('البرنامج الكامل للمؤتمر', 'The full conference program')}</span><a href="${esc(ppdf)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-primary hover:bg-secondary text-white font-black py-2.5 px-6 rounded-xl transition-colors"><i class="fas fa-file-pdf" aria-hidden="true"></i> ${L('تحميل البرنامج (PDF)', 'Download program (PDF)')}</a></div>` : '';
+    if (!days.length) { root.innerHTML = pbtn + `<div class="p-12 text-center text-gray-400 font-bold">${L('سيتم نشر البرنامج قريباً.', 'The program will be published soon.')}</div>`; return; }
     if (progTab >= days.length) progTab = 0;
     const label = (d, i) => t(d, 'label') || (lang === 'ar'
       ? `اليوم ${ORD_AR[(d.dayNumber || i + 1) - 1] || d.dayNumber} (${fmtDate(d.date, {day: 'numeric', month: 'long'})})`
       : `Day ${d.dayNumber || i + 1} (${fmtDate(d.date, {day: 'numeric', month: 'short'})})`);
-    root.innerHTML = `<div class="flex flex-col sm:flex-row border-b border-gray-200" role="tablist">${days.map((d, i) =>
+    root.innerHTML = pbtn + `<div class="flex flex-col sm:flex-row border-b border-gray-200" role="tablist">${days.map((d, i) =>
       `<button type="button" role="tab" data-action="prog-tab" data-tab="${i}" aria-selected="${i === progTab}" class="program-tab flex-1 py-6 font-bold text-xl transition-colors ${i === progTab ? 'bg-primary text-white' : 'bg-gray-50 text-gray-500 hover:bg-gray-100'}">${esc(label(d, i))}</button>`).join('')}</div>
       ${days.map((d, i) => `<div data-prog-panel="${i}" class="${i === progTab ? '' : 'hidden'} p-8 md:p-12 space-y-4">${(d.sessions || []).map((s) =>
         `<div class="flex flex-col md:flex-row gap-6 items-center hover:bg-bgLight p-6 rounded-2xl transition border border-transparent hover:border-gray-100">
@@ -551,15 +558,15 @@
     const last = dates.length - 1;
     root.innerHTML = `
       ${pdf ? `<a href="${esc(pdf)}" target="_blank" rel="noopener noreferrer" class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-accent/10 border border-accent/30 hover:bg-accent/20 rounded-2xl p-6 transition-colors"><span class="text-primary font-black text-lg">${L('تحميل إعلان المؤتمر (PDF)', 'Download the Call for Papers (PDF)')}</span><span class="bg-primary text-white font-bold px-6 py-2.5 rounded-xl">${L('تحميل', 'Download')}</span></a>` : ''}
-      <section id="sub-dates" class="${CARD} scroll-mt-24">${secHead(L('المواعيد', 'Timeline'), L('تواريخ مهمة', 'Important Dates'))}
+      <section id="sub-dates" class="${CARD} scroll-mt-24">${secHead(L('سجّلها في أجندتك', 'Mark your calendar'), L('تواريخ مهمة', 'Important Dates'))}
         ${dates.length ? `<ol class="rounded-2xl border border-gray-200 overflow-hidden">${dates.map((d, i) => `<li class="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-4 px-6 py-4 items-center ${i ? 'border-t border-gray-100' : ''} ${i === last ? 'bg-primary text-white' : i % 2 ? 'bg-bgLight' : 'bg-white'}"><span class="sm:col-span-7 font-bold">${esc(t(d, 'title'))}</span><span class="sm:col-span-5 font-black ${i === last ? 'text-accent' : 'text-primary'}" dir="auto">${esc(t(d, 'dateLabel') || fmtDate(d.date, {day: '2-digit', month: lang === 'ar' ? 'long' : 'short', year: 'numeric'}))}</span></li>`).join('')}</ol>` : emptyBox(EMPTY())}
         ${dnote ? `<p class="mt-5 text-sm font-bold text-red-700 bg-red-50 border border-red-100 rounded-xl px-5 py-3">${esc(dnote)}</p>` : ''}</section>
-      <section id="sub-guidelines" class="${CARD} scroll-mt-24">${secHead(L('الشروط', 'Guidelines'), L('شروط المشاركة في المؤتمر', 'Participation Requirements'))}
+      <section id="sub-guidelines" class="${CARD} scroll-mt-24">${secHead(L('قبل أن تكتب', 'Before you write'), L('شروط المشاركة في المؤتمر', 'Participation Requirements'))}
         ${list(sub.guidelines || [])}
         ${tpls.length ? `<div class="flex flex-wrap gap-4 mt-8">${tpls.map(([u, lb]) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer" download class="inline-flex items-center gap-2 bg-primary hover:bg-secondary text-white font-black py-3.5 px-7 rounded-xl transition-colors"><i class="fas fa-file-word" aria-hidden="true"></i> ${lb}</a>`).join('')}</div>` : ''}</section>
       ${(pintro || ben.length || pub.length) ? `<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        ${(pintro || ben.length) ? `<section class="${CARD}">${secHead(L('المشاركة', 'Participation'), L('المشاركة في المؤتمر', 'Attending the Conference'))}${pintro ? `<p class="text-gray-700 font-bold leading-relaxed mb-5">${esc(pintro)}</p>` : ''}${list(ben)}</section>` : ''}
-        ${pub.length ? `<section class="${CARD}">${secHead(L('النشر', 'Publication'), L('فرص النشر', 'Publication Opportunities'))}${list(pub)}</section>` : ''}</div>` : ''}
+        ${(pintro || ben.length) ? `<section class="${CARD}">${secHead(L('نرحّب بكم', 'You are welcome'), L('المشاركة في المؤتمر', 'Attending the Conference'))}${pintro ? `<p class="text-gray-700 font-bold leading-relaxed mb-5">${esc(pintro)}</p>` : ''}${list(ben)}</section>` : ''}
+        ${pub.length ? `<section class="${CARD}">${secHead(L('ما بعد المؤتمر', 'Beyond the event'), L('فرص النشر', 'Publication Opportunities'))}${list(pub)}</section>` : ''}</div>` : ''}
       <section class="bg-primary text-white rounded-3xl p-8 md:p-12 text-center relative overflow-hidden"><div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
         <h3 class="text-3xl font-black mb-4">${L('إرسال الورقة البحثية', 'Paper Submission')}</h3>
         <p class="text-gray-300 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">${esc(t(sub, 'platformNote'))}</p>
@@ -729,6 +736,11 @@
       else if (a === 'open-modal') openModal(el.dataset.target);
       else if (a === 'close-modal') closeModal(el.dataset.target);
       else if (a === 'com-tab') switchComTab(el.dataset.tab);
+      else if (a === 'track-toggle') {
+        const ul = el.parentElement.querySelector('.track-pts'), open = el.getAttribute('aria-expanded') !== 'true';
+        el.setAttribute('aria-expanded', String(open)); if (ul) ul.classList.toggle('hidden', !open);
+        const ch = el.querySelector('.track-chev'); if (ch) ch.style.transform = open ? 'rotate(180deg)' : '';
+      }
       else if (a === 'prog-tab') switchProgramTab(el.dataset.tab);
       else if (a === 'open-ann') openAnn(el.dataset.id);
       else if (a === 'open-img') {
