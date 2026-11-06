@@ -11,7 +11,9 @@
     "import-seed": "node seed/build-seed.mjs && sanity dataset import seed/seed.ndjson production --missing",
     "import-docx": "node seed/build-seed.mjs && sanity dataset import seed/seed-docx.ndjson production --replace",
     "patch-settings": "sanity exec seed/patch-settings.mjs --with-user-token",
-    "patch-names": "sanity exec seed/patch-names.mjs --with-user-token"
+    "patch-names": "sanity exec seed/patch-names.mjs --with-user-token",
+    "sync-committee": "sanity exec seed/sync-committee.mjs --with-user-token",
+    "sync-committee-apply": "sanity exec seed/sync-committee.mjs --with-user-token -- --apply"
   },
   "dependencies": {
     "@sanity/vision": "^4",

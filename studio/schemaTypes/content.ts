@@ -87,7 +87,7 @@ export const committee = defineType({
     select: {title: 'name_ar', type: 'committeeType', role: 'role_ar', media: 'image'},
     prepare: ({title, type, role, media}) => ({
       title,
-      subtitle: `${{high: 'العليا', scientific: 'العلمية', organizing: 'التنظيمية'}[type as string] ?? ''} — ${role ?? ''}`,
+      subtitle: `${{high: 'الشرفية', scientific: 'العلمية', organizing: 'التنظيمية'}[type as string] ?? ''} — ${role ?? ''}`,
       media,
     }),
   },

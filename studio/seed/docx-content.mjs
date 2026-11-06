@@ -81,6 +81,16 @@ const nameEn = (n) => { if (/[A-Za-z]/.test(n)) return n.replace(/^أ\.د\. /, '
 const latin = (n) => (/[A-Za-z]/.test(n) ? n.replace(/^أ\.د\. /, 'Prof. ').replace(/^د\. /, 'Dr. ') : undefined)
 
 const committees = [
+  doc('committee', 'committee-high-01', {
+    committeeType: 'high', order: 1, name_ar: 'الأستاذ الدكتور محمد الهادي لطرش', name_en: 'Prof. Mohamed El Hadi Latrech',
+    role_ar: 'الرئيس الشرفي', role_en: 'Honorary President',
+    institution_ar: 'مدير جامعة سطيف 1 – فرحات عباس', institution_en: 'Director of Ferhat Abbas University Setif 1',
+  }),
+  doc('committee', 'committee-high-02', {
+    committeeType: 'high', order: 2, name_ar: 'الأستاذ الدكتور شوقي بورقبة', name_en: 'Prof. Chawki Bourokba',
+    role_ar: 'رئيس المؤتمر', role_en: 'Conference Chair',
+    institution_ar: 'عميد كلية العلوم الاقتصادية والتجارية وعلوم التسيير', institution_en: 'Dean of the Faculty of Economics, Business and Management Sciences',
+  }),
   ...sci.map(([n, inst, ra, re], i) => doc('committee', `committee-sci-${String(i + 1).padStart(2, '0')}`, {
     committeeType: 'scientific', order: i + 1, name_ar: AR[n] || n, name_en: nameEn(n),
     role_ar: ra, role_en: re, institution_ar: inst, institution_en: INST[inst],
