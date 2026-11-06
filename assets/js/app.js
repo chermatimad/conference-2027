@@ -5,6 +5,8 @@
  */
 (() => {
   'use strict';
+  // دفاع إضافي ضد التطريز داخل إطار (clickjacking) حين لا يتوفر X-Frame-Options (مثل GitHub Pages)
+  if (window.top !== window.self) { document.documentElement.hidden = true; try { window.top.location = window.self.location.href; } catch { /* محجوب */ } }
 
   const CFG = {projectId: 'k6sogxhu', dataset: 'production', apiVersion: '2025-02-19'};
   const DEFAULT_EMAIL = 'digitalcell.fsecg@gmail.com';
@@ -19,7 +21,7 @@
   const safeHttps = (u) => {
     try { const x = new URL(String(u)); return x.protocol === 'https:' ? x.href : ''; } catch { return ''; }
   };
-  const IMG_HOSTS = new Set(['cdn.sanity.io', 'images.unsplash.com']);
+  const IMG_HOSTS = new Set(['cdn.sanity.io']);
   /** يقبل: مسار محلي assets/ أو https من النطاقات المسموحة فقط */
   const safeImg = (u, w) => {
     if (!u) return '';
@@ -113,7 +115,8 @@
     if (HEX.test(g)) root.setProperty('--hero-c', darken(g, 0.6)); else root.removeProperty('--hero-c');
   }
 
-  const AVATAR = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=256&h=256&fit=crop';
+  // صورة رمزية محلية (SVG مضمّنة) بدل أي خدمة خارجية، حتى لا يُرسَل أي طلب إلى طرف ثالث
+  const AVATAR = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="#e5e7eb"/><circle cx="32" cy="24" r="11" fill="#9ca3af"/><path d="M10 60c2-14 12-20 22-20s20 6 22 20z" fill="#9ca3af"/></svg>');
 
   // ---------- جلب البيانات ----------
   const img = (f) => `"${f}": ${f}.asset->url`;
