@@ -194,8 +194,6 @@
     setText('hdr-title', title); setText('hdr-theme', t(s, 'theme'));
     const dateTxt = t(s, 'eventDateText') || L('20-21 أفريل 2027', '20-21 April 2027');
     setText('hdr-date', dateTxt); setText('hero-date', dateTxt);
-    const callPdf = safeFile(isAr ? s.callPdfArUrl || s.callPdfEnUrl : s.callPdfEnUrl || s.callPdfArUrl), hp = byId('hero-pdf');
-    if (hp) { hp.classList.toggle('hidden', !callPdf); hp.classList.toggle('inline-flex', !!callPdf); if (callPdf) hp.href = callPdf; setText('hero-pdf-label', L('تحميل إعلان المؤتمر (PDF)', 'Download the Call for Papers (PDF)')); }
     setText('hero-edition', t(s, 'editionLabel')); setText('hero-title', t(s, 'heroTitle'));
     const theme = t(s, 'theme'); if (theme) setText('hero-theme', theme.replace(/\.?$/, '.'));
     if (title) document.title = title;
@@ -373,7 +371,7 @@
     const out = [];
     if (intro || eds.length) out.push(`<section class="${CARD}">${secHead(L('تعرّف علينا', 'Get to know us'), L('نبذة عن المؤتمر', 'About the Conference'))}
       <div class="grid grid-cols-1 ${eds.length ? 'lg:grid-cols-5' : ''} gap-10">
-        <div class="${eds.length ? 'lg:col-span-3' : ''} space-y-5">${paras(intro, 'text-gray-600 leading-loose text-lg text-justify-custom')}${callPdf ? `<a href="${esc(callPdf)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-2 bg-accent/10 hover:bg-accent text-primary hover:text-white border border-accent/40 font-bold text-sm py-2.5 px-5 rounded-full transition-colors"><i class="fas fa-file-pdf" aria-hidden="true"></i> ${L('تحميل إعلان المؤتمر (PDF)', 'Download the Call for Papers (PDF)')}</a>` : ''}</div>
+        <div class="${eds.length ? 'lg:col-span-3' : ''} space-y-5">${paras(intro, 'text-gray-600 leading-loose text-lg text-justify-custom')}${callPdf ? `<a href="${esc(callPdf)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-2 bg-primary hover:bg-secondary text-white font-bold py-3 px-7 rounded-xl transition-colors"><i class="fas fa-file-pdf" aria-hidden="true"></i> ${L('تحميل إعلان المؤتمر (PDF)', 'Download the Call for Papers (PDF)')}</a>` : ''}</div>
         ${eds.length ? `<div class="lg:col-span-2"><div class="rounded-2xl border border-gray-200 overflow-hidden">
           <div class="bg-primary text-white px-5 py-3 font-bold text-sm grid grid-cols-6 gap-3"><span class="col-span-2">${L('الطبعة', 'Edition')}</span><span class="col-span-4">${L('الموضوع', 'Theme')}</span></div>
           ${eds.map((r) => `<div class="px-5 py-4 grid grid-cols-6 gap-3 items-start border-t border-gray-100"><span class="col-span-2 font-black text-primary text-sm">${esc(t(r, 'label'))}<span class="block text-accent font-bold" dir="ltr">${esc(r.year)}</span></span><span class="col-span-4 text-gray-600 text-sm leading-relaxed">${esc(t(r, 'topic'))}</span></div>`).join('')}
