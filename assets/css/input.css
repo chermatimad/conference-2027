@@ -70,15 +70,10 @@ html[data-icons="plain"] .ico-tile { background: transparent !important; box-sha
 .ann-slides { display: grid; }
 .ann-slide { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease, visibility 0s linear .6s; }
 .ann-slide.on { opacity: 1; visibility: visible; transform: none; transition: opacity .6s ease, transform .6s ease, visibility 0s; }
-.ann-seg { flex: 1; height: 6px; border-radius: 6px; background: rgb(var(--c-primary) / .12); overflow: hidden; cursor: pointer; padding: 0; }
-.ann-seg-fill { display: block; height: 100%; width: 0; border-radius: 6px; background: rgb(var(--c-accent)); }
-.ann-seg-done { width: 100%; }
-.ann-seg-cur { animation: annBar linear forwards; }
-.ann-paused .ann-seg-cur { animation-play-state: paused; }
-@keyframes annBar { from { width: 0; } to { width: 100%; } }
-@media (prefers-reduced-motion: reduce) { .ann-slide { transition: none; } .ann-seg-cur { animation: none; width: 100%; } }
+.ann-dot { width: 12px; height: 12px; border-radius: 9999px; background: rgb(var(--c-primary) / .2); transition: all .3s; padding: 0; cursor: pointer; }
+.ann-dot:hover { background: rgb(var(--c-primary) / .45); }
+.ann-dot.on { width: 32px; background: rgb(var(--c-accent)); }
+@media (prefers-reduced-motion: reduce) { .ann-slide { transition: none; } }
 
 /* ---- نبذة المتحدث المقتطعة ---- */
 .clamp4 { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
-.com-tab .cnt { background: rgb(128 128 128 / .2); }
-.com-tab .cnt:empty { display: none; }

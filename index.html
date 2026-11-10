@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="assets/vendor/fa/css/all.min.css">
     <link rel="stylesheet" href="assets/vendor/aos/aos.css">
-    <link rel="stylesheet" href="assets/css/tailwind.css?v=20261110c">
+    <link rel="stylesheet" href="assets/css/tailwind.css?v=20261110d">
 </head>
 <body class="font-cairo text-gray-800 transition-all duration-300 flex flex-col min-h-screen">
 
@@ -260,8 +260,8 @@
                     <div class="w-20 h-1.5 bg-accent mx-auto rounded-full"></div>
                     <p id="venue-desc" class="text-gray-500 mt-6 max-w-2xl mx-auto font-semibold"></p>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 max-w-6xl mx-auto items-stretch">
-                    <div class="lg:col-span-2 rounded-3xl p-8 md:p-10 text-white shadow-xl relative overflow-hidden bg-gradient-to-br from-primary via-primary to-secondary flex flex-col gap-7 justify-center">
+                <div class="max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-gray-100 grid grid-cols-1 lg:grid-cols-5 bg-white">
+                    <div class="lg:col-span-2 p-8 md:p-10 text-white relative overflow-hidden bg-gradient-to-br from-primary via-primary to-secondary flex flex-col gap-7 justify-center">
                         <div class="absolute -top-12 rtl:-left-12 ltr:-right-12 w-44 h-44 bg-white/5 rounded-full" aria-hidden="true"></div>
                         <div class="relative">
                             <h3 class="text-accent font-black text-sm mb-2" data-ar="مكان الانعقاد" data-en="Event Venue">مكان الانعقاد</h3>
@@ -276,13 +276,10 @@
                             <p class="flex items-center gap-3 font-bold" dir="ltr"><i class="fas fa-phone text-accent" aria-hidden="true"></i><span id="venue-phone"></span></p>
                         </div>
                     </div>
-                    <div class="lg:col-span-3 h-[360px] lg:h-auto lg:min-h-[420px] rounded-3xl overflow-hidden shadow-xl border border-gray-100 relative">
-                        <a id="venue-link" href="https://maps.app.goo.gl/xHB9GtWvQpGnTqDV8" target="_blank" rel="noopener noreferrer" class="group absolute inset-0 bg-primary text-white flex flex-col items-center justify-center gap-5 p-8 text-center overflow-hidden">
-                            <span class="absolute inset-0 opacity-10 dots-pattern" aria-hidden="true"></span>
-                            <i class="fas fa-map-marked-alt absolute -bottom-6 rtl:-left-6 ltr:-right-6 text-white/5 text-[11rem]" aria-hidden="true"></i>
-                            <span class="relative w-24 h-24 rounded-full bg-accent/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500"><i class="fas fa-map-marker-alt text-accent text-5xl" aria-hidden="true"></i></span>
-                            <span class="relative font-black text-xl leading-snug" id="venue-map-name"></span>
-                            <span class="relative inline-flex items-center gap-3 bg-white text-primary group-hover:bg-accent group-hover:text-white font-black py-3.5 px-7 rounded-xl transition shadow-lg"><i class="fas fa-external-link-alt" aria-hidden="true"></i><span data-ar="فتح في خرائط Google" data-en="Open in Google Maps">فتح في خرائط Google</span></span>
+                    <div class="lg:col-span-3 relative min-h-[340px] lg:min-h-[420px] bg-primary">
+                        <iframe id="venue-map" title="Map" class="absolute inset-0 w-full h-full border-0 pointer-events-none" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin"></iframe>
+                        <a id="venue-link" href="https://maps.app.goo.gl/xHB9GtWvQpGnTqDV8" target="_blank" rel="noopener noreferrer" class="group absolute inset-0 flex items-end justify-center p-5" aria-label="Google Maps">
+                            <span class="inline-flex items-center gap-3 bg-white text-primary group-hover:bg-accent group-hover:text-white font-black py-3 px-7 rounded-xl transition shadow-xl"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span data-ar="فتح في خرائط Google" data-en="Open in Google Maps">فتح في خرائط Google</span></span>
                         </a>
                     </div>
                 </div>
@@ -318,9 +315,9 @@
             <section id="detail-committees" class="detail-section">
                 <div class="max-w-6xl mx-auto">
                     <div class="flex flex-wrap justify-center gap-3 mb-10" role="tablist">
-                        <button type="button" role="tab" data-action="com-tab" data-tab="high" id="btn-com-high" class="com-tab flex-1 py-4 px-6 rounded-2xl font-bold transition-all bg-primary text-white shadow-lg text-sm md:text-base border border-transparent"><span data-ar="اللجنة العليا للمؤتمر" data-en="High Committee">اللجنة العليا للمؤتمر</span><span class="cnt inline-block mx-1 min-w-[1.6rem] text-xs font-black rounded-full px-2 py-0.5" aria-hidden="true"></span></button>
-                        <button type="button" role="tab" data-action="com-tab" data-tab="scientific" id="btn-com-scientific" class="com-tab flex-1 py-4 px-6 rounded-2xl font-bold transition-all bg-white text-gray-500 hover:text-primary shadow-sm border border-gray-200 text-sm md:text-base"><span data-ar="اللجنة العلمية" data-en="Scientific Committee">اللجنة العلمية</span><span class="cnt inline-block mx-1 min-w-[1.6rem] text-xs font-black rounded-full px-2 py-0.5" aria-hidden="true"></span></button>
-                        <button type="button" role="tab" data-action="com-tab" data-tab="organizing" id="btn-com-organizing" class="com-tab flex-1 py-4 px-6 rounded-2xl font-bold transition-all bg-white text-gray-500 hover:text-primary shadow-sm border border-gray-200 text-sm md:text-base"><span data-ar="اللجنة التنظيمية" data-en="Organizing Committee">اللجنة التنظيمية</span><span class="cnt inline-block mx-1 min-w-[1.6rem] text-xs font-black rounded-full px-2 py-0.5" aria-hidden="true"></span></button>
+                        <button type="button" role="tab" data-action="com-tab" data-tab="high" id="btn-com-high" class="com-tab flex-1 py-4 px-6 rounded-2xl font-bold transition-all bg-primary text-white shadow-lg text-sm md:text-base border border-transparent"><span data-ar="اللجنة العليا للمؤتمر" data-en="High Committee">اللجنة العليا للمؤتمر</span></button>
+                        <button type="button" role="tab" data-action="com-tab" data-tab="scientific" id="btn-com-scientific" class="com-tab flex-1 py-4 px-6 rounded-2xl font-bold transition-all bg-white text-gray-500 hover:text-primary shadow-sm border border-gray-200 text-sm md:text-base"><span data-ar="اللجنة العلمية" data-en="Scientific Committee">اللجنة العلمية</span></button>
+                        <button type="button" role="tab" data-action="com-tab" data-tab="organizing" id="btn-com-organizing" class="com-tab flex-1 py-4 px-6 rounded-2xl font-bold transition-all bg-white text-gray-500 hover:text-primary shadow-sm border border-gray-200 text-sm md:text-base"><span data-ar="اللجنة التنظيمية" data-en="Organizing Committee">اللجنة التنظيمية</span></button>
                     </div>
                     <div class="bg-white border border-gray-100 rounded-[2rem] p-8 md:p-14 shadow-xl min-h-[400px]">
                         <div id="com-high" class="com-content w-full text-center py-4 relative z-10">
@@ -482,6 +479,6 @@
     </div>
 
     <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/js/app.js?v=20261110c" defer></script>
+    <script src="assets/js/app.js?v=20261110d" defer></script>
 </body>
 </html>

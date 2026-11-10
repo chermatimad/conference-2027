@@ -247,8 +247,9 @@
     const vp = byId('venue-phone-row'); if (vp) { vp.classList.toggle('hidden', !phone); setText('venue-phone', phone); }
     setText('footer-address', t(s, 'address')); setText('footer-about', t(s, 'footerAbout')); setText('footer-copy', t(s, 'copyright'));
     setText('footer-line', t(s, 'footerLine') || (isAr ? 'كلية العلوم الاقتصادية والتجارية وعلوم التسيير | جامعة سطيف 1 - فرحات عباس، الجزائر' : 'Faculty of Economics, Business and Management Sciences | Setif 1 University - Ferhat ABBAS, Algeria'));
+    const map = byId('venue-map'), mapUrl = safeHttps(s.mapEmbedUrl);
+    if (map && mapUrl.startsWith('https://www.google.com/maps/embed') && map.getAttribute('src') !== mapUrl) map.src = mapUrl;
     const ml = byId('venue-link'), mlu = safeHttps(s.mapLinkUrl); if (ml && mlu) ml.href = mlu;
-    setText('venue-map-name', t(s, 'venueName'));
 
     const sub = safeHttps(s.paperSubmissionUrl);
     $$('[data-submit-link]').forEach((a) => { if (sub) a.href = sub; });
@@ -392,7 +393,7 @@
     root.innerHTML = `<div class="ann-slides">${annItems.map((a, i) => annSlide(a, i, annN)).join('')}</div>` + (annN > 1 ? `
       <div class="flex items-center gap-3 mt-5" role="group" aria-label="${L('التنقل بين الإعلانات', 'Announcement navigation')}">
         <button type="button" data-action="ann-prev" aria-label="${L('السابق', 'Previous')}" class="${btn}"><i class="fas fa-chevron-right rtl:rotate-0 ltr:rotate-180" aria-hidden="true"></i></button>
-        <div class="flex flex-grow items-center gap-2">${annItems.map((_, i) => `<button type="button" data-action="ann-go" data-i="${i}" aria-label="${i + 1}" class="ann-seg"><span class="ann-seg-fill"></span></button>`).join('')}</div>
+        <div class="flex flex-grow items-center justify-center gap-2.5">${annItems.map((_, i) => `<button type="button" data-action="ann-go" data-i="${i}" aria-label="${i + 1}" class="ann-dot"></button>`).join('')}</div>
         <button type="button" data-action="ann-next" aria-label="${L('التالي', 'Next')}" class="${btn}"><i class="fas fa-chevron-left rtl:rotate-0 ltr:rotate-180" aria-hidden="true"></i></button>
         <button type="button" data-action="ann-toggle" id="ann-toggle" class="${btn}"><i id="ann-toggle-ico" class="fas fa-pause text-xs" aria-hidden="true"></i></button>
       </div>` : '');
@@ -411,12 +412,7 @@
     const root = byId('ann-carousel');
     const running = annN > 1 && !annPaused && !annHover && !reduceMotion() && !document.hidden;
     if (root) root.classList.toggle('ann-paused', !running);
-    $$('.ann-seg-fill').forEach((f, k) => {
-      f.classList.remove('ann-seg-cur', 'ann-seg-done');
-      if (k < annIdx) f.classList.add('ann-seg-done');
-      else if (k === annIdx) { void f.offsetWidth; f.style.animationDuration = annSecs(k) + 's'; f.classList.add('ann-seg-cur'); }
-    });
-    $$('.ann-seg').forEach((b, k) => b.setAttribute('aria-current', String(k === annIdx)));
+    $$('.ann-dot').forEach((b, k) => { b.classList.toggle('on', k === annIdx); b.setAttribute('aria-current', String(k === annIdx)); });
     const ico = byId('ann-toggle-ico'), tg = byId('ann-toggle');
     if (ico) ico.className = `fas ${annPaused ? 'fa-play' : 'fa-pause'} text-xs`;
     if (tg) tg.setAttribute('aria-label', annPaused ? L('تشغيل التبديل التلقائي', 'Resume autoplay') : L('إيقاف التبديل التلقائي', 'Pause autoplay'));
@@ -561,14 +557,14 @@
   const personName = (m) => t(m, 'name');
   function renderCommittees() {
     const all = arr('committee'), none = emptyBox(L('لا يوجد أعضاء مضافين حالياً.', 'No members added yet.'));
-    const cnt = (k, n) => { const el = $(`#btn-com-${k} .cnt`); if (el) el.textContent = n ? String(n) : ''; };
+    const cnt = () => {};
 
     // اللجنة العليا: بطاقات كبيرة بارزة
     const hi = all.filter((c) => c.committeeType === 'high'), hc = byId('high-members');
     cnt('high', hi.length);
     if (hc) hc.innerHTML = hi.length ? `<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">${hi.map((m) => {
       const inst = t(m, 'institution'), role = t(m, 'role');
-      return `<div class="rise group relative bg-gradient-to-b from-white to-bgLight rounded-3xl border border-gray-100 shadow-lg p-8 pt-10 text-center overflow-hidden hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
+      return `<div class="rise group relative bg-gradient-to-b from-accent/10 to-white rounded-3xl border border-accent/30 shadow-xl p-8 pt-10 text-center overflow-hidden hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
         <div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
         <i class="ico-decor fas fa-star absolute -bottom-6 rtl:-left-6 ltr:-right-6 text-accent/5 text-[9rem] rotate-12" aria-hidden="true"></i>
         ${avatarHalo(m, 'w-36 h-36', 'border-4 border-white shadow-lg', '-inset-2 rounded-full bg-accent/15 group-hover:bg-accent/25 transition', 'mb-5')}
@@ -588,7 +584,7 @@
       // بطاقة الرئيس: أكبر وأبرز من باقي الأعضاء
       const presHtml = pres ? (() => {
         const inst = t(pres, 'institution'), role = t(pres, 'role');
-        return `<div class="col-span-full mb-6"><div class="rise group relative max-w-2xl mx-auto rounded-3xl border border-accent/30 bg-gradient-to-b from-accent/10 via-white to-white p-8 md:p-10 text-center shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
+        return `<div class="col-span-full mb-6"><div class="rise group relative max-w-2xl mx-auto rounded-3xl border-2 border-accent/50 bg-gradient-to-b from-accent/20 via-accent/5 to-white p-8 md:p-10 text-center shadow-2xl overflow-hidden hover:shadow-2xl transition-all duration-300">
           <div class="absolute top-0 inset-x-0 h-2 ${c.bar}"></div>
           <i class="ico-decor fas fa-star ${c.star} absolute -bottom-8 rtl:-left-8 ltr:-right-8 text-[11rem] rotate-12" aria-hidden="true"></i>
           ${avatarHalo(pres, 'w-36 h-36', 'border-4 border-white shadow-xl', '-inset-3 rounded-full ' + c.soft + ' group-hover:scale-105 transition-transform duration-500', 'mb-5')}
@@ -599,10 +595,10 @@
       box.innerHTML = search + presHtml + others.map((m) => {
         const inst = t(m, 'institution'), role = t(m, 'role') || defRole;
         const q = `${personName(m)} ${inst} ${role}`.toLowerCase();
-        return `<div class="com-card rise group relative bg-white p-4 rtl:pl-5 ltr:pr-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition flex items-center gap-4 overflow-hidden" data-q="${esc(q)}">
-          <span class="absolute top-0 rtl:right-0 ltr:left-0 h-full w-1 ${c.bar} opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true"></span>
+        return `<div class="com-card rise group relative bg-white p-4 rtl:pr-6 rtl:pl-5 ltr:pl-6 ltr:pr-5 rounded-2xl border border-gray-200 shadow-md hover:shadow-xl hover:-translate-y-1 transition flex items-center gap-4 overflow-hidden" data-q="${esc(q)}">
+          <span class="absolute top-0 rtl:right-0 ltr:left-0 h-full w-1.5 ${c.bar}" aria-hidden="true"></span>
           ${avatar(m, 'w-16 h-16', '', 'border-2 border-white shadow ring-1 ring-gray-200')}
-          <div class="min-w-0"><span class="font-black text-primary block leading-snug">${esc(personName(m))}</span><span class="text-xs ${c.text} font-bold block mt-1">${esc(role)}</span>
+          <div class="min-w-0"><span class="font-black text-primary text-lg block leading-snug">${esc(personName(m))}</span><span class="inline-block text-xs ${c.text} ${c.soft} font-black rounded-full px-2.5 py-0.5 mt-1.5">${esc(role)}</span>
             ${inst ? `<span class="text-xs text-gray-500 font-bold block mt-1">${esc(inst)}</span>` : ''}</div></div>`;
       }).join('') + `<div data-com-empty class="hidden col-span-full text-center text-gray-400 font-bold py-8">${L('لا توجد نتائج مطابقة.', 'No matching members.')}</div>`;
     };
