@@ -26,7 +26,7 @@
   const safeImg = (u, w) => {
     if (!u) return '';
     u = String(u);
-    if (/^assets\/[\w./-]+$/.test(u) && !u.includes('..')) return u;
+    if (/^(assets|uploads)\/[\w./-]+$/.test(u) && !u.includes('..')) return u;
     try {
       const x = new URL(u);
       if (x.protocol !== 'https:' || !IMG_HOSTS.has(x.hostname)) return '';
@@ -34,7 +34,10 @@
       return x.href;
     } catch { return ''; }
   };
-  const safeFile = (u) => { const h = safeHttps(u); return h && new URL(h).hostname === 'cdn.sanity.io' ? h : ''; };
+  const safeFile = (u) => {
+    if (/^uploads\/[\w.-]+$/.test(String(u || ''))) return String(u);
+    const h = safeHttps(u); return h && new URL(h).hostname === 'cdn.sanity.io' ? h : '';
+  };
   const isEmail = (s) => /^[^\s@<>"']+@[^\s@<>"']+\.[^\s@<>"']+$/.test(s) && s.length <= 120;
   const youtubeId = (u) => {
     const h = safeHttps(u); if (!h) return '';
@@ -128,7 +131,7 @@
     "announcements": *[_type == "announcement" && publishAt <= now() && (!defined(expireAt) || expireAt > now())] | order(pinned desc, publishAt desc)[0...60]{
       _id, kind, title_ar, title_en, body_ar, body_en, linkUrl, linkLabel_ar, linkLabel_en, publishAt, expireAt, pinned, popup, "imageUrl": image.asset->url },
     "tracks": *[_type == "track"] | order(order asc){ _id, order, kicker_ar, kicker_en, title_ar, title_en, description_ar, description_en, topics, icon, color },
-    "speakers": *[_type == "speaker"] | order(order asc){ _id, name_ar, name_en, role_ar, role_en, bio_ar, bio_en, order, "imageUrl": image.asset->url },
+    "speakers": *[_type == "speaker"] | order(order asc){ _id, name_ar, name_en, role_ar, role_en, institution_ar, institution_en, bio_ar, bio_en, linkedinUrl, websiteUrl, order, "imageUrl": image.asset->url },
     "committee": *[_type == "committee"] | order(order asc){ _id, committeeType, name_ar, name_en, role_ar, role_en, institution_ar, institution_en, order, "imageUrl": image.asset->url },
     "program": *[_type == "programDay"] | order(dayNumber asc){ _id, dayNumber, date, label_ar, label_en, sessions },
     "dates": *[_type == "importantDate"] | order(order asc){ _id, title_ar, title_en, dateLabel_ar, dateLabel_en, date, icon, order },
@@ -152,6 +155,11 @@
   }
 
   async function loadData() {
+    // 1) لوحة PHP على الخادم (api.php) إن وُجدت
+    try {
+      const j = await fetchJson('api.php', 6000);
+      if (j && j.settings) return {data: j, live: true};
+    } catch { /* غير متاح (استضافة ثابتة): ننتقل للمصدر التالي */ }
     const url = `https://${CFG.projectId}.apicdn.sanity.io/v${CFG.apiVersion}/data/query/${CFG.dataset}?perspective=published&query=${encodeURIComponent(QUERY)}`;
     try {
       const j = await fetchJson(url);
@@ -230,7 +238,13 @@
     const phone = (s.phone || '').trim();
     const pc = byId('contact-phone-card');
     if (pc) { pc.classList.toggle('hidden', !phone); pc.classList.toggle('flex', !!phone); setText('contact-phone', phone); }
+    const em2 = (s.contactEmail2 || '').trim(), e2 = byId('contact-email2');
+    if (e2) { const ok = isEmail(em2); e2.classList.toggle('hidden', !ok); if (ok) { e2.textContent = em2; e2.href = 'mailto:' + em2; } }
+    const addr = t(s, 'address'), ac = byId('contact-address-card');
+    if (ac) { ac.classList.toggle('hidden', !addr); ac.classList.toggle('flex', !!addr); setText('contact-address', addr); }
     setText('venue-name', t(s, 'venueName')); setText('venue-desc', t(s, 'venueDescription'));
+    const vr = byId('venue-address-row'); if (vr) { vr.classList.toggle('hidden', !addr); setText('venue-address', addr); }
+    const vp = byId('venue-phone-row'); if (vp) { vp.classList.toggle('hidden', !phone); setText('venue-phone', phone); }
     setText('footer-address', t(s, 'address')); setText('footer-about', t(s, 'footerAbout')); setText('footer-copy', t(s, 'copyright'));
     setText('footer-line', t(s, 'footerLine') || (isAr ? 'كلية العلوم الاقتصادية والتجارية وعلوم التسيير | جامعة سطيف 1 - فرحات عباس، الجزائر' : 'Faculty of Economics, Business and Management Sciences | Setif 1 University - Ferhat ABBAS, Algeria'));
     const map = byId('venue-map'), mapUrl = safeHttps(s.mapEmbedUrl);
@@ -266,7 +280,7 @@
       {target: 'topics', title: L('المحاور العلمية', 'Scientific Tracks'), text: nTracks ? L(`${nTracks} مسارات بحثية دقيقة.`, `${nTracks} specific research tracks.`) : L('مسارات بحثية دقيقة.', 'Specific research tracks.')},
       {target: 'speakers', title: L('المتحدثون', 'Speakers'), text: L('خبراء وصناع قرار دوليون.', 'International experts & leaders.')},
       {target: 'program', title: L('البرنامج', 'Program'), text: L('الجدول الزمني للفعاليات.', 'Event schedule and timeline.')},
-      {target: 'submission', title: L('المشاركة والنشر', 'Submission'), text: L('الشروط، التواريخ، والتقديم.', 'Rules, dates, and submission.')},
+      {target: 'submission', title: L('تقديم الأوراق', 'Submission'), text: L('الشروط، التواريخ، والتقديم.', 'Rules, dates, and submission.')},
     ];
     const colors = ['hover:border-primary', 'hover:border-secondary', 'hover:border-accent', 'hover:border-primary'];
     root.innerHTML = cards.slice(0, 8).map((c, i) => `
@@ -323,9 +337,8 @@
         <span class="shrink-0 bg-white/20 px-3 py-1 rounded-full text-xs font-black">${L('إعلان هام', 'Important')}</span>
         <div class="marquee-wrap overflow-hidden flex-grow"><div class="marquee-track animate-marquee" aria-live="off">${items}${items}</div></div></div>`;
     }
-    // الرئيسية
-    const sec = byId('home-news-section');
-    if (sec) { sec.classList.toggle('hidden', list.length === 0); byId('home-news-list').innerHTML = list.slice(0, 3).map((a, i) => annCard(a, i * 100)).join(''); }
+    // الرئيسية: شريط متبدّل
+    renderAnnCarousel(list);
     // صفحة الإعلانات
     const root = byId('news-root');
     if (root) {
@@ -335,6 +348,76 @@
       root.innerHTML = list.length ? intro + block(L('إعلانات هامة', 'Important announcements'), imp) + block(L('إعلانات دورية', 'Periodic announcements'), periodic) : emptyBox(L('لا توجد إعلانات حالياً.', 'No announcements at the moment.'));
     }
     maybePopup(imp);
+  }
+
+
+  // ---------- شريط الإعلانات المتبدّل في الرئيسية ----------
+  let annIdx = 0, annTimer = null, annPaused = false, annHover = false, annN = 0;
+  const annSecs = () => { const v = Number((DATA.settings || {}).announcementInterval); return Math.min(120, Math.max(5, Number.isFinite(v) && v > 0 ? Math.round(v) : 20)); };
+  const reduceMotion = () => !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  function annSlide(a, i, n) {
+    const im = safeImg(a.imageUrl, 900), link = safeHttps(a.linkUrl);
+    const media = im
+      ? `<div class="md:w-2/5 relative min-h-[14rem] md:min-h-full"><img src="${esc(im)}" alt="" loading="lazy" class="absolute inset-0 w-full h-full object-cover"></div>`
+      : `<div class="md:w-2/5 relative min-h-[9rem] md:min-h-full bg-gradient-to-br from-primary via-primary to-secondary flex items-center justify-center overflow-hidden"><i class="fas fa-bullhorn text-white/10 text-[10rem] -rotate-12" aria-hidden="true"></i><i class="fas fa-bullhorn absolute text-accent text-5xl" aria-hidden="true"></i></div>`;
+    return `<article class="ann-slide" data-ann-slide="${i}" role="group" aria-roledescription="slide" aria-label="${i + 1} / ${n}" aria-hidden="${i ? 'true' : 'false'}">
+      <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden flex flex-col md:flex-row min-h-[17rem]">
+        ${media}
+        <div class="md:w-3/5 p-7 md:p-10 flex flex-col gap-4 justify-center">
+          <div class="flex items-center gap-3 flex-wrap">${annBadge(a)}<time class="text-xs text-gray-400 font-bold" datetime="${esc(a.publishAt)}">${esc(fmtDate(a.publishAt, {day: '2-digit', month: 'long', year: 'numeric'}))}</time>${a.pinned ? '<i class="fas fa-thumbtack text-accent text-sm" aria-hidden="true"></i>' : ''}</div>
+          <h3 class="text-2xl md:text-3xl font-black text-primary leading-snug">${esc(t(a, 'title'))}</h3>
+          <p class="text-gray-500 leading-relaxed">${esc(excerpt(t(a, 'body'), 230))}</p>
+          <div class="flex flex-wrap gap-3 mt-1">
+            <button type="button" data-action="open-ann" data-id="${esc(a._id)}" class="inline-flex items-center gap-2 bg-primary hover:bg-secondary text-white font-bold text-sm py-2.5 px-6 rounded-xl transition">${L('اقرأ المزيد', 'Read more')} <i class="fas fa-arrow-left rtl:rotate-0 ltr:rotate-180 text-xs" aria-hidden="true"></i></button>
+            ${link ? `<a href="${esc(link)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 border-2 border-accent/40 text-accent hover:bg-accent hover:text-white font-bold text-sm py-2.5 px-5 rounded-xl transition">${esc(t(a, 'linkLabel') || L('فتح الرابط', 'Open link'))} <i class="fas fa-external-link-alt text-xs" aria-hidden="true"></i></a>` : ''}
+          </div>
+        </div>
+      </div></article>`;
+  }
+
+  function renderAnnCarousel(list) {
+    const sec = byId('home-news-section'), root = byId('ann-carousel'); if (!sec || !root) return;
+    const items = list.slice(0, 8); annN = items.length;
+    sec.classList.toggle('hidden', !annN);
+    clearTimeout(annTimer); annTimer = null;
+    if (!annN) { root.innerHTML = ''; return; }
+    if (annIdx >= annN) annIdx = 0;
+    const btn = 'w-10 h-10 rounded-full bg-white border border-gray-200 text-primary hover:bg-primary hover:text-white transition shadow-sm';
+    root.innerHTML = `<div class="ann-slides">${items.map((a, i) => annSlide(a, i, annN)).join('')}</div>` + (annN > 1 ? `
+      <div class="flex items-center justify-between gap-4 mt-5">
+        <div class="flex items-center gap-2" role="group" aria-label="${L('التنقل بين الإعلانات', 'Announcement navigation')}">
+          <button type="button" data-action="ann-prev" aria-label="${L('السابق', 'Previous')}" class="${btn}"><i class="fas fa-chevron-right rtl:rotate-0 ltr:rotate-180" aria-hidden="true"></i></button>
+          <button type="button" data-action="ann-next" aria-label="${L('التالي', 'Next')}" class="${btn}"><i class="fas fa-chevron-left rtl:rotate-0 ltr:rotate-180" aria-hidden="true"></i></button>
+          <button type="button" data-action="ann-toggle" id="ann-toggle" class="${btn}"><i id="ann-toggle-ico" class="fas fa-pause text-xs" aria-hidden="true"></i></button>
+        </div>
+        <div class="flex items-center gap-2">${items.map((_, i) => `<button type="button" data-action="ann-go" data-i="${i}" aria-label="${i + 1}" class="ann-dot h-2.5 w-2.5 rounded-full bg-gray-300 transition-all duration-300"></button>`).join('')}</div>
+      </div>
+      <div class="ann-progress mt-4" aria-hidden="true"><span class="ann-bar" id="ann-bar"></span></div>` : '');
+    annShow(annIdx);
+  }
+
+  function annShow(i) {
+    const slides = $$('[data-ann-slide]'); if (!slides.length) return;
+    annIdx = ((i % slides.length) + slides.length) % slides.length;
+    slides.forEach((s, k) => { const on = k === annIdx; s.classList.toggle('on', on); s.setAttribute('aria-hidden', String(!on)); });
+    $$('.ann-dot').forEach((d, k) => {
+      const on = k === annIdx;
+      d.classList.toggle('bg-accent', on); d.classList.toggle('w-8', on); d.classList.toggle('bg-gray-300', !on); d.classList.toggle('w-2.5', !on); d.setAttribute('aria-current', String(on));
+    });
+    annSchedule();
+  }
+
+  function annSchedule() {
+    clearTimeout(annTimer); annTimer = null;
+    const root = byId('ann-carousel'), bar = byId('ann-bar');
+    const running = annN > 1 && !annPaused && !annHover && !reduceMotion() && !document.hidden;
+    if (root) root.classList.toggle('ann-paused', !running);
+    if (bar) { bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = ''; bar.style.animationDuration = annSecs() + 's'; }
+    const ico = byId('ann-toggle-ico'), tg = byId('ann-toggle');
+    if (ico) ico.className = `fas ${annPaused ? 'fa-play' : 'fa-pause'} text-xs`;
+    if (tg) tg.setAttribute('aria-label', annPaused ? L('تشغيل التبديل التلقائي', 'Resume autoplay') : L('إيقاف التبديل التلقائي', 'Pause autoplay'));
+    if (running) annTimer = setTimeout(() => annShow(annIdx + 1), annSecs() * 1000);
   }
 
   function openAnn(id) {
@@ -475,55 +558,88 @@
   const personName = (m) => t(m, 'name');
   function renderCommittees() {
     const all = arr('committee'), none = emptyBox(L('لا يوجد أعضاء مضافين حالياً.', 'No members added yet.'));
+    const cnt = (k, n) => { const el = $(`#btn-com-${k} .cnt`); if (el) el.textContent = n ? String(n) : ''; };
+
+    // اللجنة العليا: بطاقات كبيرة بارزة
     const hi = all.filter((c) => c.committeeType === 'high'), hc = byId('high-members');
-    if (hc) hc.innerHTML = hi.length ? `<div class="flex flex-col gap-6 w-full">${hi.map((m) => {
-      const inst = t(m, 'institution'), im = safeImg(m.imageUrl, 300) || AVATAR;
-      return `<div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-lg border border-gray-100 flex flex-col md:flex-row items-center gap-6 max-w-4xl mx-auto w-full hover:-translate-y-1 transition transform group">
-        <img src="${esc(im)}" alt="${esc(personName(m))}" loading="lazy" class="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover border-4 border-accent shadow-sm group-hover:scale-105 transition-transform">
-        <div class="text-center md:text-start rtl:md:text-right ltr:md:text-left flex-grow"><h4 class="text-2xl font-black text-primary mb-2">${esc(personName(m))}</h4>
-          ${t(m, 'role') ? `<span class="inline-block bg-accent/10 text-accent font-bold px-4 py-1.5 rounded-full text-sm mb-2 border border-accent/20">${esc(t(m, 'role'))}</span>` : ''}
-          ${inst ? `<p class="text-gray-500 text-sm font-bold"><i class="fas fa-university text-gray-400" aria-hidden="true"></i> ${esc(inst)}</p>` : ''}</div></div>`;
+    cnt('high', hi.length);
+    if (hc) hc.innerHTML = hi.length ? `<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">${hi.map((m, i) => {
+      const inst = t(m, 'institution'), role = t(m, 'role');
+      return `<div class="rise group relative bg-gradient-to-b from-white to-bgLight rounded-3xl border border-gray-100 shadow-lg p-8 pt-10 text-center overflow-hidden hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
+        <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-accent via-primary to-secondary"></div>
+        <i class="ico-decor fas fa-star absolute -bottom-6 rtl:-left-6 ltr:-right-6 text-accent/5 text-[9rem] rotate-12" aria-hidden="true"></i>
+        <div class="relative inline-block mb-5"><span class="absolute -inset-2 rounded-full bg-accent/15 group-hover:bg-accent/30 transition" aria-hidden="true"></span>${avatar(m, 'relative w-36 h-36 text-4xl', i, 'border-4 border-white shadow-lg')}</div>
+        ${role ? `<div><span class="inline-block bg-accent text-white font-black px-4 py-1.5 rounded-full text-sm shadow-sm">${esc(role)}</span></div>` : ''}
+        <h4 class="text-xl md:text-2xl font-black text-primary mt-3 mb-2 leading-snug relative">${esc(personName(m))}</h4>
+        ${inst ? `<p class="text-gray-500 text-sm font-bold relative"><i class="fas fa-university text-gray-300" aria-hidden="true"></i> ${esc(inst)}</p>` : ''}</div>`;
     }).join('')}</div>` : `<div class="text-gray-400 font-bold py-5">${L('لا يوجد أعضاء مضافين حالياً.', 'No members added yet.')}</div>`;
 
     const grid = (type, color, id) => {
       const box = byId(id); if (!box) return;
       const ms = all.filter((c) => c.committeeType === type), c = COM_COLOR[color];
+      cnt(type, ms.length);
       const defRole = type === 'scientific' ? L('عضو اللجنة العلمية', 'Scientific Committee Member') : L('عضو اللجنة التنظيمية', 'Organizing Committee Member');
       if (!ms.length) { box.innerHTML = none; return; }
       const pres = ms.find((m) => m.order === 1), others = ms.filter((m) => m !== pres);
+      const search = others.length > 8 ? `<div class="col-span-full relative max-w-md mx-auto w-full mb-2"><i class="fas fa-search absolute top-1/2 -translate-y-1/2 rtl:right-4 ltr:left-4 text-gray-400" aria-hidden="true"></i><input type="search" data-com-filter maxlength="60" aria-label="${L('بحث في أعضاء اللجنة', 'Search committee members')}" placeholder="${L('ابحث بالاسم أو المؤسسة…', 'Search by name or institution…')}" class="w-full px-4 rtl:pr-11 ltr:pl-11 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-primary outline-none"></div>` : '';
       const presHtml = pres ? (() => {
-        const inst = t(pres, 'institution'), im = safeImg(pres.imageUrl, 300) || AVATAR;
-        return `<div class="col-span-full mb-8"><div class="bg-white p-4 md:p-5 rounded-3xl border border-gray-100 shadow-lg max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-4 md:gap-6 relative overflow-hidden group hover:shadow-2xl transition transform hover:-translate-y-1">
-          <div class="absolute top-0 right-0 w-2 h-full ${c.bar}"></div>
-          <img src="${esc(im)}" alt="${esc(personName(pres))}" loading="lazy" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-white shadow-md z-10 relative">
-          <div class="text-center md:text-start rtl:md:text-right ltr:md:text-left flex-grow z-10 relative"><span class="font-black text-primary text-xl block mb-1.5">${esc(personName(pres))}</span>
-            ${t(pres, 'role') ? `<span class="text-sm ${c.text} font-bold inline-block px-4 py-1.5 ${c.soft} rounded-full mb-2 border ${c.ring}">${esc(t(pres, 'role'))}</span>` : ''}
-            ${inst ? `<p class="text-sm text-gray-500 font-bold mt-1"><i class="fas fa-university text-gray-400" aria-hidden="true"></i> ${esc(inst)}</p>` : ''}</div>
-          <i class="ico-decor fas fa-star ${c.star} text-6xl absolute -bottom-3 rtl:-left-3 ltr:-right-3 rotate-12 group-hover:rotate-0 transition-transform duration-500" aria-hidden="true"></i></div></div>`;
+        const inst = t(pres, 'institution'), role = t(pres, 'role');
+        return `<div class="col-span-full mb-4"><div class="rise relative overflow-hidden rounded-3xl p-6 md:p-8 text-white shadow-xl bg-gradient-to-br from-primary via-primary to-secondary flex flex-col md:flex-row items-center gap-6 max-w-3xl mx-auto">
+          <i class="ico-decor fas fa-star absolute -bottom-6 rtl:-left-6 ltr:-right-6 text-white/5 text-[9rem] rotate-12" aria-hidden="true"></i>
+          ${avatar(pres, 'w-24 h-24 text-3xl relative', 0, 'border-4 border-white/30 shadow-lg')}
+          <div class="text-center md:text-start relative">${role ? `<span class="inline-block ${c.bar} text-white text-xs font-black px-3 py-1 rounded-full mb-2">${esc(role)}</span>` : ''}
+            <h4 class="text-2xl font-black leading-snug">${esc(personName(pres))}</h4>
+            ${inst ? `<p class="text-white/80 text-sm font-bold mt-1"><i class="fas fa-university" aria-hidden="true"></i> ${esc(inst)}</p>` : ''}</div></div></div>`;
       })() : '';
-      box.innerHTML = presHtml + others.map((m) => {
-        const inst = t(m, 'institution');
-        return `<div class="rise bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition hover:-translate-y-1 relative group overflow-hidden">
-          <div class="w-1 h-full ${c.bar} absolute top-0 rtl:right-0 ltr:left-0 rounded-r-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <span class="font-black text-primary text-lg block mb-1">${esc(personName(m))}</span><span class="text-sm ${c.text} font-bold block mb-3">${esc(t(m, 'role') || defRole)}</span>
-          ${inst ? `<span class="text-sm text-gray-500 font-bold"><i class="fas fa-university text-gray-400" aria-hidden="true"></i> ${esc(inst)}</span>` : ''}</div>`;
-      }).join('');
+      box.innerHTML = search + presHtml + others.map((m, i) => {
+        const inst = t(m, 'institution'), role = t(m, 'role') || defRole;
+        const q = `${personName(m)} ${inst} ${role}`.toLowerCase();
+        return `<div class="com-card rise group relative bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition flex items-start gap-4 overflow-hidden" data-q="${esc(q)}">
+          <span class="absolute top-0 rtl:right-0 ltr:left-0 h-full w-1 ${c.bar} opacity-40 group-hover:opacity-100 transition-opacity" aria-hidden="true"></span>
+          ${avatar(m, 'w-14 h-14 text-lg', i + 1, 'shadow-sm')}
+          <div class="min-w-0"><span class="font-black text-primary block leading-snug">${esc(personName(m))}</span><span class="text-xs ${c.text} font-bold block mt-1">${esc(role)}</span>
+            ${inst ? `<span class="text-xs text-gray-500 font-bold block mt-1"><i class="fas fa-university text-gray-300" aria-hidden="true"></i> ${esc(inst)}</span>` : ''}</div></div>`;
+      }).join('') + `<div data-com-empty class="hidden col-span-full text-center text-gray-400 font-bold py-8">${L('لا توجد نتائج مطابقة.', 'No matching members.')}</div>`;
     };
     grid('scientific', 'accent', 'scientific-members');
     grid('organizing', 'blue', 'organizing-members');
   }
 
   // ---------- المتحدثون ----------
+  const TITLE_RE = /^(?:الأستاذ(?:ة)?\s+الدكتور(?:ة)?|الأستاذ(?:ة)?|الدكتور(?:ة)?|أ\.?\s?د\.?|د\.|Prof\.?|Dr\.?|Pr\.?|Mr\.?|Mrs\.?|Ms\.?)\s+/i;
+  function initials(n) {
+    let s = String(n || '').trim();
+    for (let i = 0; i < 3; i++) s = s.replace(TITLE_RE, '');
+    const w = s.split(/\s+/).filter(Boolean);
+    return ((Array.from(w[0] || '')[0] || '') + (w.length > 1 ? Array.from(w[1])[0] : '')).toUpperCase();
+  }
+  const AV_GRAD = ['from-primary to-blue-500', 'from-secondary to-green-400', 'from-accent to-yellow-500', 'from-blue-500 to-cyan-400', 'from-purple-600 to-pink-400'];
+  function avatar(m, size, i, ring) {
+    const im = safeImg(m.imageUrl, 400);
+    return im
+      ? `<img src="${esc(im)}" alt="${esc(personName(m))}" loading="lazy" class="${size} rounded-full object-cover shrink-0 ${ring}">`
+      : `<span class="${size} rounded-full bg-gradient-to-br ${AV_GRAD[i % AV_GRAD.length]} text-white font-black flex items-center justify-center shrink-0 ${ring}" aria-hidden="true">${esc(initials(personName(m)))}</span>`;
+  }
+
   function renderSpeakers() {
     const box = byId('speakers-container'), sp = arr('speakers'); if (!box) return;
     box.innerHTML = sp.length ? sp.map((s, i) => {
-      const g = SPK_GRAD[i % SPK_GRAD.length], im = safeImg(s.imageUrl, 400) || AVATAR;
-      return `<div class="bg-white rounded-[2rem] p-8 shadow-xl border border-gray-100 text-center relative overflow-hidden group">
-        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r ${g}"></div>
-        <div class="w-40 h-40 mx-auto rounded-full bg-gradient-to-tr ${g} p-1 mb-6 mt-4 shadow-lg group-hover:scale-105 transition-transform duration-500"><img src="${esc(im)}" alt="${esc(t(s, 'name'))}" loading="lazy" class="w-full h-full object-cover rounded-full border-4 border-white bg-white"></div>
-        <h3 class="text-2xl font-black text-primary mb-1">${esc(t(s, 'name'))}</h3>
-        <p class="text-accent font-bold mb-4 text-sm uppercase tracking-wide">${esc(t(s, 'role'))}</p>
-        <p class="text-gray-500 text-sm leading-relaxed mb-6">${esc(t(s, 'bio'))}</p></div>`;
+      const g = SPK_GRAD[i % SPK_GRAD.length], im = safeImg(s.imageUrl, 700), nm = t(s, 'name'), bio = t(s, 'bio'), inst = t(s, 'institution'), role = t(s, 'role');
+      const li = safeHttps(s.linkedinUrl), web = safeHttps(s.websiteUrl);
+      const photo = im
+        ? `<img src="${esc(im)}" alt="${esc(nm)}" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">`
+        : `<div class="absolute inset-0 bg-gradient-to-br ${g} flex items-center justify-center text-white text-6xl font-black" aria-hidden="true">${esc(initials(nm))}</div>`;
+      const soc = (li || web) ? `<div class="flex gap-2 mt-auto pt-3">${li ? `<a href="${esc(li)}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-9 h-9 rounded-full bg-gray-100 text-primary hover:bg-primary hover:text-white flex items-center justify-center transition"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>` : ''}${web ? `<a href="${esc(web)}" target="_blank" rel="noopener noreferrer" aria-label="${L('الموقع', 'Website')}" class="w-9 h-9 rounded-full bg-gray-100 text-primary hover:bg-primary hover:text-white flex items-center justify-center transition"><i class="fas fa-globe" aria-hidden="true"></i></a>` : ''}</div>` : '';
+      return `<article class="rise group bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden flex flex-col sm:flex-row hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+        <div class="sm:w-2/5 relative min-h-[17rem] sm:min-h-[21rem] overflow-hidden shrink-0">${photo}<div class="absolute inset-x-0 bottom-0 h-1.5 bg-gradient-to-r ${g}"></div></div>
+        <div class="p-6 md:p-7 flex flex-col gap-2 flex-grow min-w-0">
+          <span class="block h-1 w-10 bg-accent rounded-full mb-1 transition-all duration-500 group-hover:w-20" aria-hidden="true"></span>
+          <h3 class="text-xl font-black text-primary leading-snug">${esc(nm)}</h3>
+          ${role ? `<p class="text-secondary font-bold text-sm">${esc(role)}</p>` : ''}
+          ${inst ? `<p class="text-gray-500 text-sm font-bold flex items-start gap-2"><i class="fas fa-university text-gray-300 mt-1" aria-hidden="true"></i><span>${esc(inst)}</span></p>` : ''}
+          ${bio ? `<p class="spk-bio clamp4 text-gray-500 text-sm leading-relaxed mt-2">${esc(bio)}</p>${bio.length > 220 ? `<button type="button" data-action="spk-toggle" aria-expanded="false" class="self-start text-secondary font-black text-xs hover:underline">${L('اقرأ المزيد', 'Read more')} <i class="fas fa-chevron-down text-[10px]" aria-hidden="true"></i></button>` : ''}` : ''}
+          ${soc}
+        </div></article>`;
     }).join('') : `<div class="col-span-full text-center py-20 text-gray-400"><i class="fas fa-user-tie text-5xl mb-4" aria-hidden="true"></i><p class="font-bold text-lg">${L('سيتم الإعلان عن المتحدثين قريباً.', 'Speakers will be announced soon.')}</p></div>`;
   }
 
@@ -610,8 +726,8 @@
   function bindForms() {
     byId('contact-form').addEventListener('submit', (e) => {
       e.preventDefault();
-      const name = clean(byId('cf-name').value, 100), email = clean(byId('cf-email').value, 120), msg = String(byId('cf-msg').value || '').replace(/\u0000/g, '').trim().slice(0, 1500), st = byId('cf-status');
-      if (!name || !msg) return setStatus(st, false, L('يرجى ملء جميع الحقول.', 'Please fill in all fields.'));
+      const fn = clean(byId('cf-fname').value, 60), ln = clean(byId('cf-lname').value, 60), name = `${fn} ${ln}`.trim(), email = clean(byId('cf-email').value, 120), msg = String(byId('cf-msg').value || '').replace(/\u0000/g, '').trim().slice(0, 1500), st = byId('cf-status');
+      if (!fn || !ln || !msg) return setStatus(st, false, L('يرجى ملء جميع الحقول.', 'Please fill in all fields.'));
       if (!isEmail(email)) return setStatus(st, false, L('البريد الإلكتروني غير صالح.', 'Invalid email address.'));
       sendMail(`[ICEIC 2027] ${name}`, `${msg}\n\n— ${name} <${email}>`);
       setStatus(st, true, L('تم تجهيز رسالتك في برنامج البريد لديك. اضغط "إرسال" هناك لإتمامها.', 'Your message is ready in your mail app. Press "Send" there to finish.'));
@@ -654,7 +770,7 @@
   const TITLES = () => ({
     news: L('الإعلانات', 'Announcements'), about: L('حول المؤتمر', 'About Conference'), history: L('الطبعات السابقة للمؤتمر', 'Previous Editions'),
     topics: L('محاور المؤتمر', 'Conference Tracks'), speakers: L('المتحدثون الرئيسيون', 'Keynote Speakers'), program: L('برنامج المؤتمر', 'Conference Program'),
-    committees: L('لجان المؤتمر', 'Committees'), submission: L('المشاركة والنشر', 'Submission & Publication'), contact: L('اتصل بنا', 'Contact Us'),
+    committees: L('لجان المؤتمر', 'Committees'), submission: L('تقديم الأوراق', 'Submission'), contact: L('اتصل بنا', 'Contact Us'),
     venue: L('مكان الانعقاد', 'Venue'), sponsors: L('الرعاة والشركاء', 'Sponsors & Partners'),
   });
 
@@ -662,6 +778,7 @@
     const full = location.hash.slice(1);
     const [rawBase, query] = full.split('?');
     let base = rawBase, edition = null;
+    if (rawBase === 'venue') { location.replace('#home?section=home-venue'); return; }
     const em = /^history-(\d{4})$/.exec(rawBase || '');
     if (em) { edition = em[1]; base = 'edition'; }
     else if (!ROUTES.includes(rawBase)) { base = 'home'; history.replaceState(null, '', '#home'); }
@@ -744,11 +861,34 @@
       }
       else if (a === 'prog-tab') switchProgramTab(el.dataset.tab);
       else if (a === 'open-ann') openAnn(el.dataset.id);
+      else if (a === 'ann-prev') annShow(annIdx - 1);
+      else if (a === 'ann-next') annShow(annIdx + 1);
+      else if (a === 'ann-go') annShow(Number(el.dataset.i) || 0);
+      else if (a === 'ann-toggle') { annPaused = !annPaused; annSchedule(); }
+      else if (a === 'spk-toggle') {
+        const p = el.previousElementSibling, open = el.getAttribute('aria-expanded') !== 'true';
+        el.setAttribute('aria-expanded', String(open)); if (p) p.classList.toggle('clamp4', !open);
+        el.innerHTML = `${open ? L('عرض أقل', 'Show less') : L('اقرأ المزيد', 'Read more')} <i class="fas fa-chevron-${open ? 'up' : 'down'} text-[10px]" aria-hidden="true"></i>`;
+      }
       else if (a === 'open-img') {
         const src = safeImg(el.dataset.src); if (!src) return;
         const im = byId('lightbox-img'); im.src = src; im.alt = el.dataset.alt || ''; openModal('lightbox');
       }
     });
+    document.addEventListener('input', (ev) => {
+      const el = ev.target; if (!(el instanceof Element) || !el.matches('[data-com-filter]')) return;
+      const q = el.value.trim().toLowerCase(), wrap = el.closest('.com-content'); if (!wrap) return;
+      let shown = 0;
+      wrap.querySelectorAll('.com-card').forEach((c) => { const ok = !q || (c.dataset.q || '').includes(q); c.classList.toggle('hidden', !ok); if (ok) shown++; });
+      const em = wrap.querySelector('[data-com-empty]'); if (em) em.classList.toggle('hidden', shown > 0);
+    });
+    const ns = byId('home-news-section');
+    if (ns) {
+      const hov = (v) => () => { annHover = v; if (v) { clearTimeout(annTimer); annTimer = null; const r = byId('ann-carousel'); if (r) r.classList.add('ann-paused'); } else annSchedule(); };
+      ns.addEventListener('mouseenter', hov(true)); ns.addEventListener('mouseleave', hov(false));
+      ns.addEventListener('focusin', hov(true)); ns.addEventListener('focusout', hov(false));
+    }
+    document.addEventListener('visibilitychange', () => { if (annN > 1) annSchedule(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') $$('.modal.flex').forEach((m) => closeModal(m.id)); });
     // احتياط الصور المعطوبة (بديل onerror المضمّن)
     document.addEventListener('error', (e) => {

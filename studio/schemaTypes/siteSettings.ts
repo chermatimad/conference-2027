@@ -51,6 +51,11 @@ export const siteSettings = defineType({
     }),
     defineField({name: 'eventEnd', title: 'تاريخ نهاية المؤتمر', type: 'datetime', group: 'event'}),
     defineField({
+      name: 'announcementInterval', title: 'مدة بقاء كل إعلان في الصفحة الرئيسية (بالثواني)', type: 'number', group: 'event',
+      initialValue: 20, description: 'الإعلانات تتبدّل تلقائياً. القيمة بين 5 و120 ثانية، والافتراضي 20.',
+      validation: (R) => R.min(5).max(120).integer(),
+    }),
+    defineField({
       name: 'registrationOpen', title: 'التسجيل مفتوح؟', type: 'boolean', initialValue: true, group: 'event',
     }),
     defineField({
@@ -62,6 +67,10 @@ export const siteSettings = defineType({
       name: 'contactEmail', title: 'البريد الرسمي', type: 'string', group: 'contact',
       initialValue: 'digitalcell.fsecg@gmail.com',
       validation: (R) => R.required().regex(/^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/, {name: 'email'}).max(120),
+    }),
+    defineField({
+      name: 'contactEmail2', title: 'بريد إضافي (اختياري، يظهر في صفحة اتصل بنا)', type: 'string', group: 'contact',
+      validation: (R) => R.regex(/^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/, {name: 'email'}).max(120),
     }),
     defineField({name: 'phone', title: 'الهاتف', type: 'string', group: 'contact', validation: (R) => R.max(40)}),
     ...bilingual('venueName', 'اسم المؤسسة / المكان').map((f) => ({...f, group: 'contact'})),

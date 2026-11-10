@@ -22,7 +22,7 @@ export const homePage = defineType({
             name: 'target', title: 'الصفحة التي تفتحها', type: 'string', validation: (R) => R.required(),
             options: {list: [
               {title: 'المحاور', value: 'topics'}, {title: 'المتحدثون', value: 'speakers'}, {title: 'البرنامج', value: 'program'},
-              {title: 'المشاركة والنشر', value: 'submission'}, {title: 'الإعلانات', value: 'news'}, {title: 'حول المؤتمر', value: 'about'},
+              {title: 'تقديم الأوراق', value: 'submission'}, {title: 'الإعلانات', value: 'news'}, {title: 'حول المؤتمر', value: 'about'},
               {title: 'تاريخ المؤتمر', value: 'history'}, {title: 'اللجان', value: 'committees'}, {title: 'الرعاة', value: 'sponsors'},
               {title: 'المكان', value: 'venue'}, {title: 'اتصل بنا', value: 'contact'},
             ]},
@@ -102,7 +102,7 @@ export const aboutPage = defineType({
 
 export const submissionPage = defineType({
   name: 'submissionPage',
-  title: 'صفحة: المشاركة والنشر',
+  title: 'صفحة: تقديم الأوراق',
   type: 'document',
   fields: [
     defineField({
@@ -140,7 +140,7 @@ export const submissionPage = defineType({
       validation: (R) => R.max(12),
     }),
   ],
-  preview: {prepare: () => ({title: 'صفحة: المشاركة والنشر'})},
+  preview: {prepare: () => ({title: 'صفحة: تقديم الأوراق'})},
 })
 
 export const importantDate = defineType({

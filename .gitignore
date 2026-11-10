@@ -2,3 +2,10 @@ node_modules
 .DS_Store
 .env
 .env.*
+
+# نسخة PHP (للتسليم لمسؤول الخادم لاحقاً): لا تُرفع إلى GitHub
+/admin/
+/api.php
+/login.php
+/data/
+/uploads/

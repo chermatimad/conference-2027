@@ -51,9 +51,12 @@ export const speaker = defineType({
   type: 'document',
   fields: [
     ...bilingual('name', 'الاسم', {required: true}),
-    ...bilingual('role', 'الصفة / المؤسسة'),
-    ...bilingual('bio', 'نبذة', {type: 'text', rows: 4, max: 800}),
-    imageField('image', 'الصورة'),
+    ...bilingual('role', 'المنصب (مثال: رئيس جامعة، مدير عام)'),
+    ...bilingual('institution', 'المؤسسة والبلد (مثال: جامعة إسطنبول، تركيا)'),
+    ...bilingual('bio', 'نبذة (تظهر مقتطعة مع «اقرأ المزيد»)', {type: 'text', rows: 6, max: 2500}),
+    imageField('image', 'الصورة (يُفضّل صورة عمودية أو مربعة لوجه واضح)'),
+    defineField({name: 'linkedinUrl', title: 'رابط لينكد إن (اختياري)', type: 'url', validation: safeUrl()}),
+    defineField({name: 'websiteUrl', title: 'رابط الموقع أو الملف الشخصي (اختياري)', type: 'url', validation: safeUrl()}),
     defineField({name: 'order', title: 'الترتيب', type: 'number', initialValue: 10}),
   ],
   orderings: [{title: 'الترتيب', name: 'o', by: [{field: 'order', direction: 'asc'}]}],
@@ -68,7 +71,7 @@ export const committee = defineType({
   fields: [
     defineField({
       name: 'committeeType', title: 'اللجنة', type: 'string',
-      options: {layout: 'radio', list: [{title: 'اللجنة الشرفية', value: 'high'}, {title: 'اللجنة العلمية', value: 'scientific'}, {title: 'اللجنة التنظيمية', value: 'organizing'}]},
+      options: {layout: 'radio', list: [{title: 'اللجنة العليا للمؤتمر', value: 'high'}, {title: 'اللجنة العلمية', value: 'scientific'}, {title: 'اللجنة التنظيمية', value: 'organizing'}]},
       validation: (R) => R.required(),
     }),
     ...bilingual('name', 'الاسم', {required: true}),
@@ -87,7 +90,7 @@ export const committee = defineType({
     select: {title: 'name_ar', type: 'committeeType', role: 'role_ar', media: 'image'},
     prepare: ({title, type, role, media}) => ({
       title,
-      subtitle: `${{high: 'الشرفية', scientific: 'العلمية', organizing: 'التنظيمية'}[type as string] ?? ''} — ${role ?? ''}`,
+      subtitle: `${{high: 'العليا', scientific: 'العلمية', organizing: 'التنظيمية'}[type as string] ?? ''} — ${role ?? ''}`,
       media,
     }),
   },

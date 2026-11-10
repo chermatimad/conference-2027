@@ -65,3 +65,18 @@ html[data-icons="plain"] .ico-tile { background: transparent !important; box-sha
 .rise:nth-child(5) { animation-delay: .32s; } .rise:nth-child(6) { animation-delay: .4s; } .rise:nth-child(n+7) { animation-delay: .48s; }
 .lively:hover { background-image: linear-gradient(180deg, rgb(var(--c-accent) / .06), transparent 60%); }
 @media (prefers-reduced-motion: reduce) { .rise { animation: none !important; } }
+
+/* ---- شريط الإعلانات المتبدّل ---- */
+.ann-slides { display: grid; }
+.ann-slide { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease, visibility 0s linear .6s; }
+.ann-slide.on { opacity: 1; visibility: visible; transform: none; transition: opacity .6s ease, transform .6s ease, visibility 0s; }
+.ann-progress { height: 3px; background: rgb(var(--c-primary) / .08); border-radius: 3px; overflow: hidden; }
+.ann-bar { display: block; height: 100%; width: 0; background: rgb(var(--c-accent)); animation: annBar linear forwards; }
+.ann-paused .ann-bar { animation-play-state: paused; }
+@keyframes annBar { from { width: 0; } to { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .ann-slide { transition: none; } .ann-bar { animation: none; width: 100%; } }
+
+/* ---- نبذة المتحدث المقتطعة ---- */
+.clamp4 { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.com-tab .cnt { background: rgb(128 128 128 / .2); }
+.com-tab .cnt:empty { display: none; }
