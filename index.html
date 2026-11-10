@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="assets/vendor/fa/css/all.min.css">
     <link rel="stylesheet" href="assets/vendor/aos/aos.css">
-    <link rel="stylesheet" href="assets/css/tailwind.css?v=20261110b">
+    <link rel="stylesheet" href="assets/css/tailwind.css?v=20261110c">
 </head>
 <body class="font-cairo text-gray-800 transition-all duration-300 flex flex-col min-h-screen">
 
@@ -166,7 +166,7 @@
             <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px]"></div>
             <div class="container mx-auto px-4 sm:px-8 relative z-10">
                 <div class="text-center mb-16" data-aos="fade-up">
-                    <h2 id="ov-kicker" class="text-accent font-black text-lg tracking-widest uppercase mb-2">مرحباً بكم</h2>
+                    <h2 id="ov-kicker" class="text-accent font-black text-lg tracking-widest uppercase mb-2">تعرّف على المؤتمر</h2>
                     <h3 id="ov-title" class="text-4xl md:text-5xl font-black text-primary mb-4">نظرة عامة على المؤتمر</h3>
                     <div class="w-20 h-1.5 bg-secondary mx-auto rounded-full"></div>
                 </div>
@@ -221,6 +221,21 @@
             </div>
         </section>
 
+        <!-- Keynote speakers (home) -->
+        <section id="home-speakers" class="hidden py-24 bg-white border-t border-gray-100 scroll-mt-20">
+            <div class="container mx-auto px-4 sm:px-8">
+                <div class="text-center mb-14" data-aos="fade-up">
+                    <span class="text-accent font-bold text-sm" data-ar="نخبة من الخبراء" data-en="Distinguished Guests">نخبة من الخبراء</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-primary mt-1 mb-4" data-ar="المتحدثون الرئيسيون" data-en="Keynote Speakers">المتحدثون الرئيسيون</h2>
+                    <div class="w-20 h-1.5 bg-accent mx-auto rounded-full"></div>
+                </div>
+                <div id="home-speakers-root" class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto"></div>
+                <div class="text-center mt-12">
+                    <a href="#speakers" class="inline-flex items-center gap-3 bg-primary hover:bg-secondary text-white font-bold py-3 px-8 rounded-xl transition shadow-md"><span data-ar="عرض جميع المتحدثين" data-en="View All Speakers">عرض جميع المتحدثين</span> <i class="fas fa-arrow-left rtl:rotate-0 ltr:rotate-180" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </section>
+
         <!-- Sponsors (يُملأ من لوحة التحكم) -->
         <section id="home-sponsors" class="hidden py-24 bg-white border-t border-gray-100 scroll-mt-20">
             <div class="container mx-auto px-4 sm:px-8">
@@ -231,7 +246,7 @@
                 </div>
                 <div id="home-sponsors-root" class="max-w-6xl mx-auto"></div>
                 <div class="text-center mt-12">
-                    <a href="#sponsors" class="inline-flex items-center gap-3 bg-primary hover:bg-secondary text-white font-bold py-3 px-8 rounded-xl transition shadow-md"><span data-ar="جميع الرعاة والشركاء" data-en="View All Sponsors">جميع الرعاة والشركاء</span> <i class="fas fa-arrow-left rtl:rotate-0 ltr:rotate-180" aria-hidden="true"></i></a>
+                    <a href="#sponsors" class="inline-flex items-center gap-3 bg-primary hover:bg-secondary text-white font-bold py-3 px-8 rounded-xl transition shadow-md"><span data-ar="عرض جميع الرعاة" data-en="View All Sponsors">عرض جميع الرعاة</span> <i class="fas fa-arrow-left rtl:rotate-0 ltr:rotate-180" aria-hidden="true"></i></a>
                 </div>
             </div>
         </section>
@@ -260,12 +275,15 @@
                             <h3 class="text-accent font-black text-sm mb-2" data-ar="الاستقبال" data-en="Reception Info">الاستقبال</h3>
                             <p class="flex items-center gap-3 font-bold" dir="ltr"><i class="fas fa-phone text-accent" aria-hidden="true"></i><span id="venue-phone"></span></p>
                         </div>
-                        <a id="venue-link" href="https://maps.app.goo.gl/xHB9GtWvQpGnTqDV8" target="_blank" rel="noopener noreferrer" class="relative mt-1 inline-flex items-center justify-center gap-3 bg-white text-primary hover:bg-accent hover:text-white font-black py-3.5 px-6 rounded-xl transition shadow-lg">
-                            <i class="fas fa-location-arrow" aria-hidden="true"></i><span data-ar="الاتجاهات" data-en="Get Directions">الاتجاهات</span>
-                        </a>
                     </div>
                     <div class="lg:col-span-3 h-[360px] lg:h-auto lg:min-h-[420px] rounded-3xl overflow-hidden shadow-xl border border-gray-100 relative">
-                        <iframe id="venue-map" title="Map" class="absolute inset-0 w-full h-full border-0" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+                        <a id="venue-link" href="https://maps.app.goo.gl/xHB9GtWvQpGnTqDV8" target="_blank" rel="noopener noreferrer" class="group absolute inset-0 bg-primary text-white flex flex-col items-center justify-center gap-5 p-8 text-center overflow-hidden">
+                            <span class="absolute inset-0 opacity-10 dots-pattern" aria-hidden="true"></span>
+                            <i class="fas fa-map-marked-alt absolute -bottom-6 rtl:-left-6 ltr:-right-6 text-white/5 text-[11rem]" aria-hidden="true"></i>
+                            <span class="relative w-24 h-24 rounded-full bg-accent/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500"><i class="fas fa-map-marker-alt text-accent text-5xl" aria-hidden="true"></i></span>
+                            <span class="relative font-black text-xl leading-snug" id="venue-map-name"></span>
+                            <span class="relative inline-flex items-center gap-3 bg-white text-primary group-hover:bg-accent group-hover:text-white font-black py-3.5 px-7 rounded-xl transition shadow-lg"><i class="fas fa-external-link-alt" aria-hidden="true"></i><span data-ar="فتح في خرائط Google" data-en="Open in Google Maps">فتح في خرائط Google</span></span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -438,6 +456,15 @@
         <i class="fas fa-chevron-up" aria-hidden="true"></i>
     </button>
 
+    <!-- Speaker modal -->
+    <div id="spkModal" class="modal hidden fixed inset-0 z-[110] items-center justify-center px-4" role="dialog" aria-modal="true" aria-labelledby="spk-title">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-md" data-action="close-modal" data-target="spkModal"></div>
+        <div class="bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl relative z-10">
+            <button type="button" data-action="close-modal" data-target="spkModal" aria-label="Close" class="absolute rtl:left-4 ltr:right-4 top-4 z-20 w-10 h-10 rounded-full bg-black/40 text-white hover:bg-black/60"><i class="fas fa-times" aria-hidden="true"></i></button>
+            <div id="spk-body"></div>
+        </div>
+    </div>
+
     <!-- Announcement modal -->
     <div id="annModal" class="modal hidden fixed inset-0 z-[110] items-center justify-center px-4" role="dialog" aria-modal="true" aria-labelledby="ann-title">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-md" data-action="close-modal" data-target="annModal"></div>
@@ -455,6 +482,6 @@
     </div>
 
     <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/js/app.js?v=20261110b" defer></script>
+    <script src="assets/js/app.js?v=20261110c" defer></script>
 </body>
 </html>

@@ -82,7 +82,7 @@ export const committee = defineType({
     ...bilingual('name', 'الاسم', {required: true}),
     ...bilingual('role', 'الصفة (رئيس، عضو...)'),
     ...bilingual('institution', 'المؤسسة'),
-    imageField('image', 'الصورة (تظهر للرئيس فقط)'),
+    imageField('image', 'الصورة (اختيارية — تظهر فقط إذا أضفتها)'),
     defineField({
       name: 'order', title: 'الترتيب (1 = الرئيس)', type: 'number', initialValue: 10,
       validation: (R) => R.required().integer().min(1),

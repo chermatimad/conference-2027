@@ -115,6 +115,10 @@ export const submissionPage = defineType({
       validation: (R) => R.max(20),
     }),
     defineField({
+      name: 'platformGuideFile', title: 'دليل استخدام منصة الإرسال (PDF) — اختياري، يوجد دليل افتراضي', type: 'file',
+      options: {accept: '.pdf'},
+    }),
+    defineField({
       name: 'templateFileAr', title: 'قالب البحث — النسخة العربية (ملف Word)', type: 'file',
       options: {accept: '.doc,.docx,.pdf,.odt'},
     }),
