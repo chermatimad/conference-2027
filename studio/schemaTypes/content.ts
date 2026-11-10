@@ -28,6 +28,11 @@ export const announcement = defineType({
       initialValue: () => new Date().toISOString(), validation: (R) => R.required(),
     }),
     defineField({name: 'expireAt', title: 'ينتهي العرض في (اختياري)', type: 'datetime'}),
+    defineField({
+      name: 'displaySeconds', title: 'مدة ظهور هذا الإعلان في الشريط الرئيسي (بالثواني، اختياري)', type: 'number',
+      description: 'اتركه فارغاً لاستعمال المدة العامة من «إعلانات الموقع ← مدة بقاء كل إعلان». القيمة بين 5 و120.',
+      validation: (R) => R.min(5).max(120).integer(),
+    }),
     defineField({name: 'pinned', title: 'تثبيت في الأعلى', type: 'boolean', initialValue: false}),
     defineField({
       name: 'popup', title: 'عرضه كنافذة منبثقة عند الدخول (للإعلانات الهامة)', type: 'boolean', initialValue: false,
@@ -47,7 +52,7 @@ export const announcement = defineType({
 
 export const speaker = defineType({
   name: 'speaker',
-  title: 'المتحدثون',
+  title: 'المتحدثون الرئيسيون (Keynote)',
   type: 'document',
   fields: [
     ...bilingual('name', 'الاسم', {required: true}),

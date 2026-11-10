@@ -21,7 +21,7 @@ export const homePage = defineType({
           defineField({
             name: 'target', title: 'الصفحة التي تفتحها', type: 'string', validation: (R) => R.required(),
             options: {list: [
-              {title: 'المحاور', value: 'topics'}, {title: 'المتحدثون', value: 'speakers'}, {title: 'البرنامج', value: 'program'},
+              {title: 'المحاور', value: 'topics'}, {title: 'المتحدثون الرئيسيون', value: 'speakers'}, {title: 'البرنامج', value: 'program'},
               {title: 'تقديم الأوراق', value: 'submission'}, {title: 'الإعلانات', value: 'news'}, {title: 'حول المؤتمر', value: 'about'},
               {title: 'تاريخ المؤتمر', value: 'history'}, {title: 'اللجان', value: 'committees'}, {title: 'الرعاة', value: 'sponsors'},
               {title: 'المكان', value: 'venue'}, {title: 'اتصل بنا', value: 'contact'},

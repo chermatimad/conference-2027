@@ -56,7 +56,7 @@ export const siteSettings = defineType({
       validation: (R) => R.min(5).max(120).integer(),
     }),
     defineField({
-      name: 'registrationOpen', title: 'التسجيل مفتوح؟', type: 'boolean', initialValue: true, group: 'event',
+      name: 'registrationOpen', title: 'استقبال الأوراق مفتوح؟ (يُظهر زر «إرسال الورقة البحثية»)', type: 'boolean', initialValue: true, group: 'event',
     }),
     defineField({
       name: 'paperSubmissionUrl', title: 'رابط منصة إرسال الأوراق', type: 'url', group: 'event',

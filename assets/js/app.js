@@ -129,7 +129,7 @@
     "about": *[_id == "aboutPage"][0]{ ..., ${img('preambleImage')} },
     "submission": *[_id == "submissionPage"][0]{ ..., "templateUrl": templateFile.asset->url, "templateArUrl": templateFileAr.asset->url, "templateEnUrl": templateFileEn.asset->url },
     "announcements": *[_type == "announcement" && publishAt <= now() && (!defined(expireAt) || expireAt > now())] | order(pinned desc, publishAt desc)[0...60]{
-      _id, kind, title_ar, title_en, body_ar, body_en, linkUrl, linkLabel_ar, linkLabel_en, publishAt, expireAt, pinned, popup, "imageUrl": image.asset->url },
+      _id, kind, title_ar, title_en, body_ar, body_en, linkUrl, linkLabel_ar, linkLabel_en, publishAt, expireAt, pinned, popup, displaySeconds, "imageUrl": image.asset->url },
     "tracks": *[_type == "track"] | order(order asc){ _id, order, kicker_ar, kicker_en, title_ar, title_en, description_ar, description_en, topics, icon, color },
     "speakers": *[_type == "speaker"] | order(order asc){ _id, name_ar, name_en, role_ar, role_en, institution_ar, institution_en, bio_ar, bio_en, linkedinUrl, websiteUrl, order, "imageUrl": image.asset->url },
     "committee": *[_type == "committee"] | order(order asc){ _id, committeeType, name_ar, name_en, role_ar, role_en, institution_ar, institution_en, order, "imageUrl": image.asset->url },
@@ -278,7 +278,7 @@
     const custom = (Array.isArray(home.gatewayCards) ? home.gatewayCards : []).filter((c) => c && GATE_TARGETS.includes(c.target));
     const cards = custom.length ? custom.map((c) => ({target: c.target, title: t(c, 'title'), text: t(c, 'text')})) : [
       {target: 'topics', title: L('المحاور العلمية', 'Scientific Tracks'), text: nTracks ? L(`${nTracks} مسارات بحثية دقيقة.`, `${nTracks} specific research tracks.`) : L('مسارات بحثية دقيقة.', 'Specific research tracks.')},
-      {target: 'speakers', title: L('المتحدثون', 'Speakers'), text: L('خبراء وصناع قرار دوليون.', 'International experts & leaders.')},
+      {target: 'speakers', title: L('المتحدثون الرئيسيون', 'Keynote Speakers'), text: L('خبراء وصناع قرار دوليون.', 'International experts & leaders.')},
       {target: 'program', title: L('البرنامج', 'Program'), text: L('الجدول الزمني للفعاليات.', 'Event schedule and timeline.')},
       {target: 'submission', title: L('تقديم الأوراق', 'Submission'), text: L('الشروط، التواريخ، والتقديم.', 'Rules, dates, and submission.')},
     ];
@@ -352,25 +352,31 @@
 
 
   // ---------- شريط الإعلانات المتبدّل في الرئيسية ----------
-  let annIdx = 0, annTimer = null, annPaused = false, annHover = false, annN = 0;
-  const annSecs = () => { const v = Number((DATA.settings || {}).announcementInterval); return Math.min(120, Math.max(5, Number.isFinite(v) && v > 0 ? Math.round(v) : 20)); };
+  let annIdx = 0, annTimer = null, annPaused = false, annHover = false, annN = 0, annItems = [];
+  const annDefault = () => { const v = Number((DATA.settings || {}).announcementInterval); return Math.min(120, Math.max(5, Number.isFinite(v) && v > 0 ? Math.round(v) : 20)); };
+  const annSecs = (i) => { const v = Number((annItems[i] || {}).displaySeconds); return Number.isFinite(v) && v >= 5 ? Math.min(120, Math.round(v)) : annDefault(); };
   const reduceMotion = () => !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
   function annSlide(a, i, n) {
-    const im = safeImg(a.imageUrl, 900), link = safeHttps(a.linkUrl);
+    const im = safeImg(a.imageUrl, 900), link = safeHttps(a.linkUrl), d = new Date(a.publishAt), okD = !isNaN(d);
     const media = im
-      ? `<div class="md:w-2/5 relative min-h-[14rem] md:min-h-full"><img src="${esc(im)}" alt="" loading="lazy" class="absolute inset-0 w-full h-full object-cover"></div>`
-      : `<div class="md:w-2/5 relative min-h-[9rem] md:min-h-full bg-gradient-to-br from-primary via-primary to-secondary flex items-center justify-center overflow-hidden"><i class="fas fa-bullhorn text-white/10 text-[10rem] -rotate-12" aria-hidden="true"></i><i class="fas fa-bullhorn absolute text-accent text-5xl" aria-hidden="true"></i></div>`;
+      ? `<img src="${esc(im)}" alt="" loading="lazy" class="absolute inset-0 w-full h-full object-cover"><div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent md:bg-gradient-to-l md:from-transparent md:via-transparent md:to-primary/60"></div>`
+      : `<div class="absolute inset-0 bg-white/5 flex items-center justify-center overflow-hidden"><i class="fas fa-bullhorn text-white/10 text-[11rem] -rotate-12" aria-hidden="true"></i><i class="fas fa-bullhorn absolute text-accent text-5xl" aria-hidden="true"></i></div>`;
+    const badge = a.kind === 'important'
+      ? `<span class="inline-flex items-center gap-1.5 bg-accent text-white px-3.5 py-1 rounded-full text-xs font-black"><i class="fas fa-star" aria-hidden="true"></i>${L('هام', 'Important')}</span>`
+      : `<span class="inline-flex items-center gap-1.5 bg-white/15 text-white px-3.5 py-1 rounded-full text-xs font-black"><i class="fas fa-newspaper" aria-hidden="true"></i>${L('إعلان', 'News')}</span>`;
+    const dateBox = okD ? `<div class="absolute top-5 rtl:right-5 ltr:left-5 bg-white text-primary rounded-2xl px-4 py-2 text-center shadow-lg leading-tight"><span class="block text-3xl font-black">${esc(fmtDate(a.publishAt, {day: '2-digit'}))}</span><span class="block text-xs font-bold">${esc(fmtDate(a.publishAt, {month: 'long', year: 'numeric'}))}</span></div>` : '';
     return `<article class="ann-slide" data-ann-slide="${i}" role="group" aria-roledescription="slide" aria-label="${i + 1} / ${n}" aria-hidden="${i ? 'true' : 'false'}">
-      <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden flex flex-col md:flex-row min-h-[17rem]">
-        ${media}
-        <div class="md:w-3/5 p-7 md:p-10 flex flex-col gap-4 justify-center">
-          <div class="flex items-center gap-3 flex-wrap">${annBadge(a)}<time class="text-xs text-gray-400 font-bold" datetime="${esc(a.publishAt)}">${esc(fmtDate(a.publishAt, {day: '2-digit', month: 'long', year: 'numeric'}))}</time>${a.pinned ? '<i class="fas fa-thumbtack text-accent text-sm" aria-hidden="true"></i>' : ''}</div>
-          <h3 class="text-2xl md:text-3xl font-black text-primary leading-snug">${esc(t(a, 'title'))}</h3>
-          <p class="text-gray-500 leading-relaxed">${esc(excerpt(t(a, 'body'), 230))}</p>
-          <div class="flex flex-wrap gap-3 mt-1">
-            <button type="button" data-action="open-ann" data-id="${esc(a._id)}" class="inline-flex items-center gap-2 bg-primary hover:bg-secondary text-white font-bold text-sm py-2.5 px-6 rounded-xl transition">${L('اقرأ المزيد', 'Read more')} <i class="fas fa-arrow-left rtl:rotate-0 ltr:rotate-180 text-xs" aria-hidden="true"></i></button>
-            ${link ? `<a href="${esc(link)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 border-2 border-accent/40 text-accent hover:bg-accent hover:text-white font-bold text-sm py-2.5 px-5 rounded-xl transition">${esc(t(a, 'linkLabel') || L('فتح الرابط', 'Open link'))} <i class="fas fa-external-link-alt text-xs" aria-hidden="true"></i></a>` : ''}
+      <div class="relative overflow-hidden rounded-3xl bg-primary text-white shadow-2xl grid grid-cols-1 md:grid-cols-5 min-h-[21rem]">
+        <div class="absolute inset-0 opacity-10 dots-pattern pointer-events-none" aria-hidden="true"></div>
+        <div class="md:col-span-2 relative min-h-[13rem]">${media}${dateBox}</div>
+        <div class="md:col-span-3 relative p-7 md:p-12 flex flex-col justify-center gap-4">
+          <div class="flex items-center justify-between gap-3">${badge}<span class="text-white/50 text-sm font-black tracking-widest" dir="ltr">${String(i + 1).padStart(2, '0')} / ${String(n).padStart(2, '0')}</span></div>
+          <h3 class="text-2xl md:text-4xl font-black leading-snug">${a.pinned ? '<i class="fas fa-thumbtack text-accent text-lg" aria-hidden="true"></i> ' : ''}${esc(t(a, 'title'))}</h3>
+          <p class="text-white/80 text-base md:text-lg leading-relaxed">${esc(excerpt(t(a, 'body'), 210))}</p>
+          <div class="flex flex-wrap gap-3 mt-2">
+            <button type="button" data-action="open-ann" data-id="${esc(a._id)}" class="inline-flex items-center gap-2 bg-accent hover:bg-white hover:text-primary text-white font-black text-sm py-3 px-7 rounded-xl transition shadow-lg">${L('اقرأ المزيد', 'Read more')} <i class="fas fa-arrow-left rtl:rotate-0 ltr:rotate-180 text-xs" aria-hidden="true"></i></button>
+            ${link ? `<a href="${esc(link)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 border-2 border-white/30 hover:bg-white hover:text-primary text-white font-bold text-sm py-3 px-6 rounded-xl transition">${esc(t(a, 'linkLabel') || L('فتح الرابط', 'Open link'))} <i class="fas fa-external-link-alt text-xs" aria-hidden="true"></i></a>` : ''}
           </div>
         </div>
       </div></article>`;
@@ -378,22 +384,19 @@
 
   function renderAnnCarousel(list) {
     const sec = byId('home-news-section'), root = byId('ann-carousel'); if (!sec || !root) return;
-    const items = list.slice(0, 8); annN = items.length;
+    annItems = list.slice(0, 8); annN = annItems.length;
     sec.classList.toggle('hidden', !annN);
     clearTimeout(annTimer); annTimer = null;
     if (!annN) { root.innerHTML = ''; return; }
     if (annIdx >= annN) annIdx = 0;
-    const btn = 'w-10 h-10 rounded-full bg-white border border-gray-200 text-primary hover:bg-primary hover:text-white transition shadow-sm';
-    root.innerHTML = `<div class="ann-slides">${items.map((a, i) => annSlide(a, i, annN)).join('')}</div>` + (annN > 1 ? `
-      <div class="flex items-center justify-between gap-4 mt-5">
-        <div class="flex items-center gap-2" role="group" aria-label="${L('التنقل بين الإعلانات', 'Announcement navigation')}">
-          <button type="button" data-action="ann-prev" aria-label="${L('السابق', 'Previous')}" class="${btn}"><i class="fas fa-chevron-right rtl:rotate-0 ltr:rotate-180" aria-hidden="true"></i></button>
-          <button type="button" data-action="ann-next" aria-label="${L('التالي', 'Next')}" class="${btn}"><i class="fas fa-chevron-left rtl:rotate-0 ltr:rotate-180" aria-hidden="true"></i></button>
-          <button type="button" data-action="ann-toggle" id="ann-toggle" class="${btn}"><i id="ann-toggle-ico" class="fas fa-pause text-xs" aria-hidden="true"></i></button>
-        </div>
-        <div class="flex items-center gap-2">${items.map((_, i) => `<button type="button" data-action="ann-go" data-i="${i}" aria-label="${i + 1}" class="ann-dot h-2.5 w-2.5 rounded-full bg-gray-300 transition-all duration-300"></button>`).join('')}</div>
-      </div>
-      <div class="ann-progress mt-4" aria-hidden="true"><span class="ann-bar" id="ann-bar"></span></div>` : '');
+    const btn = 'w-10 h-10 shrink-0 rounded-full bg-white border border-gray-200 text-primary hover:bg-primary hover:text-white transition shadow-sm';
+    root.innerHTML = `<div class="ann-slides">${annItems.map((a, i) => annSlide(a, i, annN)).join('')}</div>` + (annN > 1 ? `
+      <div class="flex items-center gap-3 mt-5" role="group" aria-label="${L('التنقل بين الإعلانات', 'Announcement navigation')}">
+        <button type="button" data-action="ann-prev" aria-label="${L('السابق', 'Previous')}" class="${btn}"><i class="fas fa-chevron-right rtl:rotate-0 ltr:rotate-180" aria-hidden="true"></i></button>
+        <div class="flex flex-grow items-center gap-2">${annItems.map((_, i) => `<button type="button" data-action="ann-go" data-i="${i}" aria-label="${i + 1}" class="ann-seg"><span class="ann-seg-fill"></span></button>`).join('')}</div>
+        <button type="button" data-action="ann-next" aria-label="${L('التالي', 'Next')}" class="${btn}"><i class="fas fa-chevron-left rtl:rotate-0 ltr:rotate-180" aria-hidden="true"></i></button>
+        <button type="button" data-action="ann-toggle" id="ann-toggle" class="${btn}"><i id="ann-toggle-ico" class="fas fa-pause text-xs" aria-hidden="true"></i></button>
+      </div>` : '');
     annShow(annIdx);
   }
 
@@ -401,23 +404,24 @@
     const slides = $$('[data-ann-slide]'); if (!slides.length) return;
     annIdx = ((i % slides.length) + slides.length) % slides.length;
     slides.forEach((s, k) => { const on = k === annIdx; s.classList.toggle('on', on); s.setAttribute('aria-hidden', String(!on)); });
-    $$('.ann-dot').forEach((d, k) => {
-      const on = k === annIdx;
-      d.classList.toggle('bg-accent', on); d.classList.toggle('w-8', on); d.classList.toggle('bg-gray-300', !on); d.classList.toggle('w-2.5', !on); d.setAttribute('aria-current', String(on));
-    });
     annSchedule();
   }
 
   function annSchedule() {
     clearTimeout(annTimer); annTimer = null;
-    const root = byId('ann-carousel'), bar = byId('ann-bar');
+    const root = byId('ann-carousel');
     const running = annN > 1 && !annPaused && !annHover && !reduceMotion() && !document.hidden;
     if (root) root.classList.toggle('ann-paused', !running);
-    if (bar) { bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = ''; bar.style.animationDuration = annSecs() + 's'; }
+    $$('.ann-seg-fill').forEach((f, k) => {
+      f.classList.remove('ann-seg-cur', 'ann-seg-done');
+      if (k < annIdx) f.classList.add('ann-seg-done');
+      else if (k === annIdx) { void f.offsetWidth; f.style.animationDuration = annSecs(k) + 's'; f.classList.add('ann-seg-cur'); }
+    });
+    $$('.ann-seg').forEach((b, k) => b.setAttribute('aria-current', String(k === annIdx)));
     const ico = byId('ann-toggle-ico'), tg = byId('ann-toggle');
     if (ico) ico.className = `fas ${annPaused ? 'fa-play' : 'fa-pause'} text-xs`;
     if (tg) tg.setAttribute('aria-label', annPaused ? L('تشغيل التبديل التلقائي', 'Resume autoplay') : L('إيقاف التبديل التلقائي', 'Pause autoplay'));
-    if (running) annTimer = setTimeout(() => annShow(annIdx + 1), annSecs() * 1000);
+    if (running) annTimer = setTimeout(() => annShow(annIdx + 1), annSecs(annIdx) * 1000);
   }
 
   function openAnn(id) {
@@ -563,13 +567,13 @@
     // اللجنة العليا: بطاقات كبيرة بارزة
     const hi = all.filter((c) => c.committeeType === 'high'), hc = byId('high-members');
     cnt('high', hi.length);
-    if (hc) hc.innerHTML = hi.length ? `<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">${hi.map((m, i) => {
+    if (hc) hc.innerHTML = hi.length ? `<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">${hi.map((m) => {
       const inst = t(m, 'institution'), role = t(m, 'role');
       return `<div class="rise group relative bg-gradient-to-b from-white to-bgLight rounded-3xl border border-gray-100 shadow-lg p-8 pt-10 text-center overflow-hidden hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
-        <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-accent via-primary to-secondary"></div>
+        <div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
         <i class="ico-decor fas fa-star absolute -bottom-6 rtl:-left-6 ltr:-right-6 text-accent/5 text-[9rem] rotate-12" aria-hidden="true"></i>
-        <div class="relative inline-block mb-5"><span class="absolute -inset-2 rounded-full bg-accent/15 group-hover:bg-accent/30 transition" aria-hidden="true"></span>${avatar(m, 'relative w-36 h-36 text-4xl', i, 'border-4 border-white shadow-lg')}</div>
-        ${role ? `<div><span class="inline-block bg-accent text-white font-black px-4 py-1.5 rounded-full text-sm shadow-sm">${esc(role)}</span></div>` : ''}
+        <div class="relative inline-block mb-5"><span class="absolute -inset-2 rounded-full bg-accent/15 group-hover:bg-accent/25 transition" aria-hidden="true"></span>${avatar(m, 'relative w-36 h-36 text-4xl', 'bg-primary/10 text-primary', 'border-4 border-white shadow-lg')}</div>
+        ${role ? `<div><span class="inline-block bg-accent text-white font-black px-4 py-1.5 rounded-full text-sm">${esc(role)}</span></div>` : ''}
         <h4 class="text-xl md:text-2xl font-black text-primary mt-3 mb-2 leading-snug relative">${esc(personName(m))}</h4>
         ${inst ? `<p class="text-gray-500 text-sm font-bold relative"><i class="fas fa-university text-gray-300" aria-hidden="true"></i> ${esc(inst)}</p>` : ''}</div>`;
     }).join('')}</div>` : `<div class="text-gray-400 font-bold py-5">${L('لا يوجد أعضاء مضافين حالياً.', 'No members added yet.')}</div>`;
@@ -580,25 +584,27 @@
       cnt(type, ms.length);
       const defRole = type === 'scientific' ? L('عضو اللجنة العلمية', 'Scientific Committee Member') : L('عضو اللجنة التنظيمية', 'Organizing Committee Member');
       if (!ms.length) { box.innerHTML = none; return; }
-      const pres = ms.find((m) => m.order === 1), others = ms.filter((m) => m !== pres);
+      const pres = ms.find((m) => m.order === 1), others = ms.filter((m) => m !== pres), tint = `${c.soft} ${c.text}`;
       const search = others.length > 8 ? `<div class="col-span-full relative max-w-md mx-auto w-full mb-2"><i class="fas fa-search absolute top-1/2 -translate-y-1/2 rtl:right-4 ltr:left-4 text-gray-400" aria-hidden="true"></i><input type="search" data-com-filter maxlength="60" aria-label="${L('بحث في أعضاء اللجنة', 'Search committee members')}" placeholder="${L('ابحث بالاسم أو المؤسسة…', 'Search by name or institution…')}" class="w-full px-4 rtl:pr-11 ltr:pl-11 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-primary outline-none"></div>` : '';
+      // بطاقة الرئيس: أكبر وأبرز من باقي الأعضاء
       const presHtml = pres ? (() => {
         const inst = t(pres, 'institution'), role = t(pres, 'role');
-        return `<div class="col-span-full mb-4"><div class="rise relative overflow-hidden rounded-3xl p-6 md:p-8 text-white shadow-xl bg-gradient-to-br from-primary via-primary to-secondary flex flex-col md:flex-row items-center gap-6 max-w-3xl mx-auto">
-          <i class="ico-decor fas fa-star absolute -bottom-6 rtl:-left-6 ltr:-right-6 text-white/5 text-[9rem] rotate-12" aria-hidden="true"></i>
-          ${avatar(pres, 'w-24 h-24 text-3xl relative', 0, 'border-4 border-white/30 shadow-lg')}
-          <div class="text-center md:text-start relative">${role ? `<span class="inline-block ${c.bar} text-white text-xs font-black px-3 py-1 rounded-full mb-2">${esc(role)}</span>` : ''}
-            <h4 class="text-2xl font-black leading-snug">${esc(personName(pres))}</h4>
-            ${inst ? `<p class="text-white/80 text-sm font-bold mt-1"><i class="fas fa-university" aria-hidden="true"></i> ${esc(inst)}</p>` : ''}</div></div></div>`;
+        return `<div class="col-span-full mb-6"><div class="rise group relative max-w-2xl mx-auto rounded-3xl border border-accent/30 bg-gradient-to-b from-accent/10 via-white to-white p-8 md:p-10 text-center shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
+          <div class="absolute top-0 inset-x-0 h-2 ${c.bar}"></div>
+          <i class="ico-decor fas fa-star ${c.star} absolute -bottom-8 rtl:-left-8 ltr:-right-8 text-[11rem] rotate-12" aria-hidden="true"></i>
+          <div class="relative inline-block mb-5"><span class="absolute -inset-3 rounded-full ${c.soft} group-hover:scale-105 transition-transform duration-500" aria-hidden="true"></span>${avatar(pres, 'relative w-36 h-36 text-5xl', tint, 'border-4 border-white shadow-xl')}</div>
+          <div class="relative">${role ? `<span class="inline-block ${c.bar} text-white text-sm font-black px-5 py-1.5 rounded-full mb-3">${esc(role)}</span>` : ''}
+            <h4 class="text-2xl md:text-3xl font-black text-primary leading-snug">${esc(personName(pres))}</h4>
+            ${inst ? `<p class="text-gray-500 font-bold mt-2"><i class="fas fa-university text-gray-300" aria-hidden="true"></i> ${esc(inst)}</p>` : ''}</div></div></div>`;
       })() : '';
-      box.innerHTML = search + presHtml + others.map((m, i) => {
+      box.innerHTML = search + presHtml + others.map((m) => {
         const inst = t(m, 'institution'), role = t(m, 'role') || defRole;
         const q = `${personName(m)} ${inst} ${role}`.toLowerCase();
-        return `<div class="com-card rise group relative bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition flex items-start gap-4 overflow-hidden" data-q="${esc(q)}">
-          <span class="absolute top-0 rtl:right-0 ltr:left-0 h-full w-1 ${c.bar} opacity-40 group-hover:opacity-100 transition-opacity" aria-hidden="true"></span>
-          ${avatar(m, 'w-14 h-14 text-lg', i + 1, 'shadow-sm')}
+        return `<div class="com-card rise group relative bg-white p-4 rtl:pl-5 ltr:pr-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition flex items-center gap-4 overflow-hidden" data-q="${esc(q)}">
+          <span class="absolute top-0 rtl:right-0 ltr:left-0 h-full w-1 ${c.bar} opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true"></span>
+          ${avatar(m, 'w-16 h-16 text-xl', tint, 'border-2 border-white shadow ring-1 ring-gray-200')}
           <div class="min-w-0"><span class="font-black text-primary block leading-snug">${esc(personName(m))}</span><span class="text-xs ${c.text} font-bold block mt-1">${esc(role)}</span>
-            ${inst ? `<span class="text-xs text-gray-500 font-bold block mt-1"><i class="fas fa-university text-gray-300" aria-hidden="true"></i> ${esc(inst)}</span>` : ''}</div></div>`;
+            ${inst ? `<span class="text-xs text-gray-500 font-bold block mt-1">${esc(inst)}</span>` : ''}</div></div>`;
       }).join('') + `<div data-com-empty class="hidden col-span-full text-center text-gray-400 font-bold py-8">${L('لا توجد نتائج مطابقة.', 'No matching members.')}</div>`;
     };
     grid('scientific', 'accent', 'scientific-members');
@@ -613,12 +619,11 @@
     const w = s.split(/\s+/).filter(Boolean);
     return ((Array.from(w[0] || '')[0] || '') + (w.length > 1 ? Array.from(w[1])[0] : '')).toUpperCase();
   }
-  const AV_GRAD = ['from-primary to-blue-500', 'from-secondary to-green-400', 'from-accent to-yellow-500', 'from-blue-500 to-cyan-400', 'from-purple-600 to-pink-400'];
-  function avatar(m, size, i, ring) {
+  function avatar(m, size, tint, ring) {
     const im = safeImg(m.imageUrl, 400);
     return im
       ? `<img src="${esc(im)}" alt="${esc(personName(m))}" loading="lazy" class="${size} rounded-full object-cover shrink-0 ${ring}">`
-      : `<span class="${size} rounded-full bg-gradient-to-br ${AV_GRAD[i % AV_GRAD.length]} text-white font-black flex items-center justify-center shrink-0 ${ring}" aria-hidden="true">${esc(initials(personName(m)))}</span>`;
+      : `<span class="${size} rounded-full ${tint} font-black flex items-center justify-center shrink-0 ${ring}" aria-hidden="true">${esc(initials(personName(m)))}</span>`;
   }
 
   function renderSpeakers() {
@@ -691,6 +696,28 @@
   }
 
   // ---------- الرعاة ----------
+  function renderHomeSponsors() {
+    const sec = byId('home-sponsors'), root = byId('home-sponsors-root'); if (!sec || !root) return;
+    const all = arr('sponsors'); sec.classList.toggle('hidden', !all.length);
+    if (!all.length) { root.innerHTML = ''; return; }
+    const card = (s, cls) => {
+      const im = safeImg(s.logoUrl, 400), u = safeHttps(s.url);
+      const inner = im ? `<img src="${esc(im)}" alt="${esc(s.name)}" loading="lazy" class="max-h-full max-w-full object-contain">` : `<span class="text-gray-500 font-black text-center text-sm">${esc(s.name)}</span>`;
+      const base = `rise bg-white border border-gray-100 shadow-sm rounded-2xl p-4 flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition ${cls}`;
+      return u ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer" title="${esc(s.name)}" class="${base}">${inner}</a>` : `<div title="${esc(s.name)}" class="${base}">${inner}</div>`;
+    };
+    const tiers = [
+      ['platinum', L('الراعي الماسي', 'Platinum Sponsor'), 'w-60 h-32'],
+      ['gold', L('الرعاة الذهبيون', 'Gold Sponsors'), 'w-52 h-28'],
+      ['silver', L('الرعاة الفضيون', 'Silver Sponsors'), 'w-44 h-24'],
+      ['partner', L('الشركاء', 'Partners'), 'w-40 h-24'],
+    ];
+    root.innerHTML = tiers.map(([k, title, cls]) => {
+      const items = all.filter((s) => s.tier === k); if (!items.length) return '';
+      return `<div class="mb-10 text-center"><h3 class="text-sm font-black text-gray-400 uppercase tracking-widest mb-5">${title}</h3><div class="flex flex-wrap justify-center gap-5">${items.map((s) => card(s, cls)).join('')}</div></div>`;
+    }).join('');
+  }
+
   function renderSponsors() {
     const root = byId('sponsors-root'); if (!root) return;
     const all = arr('sponsors');
@@ -732,14 +759,6 @@
       sendMail(`[ICEIC 2027] ${name}`, `${msg}\n\n— ${name} <${email}>`);
       setStatus(st, true, L('تم تجهيز رسالتك في برنامج البريد لديك. اضغط "إرسال" هناك لإتمامها.', 'Your message is ready in your mail app. Press "Send" there to finish.'));
     });
-    byId('register-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = clean(byId('rf-name').value, 100), email = clean(byId('rf-email').value, 120), st = byId('rf-status');
-      if (!name) return setStatus(st, false, L('يرجى إدخال الاسم الكامل.', 'Please enter your full name.'));
-      if (!isEmail(email)) return setStatus(st, false, L('البريد الإلكتروني غير صالح.', 'Invalid email address.'));
-      sendMail(`[ICEIC 2027] ${L('طلب تسجيل', 'Registration request')} — ${name}`, `${L('الاسم الكامل', 'Full name')}: ${name}\n${L('البريد الإلكتروني', 'Email')}: ${email}`);
-      setStatus(st, true, L('تم تجهيز طلب التسجيل في برنامج البريد لديك. اضغط "إرسال" لإتمامه.', 'Your registration request is ready in your mail app. Press "Send" to finish.'));
-    });
   }
 
   // ---------- اللغة ----------
@@ -754,7 +773,7 @@
   }
   function renderAll(silent) {
     applyStaticI18n(); applySettings(); renderAnnouncements(); renderAbout(); renderTopics(); renderHistoryList();
-    renderCommittees(); renderSpeakers(); renderProgram(); renderSubmission(); renderSponsors();
+    renderCommittees(); renderSpeakers(); renderProgram(); renderSubmission(); renderSponsors(); renderHomeSponsors();
     const m = location.hash.slice(1).split('?')[0].match(/^history-(\d{4})$/); if (m) renderEdition(m[1]);
     if (!silent) route(true);
   }
