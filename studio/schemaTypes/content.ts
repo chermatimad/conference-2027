@@ -1,5 +1,5 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
-import {bilingual, imageField, safeUrl} from './helpers'
+import {bilingual, imageField, pairRule, safeUrl} from './helpers'
 
 /** إعلانات هامة (شريط/نافذة منبثقة) وإعلانات دورية (أخبار) */
 export const announcement = defineType({
@@ -139,8 +139,8 @@ export const history = defineType({
   fieldsets: [{name: 'legacy', title: 'حقول قديمة (للتوافق)', options: {collapsible: true, collapsed: true}}],
   fields: [
     defineField({name: 'editionYear', title: 'سنة الطبعة (مثال: 2025)', type: 'string', validation: (R) => R.required().regex(/^\d{4}$/, {name: 'year'})}),
-    defineField({name: 'dateLabel_ar', title: 'التاريخ (نص عربي)', type: 'string'}),
-    defineField({name: 'dateLabel_en', title: 'Date (English text)', type: 'string'}),
+    defineField({name: 'dateLabel_ar', title: 'التاريخ (نص عربي)', type: 'string', validation: (R) => pairRule(R, 'dateLabel', 'ar')}),
+    defineField({name: 'dateLabel_en', title: 'Date (English text)', type: 'string', validation: (R) => pairRule(R, 'dateLabel', 'en')}),
     ...bilingual('title', 'عنوان الطبعة', {required: true}),
     ...bilingual('summary', 'ملخص قصير', {type: 'text', rows: 3, max: 600}),
     ...bilingual('intro', 'مقدمة الصفحة التفصيلية', {type: 'text', rows: 3, max: 800}),
@@ -165,8 +165,8 @@ export const history = defineType({
     defineField({
       name: 'gallery', title: 'معرض الصور', type: 'array',
       of: [defineArrayMember({type: 'image', options: {hotspot: true, accept: 'image/png,image/jpeg,image/webp'}, fields: [
-        defineField({name: 'caption_ar', title: 'تعليق (عربي)', type: 'string', validation: (R) => R.max(160)}),
-        defineField({name: 'caption_en', title: 'Caption (English)', type: 'string', validation: (R) => R.max(160)}),
+        defineField({name: 'caption_ar', title: 'تعليق (عربي)', type: 'string', validation: (R) => [R.max(160), pairRule(R, 'caption', 'ar')]}),
+        defineField({name: 'caption_en', title: 'Caption (English)', type: 'string', validation: (R) => [R.max(160), pairRule(R, 'caption', 'en')]}),
       ]})],
       options: {layout: 'grid'},
       validation: (R) => R.max(80),

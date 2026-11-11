@@ -1,5 +1,16 @@
 import {defineField} from 'sanity'
 
+/** يمنع ترك إحدى اللغتين فارغة إذا كُتبت الأخرى: الموقع كله ثنائي اللغة */
+export const pairRule = (Rule: any, name: string, lang: 'ar' | 'en', prefix = name) =>
+  Rule.custom((value: unknown, ctx: any) => {
+    const other = ctx?.parent?.[`${prefix}_${lang === 'ar' ? 'en' : 'ar'}`]
+    const has = (v: unknown) => typeof v === 'string' && v.trim() !== ''
+    if (!has(value) && has(other)) {
+      return lang === 'ar' ? 'اكتب النسخة العربية أيضاً — يجب أن يكون المحتوى باللغتين معاً' : 'Please fill the English version too — content must be bilingual'
+    }
+    return true
+  }).error()
+
 /** حقل ثنائي اللغة: يُنتج <name>_ar و <name>_en */
 export function bilingual(
   name: string,
@@ -14,10 +25,10 @@ export function bilingual(
       title: `${title} (${label})`,
       type,
       ...(type === 'text' ? {rows} : {}),
-      validation: (Rule) => {
-        let r = Rule.max(limit).warning(`الحد الأقصى ${limit} حرفاً`)
-        return required && lang === 'ar' ? Rule.required().max(limit) : r
-      },
+      validation: (Rule) => [
+        required ? Rule.required().max(limit) : Rule.max(limit).warning(`الحد الأقصى ${limit} حرفاً`),
+        pairRule(Rule, name, lang),
+      ],
     })
   return [make('ar', 'العربية'), make('en', 'English')]
 }
@@ -34,8 +45,8 @@ export const imageField = (name: string, title: string, description?: string) =>
     description,
     options: {hotspot: true, accept: 'image/png,image/jpeg,image/webp'},
     fields: [
-      defineField({name: 'alt_ar', title: 'النص البديل (العربية)', type: 'string', validation: (R) => R.max(160)}),
-      defineField({name: 'alt_en', title: 'Alt text (English)', type: 'string', validation: (R) => R.max(160)}),
+      defineField({name: 'alt_ar', title: 'النص البديل (العربية)', type: 'string', validation: (R) => [R.max(160), pairRule(R, 'alt', 'ar')]}),
+      defineField({name: 'alt_en', title: 'Alt text (English)', type: 'string', validation: (R) => [R.max(160), pairRule(R, 'alt', 'en')]}),
     ],
   })
 
