@@ -53,11 +53,15 @@
   const L = (ar, en) => (lang === 'ar' ? ar : en);
   const setText = (id, v) => { const el = byId(id); if (el && v) el.textContent = v; };
   // يقسم عنوان المحور عند أول نقطتين (:) إلى سطرين: الأول أكبر والثاني أقل بقليل
-  function setTheme(id, v, c1, c2) {
+  function setTheme(id, v, c1, c2, divider) {
     const el = byId(id); if (!el || !v) return;
     const i = v.search(/[:：]/), a = i > 0 ? v.slice(0, i).trim() : v.trim(), b = i > 0 ? v.slice(i + 1).trim() : '';
     el.textContent = '';
-    [[a, c1], [b, c2]].forEach(([txt, cls]) => { if (!txt) return; const sp = document.createElement('span'); sp.className = cls; sp.textContent = txt; el.appendChild(sp); });
+    [[a, c1], [b, c2]].forEach(([txt, cls], k) => {
+      if (!txt) return;
+      if (k && divider) { const d = document.createElement('span'); d.className = 'block mx-auto my-5 h-1 w-24 rounded-full bg-accent'; d.setAttribute('aria-hidden', 'true'); el.appendChild(d); }
+      const sp = document.createElement('span'); sp.className = cls; sp.textContent = txt; el.appendChild(sp);
+    });
   }
 
   const fmtDate = (iso, opts) => {
@@ -213,7 +217,7 @@
     const dateTxt = t(s, 'eventDateText') || L('20-21 أفريل 2027', '20-21 April 2027');
     setText('hdr-date', dateTxt); setText('hero-date', dateTxt);
     setText('hero-edition', t(s, 'editionLabel')); setText('hero-title', t(s, 'heroTitle'));
-    const theme = t(s, 'theme'); if (theme) setTheme('hero-theme', theme.replace(/\.?$/, '.'), 'block text-2xl md:text-4xl lg:text-5xl font-black leading-[1.5] lg:whitespace-nowrap', 'block mt-3 text-xl md:text-3xl lg:text-4xl font-black text-white/90 leading-[1.6] lg:whitespace-nowrap');
+    const theme = t(s, 'theme'); if (theme) setTheme('hero-theme', theme.replace(/\.?$/, '.'), 'block text-2xl md:text-4xl lg:text-5xl font-black leading-[1.5] lg:whitespace-nowrap', 'block text-xl md:text-3xl lg:text-4xl font-bold text-white/85 leading-[1.7] lg:whitespace-nowrap', true);
     if (title) document.title = title;
     const desc = t(s, 'seoDescription');
     if (desc) { const m = $('meta[name="description"]'); if (m) m.content = desc; const og = $('meta[property="og:description"]'); if (og) og.content = desc; }
