@@ -217,7 +217,7 @@
     const dateTxt = t(s, 'eventDateText') || L('20-21 أفريل 2027', '20-21 April 2027');
     setText('hdr-date', dateTxt); setText('hero-date', dateTxt);
     setText('hero-edition', t(s, 'editionLabel')); setText('hero-title', t(s, 'heroTitle'));
-    const theme = t(s, 'theme'); if (theme) setTheme('hero-theme', theme.replace(/\.?$/, '.'), 'block text-2xl md:text-4xl lg:text-5xl font-black leading-[1.5] lg:whitespace-nowrap', 'block text-xl md:text-3xl lg:text-4xl font-bold text-white/85 leading-[1.7] lg:whitespace-nowrap', true);
+    const theme = t(s, 'theme'); if (theme) setTheme('hero-theme', theme.replace(/[.。]+\s*$/, ''), 'block text-[1.65rem] md:text-[2.5rem] lg:text-[3.3rem] font-black leading-[1.5] lg:whitespace-nowrap', 'block text-xl md:text-3xl lg:text-4xl font-bold text-white/85 leading-[1.7] lg:whitespace-nowrap', true);
     if (title) document.title = title;
     const desc = t(s, 'seoDescription');
     if (desc) { const m = $('meta[name="description"]'); if (m) m.content = desc; const og = $('meta[property="og:description"]'); if (og) og.content = desc; }
