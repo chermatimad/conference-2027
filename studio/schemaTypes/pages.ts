@@ -191,15 +191,18 @@ export const sponsor = defineType({
   title: 'الرعاة والشركاء',
   type: 'document',
   fields: [
-    defineField({name: 'name', title: 'الاسم', type: 'string', validation: (R) => R.required().max(120)}),
+    ...bilingual('name', 'اسم الراعي', {required: true, max: 120}),
+    ...bilingual('description', 'نبذة عن الراعي (تظهر في نافذة التفاصيل)', {type: 'text', rows: 4, max: 700}),
     defineField({
-      name: 'tier', title: 'الفئة', type: 'string', initialValue: 'gold',
-      options: {list: [{title: 'ماسي', value: 'platinum'}, {title: 'ذهبي', value: 'gold'}, {title: 'فضي', value: 'silver'}, {title: 'شريك', value: 'partner'}]},
+      name: 'tier', title: 'الفئة', type: 'string', initialValue: 'sponsor',
+      options: {layout: 'radio', list: [{title: 'راعٍ مميز (Premium Sponsors) — بطاقات كبيرة', value: 'premium'}, {title: 'راعٍ (Sponsors)', value: 'sponsor'}]},
       validation: (R) => R.required(),
     }),
     imageField('logo', 'الشعار'),
-    defineField({name: 'url', title: 'الموقع الإلكتروني', type: 'url', validation: safeUrl()}),
+    defineField({name: 'url', title: 'الموقع الإلكتروني (اختياري)', type: 'url', validation: safeUrl()}),
     defineField({name: 'order', title: 'الترتيب', type: 'number', initialValue: 10}),
+    defineField({name: 'name', title: 'الاسم (قديم)', type: 'string', hidden: true}),
   ],
-  preview: {select: {title: 'name', subtitle: 'tier', media: 'logo'}},
+  orderings: [{title: 'الفئة ثم الترتيب', name: 'o', by: [{field: 'tier', direction: 'desc'}, {field: 'order', direction: 'asc'}]}],
+  preview: {select: {title: 'name_ar', subtitle: 'name_en', media: 'logo'}},
 })

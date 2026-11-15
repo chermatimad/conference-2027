@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="assets/vendor/fa/css/all.min.css">
     <link rel="stylesheet" href="assets/vendor/aos/aos.css">
-    <link rel="stylesheet" href="assets/css/tailwind.css?v=20261111a">
+    <link rel="stylesheet" href="assets/css/tailwind.css?v=20261115a">
 </head>
 <body class="font-cairo text-gray-800 transition-all duration-300 flex flex-col min-h-screen">
 
@@ -240,8 +240,8 @@
         <section id="home-sponsors" class="hidden py-24 bg-white border-t border-gray-100 scroll-mt-20">
             <div class="container mx-auto px-4 sm:px-8">
                 <div class="text-center mb-14" data-aos="fade-up">
-                    <span class="text-accent font-bold text-sm" data-ar="شركاء النجاح" data-en="Our Partners">شركاء النجاح</span>
-                    <h2 class="text-3xl md:text-4xl font-black text-primary mt-1 mb-4" data-ar="الرعاة الرسميون" data-en="Official Sponsors">الرعاة الرسميون</h2>
+                    <span class="text-accent font-bold text-sm" data-ar="شركاء النجاح" data-en="Our Sponsors">شركاء النجاح</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-primary mt-1 mb-4" data-ar="الرعاة" data-en="Sponsors">الرعاة</h2>
                     <div class="w-20 h-1.5 bg-accent mx-auto rounded-full"></div>
                 </div>
                 <div id="home-sponsors-root" class="max-w-6xl mx-auto"></div>
@@ -453,6 +453,15 @@
         <i class="fas fa-chevron-up" aria-hidden="true"></i>
     </button>
 
+    <!-- Sponsor modal -->
+    <div id="spnModal" class="modal hidden fixed inset-0 z-[110] items-center justify-center px-4" role="dialog" aria-modal="true" aria-labelledby="spn-title">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-md" data-action="close-modal" data-target="spnModal"></div>
+        <div class="bg-white w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl relative z-10">
+            <button type="button" data-action="close-modal" data-target="spnModal" aria-label="Close" class="absolute rtl:left-4 ltr:right-4 top-4 z-20 w-10 h-10 rounded-full bg-black/40 text-white hover:bg-black/60"><i class="fas fa-times" aria-hidden="true"></i></button>
+            <div id="spn-body"></div>
+        </div>
+    </div>
+
     <!-- Speaker modal -->
     <div id="spkModal" class="modal hidden fixed inset-0 z-[110] items-center justify-center px-4" role="dialog" aria-modal="true" aria-labelledby="spk-title">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-md" data-action="close-modal" data-target="spkModal"></div>
@@ -479,6 +488,6 @@
     </div>
 
     <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/js/app.js?v=20261111a" defer></script>
+    <script src="assets/js/app.js?v=20261115a" defer></script>
 </body>
 </html>

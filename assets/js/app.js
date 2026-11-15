@@ -141,7 +141,7 @@
       videoUrl_ar, videoUrl_en, galleryTitle_ar, galleryTitle_en, "logoUrl": logo.asset->url, "programPdfUrl": programPdf.asset->url,
       "gallery": gallery[]{ "url": asset->url, caption_ar, caption_en },
       "legacyImages": [image1.asset->url, image2.asset->url, image3.asset->url, image4.asset->url, image5.asset->url, image6.asset->url] },
-    "sponsors": *[_type == "sponsor"] | order(order asc){ _id, name, tier, url, order, "logoUrl": logo.asset->url }
+    "sponsors": *[_type == "sponsor"] | order(order asc){ _id, name, name_ar, name_en, description_ar, description_en, tier, url, order, "logoUrl": logo.asset->url }
   }`;
 
   async function fetchJson(url, ms = 9000) {
@@ -719,48 +719,59 @@
   }
 
   // ---------- الرعاة ----------
+  const isPremium = (s) => s.tier === 'premium' || s.tier === 'platinum';
+  const spnName = (s) => t(s, 'name') || s.name || '';
+  function spnCard(s, kind) {
+    const im = safeImg(s.logoUrl, 600), nm = spnName(s), d = t(s, 'description');
+    const logo = im ? `<img src="${esc(im)}" alt="${esc(nm)}" loading="lazy" class="max-h-full max-w-full object-contain">` : `<span class="text-primary font-black text-xl text-center leading-snug">${esc(nm)}</span>`;
+    const open = `type="button" data-action="open-spn" data-id="${esc(s._id)}"`;
+    if (kind === 'premium' || kind === 'premium-lite') {
+      const tab = `<span class="absolute top-0 ltr:right-0 rtl:left-0 bg-accent text-white text-sm font-black px-4 py-1.5 ltr:rounded-bl-xl rtl:rounded-br-xl z-10">${L('عرض التفاصيل', 'Show details')}</span>`;
+      const text = kind === 'premium' ? `<span class="block border-t border-gray-100 p-5 text-start"><span class="inline-block bg-accent/10 text-accent text-xs font-black px-3 py-1 rounded-full mb-2">Premium</span><span class="block font-black text-primary text-xl leading-snug">${esc(nm)}</span>${d ? `<span class="block clamp3 text-gray-500 text-sm leading-relaxed mt-1">${esc(d)}</span>` : ''}<span class="block text-secondary font-black text-sm mt-3">${L('اعرف المزيد', 'Learn more')} ←</span></span>` : '';
+      return `<button ${open} aria-label="${esc(nm)}" class="rise group relative w-full bg-white rounded-2xl border-2 border-accent shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">${tab}<span class="flex items-center justify-center h-52 md:h-64 p-8">${logo}</span>${text}</button>`;
+    }
+    const text = kind === 'sponsor' ? `<span class="block text-start px-5 pb-5"><span class="block font-black text-primary leading-snug">${esc(nm)}</span>${d ? `<span class="block clamp3 text-gray-500 text-sm leading-relaxed mt-1">${esc(d)}</span>` : ''}<span class="block text-secondary font-black text-sm mt-3">${L('عرض التفاصيل', 'View details')} ←</span></span>`
+      : `<span class="block text-center text-sm font-black text-primary pb-4 px-3">${esc(nm)}</span>`;
+    return `<button ${open} aria-label="${esc(nm)}" class="rise group w-full bg-white rounded-2xl border border-gray-200 hover:border-accent shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden"><span class="flex items-center justify-center h-32 p-6">${logo}</span>${text}</button>`;
+  }
+
   function renderHomeSponsors() {
     const sec = byId('home-sponsors'), root = byId('home-sponsors-root'); if (!sec || !root) return;
     const all = arr('sponsors'); sec.classList.toggle('hidden', !all.length);
     if (!all.length) { root.innerHTML = ''; return; }
-    const card = (s, cls) => {
-      const im = safeImg(s.logoUrl, 400), u = safeHttps(s.url);
-      const inner = im ? `<img src="${esc(im)}" alt="${esc(s.name)}" loading="lazy" class="max-h-full max-w-full object-contain">` : `<span class="text-gray-500 font-black text-center text-sm">${esc(s.name)}</span>`;
-      const base = `rise bg-white border border-gray-100 shadow-sm rounded-2xl p-4 flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition ${cls}`;
-      return u ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer" title="${esc(s.name)}" class="${base}">${inner}</a>` : `<div title="${esc(s.name)}" class="${base}">${inner}</div>`;
-    };
-    const tiers = [
-      ['platinum', L('الراعي الماسي', 'Platinum Sponsor'), 'w-60 h-32'],
-      ['gold', L('الرعاة الذهبيون', 'Gold Sponsors'), 'w-52 h-28'],
-      ['silver', L('الرعاة الفضيون', 'Silver Sponsors'), 'w-44 h-24'],
-      ['partner', L('الشركاء', 'Partners'), 'w-40 h-24'],
-    ];
-    root.innerHTML = tiers.map(([k, title, cls]) => {
-      const items = all.filter((s) => s.tier === k); if (!items.length) return '';
-      return `<div class="mb-10 text-center"><h3 class="text-sm font-black text-gray-400 uppercase tracking-widest mb-5">${title}</h3><div class="flex flex-wrap justify-center gap-5">${items.map((s) => card(s, cls)).join('')}</div></div>`;
-    }).join('');
+    const pre = all.filter(isPremium), oth = all.filter((s) => !isPremium(s));
+    root.innerHTML = (pre.length ? `<h3 class="text-center text-2xl font-black text-secondary mb-8">${L('الرعاة المميزون', 'Premium Sponsors')}</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-14">${pre.map((s) => spnCard(s, 'premium-lite')).join('')}</div>` : '')
+      + (oth.length ? `<h3 class="text-center text-2xl font-black text-secondary mb-8">${L('الرعاة', 'Sponsors')}</h3><div class="grid grid-cols-2 md:grid-cols-4 gap-6">${oth.map((s) => spnCard(s, 'compact')).join('')}</div>` : '');
   }
 
   function renderSponsors() {
     const root = byId('sponsors-root'); if (!root) return;
     const all = arr('sponsors');
-    if (!all.length) { root.innerHTML = `<div class="text-center py-20 text-gray-400"><i class="fas fa-handshake text-5xl mb-4" aria-hidden="true"></i><p class="font-bold text-lg">${L('سيتم الإعلان عن الرعاة والشركاء قريباً.', 'Sponsors and partners will be announced soon.')}</p></div>`; return; }
-    const logo = (s, cls) => {
-      const im = safeImg(s.logoUrl, 500), u = safeHttps(s.url);
-      const inner = im ? `<img src="${esc(im)}" alt="${esc(s.name)}" loading="lazy" class="max-h-full max-w-full object-contain">` : `<span class="text-gray-500 text-xl font-bold">${esc(s.name)}</span>`;
-      const tag = u ? `a href="${esc(u)}" target="_blank" rel="noopener noreferrer"` : 'div';
-      return `<${tag} class="${cls}">${inner}</${u ? 'a' : 'div'}>`;
-    };
-    const tiers = [
-      ['platinum', L('الراعي الماسي', 'Platinum Sponsor'), 'text-3xl font-black text-gray-400 mb-10 uppercase tracking-widest border-b-2 border-gray-200 inline-block pb-4', 'bg-white border border-gray-200 p-8 rounded-[3rem] shadow-lg w-[22rem] h-48 flex items-center justify-center hover:shadow-2xl transition-all transform hover:-translate-y-2'],
-      ['gold', L('الرعاة الذهبيون', 'Gold Sponsors'), 'text-2xl font-black text-accent mb-10 uppercase tracking-widest border-b-2 border-accent inline-block pb-4', 'bg-white border border-yellow-100 p-6 rounded-3xl shadow-md w-72 h-36 flex items-center justify-center hover:shadow-xl transition-all transform hover:-translate-y-1'],
-      ['silver', L('الرعاة الفضيون', 'Silver Sponsors'), 'text-xl font-black text-gray-500 mb-8 uppercase tracking-widest border-b-2 border-gray-300 inline-block pb-3', 'bg-white border border-gray-200 p-5 rounded-3xl shadow-sm w-60 h-32 flex items-center justify-center hover:shadow-lg transition-all transform hover:-translate-y-1'],
-      ['partner', L('الشركاء', 'Partners'), 'text-xl font-black text-primary mb-8 uppercase tracking-widest border-b-2 border-primary/30 inline-block pb-3', 'bg-white border border-gray-100 p-5 rounded-3xl shadow-sm w-52 h-28 flex items-center justify-center hover:shadow-lg transition-all transform hover:-translate-y-1'],
-    ];
-    root.innerHTML = tiers.map(([k, title, hcls, ccls]) => {
-      const items = all.filter((s) => s.tier === k); if (!items.length) return '';
-      return `<div class="mb-20 text-center"><h3 class="${hcls}">${title}</h3><div class="flex flex-wrap justify-center gap-10 mt-4">${items.map((s) => logo(s, ccls)).join('')}</div></div>`;
-    }).join('');
+    if (!all.length) { root.innerHTML = `<div class="text-center py-20 text-gray-400"><i class="fas fa-handshake text-5xl mb-4" aria-hidden="true"></i><p class="font-bold text-lg">${L('سيتم الإعلان عن الرعاة والشركاء قريباً.', 'Sponsors will be announced soon.')}</p></div>`; return; }
+    const pre = all.filter(isPremium), oth = all.filter((s) => !isPremium(s));
+    const head = (txt) => `<div class="mb-10 text-center"><h3 class="text-3xl md:text-4xl font-black text-primary">${txt}</h3><div class="w-16 h-1.5 bg-accent mx-auto rounded-full mt-3"></div></div>`;
+    root.innerHTML = `<div class="max-w-6xl mx-auto">
+      <p class="text-center text-gray-500 text-lg max-w-3xl mx-auto mb-16 leading-relaxed">${L('نعبّر عن عميق امتناننا لرعاتنا على دعمهم القيّم ومساهمتهم في إنجاح المؤتمر.', 'We are immensely grateful to our sponsors for their valuable support and contribution to making the conference a success.')}</p>
+      ${pre.length ? `<section class="mb-20">${head(L('الرعاة المميزون', 'Premium Sponsors'))}<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">${pre.map((s) => spnCard(s, 'premium')).join('')}</div></section>` : ''}
+      ${oth.length ? `<section class="mb-20">${head(L('الرعاة', 'Sponsors'))}<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">${oth.map((s) => spnCard(s, 'sponsor')).join('')}</div></section>` : ''}
+      <section class="bg-primary text-white rounded-3xl p-8 md:p-12 text-center relative overflow-hidden"><div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
+        <h3 class="text-2xl md:text-3xl font-black mb-3">${L('هل ترغب في أن تكون راعياً؟', 'Interested in becoming a sponsor?')}</h3>
+        <p class="text-gray-300 max-w-2xl mx-auto mb-7 leading-relaxed">${L('انضم إلى قائمة رعاتنا وساهم في إنجاح المؤتمر.', 'Join our prestigious list of sponsors and support the success of the conference.')}</p>
+        <a href="#contact" class="inline-flex items-center gap-2 bg-accent hover:bg-white hover:text-primary text-white font-black py-3.5 px-9 rounded-xl transition">${L('اتصل بنا', 'Contact Us')}</a></section></div>`;
+  }
+
+  function openSpn(id) {
+    const s = arr('sponsors').find((x) => x._id === id); if (!s) return;
+    const im = safeImg(s.logoUrl, 700), nm = spnName(s), d = t(s, 'description'), u = safeHttps(s.url);
+    byId('spn-body').innerHTML = `<div class="h-2 bg-accent"></div>
+      ${im ? `<div class="flex items-center justify-center h-56 p-8 bg-bgLight"><img src="${esc(im)}" alt="${esc(nm)}" class="max-h-full max-w-full object-contain"></div>` : ''}
+      <div class="p-8 space-y-4">
+        ${isPremium(s) ? '<span class="inline-block bg-accent/10 text-accent text-xs font-black px-3 py-1 rounded-full">Premium</span>' : ''}
+        <h2 id="spn-title" class="text-2xl md:text-3xl font-black text-primary leading-snug">${esc(nm)}</h2>
+        ${d ? `<p class="text-gray-600 leading-loose pre-line">${esc(d)}</p>` : ''}
+        ${u ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-secondary hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl transition"><i class="fas fa-external-link-alt text-xs" aria-hidden="true"></i>${L('زيارة الموقع', 'Visit website')}</a>` : ''}
+      </div>`;
+    openModal('spnModal');
   }
 
   // ---------- التسجيل والرسائل (mailto — لا خادم، لا تخزين لبيانات الزوار) ----------
@@ -904,6 +915,7 @@
       else if (a === 'prog-tab') switchProgramTab(el.dataset.tab);
       else if (a === 'open-ann') openAnn(el.dataset.id);
       else if (a === 'open-spk') openSpk(el.dataset.id);
+      else if (a === 'open-spn') openSpn(el.dataset.id);
       else if (a === 'ann-prev') annShow(annIdx - 1);
       else if (a === 'ann-next') annShow(annIdx + 1);
       else if (a === 'ann-go') annShow(Number(el.dataset.i) || 0);
