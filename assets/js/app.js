@@ -52,6 +52,13 @@
   const t = (o, base) => (o && (o[`${base}_${lang}`] || o[`${base}_ar`] || o[`${base}_en`])) || '';
   const L = (ar, en) => (lang === 'ar' ? ar : en);
   const setText = (id, v) => { const el = byId(id); if (el && v) el.textContent = v; };
+  // يقسم عنوان المحور عند أول نقطتين (:) إلى سطرين: الأول أكبر والثاني أقل بقليل
+  function setTheme(id, v, c1, c2) {
+    const el = byId(id); if (!el || !v) return;
+    const i = v.search(/[:：]/), a = i > 0 ? v.slice(0, i).trim() : v.trim(), b = i > 0 ? v.slice(i + 1).trim() : '';
+    el.textContent = '';
+    [[a, c1], [b, c2]].forEach(([txt, cls]) => { if (!txt) return; const sp = document.createElement('span'); sp.className = cls; sp.textContent = txt; el.appendChild(sp); });
+  }
 
   const fmtDate = (iso, opts) => {
     if (!iso) return '';
@@ -202,11 +209,11 @@
     });
 
     const title = t(s, 'siteTitle');
-    setText('hdr-title', title); setText('hdr-theme', t(s, 'theme'));
+    setText('hdr-title', title); setTheme('hdr-theme', t(s, 'theme'), 'block text-primary font-black text-sm md:text-lg leading-relaxed', 'block text-accent font-bold text-xs md:text-base leading-relaxed');
     const dateTxt = t(s, 'eventDateText') || L('20-21 أفريل 2027', '20-21 April 2027');
     setText('hdr-date', dateTxt); setText('hero-date', dateTxt);
     setText('hero-edition', t(s, 'editionLabel')); setText('hero-title', t(s, 'heroTitle'));
-    const theme = t(s, 'theme'); if (theme) setText('hero-theme', theme.replace(/\.?$/, '.'));
+    const theme = t(s, 'theme'); if (theme) setTheme('hero-theme', theme.replace(/\.?$/, '.'), 'block text-3xl md:text-5xl lg:text-6xl font-black leading-[1.45]', 'block mt-3 text-2xl md:text-4xl lg:text-5xl font-black text-white/90 leading-[1.55]');
     if (title) document.title = title;
     const desc = t(s, 'seoDescription');
     if (desc) { const m = $('meta[name="description"]'); if (m) m.content = desc; const og = $('meta[property="og:description"]'); if (og) og.content = desc; }
