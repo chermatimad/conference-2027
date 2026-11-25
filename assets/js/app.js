@@ -229,15 +229,12 @@
     // الرئيسية
     setText('ov-kicker', (k => (k === 'مرحباً بكم' || k === 'Welcome') ? L('تعرّف على المؤتمر', 'Discover the Conference') : k)(t(home, 'welcomeKicker'))); setText('ov-title', t(home, 'welcomeTitle'));
     setText('ov-heading', t(home, 'welcomeHeading')); setText('ov-text', t(home, 'welcomeText'));
-    setText('ov-img2-label', t(home, 'welcomeImage2Label'));
-    const i1 = byId('ov-img1'), i2 = byId('ov-img2');
-    if (i1) i1.src = safeImg(home.welcomeImage, 700) || ''; if (i1) i1.alt = t(home, 'welcomeHeading');
-    if (i2) i2.src = safeImg(home.welcomeImage2, 700) || '';
-    (home.stats || []).slice(0, 2).forEach((st, i) => {
-      setText(`stat-${i}-value`, st.value); setText(`stat-${i}-label`, t(st, 'label'));
-      const icn = byId(`stat-${i}-icon`), cls = faIcon(st.icon, '');
-      if (icn && cls) icn.className = `${cls} text-4xl mb-3 ${i === 0 ? 'text-lightBlue' : 'text-secondary'}`;
-    });
+    const ovLogo = byId('ov-logo'); if (ovLogo) ovLogo.src = confLogo;
+    const ovFacts = byId('ov-facts');
+    if (ovFacts) {
+      const rows = [[L('التاريخ', 'Date'), dateTxt], [L('المكان', 'Venue'), t(s, 'venueName')], [L('المحاور العلمية', 'Scientific themes'), L(`${arr('tracks').length} محاور`, `${arr('tracks').length} themes`)], [L('المشاركة', 'Participation'), L('مجانية لجميع المشاركين', 'Free of charge')]].filter((r) => r[1] && !/^0 /.test(r[1]));
+      ovFacts.innerHTML = rows.map(([k, v]) => `<div class="py-4 first:pt-0 last:pb-0"><dt class="text-accent text-xs font-black tracking-wider mb-1">${esc(k)}</dt><dd class="font-bold text-lg leading-snug">${esc(v)}</dd></div>`).join('');
+    }
 
     const nTracks = arr('tracks').length;
     document.documentElement.dataset.icons = ['none', 'plain', 'tile'].includes(s.iconStyle) ? s.iconStyle : 'none';
