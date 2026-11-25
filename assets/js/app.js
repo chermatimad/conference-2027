@@ -265,6 +265,9 @@
     const sub = safeHttps(s.paperSubmissionUrl);
     $$('[data-submit-link]').forEach((a) => { if (sub) a.href = sub; });
     $$('[data-register]').forEach((b) => b.classList.toggle('hidden', s.registrationOpen === false));
+    const callPdf = safeFile(lang === 'ar' ? s.callPdfArUrl || s.callPdfEnUrl : s.callPdfEnUrl || s.callPdfArUrl);
+    $$('[data-call-link]').forEach((b) => { if (callPdf) b.href = callPdf; b.classList.toggle('hidden', !callPdf); if (callPdf) b.classList.add('flex'); });
+    const cta = byId('hero-cta'); if (cta) cta.classList.toggle('hidden', !callPdf && s.registrationOpen === false);
 
     const soc = byId('social-links');
     if (soc) {
