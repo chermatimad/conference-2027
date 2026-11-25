@@ -33,6 +33,7 @@ export const about = {
     ['صنّاع القرار.', 'Decision-makers.'],
     ['المهنيون والفاعلون الاقتصاديون.', 'Professionals and economic actors.'],
   ],
+  problemQuestion_ar: '', problemQuestion_en: '', problemIntro_ar: '', problemIntro_en: '',
   tracksNote_ar: 'تُرحّب اللجنة العلمية بالدراسات التطبيقية والقياسية ودراسات الحالة، ولا سيما تلك التي تتناول التجربة الجزائرية والسياقين العربي والإفريقي، إلى جانب الدراسات المقارنة للتجارب الدولية.',
   tracksNote_en: 'The Scientific Committee welcomes applied and econometric studies as well as case studies, particularly those addressing the Algerian experience and the Arab and African contexts, in addition to comparative studies of international experiences.',
 }
@@ -203,6 +204,7 @@ export function buildDocs() {
     preamble_ar: about.preamble_ar, preamble_en: about.preamble_en,
     objectives: txt(about.objectives, 'o'), audience: txt(about.audience, 'a'),
     tracksNote_ar: about.tracksNote_ar, tracksNote_en: about.tracksNote_en,
+    problemQuestion_ar: '', problemQuestion_en: '', problemIntro_ar: '', problemIntro_en: '',
   }})
   docs.push({_id: 'submissionPage', _type: 'submissionPage', patch: {
     guidelines: txt(submission.guidelines, 'g'), benefits: txt(submission.benefits, 'b'), publishing: txt(submission.publishing, 'p'),
