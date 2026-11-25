@@ -265,7 +265,7 @@
     const sub = safeHttps(s.paperSubmissionUrl);
     $$('[data-submit-link]').forEach((a) => { if (sub) a.href = sub; });
     $$('[data-register]').forEach((b) => b.classList.toggle('hidden', s.registrationOpen === false));
-    const callPdf = safeFile(lang === 'ar' ? s.callPdfArUrl || s.callPdfEnUrl : s.callPdfEnUrl || s.callPdfArUrl);
+    const callPdf = callPdfOf(s);
     $$('[data-call-link]').forEach((b) => { if (callPdf) b.href = callPdf; b.classList.toggle('hidden', !callPdf); if (callPdf) b.classList.add('inline-flex'); });
     const regUrl = safeHttps(s.registrationUrl); $$('[data-register-link]').forEach((a) => { if (regUrl) a.href = regUrl; });
 
@@ -465,7 +465,7 @@
     const a = DATA.about || {}, root = byId('about-root'); if (!root) return;
     const pim = safeImg(a.preambleImage, 1000);
     const eds = a.editionsTable || [], objs = a.objectives || [], aud = a.audience || [];
-    const as = DATA.settings || {}, callPdf = safeFile(lang === 'ar' ? as.callPdfArUrl || as.callPdfEnUrl : as.callPdfEnUrl || as.callPdfArUrl);
+    const as = DATA.settings || {}, callPdf = callPdfOf(as);
     const intro = t(a, 'aboutIntro'), pre = t(a, 'preamble'), q = t(a, 'problemQuestion'), pi = t(a, 'problemIntro');
     const out = [];
     if (intro || eds.length) out.push(`<section class="${CARD}">${secHead(L('تعرّف علينا', 'Get to know us'), L('نبذة عن المؤتمر', 'About the Conference'))}
@@ -703,6 +703,85 @@
           <div class="flex-grow text-center md:text-start rtl:md:text-right ltr:md:text-left"><h4 class="text-xl font-bold text-primary mb-1">${esc(t(s, 'title'))}</h4><p class="text-sm text-gray-500">${esc(t(s, 'place'))}</p></div></div>`).join('') || `<p class="text-center text-gray-400 font-bold">${EMPTY()}</p>`}</div>`).join('')}`;
   }
 
+  // ---------- المواعيد الهامة: جدول عمودي (التقديم) + شريط أفقي (الرئيسية) ----------
+  const tlSeen = new Set();
+  const DL_ICON = {calendar: 'fa-calendar-alt', mail: 'fa-envelope-open-text', check: 'fa-clipboard-check', file: 'fa-file-alt', star: 'fa-star'};
+  function dateInfo(dates) {
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    let next = -1;
+    const info = dates.map((d, i) => {
+      const x = new Date(d.date); x.setHours(0, 0, 0, 0);
+      const ok = !isNaN(x), days = ok ? Math.round((x - today) / 864e5) : 0, past = ok && days < 0;
+      if (next < 0 && ok && !past) next = i;
+      return {past, days};
+    });
+    return {next, info};
+  }
+  const daysChip = (n) => n === 0 ? L('اليوم', 'Today') : n === 1 ? L('غدًا', 'Tomorrow') : L(`بعد ${n} ${n <= 10 ? 'أيام' : 'يومًا'}`, `in ${n} days`);
+  const dateLabel = (d, month) => t(d, 'dateLabel') || fmtDate(d.date, {day: '2-digit', month: month || 'long', year: 'numeric'});
+
+  function tlVertical(dates) {
+    const {next, info} = dateInfo(dates), last = dates.length - 1;
+    return `<div class="tl" data-tl-root><span class="tl-line" aria-hidden="true"><i class="tl-fill"></i></span><ol>${dates.map((d, i) => {
+      const cls = ['tl-item', i === last ? 'tl-last' : '', info[i].past ? 'tl-past' : '', i === next ? 'tl-next' : '', tlSeen.has('v' + i) ? 'in' : ''].filter(Boolean).join(' ');
+      return `<li class="${cls}" data-tl="v${i}"><span class="tl-dot" aria-hidden="true">${info[i].past ? '<i class="fas fa-check"></i>' : ''}</span><div class="tl-card"><time class="tl-date" dir="auto">${esc(dateLabel(d))}</time><p class="tl-label">${esc(t(d, 'title'))}</p>${i === next && i !== last ? `<span class="tl-chip">${esc(daysChip(info[i].days))}</span>` : ''}</div></li>`;
+    }).join('')}</ol></div>`;
+  }
+
+  function tlUpdate() {
+    $$('[data-tl-root]').forEach((r) => {
+      const rc = r.getBoundingClientRect(), vh = window.innerHeight || 800;
+      const p = reduceMotion() ? 1 : Math.min(1, Math.max(0, (vh * 0.62 - rc.top) / Math.max(1, rc.height)));
+      const f = r.querySelector('.tl-fill'); if (f) r.style.setProperty('--tl-p', p.toFixed(3));
+    });
+  }
+  let tlIO = null, tlBound = false;
+  function tlInit() {
+    if (tlIO) tlIO.disconnect();
+    const items = $$('[data-tl]');
+    if (!('IntersectionObserver' in window) || reduceMotion()) { items.forEach((e) => { e.classList.add('in'); tlSeen.add(e.dataset.tl); }); tlUpdate(); return; }
+    let batch = 0;
+    tlIO = new IntersectionObserver((ents) => {
+      batch = 0;
+      ents.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top).forEach((e) => {
+        e.target.style.transitionDelay = (batch++ * 140) + 'ms';
+        e.target.classList.add('in'); tlSeen.add(e.target.dataset.tl); tlIO.unobserve(e.target);
+      });
+    }, {threshold: 0.35, rootMargin: '0px 0px -8% 0px'});
+    items.forEach((e) => { if (!e.classList.contains('in')) tlIO.observe(e); });
+    if (!tlBound) { tlBound = true; let q = false; const f = () => { if (q) return; q = true; requestAnimationFrame(() => { q = false; tlUpdate(); }); }; window.addEventListener('scroll', f, {passive: true}); window.addEventListener('resize', f); }
+    tlUpdate();
+  }
+
+  let dlIO = null;
+  function renderHomeDeadlines() {
+    const sec = byId('home-deadlines'), root = byId('dl-root'); if (!sec || !root) return;
+    const dates = arr('dates'); sec.classList.toggle('hidden', !dates.length); if (!dates.length) return;
+    setText('dl-kicker', L('سجّلها في أجندتك', 'Mark your calendar')); setText('dl-title', L('المواعيد الهامة', 'Important Dates'));
+    const {next, info} = dateInfo(dates), n = dates.length, last = n - 1;
+    const prog = next < 0 ? 1 : Math.max(0, next - 0.5 + (next === 0 ? 0.5 : 0)) / Math.max(1, last);
+    const note = t(DATA.submission || {}, 'datesNote');
+    root.innerHTML = `<div class="dl ${tlSeen.has('home') ? 'in' : ''}" data-dl><div class="dl-track" aria-hidden="true"><i class="dl-fill"></i></div><ol class="dl-list">${dates.map((d, i) => {
+      const cls = ['dl-item', info[i].past ? 'dl-past' : '', i === next ? 'dl-next' : '', i === last ? 'dl-last' : ''].filter(Boolean).join(' ');
+      const ic = info[i].past ? 'fa-check' : (i === last ? 'fa-star' : DL_ICON[d.icon] || 'fa-calendar-day');
+      const lbl = t(d, 'dateLabel');
+      const head = lbl ? `<span class="dl-date" dir="auto">${esc(lbl)}</span>` : `<span class="dl-date" dir="auto">${esc(fmtDate(d.date, {day: '2-digit', month: lang === 'ar' ? 'long' : 'short'}))}</span><span class="dl-year" dir="ltr">${esc(fmtDate(d.date, {year: 'numeric'}))}</span>`;
+      return `<li class="${cls}"><span class="dl-node" aria-hidden="true"><i class="fas ${ic}"></i></span><div>${head}<p class="dl-label">${esc(t(d, 'title'))}</p>${i === next && i !== last ? `<span class="dl-chip">${esc(daysChip(info[i].days))}</span>` : ''}</div></li>`;
+    }).join('')}</ol></div>
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">${note ? `<p class="text-sm font-bold text-white/85 flex items-center gap-2"><i class="fas fa-info-circle text-accent" aria-hidden="true"></i>${esc(note)}</p>` : ''}<a href="#submission?section=sub-dates" class="inline-flex items-center gap-2 border-2 border-white/30 hover:bg-white hover:text-primary font-black text-sm py-2.5 px-6 rounded-xl transition-colors">${L('كل التواريخ والشروط', 'All dates & requirements')}</a></div>`;
+    root.style.setProperty('--n', String(n));
+    const dl = root.querySelector('[data-dl]'); dl.style.setProperty('--dl-p', Math.min(1, prog).toFixed(3));
+    dl.querySelectorAll('.dl-item').forEach((e, i) => { e.style.transitionDelay = (i * 150) + 'ms'; });
+    if (dlIO) dlIO.disconnect();
+    if (dl.classList.contains('in')) return;
+    if (!('IntersectionObserver' in window) || reduceMotion()) { dl.classList.add('in'); tlSeen.add('home'); return; }
+    dlIO = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { dl.classList.add('in'); tlSeen.add('home'); dlIO.disconnect(); } }, {threshold: 0.3});
+    dlIO.observe(dl);
+  }
+
+  // ملف الإعلان المعتمد: من Studio إن وُجد، وإلا النسخة المحلية
+  const callPdfOf = (s) => safeFile(lang === 'ar' ? s.callPdfArUrl || s.callPdfEnUrl : s.callPdfEnUrl || s.callPdfArUrl) || (lang === 'ar' ? 'assets/docs/call-for-papers-ar.pdf' : 'assets/docs/call-for-papers-en.pdf');
+
   // ---------- المشاركة والنشر ----------
   function renderSubmission() {
     const root = byId('submission-root'); if (!root) return;
@@ -711,15 +790,15 @@
     const tpls = [[tplAr, L('قالب البحث (عربي)', 'Paper Template (Arabic)')], [tplEn, L('قالب البحث (إنجليزي)', 'Paper Template (English)')]].filter((x) => x[0]);
     if (!tpls.length && tplOld) tpls.push([tplOld, L('تحميل قالب البحث (Template)', 'Download Paper Template')]);
     const guide = safeFile(sub.platformGuideUrl) || 'assets/docs/submission-guide.pdf';
-    const pdf = safeFile(lang === 'ar' ? s.callPdfArUrl || s.callPdfEnUrl : s.callPdfEnUrl || s.callPdfArUrl);
+    const pdf = callPdfOf(s);
     const dnote = t(sub, 'datesNote'), pintro = t(sub, 'participationIntro'), ben = sub.benefits || [], pub = sub.publishing || [];
     const dot = '<span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span>';
     const list = (items) => `<ul class="space-y-3">${items.map((g) => `<li class="flex gap-3 text-gray-600 leading-relaxed">${dot}<span>${esc(t(g, 'text'))}</span></li>`).join('')}</ul>`;
-    const last = dates.length - 1;
     root.innerHTML = `
-      <section id="sub-dates" class="${CARD} scroll-mt-24">${secHead(L('سجّلها في أجندتك', 'Mark your calendar'), L('تواريخ مهمة', 'Important Dates'))}
-        ${dates.length ? `<ol class="rounded-2xl border border-gray-200 overflow-hidden">${dates.map((d, i) => `<li class="grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-4 px-6 py-4 items-center ${i ? 'border-t border-gray-100' : ''} ${i === last ? 'bg-primary text-white' : i % 2 ? 'bg-bgLight' : 'bg-white'}"><span class="sm:col-span-7 font-bold">${esc(t(d, 'title'))}</span><span class="sm:col-span-5 font-black ${i === last ? 'text-accent' : 'text-primary'}" dir="auto">${esc(t(d, 'dateLabel') || fmtDate(d.date, {day: '2-digit', month: lang === 'ar' ? 'long' : 'short', year: 'numeric'}))}</span></li>`).join('')}</ol>` : emptyBox(EMPTY())}
-        ${dnote ? `<p class="mt-5 text-sm font-bold text-red-700 bg-red-50 border border-red-100 rounded-xl px-5 py-3">${esc(dnote)}</p>` : ''}</section>
+      <section id="sub-dates" class="rise bg-primary text-white rounded-3xl p-8 md:p-12 shadow-sm scroll-mt-24 relative overflow-hidden"><div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
+        <div class="mb-10 text-center"><span class="text-accent font-bold text-sm">${L('سجّلها في أجندتك', 'Mark your calendar')}</span><h3 class="text-3xl md:text-4xl font-black mt-1 leading-tight">${L('تواريخ مهمة', 'Important Dates')}</h3><div class="w-16 h-1 bg-accent mt-4 mx-auto rounded-full"></div></div>
+        ${dates.length ? tlVertical(dates) : emptyBox(EMPTY())}
+        ${dnote ? `<p class="tl-note"><i class="fas fa-exclamation-circle text-accent mt-1" aria-hidden="true"></i><span>${esc(dnote)}</span></p>` : ''}</section>
       <section id="sub-guidelines" class="${CARD} scroll-mt-24">${secHead(L('قبل أن تكتب', 'Before you write'), L('شروط المشاركة في المؤتمر', 'Participation Requirements'))}
         ${list(sub.guidelines || [])}
         ${tpls.length ? `<div class="flex flex-wrap gap-4 mt-8">${tpls.map(([u, lb]) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer" download class="inline-flex items-center gap-2 bg-primary hover:bg-secondary text-white font-black py-3.5 px-7 rounded-xl transition-colors"><i class="fas fa-file-word" aria-hidden="true"></i> ${lb}</a>`).join('')}</div>` : ''}</section>
@@ -730,6 +809,7 @@
         <h3 class="text-3xl font-black mb-4">${L('إرسال الورقة البحثية', 'Paper Submission')}</h3>
         <p class="text-gray-300 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">${esc(t(sub, 'platformNote'))}</p>
         <div class="flex flex-wrap justify-center gap-4">${url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-secondary hover:bg-accent text-white font-black py-4 px-10 rounded-xl transition-colors text-lg">${L('تقديم الورقة عبر المنصة', 'Submit via the Platform')}</a>` : ''}<a href="${esc(guide)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 border-2 border-white/30 hover:bg-white hover:text-primary text-white font-black py-4 px-8 rounded-xl transition-colors text-lg"><i class="fas fa-file-pdf" aria-hidden="true"></i>${L('دليل استخدام المنصة (PDF)', 'Event Submission Guidelines (PDF)')}</a></div></section>`;
+    tlInit();
   }
 
   // ---------- الرعاة ----------
@@ -821,7 +901,7 @@
   }
   function renderAll(silent) {
     applyStaticI18n(); applySettings(); renderAnnouncements(); renderAbout(); renderTopics(); renderHistoryList();
-    renderCommittees(); renderSpeakers(); renderProgram(); renderSubmission(); renderSponsors(); renderHomeSponsors();
+    renderCommittees(); renderSpeakers(); renderProgram(); renderSubmission(); renderSponsors(); renderHomeSponsors(); renderHomeDeadlines();
     const m = location.hash.slice(1).split('?')[0].match(/^history-(\d{4})$/); if (m) renderEdition(m[1]);
     if (!silent) route(true);
   }

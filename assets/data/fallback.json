@@ -1,1116 +1,1064 @@
 {
- "settings": {
-  "_type": "siteSettings",
-  "_id": "siteSettings",
-  "siteTitle_ar": "المؤتمر الدولي الثاني للقضايا الاقتصادية المعاصرة",
-  "siteTitle_en": "2nd International Conference on Contemporary Economic Issues (ICCEI)",
-  "heroTitle_ar": "قضايا اقتصادية معاصرة",
-  "heroTitle_en": "Contemporary Economic Issues",
-  "theme_ar": "الأمن الغذائي في ظل التحديات العالمية: الابتكار والسياسات الاقتصادية لتحقيق الاستدامة",
-  "theme_en": "Food Security Amid Global Challenges: Innovation and Economic Policies for Sustainability",
-  "editionLabel_ar": "الطبعة الثانية - 2027",
-  "editionLabel_en": "Second Edition - 2027",
-  "facultyLogoAr": "assets/img/faculty_logo_ar.png",
-  "facultyLogoEn": "assets/img/faculty_logo_en.png",
-  "conferenceLogo": "assets/img/conference_logo.png",
-  "eventStart": "2027-10-20T07:00:00.000Z",
-  "eventEnd": "2027-10-21T17:00:00.000Z",
-  "registrationOpen": true,
-  "paperSubmissionUrl": "https://events.univ-setif.dz/",
-  "contactEmail": "iccei2027.setif1@gmail.com",
-  "venueName_ar": "جامعة سطيف 1 - فرحات عباس",
-  "venueName_en": "Setif 1 University - Ferhat Abbas",
-  "venueDescription_ar": "كلية العلوم الاقتصادية والتجارية وعلوم التسيير، جامعة سطيف 1 – فرحات عباس، القطب الجامعي الباز، طريق الجزائر، سطيف، الجزائر.",
-  "venueDescription_en": "Faculty of Economics, Business and Management Sciences, Setif 1 University – Ferhat Abbas, El Bez University Campus, Algiers Road, Setif, Algeria.",
-  "address_ar": "جامعة سطيف 1 – فرحات عباس، القطب الجامعي الباز، طريق الجزائر، سطيف، الجزائر.",
-  "address_en": "Setif 1 University – Ferhat Abbas, El Bez University Campus, Algiers Road, Setif, Algeria.",
-  "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3202.9342792611634!2d5.3952402!3d36.1916474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12f3158c3539bc7b%3A0x6b24d77054f15d2a!2sFaculty%20of%20Economics%2C%20Commerce%20and%20Management%20Sciences!5e0!3m2!1sen!2sdz!4v1700000000000!5m2!1sen!2sdz",
-  "mapLinkUrl": "https://maps.app.goo.gl/xHB9GtWvQpGnTqDV8",
-  "footerAbout_ar": "المؤتمر الدولي الثاني للقضايا الاقتصادية المعاصرة: منبر علمي يجمع الباحثين والخبراء وصنّاع القرار لمناقشة الأمن الغذائي في ظل التحديات العالمية، من زاوية الابتكار والسياسات الاقتصادية لتحقيق الاستدامة.",
-  "footerAbout_en": "The Second International Conference on Contemporary Economic Issues: a scientific forum bringing together researchers, experts and policy makers to discuss food security amid global challenges, from the angle of innovation and economic policies for sustainability.",
-  "copyright_ar": "© 2027 جامعة سطيف 1. جميع الحقوق محفوظة.",
-  "copyright_en": "© 2027 Setif 1 University. All rights reserved.",
-  "seoDescription_ar": "الموقع الرسمي للمؤتمر الدولي الثاني: قضايا اقتصادية معاصرة — الأمن الغذائي في ظل التحديات العالمية. جامعة سطيف 1، الجزائر.",
-  "seoDescription_en": "Official website of the 2nd International Conference on Contemporary Economic Issues — Food Security Amidst Global Challenges. Setif 1 University, Algeria."
- },
- "home": {
-  "_type": "homePage",
-  "_id": "homePage",
-  "welcomeKicker_ar": "مرحباً بكم",
-  "welcomeKicker_en": "Welcome",
-  "welcomeTitle_ar": "نظرة عامة على المؤتمر",
-  "welcomeTitle_en": "Conference Overview",
-  "welcomeHeading_ar": "منبر علمي دولي لقضايا الأمن الغذائي والاستدامة",
-  "welcomeHeading_en": "An International Scientific Forum on Food Security and Sustainability",
-  "welcomeText_ar": "يتناول المؤتمر الدولي الثاني للقضايا الاقتصادية المعاصرة قضية الأمن الغذائي في ظل التحديات العالمية، من زاوية الابتكار والسياسات الاقتصادية الكفيلة بتحقيق الاستدامة، ويجمع الأساتذة الباحثين والخبراء وصنّاع القرار والمهنيين من داخل الجزائر وخارجها.",
-  "welcomeText_en": "The Second International Conference on Contemporary Economic Issues addresses food security amid global challenges, from the perspective of innovation and the economic policies capable of achieving sustainability, bringing together professors, researchers, experts, policy makers and professionals from Algeria and abroad.",
-  "welcomeImage": "https://images.unsplash.com/photo-1542838132-92c53300491e?fm=jpg&fit=crop&w=600&q=80",
-  "welcomeImage2": "https://images.unsplash.com/photo-1592982537447-6f2b6dbf58d9?fm=jpg&fit=crop&w=600&q=80",
-  "welcomeImage2Label_ar": "زراعة مستدامة",
-  "welcomeImage2Label_en": "Sustainable Agri",
-  "stats": [
-   {
-    "_key": "s1",
-    "value": "06",
-    "label_ar": "محاور علمية",
-    "label_en": "Scientific Tracks"
-   },
-   {
-    "_key": "s2",
-    "value": "02",
-    "label_ar": "يومان من النقاش",
-    "label_en": "Days of Discussion"
-   }
-  ]
- },
- "about": {
-  "_type": "aboutPage",
-  "_id": "aboutPage",
-  "aboutIntro_ar": "تنظم كلية العلوم الاقتصادية والتجارية وعلوم التسيير بجامعة سطيف 1 – فرحات عباس سلسلة \"المؤتمر الدولي للقضايا الاقتصادية المعاصرة (ICCEI)\"، بوصفها فضاءً علميًا دوريًا يتناول في كل طبعة قضية اقتصادية راهنة ذات بعد دولي، ويجمع الأساتذة الباحثين والخبراء وصنّاع القرار والمهنيين من داخل الجزائر وخارجها.\n\nوقد خصصت الطبعة الأولى لاستخدامات الذكاء الاصطناعي في الخدمات المالية، فيما تتناول الطبعة الثانية قضية الأمن الغذائي في ظل التحديات العالمية، من زاوية الابتكار والسياسات الاقتصادية الكفيلة بتحقيق الاستدامة.",
-  "aboutIntro_en": "The Faculty of Economics, Business and Management Sciences at Setif 1 University – Ferhat Abbas organizes the \"International Conference on Contemporary Economic Issues (ICCEI)\" series, a periodic scientific forum that addresses, in each edition, a current economic issue of international scope and brings together professors, researchers, experts, policy makers and professionals from Algeria and abroad.\n\nThe first edition was devoted to the uses of artificial intelligence in financial services, while the second edition addresses food security amid global challenges, from the perspective of innovation and the economic policies capable of achieving sustainability.",
-  "editionsTable": [
-   {
-    "_key": "e1",
-    "label_ar": "الأولى",
-    "label_en": "First",
-    "year": "2025",
-    "topic_ar": "استخدامات الذكاء الاصطناعي في الخدمات المالية",
-    "topic_en": "Uses of Artificial Intelligence in Financial Services"
-   },
-   {
-    "_key": "e2",
-    "label_ar": "الثانية",
-    "label_en": "Second",
-    "year": "2027",
-    "topic_ar": "الأمن الغذائي في ظل التحديات العالمية: الابتكار والسياسات الاقتصادية لتحقيق الاستدامة",
-    "topic_en": "Food Security Amid Global Challenges: Innovation and Economic Policies for Sustainability"
-   }
+  "settings": {
+    "_type": "siteSettings",
+    "_id": "siteSettings",
+    "siteTitle_ar": "المؤتمر الدولي الثاني للقضايا الاقتصادية المعاصرة",
+    "siteTitle_en": "2nd International Conference on Contemporary Economic Issues (ICCEI)",
+    "heroTitle_ar": "قضايا اقتصادية معاصرة",
+    "heroTitle_en": "Contemporary Economic Issues",
+    "theme_ar": "الأمن الغذائي في ظل التحديات العالمية: الابتكار والسياسات الاقتصادية لتحقيق الاستدامة",
+    "theme_en": "Food Security Amid Global Challenges: Innovation and Economic Policies for Sustainability",
+    "editionLabel_ar": "الطبعة الثانية - 2027",
+    "editionLabel_en": "Second Edition - 2027",
+    "facultyLogoAr": "assets/img/faculty_logo_ar.png",
+    "facultyLogoEn": "assets/img/faculty_logo_en.png",
+    "conferenceLogo": "assets/img/conference_logo.png",
+    "eventStart": "2027-04-20T07:00:00.000Z",
+    "eventEnd": "2027-04-21T17:00:00.000Z",
+    "registrationOpen": true,
+    "paperSubmissionUrl": "https://events.univ-setif.dz/event/36/",
+    "contactEmail": "iccei2027.setif1@gmail.com",
+    "venueName_ar": "جامعة سطيف 1 - فرحات عباس",
+    "venueName_en": "Setif 1 University - Ferhat Abbas",
+    "venueDescription_ar": "كلية العلوم الاقتصادية والتجارية وعلوم التسيير، جامعة سطيف 1 – فرحات عباس",
+    "venueDescription_en": "Faculty of Economics, Commerce, and Management Sciences, Setif 1 University – Ferhat Abbas",
+    "address_ar": "القطب الجامعي الباز، طريق الجزائر، سطيف، الجزائر",
+    "address_en": "El Bez University Campus, Algiers Road, Setif, Algeria",
+    "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3202.9342792611634!2d5.3952402!3d36.1916474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12f3158c3539bc7b%3A0x6b24d77054f15d2a!2sFaculty%20of%20Economics%2C%20Commerce%20and%20Management%20Sciences!5e0!3m2!1sen!2sdz!4v1700000000000!5m2!1sen!2sdz",
+    "mapLinkUrl": "https://maps.app.goo.gl/xHB9GtWvQpGnTqDV8",
+    "footerAbout_ar": "المؤتمر الدولي الثاني للقضايا الاقتصادية المعاصرة: منبر علمي يجمع الباحثين والخبراء وصنّاع القرار لمناقشة الأمن الغذائي في ظل التحديات العالمية، من زاوية الابتكار والسياسات الاقتصادية لتحقيق الاستدامة.",
+    "footerAbout_en": "The Second International Conference on Contemporary Economic Issues: a scientific forum bringing together researchers, experts and policy makers to discuss food security amid global challenges, from the angle of innovation and economic policies for sustainability.",
+    "copyright_ar": "© 2027 جامعة سطيف 1. جميع الحقوق محفوظة.",
+    "copyright_en": "© 2027 Setif 1 University. All rights reserved.",
+    "seoDescription_ar": "الموقع الرسمي للمؤتمر الدولي الثاني: قضايا اقتصادية معاصرة — الأمن الغذائي في ظل التحديات العالمية. جامعة سطيف 1، الجزائر.",
+    "seoDescription_en": "Official website of the 2nd International Conference on Contemporary Economic Issues — Food Security Amidst Global Challenges. Setif 1 University, Algeria.",
+    "registrationUrl": "https://events.univ-setif.dz/event/36/"
+  },
+  "home": {
+    "_type": "homePage",
+    "_id": "homePage",
+    "welcomeKicker_ar": "مرحباً بكم",
+    "welcomeKicker_en": "Welcome",
+    "welcomeTitle_ar": "نظرة عامة على المؤتمر",
+    "welcomeTitle_en": "Conference Overview",
+    "welcomeHeading_ar": "منبر علمي دولي لقضايا الأمن الغذائي والاستدامة",
+    "welcomeHeading_en": "An International Scientific Forum on Food Security and Sustainability",
+    "welcomeText_ar": "يتناول المؤتمر الدولي الثاني للقضايا الاقتصادية المعاصرة قضية الأمن الغذائي في ظل التحديات العالمية، من زاوية الابتكار والسياسات الاقتصادية الكفيلة بتحقيق الاستدامة، ويجمع الأساتذة الباحثين والخبراء وصنّاع القرار والمهنيين من داخل الجزائر وخارجها.",
+    "welcomeText_en": "The Second International Conference on Contemporary Economic Issues addresses food security amid global challenges, from the perspective of innovation and the economic policies capable of achieving sustainability, bringing together professors, researchers, experts, policy makers and professionals from Algeria and abroad.",
+    "welcomeImage": "https://images.unsplash.com/photo-1542838132-92c53300491e?fm=jpg&fit=crop&w=600&q=80",
+    "welcomeImage2": "https://images.unsplash.com/photo-1592982537447-6f2b6dbf58d9?fm=jpg&fit=crop&w=600&q=80",
+    "welcomeImage2Label_ar": "زراعة مستدامة",
+    "welcomeImage2Label_en": "Sustainable Agri",
+    "stats": [
+      {
+        "_key": "s1",
+        "value": "06",
+        "label_ar": "محاور علمية",
+        "label_en": "Scientific Tracks"
+      },
+      {
+        "_key": "s2",
+        "value": "02",
+        "label_ar": "يومان من النقاش",
+        "label_en": "Days of Discussion"
+      }
+    ]
+  },
+  "about": {
+    "_type": "aboutPage",
+    "_id": "aboutPage",
+    "aboutIntro_ar": "تنظم كلية العلوم الاقتصادية والتجارية وعلوم التسيير بجامعة سطيف 1 – فرحات عباس سلسلة «المؤتمر الدولي للقضايا الاقتصادية المعاصرة (ICCEI)»، بوصفها فضاءً علميًا دوريًا يتناول في كل طبعة قضية اقتصادية راهنة ذات بعد دولي، ويجمع الأساتذة الباحثين والخبراء وصنّاع القرار والمهنيين من داخل الجزائر وخارجها.\n\nوقد خُصصت الطبعة الأولى لاستخدامات الذكاء الاصطناعي في الخدمات المالية، فيما تتناول الطبعة الثانية قضية الأمن الغذائي في ظل التحديات العالمية، من زاوية الابتكار والسياسات الاقتصادية الكفيلة بتحقيق الاستدامة.",
+    "aboutIntro_en": "The Faculty of Economics, Commerce, and Management Sciences at Sétif 1 University – Ferhat Abbas organizes the series “International Conference on Contemporary Economic Issues (ICCEI)” as a periodic scientific forum that addresses, in each edition, a current economic issue of international scope, and brings together academic researchers, experts, decision-makers and professionals from Algeria and abroad.\n\nThe first edition was devoted to the uses of artificial intelligence in financial services, while the second edition addresses the issue of food security amid global challenges, from the perspective of innovation and the economic policies capable of achieving sustainability.",
+    "editionsTable": [
+      {
+        "_key": "e1",
+        "label_ar": "الأولى",
+        "label_en": "First",
+        "year": "2025",
+        "topic_ar": "استخدامات الذكاء الاصطناعي في الخدمات المالية",
+        "topic_en": "Uses of Artificial Intelligence in Financial Services"
+      },
+      {
+        "_key": "e2",
+        "label_ar": "الثانية",
+        "label_en": "Second",
+        "year": "2027",
+        "topic_ar": "الأمن الغذائي في ظل التحديات العالمية: الابتكار والسياسات الاقتصادية لتحقيق الاستدامة",
+        "topic_en": "Food Security Amid Global Challenges: Innovation and Economic Policies for Sustainability"
+      }
+    ],
+    "preamble_ar": "يشكل الأمن الغذائي متغيرا هيكليا محددا للاستقرار الاقتصادي والاجتماعي، وركيزة أساسية ضمن أجندة التنمية المستدامة. وتؤكد المؤشرات الدولية الحديثة اتساع فجوة الأمن الغذائي عالميا، حيث يعاني نحو 645 مليون شخص من نقص التغذية المزمن، فيما يواجه أكثر من 2.1 مليار شخص انعدام الأمن الغذائي بدرجات متفاوتة، بما يعكس اختلالات بنيوية في حوكمة النظم الغذائية ومسارات العرض والطلب العالميين.\n\nوتتعرض سلاسل الإمداد الغذائي لضغوط غير مسبوقة ناتجة عن تداخل النزاعات الجيوسياسية، والصدمات المناخية المتطرفة، والتقلبات الاقتصادية، واضطرابات التجارة الدولية. وتزداد حدة هذه الضغوط في الاقتصادات النامية، ولا سيما في المنطقتين الإفريقية والعربية، حيث تتداخل ندرة الموارد المائية، وتدهور الأراضي، والنمو الديموغرافي، والتبعية للواردات الغذائية، بما يرفع درجة الانكشاف أمام صدمات الأسعار وقيود الإمداد.\n\nوتتطلب معالجة هذه الاختلالات تجاوز المقاربات التقليدية نحو نماذج اقتصادية أكثر استدامة، ترتكز على الابتكار الزراعي، والتكنولوجيات الرقمية، والتمويل المستدام، وتحديث الحوكمة المؤسساتية. كما تستدعي بناء سياسات تجارية واستثمارية قادرة على رفع كفاءة استخدام الموارد، وتعزيز القدرات التخزينية والاستراتيجية، وتقليص فجوة العجز الغذائي على المستويين الوطني والإقليمي.\n\nوفي هذا السياق، وانسجاما مع أهداف التنمية المستدامة 2030 وتوجهات النظم الغذائية العالمية، تنظم كلية العلوم الاقتصادية والتجارية وعلوم التسيير بجامعة سطيف 1 فرحات عباس المؤتمر الدولي الثاني للقضايا الاقتصادية المعاصرة، بهدف استقطاب مساهمات علمية رصينة ومتعددة التخصصات، وتبادل الخبرات الدولية، وصياغة توصيات عملية تساعد راسمي السياسات والفاعلين الاقتصاديين على تصميم منظومات غذائية أكثر مرونة وكفاءة واستدامة.",
+    "preamble_en": "Food security is a structural variable that determines economic and social stability, and a fundamental pillar of the sustainable development agenda. Recent international indicators confirm the widening of the global food security gap: some 645 million people suffer from chronic undernourishment, while more than 2.1 billion people face varying degrees of food insecurity, reflecting structural imbalances in the governance of food systems and in global supply and demand pathways.\n\nFood supply chains are under unprecedented pressure resulting from the interplay of geopolitical conflicts, extreme climate shocks, economic volatility and disruptions to international trade. These pressures are more acute in developing economies, particularly in the African and Arab regions, where water scarcity, land degradation, demographic growth and dependence on food imports intersect, increasing exposure to price shocks and supply constraints.\n\nAddressing these imbalances requires moving beyond traditional approaches towards more sustainable economic models based on agricultural innovation, digital technologies, sustainable finance and the modernization of institutional governance. It also requires trade and investment policies capable of improving resource-use efficiency, strengthening storage and strategic capacities, and narrowing the food deficit gap at the national and regional levels.\n\nIn this context, and in line with the 2030 Sustainable Development Goals and the orientations of global food systems, the Faculty of Economics, Commerce, and Management Sciences at Setif 1 University – Ferhat Abbas is organizing the Second International Conference on Contemporary Economic Issues, with the aim of attracting rigorous, multidisciplinary scientific contributions, exchanging international expertise, and formulating practical recommendations that help policymakers and economic actors design more resilient, efficient and sustainable food systems.",
+    "problemQuestion_ar": "كيف يمكن تصميم وتنسيق أنظمة الابتكار والسياسات الاقتصادية لتعزيز مرونة، كفاءة واستدامة النظم الغذائية في مواجهة الاضطرابات العالمية المتزايدة والتحولات الهيكلية المؤثرة على الأمن الغذائي؟",
+    "problemQuestion_en": "How can innovation systems and economic policies be designed and coordinated to strengthen the resilience, efficiency and sustainability of food systems in the face of growing global disruptions and structural shifts affecting food security?",
+    "objectives": [
+      {
+        "_key": "o1",
+        "text_ar": "تحليل الأبعاد الاقتصادية الكلية والجيوسياسية والمناخية للأمن الغذائي، وقياس أثر الصدمات العالمية وتغيرات أنماط التجارة على استقرار الأسواق وسلاسل الإمداد الدولية.",
+        "text_en": "Analyzing the macroeconomic, geopolitical and climatic dimensions of food security, and measuring the impact of global shocks and changing trade patterns on the stability of markets and international supply chains."
+      },
+      {
+        "_key": "o2",
+        "text_ar": "دراسة نجاعة السياسات الاقتصادية والزراعية والتجارية المعتمدة في الاقتصادات النامية، ولا سيما في المنطقة العربية والإفريقية، لتقليص التبعية للاستيراد ورصد الفجوات الهيكلية في حوكمة النظم الغذائية.",
+        "text_en": "Examining the effectiveness of the economic, agricultural and trade policies adopted in developing economies, particularly in the Arab and African region, in reducing import dependence, and identifying structural gaps in the governance of food systems."
+      },
+      {
+        "_key": "o3",
+        "text_ar": "استكشاف أثر التحول الرقمي والابتكار التكنولوجي، مثل الزراعة الذكية مناخيًا، والذكاء الاصطناعي، والتكنولوجيا الحيوية، في تحديث سلاسل القيمة الغذائية من الإنتاج إلى التوزيع والاستهلاك.",
+        "text_en": "Exploring the impact of digital transformation and technological innovation, such as climate-smart agriculture, artificial intelligence and biotechnology, on modernizing food value chains from production to distribution and consumption."
+      },
+      {
+        "_key": "o4",
+        "text_ar": "مناقشة نماذج التمويل المبتكر للقطاعين الفلاحي والصناعي الغذائي، بما يشمل الشراكات بين القطاعين العام والخاص، والتمويل الأخضر، والتمويل الإسلامي، وأدوات التمويل الجماعي.",
+        "text_en": "Discussing innovative financing models for the agricultural and agri-food industry sectors, including public–private partnerships, green finance, Islamic finance and crowdfunding instruments."
+      },
+      {
+        "_key": "o5",
+        "text_ar": "دراسة التجارب والنماذج العالمية الرائدة في تحقيق الاكتفاء والسيادة الغذائية وبناء منظومات مرنة، واستخلاص الدروس القابلة للتكييف مع السياقات الاقتصادية والمؤسساتية للدول النامية.",
+        "text_en": "Studying leading global experiences and models in achieving food self-sufficiency and food sovereignty and in building resilient systems, and drawing lessons that can be adapted to the economic and institutional contexts of developing countries."
+      },
+      {
+        "_key": "o6",
+        "text_ar": "تأسيس شبكة بحثية دولية متخصصة، وتوطيد التعاون المؤسسي بين الجامعات ومراكز البحث والقطاعين العام والخاص، لتسهيل نقل المعرفة والتكنولوجيا عبر سلسلة القيمة الغذائية.",
+        "text_en": "Establishing a specialized international research network and strengthening institutional cooperation among universities, research centers and the public and private sectors, to facilitate the transfer of knowledge and technology across the food value chain."
+      },
+      {
+        "_key": "o7",
+        "text_ar": "صياغة توصيات علمية وعملية مبنية على الأدلة، موجهة لراسمي السياسات العمومية والفاعلين الاقتصاديين، للمساهمة في تصميم استراتيجيات وطنية وإقليمية متكاملة تضمن استدامة الأمن الغذائي.",
+        "text_en": "Formulating evidence-based scientific and practical recommendations for public policymakers and economic actors, contributing to the design of integrated national and regional strategies that ensure the sustainability of food security."
+      }
+    ],
+    "audience": [
+      {
+        "_key": "a1",
+        "text_ar": "الأساتذة الباحثون.",
+        "text_en": "Academic researchers."
+      },
+      {
+        "_key": "a2",
+        "text_ar": "طلبة الدكتوراه.",
+        "text_en": "PhD students."
+      },
+      {
+        "_key": "a3",
+        "text_ar": "صنّاع القرار.",
+        "text_en": "Decision-makers."
+      },
+      {
+        "_key": "a4",
+        "text_ar": "المهنيون والفاعلون الاقتصاديون.",
+        "text_en": "Professionals and economic actors."
+      }
+    ],
+    "tracksIntro_ar": "يتناول المؤتمر إشكالية الأمن الغذائي والاستدامة من خلال ستة محاور مترابطة تغطي الأبعاد النظرية والسياساتية والتكنولوجية والبيئية.",
+    "tracksIntro_en": "The conference addresses food security and sustainability through six interrelated tracks covering the theoretical, policy, technological and environmental dimensions.",
+    "tracksNote_ar": "تُرحّب اللجنة العلمية بالدراسات التطبيقية والقياسية ودراسات الحالة، ولا سيما تلك التي تتناول التجربة الجزائرية والسياقين العربي والإفريقي، إلى جانب الدراسات المقارنة للتجارب الدولية.",
+    "tracksNote_en": "The Scientific Committee welcomes applied and econometric studies as well as case studies, particularly those addressing the Algerian experience and the Arab and African contexts, in addition to comparative studies of international experiences."
+  },
+  "submission": {
+    "_type": "submissionPage",
+    "_id": "submissionPage",
+    "guidelines": [
+      {
+        "_key": "g1",
+        "text_ar": "أن تندرج الورقة البحثية ضمن أحد محاور المؤتمر.",
+        "text_en": "The paper must fall within one of the conference themes."
+      },
+      {
+        "_key": "g2",
+        "text_ar": "أن تكون الورقة أصيلة، لم يسبق نشرها أو قبولها للنشر أو تقديمها في تظاهرات علمية أخرى.",
+        "text_en": "Originality: previously accepted conference papers or papers accepted for journal publication are not eligible."
+      },
+      {
+        "_key": "g3",
+        "text_ar": "تُقبل الأوراق باللغة العربية أو الإنجليزية، مرفقةً بملخصين باللغتين.",
+        "text_en": "Language: papers may be submitted in Arabic or English with abstracts at least in two languages."
+      },
+      {
+        "_key": "g4",
+        "text_ar": "تُرسل الأوراق كاملةً بصيغتي Word وPDF، ولا تُقبل الملفات المضغوطة.",
+        "text_en": "Submission: full papers should be submitted in Word and PDF formats. Do not submit zip files."
+      },
+      {
+        "_key": "g5",
+        "text_ar": "تُكتب الأوراق العربية بخط Simplified Arabic حجم 14، والإنجليزية بخط Times New Roman حجم 12.",
+        "text_en": "Formatting: Arabic papers in Simplified Arabic, font size 14; English papers in Times New Roman, font size 12."
+      },
+      {
+        "_key": "g6",
+        "text_ar": "لا يتجاوز حجم الورقة 15 صفحة، وتُعتمد طريقة APA في التوثيق والإحالات.",
+        "text_en": "Maximum paper length is 15 pages. Citation style: American Psychological Association (APA) 6th edition."
+      },
+      {
+        "_key": "g7",
+        "text_ar": "تخضع جميع الأوراق لتحكيم علمي مزدوج مجهول الهوية.",
+        "text_en": "Peer review: all submissions undergo double-blind peer review by the conference’s scientific committee."
+      },
+      {
+        "_key": "g8",
+        "text_ar": "لا تُدرج أسماء المؤلفين في متن الورقة.",
+        "text_en": "Anonymity: author names and any identifying information must not appear in the body of the manuscript."
+      },
+      {
+        "_key": "g9",
+        "text_ar": "تُعرض الأوراق المقبولة حضوريًا في مقر انعقاد المؤتمر.",
+        "text_en": "Presentation format: accepted research papers are presented in person at the conference venue."
+      }
+    ],
+    "platformNote_ar": "تُرسل الملخصات والأوراق البحثية عبر المنصة الإلكترونية لجامعة سطيف 1.",
+    "platformNote_en": "Abstracts and research papers are submitted via the online platform of Setif 1 University.",
+    "datesNote_ar": "ملاحظة: يُرجى الالتزام بالآجال المحددة، حيث تُغلق منصة الإرسال عند انتهاء المدة المحددة.",
+    "datesNote_en": "Important: papers received after the stated deadlines will not be considered.",
+    "participationIntro_ar": "المشاركة في أشغال المؤتمر مجانية، ويستفيد أصحاب الأوراق المقبولة من:",
+    "participationIntro_en": "Participation in the conference is free of charge. Authors of accepted papers will receive:",
+    "benefits": [
+      {
+        "_key": "b1",
+        "text_ar": "شهادات المشاركة.",
+        "text_en": "Certificates of participation."
+      },
+      {
+        "_key": "b2",
+        "text_ar": "وجبات الغداء واستراحات القهوة والنقل الداخلي خلال أيام المؤتمر.",
+        "text_en": "Lunches, coffee breaks, and local transportation during the conference."
+      },
+      {
+        "_key": "b3",
+        "text_ar": "تبقى المصاريف الأخرى على عاتق المشاركين.",
+        "text_en": "All other expenses shall be borne by the participants."
+      }
+    ],
+    "publishing": [
+      {
+        "_key": "p1",
+        "text_ar": "كتاب أعمال المؤتمر: تُنشر الأوراق المقبولة كاملةً في كتاب أعمال المؤتمر برقم دولي معياري (ISBN).",
+        "text_en": "Conference proceedings: accepted papers are published in full in the conference proceedings book with an International Standard Book Number (ISBN)."
+      },
+      {
+        "_key": "p2",
+        "text_ar": "مجلات علمية محكّمة: تُرشَّح أفضل الأوراق للنشر في أعداد خاصة من مجلات علمية محكمة، وفق إجراءات التحكيم المعتمدة لديها.",
+        "text_en": "Peer-reviewed scientific journals: the best papers are nominated for publication in special issues of peer-reviewed scientific journals, in accordance with their established review procedures."
+      },
+      {
+        "_key": "p3",
+        "text_ar": "جائزة أفضل ورقة بحثية: شهادة تقديرية تُمنح بناءً على توصيات اللجنة العلمية.",
+        "text_en": "Best paper award: a certificate of appreciation awarded on the basis of the recommendations of the Scientific Committee."
+      }
+    ]
+  },
+  "announcements": [
+    {
+      "_type": "announcement",
+      "_id": "announcement-welcome",
+      "kind": "important",
+      "pinned": true,
+      "popup": false,
+      "publishAt": "2026-11-03T00:00:00.000Z",
+      "title_ar": "تم إطلاق الموقع الرسمي للمؤتمر الدولي الثاني: قضايا اقتصادية معاصرة",
+      "title_en": "The official website of the 2nd International Conference is now live",
+      "body_ar": "يمكنكم من خلال هذا الموقع متابعة كل مستجدات المؤتمر: المحاور، البرنامج، اللجان، التواريخ المهمة وإرشادات النشر.",
+      "body_en": "Follow all conference updates here: tracks, program, committees, important dates and submission guidelines."
+    },
+    {
+      "_type": "announcement",
+      "_id": "announcement-dates",
+      "kind": "periodic",
+      "pinned": false,
+      "popup": false,
+      "publishAt": "2026-11-03T00:00:00.000Z",
+      "title_ar": "التواريخ المهمة للمشاركة في المؤتمر",
+      "title_en": "Important dates for participation",
+      "body_ar": "فتح باب استقبال الأوراق: 15 نوفمبر 2026.\nآخر أجل لإرسال الملخصات: 26 نوفمبر 2026.\nالرد على الملخصات: 03 ديسمبر 2026.\nآخر أجل لإرسال الأوراق كاملة: 15 فيفري 2027.\nإعلان قرار القبول: 05 مارس 2027.\nانعقاد المؤتمر: 20–21 أفريل 2027.",
+      "body_en": "Opening of submissions: 15 November 2026.\nAbstract deadline: 26 November 2026.\nNotification on abstracts: 03 December 2026.\nFull paper deadline: 15 February 2027.\nAcceptance decision: 05 March 2027.\nConference: 20–21 April 2027.",
+      "linkUrl": "https://events.univ-setif.dz/",
+      "linkLabel_ar": "منصة إرسال الأوراق",
+      "linkLabel_en": "Paper submission platform"
+    }
   ],
-  "preamble_ar": "يشكل الأمن الغذائي متغيرا هيكليا محددا للاستقرار الاقتصادي والاجتماعي، وركيزة أساسية ضمن أجندة التنمية المستدامة. وتؤكد المؤشرات الدولية الحديثة اتساع فجوة الأمن الغذائي عالميا، حيث يعاني نحو 673 مليون شخص من نقص التغذية المزمن، فيما يواجه أكثر من 2.3 مليار شخص انعدام الأمن الغذائي بدرجات متفاوتة، بما يعكس اختلالات بنيوية في حوكمة النظم الغذائية ومسارات العرض والطلب العالميين.\n\nوتتعرض سلاسل الإمداد الغذائي لضغوط غير مسبوقة ناتجة عن تداخل النزاعات الجيوسياسية، والصدمات المناخية المتطرفة، والتقلبات الاقتصادية، واضطرابات التجارة الدولية. وتزداد حدة هذه الضغوط في الاقتصادات النامية، ولا سيما في المنطقتين الإفريقية والعربية، حيث تتداخل ندرة الموارد المائية، وتدهور الأراضي، والنمو الديموغرافي، والتبعية للواردات الغذائية، بما يرفع درجة الانكشاف أمام صدمات الأسعار وقيود الإمداد.\n\nوتتطلب معالجة هذه الاختلالات تجاوز المقاربات التقليدية نحو نماذج اقتصادية أكثر استدامة، ترتكز على الابتكار الزراعي، والتكنولوجيات الرقمية، والتمويل المستدام، وتحديث الحوكمة المؤسساتية. كما تستدعي بناء سياسات تجارية واستثمارية قادرة على رفع كفاءة استخدام الموارد، وتعزيز القدرات التخزينية والاستراتيجية، وتقليص فجوة العجز الغذائي على المستويين الوطني والإقليمي.\n\nوفي هذا السياق، وانسجاما مع أهداف التنمية المستدامة 2030 وتوجهات النظم الغذائية العالمية، تنظم كلية العلوم الاقتصادية والتجارية وعلوم التسيير بجامعة سطيف 1 فرحات عباس المؤتمر الدولي الثاني للقضايا الاقتصادية المعاصرة، بهدف استقطاب مساهمات علمية رصينة ومتعددة التخصصات، وتبادل الخبرات الدولية، وصياغة توصيات عملية تساعد راسمي السياسات والفاعلين الاقتصاديين على تصميم منظومات غذائية أكثر مرونة وكفاءة واستدامة.",
-  "preamble_en": "Food security is a structural variable that determines economic and social stability and a cornerstone of the sustainable development agenda. Recent international indicators confirm a widening global food security gap: around 673 million people suffer from chronic undernourishment, while more than 2.3 billion face food insecurity to varying degrees, reflecting structural imbalances in the governance of food systems and in global supply and demand.\n\nFood supply chains are under unprecedented pressure from the combined effect of geopolitical conflicts, extreme climate shocks, economic volatility and disruptions to international trade. These pressures are sharper in developing economies, particularly in Africa and the Arab region, where water scarcity, land degradation, demographic growth and dependence on food imports converge, increasing exposure to price shocks and supply restrictions.\n\nAddressing these imbalances requires moving beyond traditional approaches toward more sustainable economic models built on agricultural innovation, digital technologies, sustainable finance and modernized institutional governance. It also calls for trade and investment policies able to improve resource-use efficiency, strengthen storage and strategic capacities, and narrow the food deficit at the national and regional levels.\n\nIn this context, and in line with the 2030 Sustainable Development Goals and global food system trends, the Faculty of Economics, Business and Management Sciences at Setif 1 University Ferhat Abbas organizes the Second International Conference on Contemporary Economic Issues, aiming to attract rigorous multidisciplinary scientific contributions, exchange international experience, and draft practical recommendations that help policy makers and economic actors design more resilient, efficient and sustainable food systems.",
-  "problemQuestion_ar": "كيف يمكن تصميم وتنسيق أنظمة الابتكار والسياسات الاقتصادية لتعزيز مرونة، كفاءة واستدامة النظم الغذائية في مواجهة الاضطرابات العالمية المتزايدة والتحولات الهيكلية المؤثرة على الأمن الغذائي؟",
-  "problemQuestion_en": "How can innovation systems and economic policies be designed and coordinated to strengthen the resilience, efficiency and sustainability of food systems in the face of growing global disruptions and structural shifts affecting food security?",
-  "objectives": [
-   {
-    "_key": "o1",
-    "text_ar": "تحليل الأبعاد الاقتصادية الكلية والجيوسياسية والمناخية للأمن الغذائي، وقياس أثر الصدمات العالمية وتغيرات أنماط التجارة على استقرار الأسواق وسلاسل الإمداد الدولية.",
-    "text_en": "Analyzing the macroeconomic, geopolitical and climatic dimensions of food security, and measuring the impact of global shocks and changing trade patterns on market stability and international supply chains."
-   },
-   {
-    "_key": "o2",
-    "text_ar": "دراسة نجاعة السياسات الاقتصادية والزراعية والتجارية المعتمدة في الاقتصادات النامية، ولا سيما في المنطقة العربية والإفريقية، لتقليص التبعية للاستيراد ورصد الفجوات الهيكلية في حوكمة النظم الغذائية.",
-    "text_en": "Studying the effectiveness of economic, agricultural and trade policies in developing economies, particularly in the Arab and African regions, to reduce import dependence and identify structural gaps in food system governance."
-   },
-   {
-    "_key": "o3",
-    "text_ar": "استكشاف أثر التحول الرقمي والابتكار التكنولوجي، مثل الزراعة الذكية مناخيا، والذكاء الاصطناعي، والتكنولوجيا الحيوية، في تحديث سلاسل القيمة الغذائية من الإنتاج إلى التوزيع والاستهلاك.",
-    "text_en": "Exploring the impact of digital transformation and technological innovation, such as climate-smart agriculture, artificial intelligence and biotechnology, on modernizing food value chains from production to distribution and consumption."
-   },
-   {
-    "_key": "o4",
-    "text_ar": "مناقشة نماذج التمويل المبتكر للقطاعين الفلاحي والصناعي الغذائي، بما يشمل الشراكات بين القطاعين العام والخاص، والتمويل الأخضر، والتمويل الإسلامي، وأدوات التمويل الجماعي.",
-    "text_en": "Discussing innovative financing models for agriculture and food industries, including public-private partnerships, green finance, Islamic finance and crowdfunding instruments."
-   },
-   {
-    "_key": "o5",
-    "text_ar": "دراسة التجارب والنماذج العالمية الرائدة في تحقيق الاكتفاء والسيادة الغذائية وبناء منظومات مرنة، واستخلاص الدروس القابلة للتكييف مع السياقات الاقتصادية والمؤسساتية للدول النامية.",
-    "text_en": "Studying leading global experiences in achieving food self-sufficiency and sovereignty and building resilient systems, and drawing lessons adaptable to the economic and institutional contexts of developing countries."
-   },
-   {
-    "_key": "o6",
-    "text_ar": "تأسيس شبكة بحثية دولية متخصصة، وتوطيد التعاون المؤسسي بين الجامعات ومراكز البحث والقطاعين العام والخاص، لتسهيل نقل المعرفة والتكنولوجيا عبر سلسلة القيمة الغذائية.",
-    "text_en": "Establishing a specialized international research network and strengthening institutional cooperation between universities, research centers and the public and private sectors to facilitate knowledge and technology transfer across the food value chain."
-   },
-   {
-    "_key": "o7",
-    "text_ar": "صياغة توصيات علمية وعملية مبنية على الأدلة، موجهة لراسمي السياسات العمومية والفاعلين الاقتصاديين، للمساهمة في تصميم استراتيجيات وطنية وإقليمية متكاملة تضمن استدامة الأمن الغذائي.",
-    "text_en": "Drafting evidence-based scientific and practical recommendations for public policy makers and economic actors, contributing to integrated national and regional strategies that ensure food security sustainability."
-   }
+  "tracks": [
+    {
+      "_id": "track-1",
+      "_type": "track",
+      "order": 1,
+      "kicker_ar": "المحور الأول",
+      "kicker_en": "Theme 1",
+      "title_ar": "تشخيص الأمن الغذائي، أدوات التحليل الاقتصادي ومؤشرات القياس الدولية",
+      "title_en": "Diagnosing Food Security: Economic Analysis Tools and International Measurement Indicators",
+      "topics": [
+        {
+          "_key": "t1",
+          "text_ar": "تطور مقاربات الأمن الغذائي في ظل أهداف التنمية المستدامة 2030.",
+          "text_en": "The evolution of food security approaches in light of the 2030 Sustainable Development Goals."
+        },
+        {
+          "_key": "t2",
+          "text_ar": "النماذج التحليلية ومؤشرات القياس الدولية للأمن الغذائي.",
+          "text_en": "Analytical models and international indicators for measuring food security."
+        },
+        {
+          "_key": "t3",
+          "text_ar": "العلاقة بين الأمن الغذائي، والأمن الاقتصادي، والاستقرار الاجتماعي.",
+          "text_en": "The relationship between food security, economic security and social stability."
+        }
+      ],
+      "icon": "chart",
+      "color": "primary"
+    },
+    {
+      "_id": "track-2",
+      "_type": "track",
+      "order": 2,
+      "kicker_ar": "المحور الثاني",
+      "kicker_en": "Theme 2",
+      "title_ar": "الصدمات العالمية وانعكاساتها على النظم الغذائية",
+      "title_en": "Global Shocks and Their Implications for Food Systems",
+      "topics": [
+        {
+          "_key": "t1",
+          "text_ar": "التوترات الجيوسياسية واضطرابات سلاسل الإمداد والتجارة الدولية.",
+          "text_en": "Geopolitical tensions and disruptions to supply chains and international trade."
+        },
+        {
+          "_key": "t2",
+          "text_ar": "التغيرات المناخية والكوارث الطبيعية وأثرها على استقرار الإنتاج الزراعي.",
+          "text_en": "Climate change and natural disasters and their impact on the stability of agricultural production."
+        },
+        {
+          "_key": "t3",
+          "text_ar": "تقلبات أسعار السلع الأساسية وتأثيرها على التضخم والقدرة الشرائية.",
+          "text_en": "Volatility of basic commodity prices and its impact on inflation and purchasing power."
+        },
+        {
+          "_key": "t4",
+          "text_ar": "تقييم مستويات الهشاشة البنيوية والتبعية الاستيرادية في الاقتصادات النامية.",
+          "text_en": "Assessing levels of structural fragility and import dependence in developing economies."
+        }
+      ],
+      "icon": "globe",
+      "color": "secondary"
+    },
+    {
+      "_id": "track-3",
+      "_type": "track",
+      "order": 3,
+      "kicker_ar": "المحور الثالث",
+      "kicker_en": "Theme 3",
+      "title_ar": "السياسات الاقتصادية والتمويلية لتعزيز الاستقلالية الغذائية",
+      "title_en": "Economic and Financing Policies for Strengthening Food Self-Reliance",
+      "topics": [
+        {
+          "_key": "t1",
+          "text_ar": "تقييم السياسات الزراعية والتجارية بين الحماية والتحرير وأثرها على الإنتاج المحلي.",
+          "text_en": "Evaluating agricultural and trade policies between protection and liberalization, and their impact on domestic production."
+        },
+        {
+          "_key": "t2",
+          "text_ar": "إصلاح منظومة الدعم الغذائي بما يوازن بين الكفاءة الاقتصادية والعدالة الاجتماعية.",
+          "text_en": "Reforming the food subsidy system to balance economic efficiency and social justice."
+        },
+        {
+          "_key": "t3",
+          "text_ar": "آليات التمويل المبتكر والمستدام للقطاع الفلاحي، مثل التمويل الأخضر، والصكوك الإسلامية، ورأس المال المخاطر.",
+          "text_en": "Innovative and sustainable financing mechanisms for the agricultural sector, such as green finance, Islamic sukuk and venture capital."
+        },
+        {
+          "_key": "t4",
+          "text_ar": "دور الشراكة بين القطاعين العام والخاص في تحديث البنى التحتية واللوجستية الزراعية.",
+          "text_en": "The role of public–private partnerships in modernizing agricultural infrastructure and logistics."
+        }
+      ],
+      "icon": "coins",
+      "color": "accent"
+    },
+    {
+      "_id": "track-4",
+      "_type": "track",
+      "order": 4,
+      "kicker_ar": "المحور الرابع",
+      "kicker_en": "Theme 4",
+      "title_ar": "دور الابتكار والتحول الرقمي في استدامة سلاسل القيمة الغذائية",
+      "title_en": "The Role of Innovation and Digital Transformation in the Sustainability of Food Value Chains",
+      "topics": [
+        {
+          "_key": "t1",
+          "text_ar": "الزراعة الذكية وتطبيقات الذكاء الاصطناعي وإنترنت الأشياء في رفع كفاءة الموارد.",
+          "text_en": "Smart agriculture and the applications of artificial intelligence and the Internet of Things in improving resource efficiency."
+        },
+        {
+          "_key": "t2",
+          "text_ar": "التكنولوجيا الحيوية والتحسين الوراثي لمواجهة الإجهاد المناخي والمائي.",
+          "text_en": "Biotechnology and genetic improvement to cope with climate and water stress."
+        },
+        {
+          "_key": "t3",
+          "text_ar": "دور الرقمنة في تتبع سلاسل الإمداد، وإدارة التخزين، والحد من الفاقد والهدر الغذائي.",
+          "text_en": "The role of digitalization in supply chain traceability, storage management, and the reduction of food loss and waste."
+        },
+        {
+          "_key": "t4",
+          "text_ar": "المقاولاتية والمؤسسات الناشئة في التكنولوجيا الزراعية (AgriTech) ودورها في تطوير الابتكار ضمن الصناعات التحويلية.",
+          "text_en": "Entrepreneurship and agricultural technology (AgriTech) start-ups and their role in developing innovation within the processing industries."
+        }
+      ],
+      "icon": "chip",
+      "color": "blue"
+    },
+    {
+      "_id": "track-5",
+      "_type": "track",
+      "order": 5,
+      "kicker_ar": "المحور الخامس",
+      "kicker_en": "Theme 5",
+      "title_ar": "اقتصاديات البيئة وإدارة الموارد الطبيعية",
+      "title_en": "Environmental Economics and Natural Resource Management",
+      "topics": [
+        {
+          "_key": "t1",
+          "text_ar": "الانتقال نحو الاقتصاد الأخضر والاقتصاد الدائري في النظم الزراعية الغذائية.",
+          "text_en": "The transition towards a green economy and a circular economy in agri-food systems."
+        },
+        {
+          "_key": "t2",
+          "text_ar": "الحوكمة الاقتصادية للموارد المائية، بما يشمل الري الذكي، وتحلية المياه، وإعادة التدوير.",
+          "text_en": "Economic governance of water resources, including smart irrigation, desalination and recycling."
+        },
+        {
+          "_key": "t3",
+          "text_ar": "التقييم الاقتصادي لآثار التصحر وتدهور الأراضي وسبل التخفيف منها.",
+          "text_en": "Economic assessment of the effects of desertification and land degradation, and ways to mitigate them."
+        },
+        {
+          "_key": "t4",
+          "text_ar": "تثمين التنوع البيولوجي والموارد الوراثية كأداة لتعزيز المنعة الغذائية.",
+          "text_en": "Valuing biodiversity and genetic resources as a tool for strengthening food resilience."
+        }
+      ],
+      "icon": "leaf",
+      "color": "purple"
+    },
+    {
+      "_id": "track-6",
+      "_type": "track",
+      "order": 6,
+      "kicker_ar": "المحور السادس",
+      "kicker_en": "Theme 6",
+      "title_ar": "الحوكمة المؤسساتية والتجارب الدولية",
+      "title_en": "Institutional Governance and International Experiences",
+      "topics": [
+        {
+          "_key": "t1",
+          "text_ar": "الأطر المؤسسية وحوكمة القطاع الزراعي الغذائي وتكامل أدوار الحكومات، والقطاع الخاص، والمجتمع المدني.",
+          "text_en": "Institutional frameworks and governance of the agri-food sector, and the complementary roles of governments, the private sector and civil society."
+        },
+        {
+          "_key": "t2",
+          "text_ar": "التكامل الاقتصادي الإقليمي ودوره في تعزيز الأمن الغذائي، مع الإشارة إلى منطقة التجارة الحرة القارية الإفريقية (AFCFTA) والمنطقة العربية.",
+          "text_en": "Regional economic integration and its role in enhancing food security, with reference to the African Continental Free Trade Area (AFCFTA) and the Arab region."
+        },
+        {
+          "_key": "t3",
+          "text_ar": "استعراض تجارب دولية رائدة في تحقيق السيادة الغذائية وبناء النظم المرنة والمستدامة.",
+          "text_en": "A review of leading international experiences in achieving food sovereignty and building resilient and sustainable systems."
+        },
+        {
+          "_key": "t4",
+          "text_ar": "دور مراكز البحث العلمي والمنظمات الدولية في توجيه السياسات العامة ونقل التكنولوجيا.",
+          "text_en": "The role of scientific research centers and international organizations in guiding public policy and transferring technology."
+        }
+      ],
+      "icon": "book",
+      "color": "gray"
+    }
   ],
-  "audience": [
-   {
-    "_key": "a1",
-    "text_ar": "الأساتذة الباحثون والباحثون في الاقتصاد، الإدارة، التجارة، المالية، الزراعة، البيئة، والتنمية المستدامة.",
-    "text_en": "Professors and researchers in economics, management, trade, finance, agriculture, environment and sustainable development."
-   },
-   {
-    "_key": "a2",
-    "text_ar": "طلبة الدكتوراه المهتمون بالأمن الغذائي، السياسات الاقتصادية، وسلاسل القيمة الغذائية.",
-    "text_en": "Doctoral students interested in food security, economic policy and food value chains."
-   },
-   {
-    "_key": "a3",
-    "text_ar": "ممثلو وزارة الفلاحة والتنمية الريفية والمؤسسات الحكومية ذات الصلة.",
-    "text_en": "Representatives of the Ministry of Agriculture and Rural Development and relevant government institutions."
-   },
-   {
-    "_key": "a4",
-    "text_ar": "إطارات ومهنيون في قطاعات الفلاحة، الصناعات الغذائية، البيئة، واللوجستيك.",
-    "text_en": "Executives and professionals in agriculture, food industries, environment and logistics."
-   },
-   {
-    "_key": "a5",
-    "text_ar": "ممثلو المنظمات الدولية المعنية بالأمن الغذائي والتنمية المستدامة.",
-    "text_en": "Representatives of international organizations concerned with food security and sustainable development."
-   },
-   {
-    "_key": "a6",
-    "text_ar": "فاعلون اقتصاديون ومقاولون في مجال الصناعات الغذائية والتكنولوجيا الزراعية، ومسؤولو غرف الفلاحة والتجارة.",
-    "text_en": "Economic actors and entrepreneurs in food industries and agricultural technology, and officials of chambers of agriculture and commerce."
-   }
+  "speakers": [],
+  "committee": [
+    {
+      "_type": "committee",
+      "_id": "committee-high-01",
+      "committeeType": "high",
+      "order": 1,
+      "name_ar": "الأستاذ الدكتور محمد الهادي لطرش",
+      "name_en": "Prof. Dr. Mohamed El Hadi Latreche",
+      "institution_ar": "مدير جامعة سطيف 1 – فرحات عباس، الجزائر",
+      "institution_en": "Rector of Setif 1 University – Ferhat Abbas, Algeria",
+      "role_ar": "الرئيس الشرفي للمؤتمر",
+      "role_en": "Honorary Chair"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-high-02",
+      "committeeType": "high",
+      "order": 2,
+      "name_ar": "الأستاذ الدكتور شوقي بورقبة",
+      "name_en": "Prof. Dr. Chaouki Bourakba",
+      "institution_ar": "عميد كلية العلوم الاقتصادية والتجارية وعلوم التسيير",
+      "institution_en": "Dean of the Faculty of Economics, Commerce, and Management Sciences",
+      "role_ar": "رئيس المؤتمر",
+      "role_en": "Conference Chairman"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-01",
+      "committeeType": "scientific",
+      "order": 1,
+      "name_ar": "أ.د. زينب بوقاعة",
+      "name_en": "Prof. Dr. Zineb Bougaa",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria",
+      "role_ar": "رئيسة اللجنة العلمية",
+      "role_en": "Chair of the Scientific Committee"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-02",
+      "committeeType": "scientific",
+      "order": 2,
+      "name_ar": "أ.د. أحمد بلوافي",
+      "name_en": "Prof. Dr. Ahmed Belouafi",
+      "institution_ar": "جامعة الملك عبد العزيز، السعودية",
+      "institution_en": "King Abdulaziz University, Saudi Arabia"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-03",
+      "committeeType": "scientific",
+      "order": 3,
+      "name_ar": "أ.د. أرانكا إغناسياك-شولتس",
+      "name_en": "Prof. Dr. Aranka Ignasiak-Szulc",
+      "institution_ar": "جامعة نيكولاس كوبرنيكوس، بولندا",
+      "institution_en": "Nicolaus Copernicus University, Poland"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-04",
+      "committeeType": "scientific",
+      "order": 4,
+      "name_ar": "أ.د. إيمان بوشنقير",
+      "name_en": "Prof. Dr. Imane Bouchenguir",
+      "institution_ar": "جامعة عنابة، الجزائر",
+      "institution_en": "University of Annaba, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-05",
+      "committeeType": "scientific",
+      "order": 5,
+      "name_ar": "أ.د. إيمان صحراوي",
+      "name_en": "Prof. Dr. Imane Sahraoui",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-06",
+      "committeeType": "scientific",
+      "order": 6,
+      "name_ar": "أ.د. توفيق مداني",
+      "name_en": "Prof. Dr. Toufik Medani",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-07",
+      "committeeType": "scientific",
+      "order": 7,
+      "name_ar": "أ.د. جمال الدين خاسف",
+      "name_en": "Prof. Dr. Djamel Eddine Khacef",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-08",
+      "committeeType": "scientific",
+      "order": 8,
+      "name_ar": "أ.د. جويدة بلعة",
+      "name_en": "Prof. Dr. Djouida Belaa",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-09",
+      "committeeType": "scientific",
+      "order": 9,
+      "name_ar": "أ.د. حسين بورغدة",
+      "name_en": "Prof. Dr. Hocine Bouraghda",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-10",
+      "committeeType": "scientific",
+      "order": 10,
+      "name_ar": "أ.د. خميسي قايدي",
+      "name_en": "Prof. Dr. Khemissi Gaidi",
+      "institution_ar": "جامعة برج بوعريريج، الجزائر",
+      "institution_en": "University of Bordj Bou Arreridj, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-11",
+      "committeeType": "scientific",
+      "order": 11,
+      "name_ar": "د. دافيد كالاندرا",
+      "name_en": "Dr. Davide Calandra",
+      "institution_ar": "جامعة تورينو، إيطاليا",
+      "institution_en": "University of Turin, Italy"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-12",
+      "committeeType": "scientific",
+      "order": 12,
+      "name_ar": "أ.د. ذهبية لطرش",
+      "name_en": "Prof. Dr. Dahbia Latreche",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-13",
+      "committeeType": "scientific",
+      "order": 13,
+      "name_ar": "د. سناء الله أنصاري",
+      "name_en": "Dr. Sanaullah Ansari",
+      "institution_ar": "معهد الشهيد ذو الفقار علي بوتو للعلوم والتكنولوجيا، باكستان",
+      "institution_en": "Shaheed Zulfikar Ali Bhutto Institute of Science and Technology, Pakistan"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-14",
+      "committeeType": "scientific",
+      "order": 14,
+      "name_ar": "أ.د. سهام حرفوش",
+      "name_en": "Prof. Dr. Sihem Harfouche",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-15",
+      "committeeType": "scientific",
+      "order": 15,
+      "name_ar": "أ.د. شرف الدين أمين بن عواق",
+      "name_en": "Prof. Dr. Charaf Eddine Amine Benaouag",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-16",
+      "committeeType": "scientific",
+      "order": 16,
+      "name_ar": "أ.د. صليحة رقاد",
+      "name_en": "Prof. Dr. Saliha Regad",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-17",
+      "committeeType": "scientific",
+      "order": 17,
+      "name_ar": "أ.د. طارق شوقي",
+      "name_en": "Prof. Dr. Tarek Chougui",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-18",
+      "committeeType": "scientific",
+      "order": 18,
+      "name_ar": "أ.د. عادل بشير",
+      "name_en": "Prof. Dr. Adel Bachir",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-19",
+      "committeeType": "scientific",
+      "order": 19,
+      "name_ar": "أ.د. عادل زيات",
+      "name_en": "Prof. Dr. Adel Ziet",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-20",
+      "committeeType": "scientific",
+      "order": 20,
+      "name_ar": "أ.د. عبد الوهاب سويسي",
+      "name_en": "Prof. Dr. Abdelouahab Souici",
+      "institution_ar": "جامعة الجزائر 3، الجزائر",
+      "institution_en": "University of Algiers 3, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-21",
+      "committeeType": "scientific",
+      "order": 21,
+      "name_ar": "أ.د. عرفان شوقي بيك",
+      "name_en": "Prof. Dr. Irfan Syauqi Beik",
+      "institution_ar": "جامعة بوجور الزراعية، إندونيسيا",
+      "institution_en": "Bogor Agricultural University, Indonesia"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-22",
+      "committeeType": "scientific",
+      "order": 22,
+      "name_ar": "أ.د. عمار روابحي",
+      "name_en": "Prof. Dr. Ammar Rouabhi",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-23",
+      "committeeType": "scientific",
+      "order": 23,
+      "name_ar": "أ.د. فارس هباش",
+      "name_en": "Prof. Dr. Fares Habache",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-24",
+      "committeeType": "scientific",
+      "order": 24,
+      "name_ar": "أ.د. فاروق بن سالم",
+      "name_en": "Prof. Dr. Farouk Bensalem",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-25",
+      "committeeType": "scientific",
+      "order": 25,
+      "name_ar": "أ.د. محمد أسلم حنيف",
+      "name_en": "Prof. Dr. Mohamed Aslam Haneef",
+      "institution_ar": "الجامعة الإسلامية العالمية، ماليزيا",
+      "institution_en": "International Islamic University, Malaysia"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-26",
+      "committeeType": "scientific",
+      "order": 26,
+      "name_ar": "أ.د. مريم قطوش",
+      "name_en": "Prof. Dr. Meriem Guettouche",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-27",
+      "committeeType": "scientific",
+      "order": 27,
+      "name_ar": "د. ميشال بوزكو",
+      "name_en": "Dr. Michał Buszko",
+      "institution_ar": "جامعة نيكولاس كوبرنيكوس، بولندا",
+      "institution_en": "Nicolaus Copernicus University, Poland"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-scientific-28",
+      "committeeType": "scientific",
+      "order": 28,
+      "name_ar": "د. هند زيتوني",
+      "name_en": "Dr. Hind Zitouni",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-organizing-01",
+      "committeeType": "organizing",
+      "order": 1,
+      "name_ar": "د. أنيسة حرفوش",
+      "name_en": "Dr. Anissa Harfouche",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria",
+      "role_ar": "رئيسة اللجنة التنظيمية",
+      "role_en": "Chair of the Organizing Committee"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-organizing-02",
+      "committeeType": "organizing",
+      "order": 2,
+      "name_ar": "د. رفيق خلفي",
+      "name_en": "Dr. Rafik Khelfi",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-organizing-03",
+      "committeeType": "organizing",
+      "order": 3,
+      "name_ar": "د. سعيدة خواثرة",
+      "name_en": "Dr. Saida Khouatra",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-organizing-04",
+      "committeeType": "organizing",
+      "order": 4,
+      "name_ar": "د. عماد شرماط",
+      "name_en": "Dr. Imad Chermat",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-organizing-05",
+      "committeeType": "organizing",
+      "order": 5,
+      "name_ar": "د. يوسف بن زيد",
+      "name_en": "Dr. Youcef Benzid",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    },
+    {
+      "_type": "committee",
+      "_id": "committee-organizing-06",
+      "committeeType": "organizing",
+      "order": 6,
+      "name_ar": "د. أميمة حورية ملاك بطوش",
+      "name_en": "Dr. Oumaima Houria Malak Bettouche",
+      "institution_ar": "جامعة سطيف 1، الجزائر",
+      "institution_en": "Setif 1 University, Algeria"
+    }
   ],
-  "tracksIntro_ar": "يتناول المؤتمر إشكالية الأمن الغذائي والاستدامة من خلال ستة محاور مترابطة تغطي الأبعاد النظرية والسياساتية والتكنولوجية والبيئية.",
-  "tracksIntro_en": "The conference addresses food security and sustainability through six interrelated tracks covering the theoretical, policy, technological and environmental dimensions.",
-  "tracksNote_ar": "تُرحّب اللجنة العلمية بالدراسات التطبيقية والقياسية ودراسات الحالة، ولا سيما تلك التي تتناول التجربة الجزائرية والسياقين العربي والإفريقي، إلى جانب الدراسات المقارنة للتجارب الدولية.",
-  "tracksNote_en": "The Scientific Committee welcomes applied and econometric studies and case studies, especially those addressing the Algerian experience and the Arab and African contexts, as well as comparative studies of international experiences."
- },
- "submission": {
-  "_type": "submissionPage",
-  "_id": "submissionPage",
-  "guidelines": [
-   {
-    "_key": "g1",
-    "text_ar": "أن تندرج الورقة البحثية ضمن أحد محاور المؤتمر.",
-    "text_en": "The paper must fall under one of the conference tracks."
-   },
-   {
-    "_key": "g2",
-    "text_ar": "أن تكون الورقة أصيلة، لم يسبق نشرها أو قبولها للنشر أو تقديمها في تظاهرات علمية أخرى.",
-    "text_en": "The paper must be original, not previously published, accepted for publication or presented at other scientific events."
-   },
-   {
-    "_key": "g3",
-    "text_ar": "تقبل الأوراق باللغة العربية أو الإنجليزية، مرفقة بملخصين بلغتين.",
-    "text_en": "Papers are accepted in Arabic or English, accompanied by abstracts in two languages."
-   },
-   {
-    "_key": "g4",
-    "text_ar": "ترسل الأوراق كاملة بصيغتي Word وPDF، ولا تُقبل الملفات المضغوطة.",
-    "text_en": "Full papers are submitted in both Word and PDF formats; compressed files are not accepted."
-   },
-   {
-    "_key": "g5",
-    "text_ar": "تكتب الأوراق العربية بخط Simplified Arabic حجم 14، والإنجليزية والفرنسية بخط Times New Roman حجم 12.",
-    "text_en": "Arabic papers are typed in Simplified Arabic size 14; English and French papers in Times New Roman size 12."
-   },
-   {
-    "_key": "g6",
-    "text_ar": "لا يتجاوز حجم الورقة 20 صفحة، وتُعتمد طريقة APA في التوثيق والإحالات.",
-    "text_en": "Papers must not exceed 20 pages, and APA style is used for citations and references."
-   },
-   {
-    "_key": "g7",
-    "text_ar": "تخضع جميع الأوراق لتحكيم علمي مزدوج مجهول الهوية، ولذا لا تدرج أسماء المؤلفين في متن الورقة.",
-    "text_en": "All papers undergo double-blind peer review; therefore author names must not appear in the body of the paper."
-   },
-   {
-    "_key": "g8",
-    "text_ar": "تعرض الأوراق المقبولة حضوريًا في مقر انعقاد المؤتمر.",
-    "text_en": "Accepted papers are presented in person at the conference venue."
-   }
+  "program": [
+    {
+      "_type": "programDay",
+      "_id": "programDay-1",
+      "dayNumber": 1,
+      "date": "2027-10-20",
+      "sessions": [
+        {
+          "_key": "a",
+          "timeFrom": "08:30",
+          "timeTo": "09:30",
+          "color": "accent",
+          "title_ar": "استقبال وتسجيل المشاركين",
+          "title_en": "Registration & Welcome",
+          "place_ar": "بهو قاعة المحاضرات الكبرى",
+          "place_en": "Main Auditorium Lobby"
+        },
+        {
+          "_key": "b",
+          "timeFrom": "09:30",
+          "timeTo": "10:30",
+          "color": "primary",
+          "title_ar": "الجلسة الافتتاحية الرسمية",
+          "title_en": "Official Opening Ceremony",
+          "place_ar": "كلمة السيد مدير الجامعة وعميد الكلية",
+          "place_en": "Speech by the University Rector & Faculty Dean"
+        },
+        {
+          "_key": "c",
+          "timeFrom": "11:00",
+          "timeTo": "13:00",
+          "color": "secondary",
+          "title_ar": "الجلسة العامة الأولى (المتحدثون الرئيسيون)",
+          "title_en": "First Plenary Session (Keynotes)",
+          "place_ar": "مداخلات الخبراء حول واقع الأمن الغذائي العالمي",
+          "place_en": "Expert talks on global food security reality"
+        },
+        {
+          "_key": "d",
+          "timeFrom": "14:30",
+          "timeTo": "17:00",
+          "color": "blue",
+          "title_ar": "الجلسات العلمية الموازية (ورشات العمل)",
+          "title_en": "Parallel Scientific Sessions (Workshops)",
+          "place_ar": "مناقشة الأبحاث المقبولة في المحورين الأول والثاني",
+          "place_en": "Discussion of accepted papers in Tracks 1 & 2"
+        }
+      ]
+    },
+    {
+      "_type": "programDay",
+      "_id": "programDay-2",
+      "dayNumber": 2,
+      "date": "2027-10-21",
+      "sessions": [
+        {
+          "_key": "a",
+          "timeFrom": "09:00",
+          "timeTo": "12:30",
+          "color": "primary",
+          "title_ar": "الجلسات العلمية الموازية",
+          "title_en": "Parallel Scientific Sessions",
+          "place_ar": "عروض ومناقشات المحاور 3، 4، 5، و 6",
+          "place_en": "Presentations for Tracks 3, 4, 5, & 6"
+        },
+        {
+          "_key": "b",
+          "timeFrom": "14:00",
+          "timeTo": "15:30",
+          "color": "accent",
+          "title_ar": "جلسة تفاعلية للطلبة والباحثين",
+          "title_en": "Interactive Session for Students",
+          "place_ar": "منهجية النشر في المجلات المصنفة",
+          "place_en": "Publishing methodology in indexed journals"
+        },
+        {
+          "_key": "c",
+          "timeFrom": "16:00",
+          "timeTo": "17:00",
+          "color": "secondary",
+          "title_ar": "الجلسة الختامية وتلاوة التوصيات",
+          "title_en": "Closing Ceremony & Recommendations",
+          "place_ar": "توزيع الشهادات واختتام الفعاليات",
+          "place_en": "Distribution of certificates and closing"
+        }
+      ]
+    }
   ],
-  "platformNote_ar": "تُرسل الأوراق البحثية عبر المنصة الإلكترونية لجامعة سطيف 1.",
-  "platformNote_en": "Papers are submitted through the electronic platform of Setif 1 University.",
-  "datesNote_ar": "تنبيه: لن يُنظر في أي ورقة بحثية تصل بعد انقضاء هذه الآجال.",
-  "datesNote_en": "Notice: no paper received after these deadlines will be considered.",
-  "participationIntro_ar": "المشاركة في أشغال المؤتمر مجانية، ويستفيد أصحاب الأوراق المقبولة من:",
-  "participationIntro_en": "Participation in the conference is free of charge, and authors of accepted papers benefit from:",
-  "benefits": [
-   {
-    "_key": "b1",
-    "text_ar": "شهادات المشاركة.",
-    "text_en": "Participation certificates."
-   },
-   {
-    "_key": "b2",
-    "text_ar": "وجبات الغداء واستراحات القهوة والنقل الداخلي خلال أيام المؤتمر.",
-    "text_en": "Lunch, coffee breaks and local transport during the conference days."
-   },
-   {
-    "_key": "b3",
-    "text_ar": "تبقى المصاريف الأخرى على عاتق المشاركين.",
-    "text_en": "Other expenses remain the responsibility of participants."
-   }
+  "dates": [
+    {
+      "_id": "date-1",
+      "_type": "importantDate",
+      "order": 1,
+      "date": "2026-11-15",
+      "title_ar": "فتح باب استقبال الأوراق البحثية",
+      "title_en": "Submission Opening",
+      "icon": "calendar"
+    },
+    {
+      "_id": "date-2",
+      "_type": "importantDate",
+      "order": 2,
+      "date": "2026-12-15",
+      "title_ar": "آخر أجل لإرسال الملخصات",
+      "title_en": "Abstract Submission Deadline",
+      "icon": "mail"
+    },
+    {
+      "_id": "date-3",
+      "_type": "importantDate",
+      "order": 3,
+      "date": "2026-12-20",
+      "title_ar": "الرد على الملخصات",
+      "title_en": "Notification of Abstract Decisions",
+      "icon": "check"
+    },
+    {
+      "_id": "date-4",
+      "_type": "importantDate",
+      "order": 4,
+      "date": "2027-02-20",
+      "title_ar": "آخر أجل لإرسال الأوراق البحثية كاملة",
+      "title_en": "Full Paper Submission Deadline",
+      "icon": "file"
+    },
+    {
+      "_id": "date-5",
+      "_type": "importantDate",
+      "order": 5,
+      "date": "2027-03-15",
+      "title_ar": "إعلان قرار اللجنة العلمية بقبول الأوراق",
+      "title_en": "Scientific Committee Decision",
+      "icon": "check"
+    },
+    {
+      "_id": "date-6",
+      "_type": "importantDate",
+      "order": 6,
+      "date": "2027-04-05",
+      "title_ar": "نشر البرنامج النهائي للمؤتمر",
+      "title_en": "Publication of the Final Conference Program",
+      "icon": "calendar"
+    },
+    {
+      "_id": "date-7",
+      "_type": "importantDate",
+      "order": 7,
+      "date": "2027-04-20",
+      "title_ar": "انعقاد المؤتمر",
+      "title_en": "Conference Dates",
+      "dateLabel_ar": "20 – 21 أفريل 2027",
+      "dateLabel_en": "20–21 April 2027",
+      "icon": "star"
+    }
   ],
-  "publishing": [
-   {
-    "_key": "p1",
-    "text_ar": "تنشر الأوراق المقبولة كاملة في كتاب أعمال المؤتمر برقم دولي معياري (ISBN).",
-    "text_en": "Accepted papers are published in full in the conference proceedings book with an ISBN."
-   },
-   {
-    "_key": "p2",
-    "text_ar": "ترشَح أفضل الأوراق للنشر في أعداد خاصة من مجلات علمية محكمة، وفق إجراءات التحكيم المعتمدة لديها.",
-    "text_en": "The best papers are nominated for publication in special issues of peer-reviewed journals, according to their review procedures."
-   },
-   {
-    "_key": "p3",
-    "text_ar": "جائزة أفضل ورقة بحثية: شهادة تقديرية تمنح بناء على توصيات اللجنة العلمية.",
-    "text_en": "Best paper award: a certificate of appreciation granted on the recommendation of the Scientific Committee."
-   }
-  ]
- },
- "announcements": [
-  {
-   "_type": "announcement",
-   "_id": "announcement-welcome",
-   "kind": "important",
-   "pinned": true,
-   "popup": false,
-   "publishAt": "2026-11-03T00:00:00.000Z",
-   "title_ar": "تم إطلاق الموقع الرسمي للمؤتمر الدولي الثاني: قضايا اقتصادية معاصرة",
-   "title_en": "The official website of the 2nd International Conference is now live",
-   "body_ar": "يمكنكم من خلال هذا الموقع متابعة كل مستجدات المؤتمر: المحاور، البرنامج، اللجان، التواريخ المهمة وإرشادات النشر.",
-   "body_en": "Follow all conference updates here: tracks, program, committees, important dates and submission guidelines."
-  },
-  {
-   "_type": "announcement",
-   "_id": "announcement-dates",
-   "kind": "periodic",
-   "pinned": false,
-   "popup": false,
-   "publishAt": "2026-11-03T00:00:00.000Z",
-   "title_ar": "التواريخ المهمة للمشاركة في المؤتمر",
-   "title_en": "Important dates for participation",
-   "body_ar": "فتح باب استقبال الأوراق: 15 نوفمبر 2026.\nآخر أجل لإرسال الملخصات: 26 نوفمبر 2026.\nالرد على الملخصات: 03 ديسمبر 2026.\nآخر أجل لإرسال الأوراق كاملة: 15 فيفري 2027.\nإعلان قرار القبول: 05 مارس 2027.\nانعقاد المؤتمر: 20–21 أفريل 2027.",
-   "body_en": "Opening of submissions: 15 November 2026.\nAbstract deadline: 26 November 2026.\nNotification on abstracts: 03 December 2026.\nFull paper deadline: 15 February 2027.\nAcceptance decision: 05 March 2027.\nConference: 20–21 April 2027.",
-   "linkUrl": "https://events.univ-setif.dz/",
-   "linkLabel_ar": "منصة إرسال الأوراق",
-   "linkLabel_en": "Paper submission platform"
-  }
- ],
- "tracks": [
-  {
-   "_type": "track",
-   "_id": "track-1",
-   "order": 1,
-   "kicker_ar": "المحور الأول",
-   "kicker_en": "Track 1",
-   "title_ar": "تشخيص الأمن الغذائي: أدوات التحليل الاقتصادي ومؤشرات القياس الدولية",
-   "title_en": "Diagnosing Food Security: Economic Analysis Tools and International Measurement Indicators",
-   "icon": "chart",
-   "color": "primary",
-   "topics": [
+  "editions": [
     {
-     "_key": "t1",
-     "text_ar": "تطور مقاربات الأمن الغذائي في ظل أهداف التنمية المستدامة 2030.",
-     "text_en": "Evolution of food security approaches in light of the 2030 Sustainable Development Goals."
-    },
-    {
-     "_key": "t2",
-     "text_ar": "النماذج التحليلية ومؤشرات القياس الدولية للأمن الغذائي.",
-     "text_en": "Analytical models and international food security measurement indicators."
-    },
-    {
-     "_key": "t3",
-     "text_ar": "العلاقة بين الأمن الغذائي، الأمن الاقتصادي، والاستقرار الاجتماعي.",
-     "text_en": "The relationship between food security, economic security and social stability."
+      "_type": "history",
+      "_id": "history-2025",
+      "editionYear": "2025",
+      "dateLabel_ar": "14-15 أفريل 2025",
+      "dateLabel_en": "14-15 April 2025",
+      "title_ar": "استخدامات الذكاء الاصطناعي في الخدمات المالية",
+      "title_en": "Uses of Artificial Intelligence in Financial Services",
+      "summary_ar": "حدث علمي دولي نوعي احتضنته جامعة فرحات عباس سطيف 1، بمشاركة أكثر من 150 باحث من 6 دول مختلفة، لتبادل الرؤى حول تقاطع الذكاء الاصطناعي مع القطاع المالي.",
+      "summary_en": "A qualitative international scientific event hosted by Ferhat Abbas Setif 1 University, with the participation of more than 150 researchers from 6 different countries.",
+      "intro_ar": "حدث أكاديمي دولي رسم ملامح التميز العلمي، شكل نموذجاً متميزاً في تعزيز إشعاع الكلية وتأكيد ريادتها الفكرية في مجال التكنولوجيا المالية.",
+      "intro_en": "An international academic event that painted the features of scientific excellence, forming a distinguished model in enhancing the faculty's radiance.",
+      "stats": [
+        {
+          "_key": "a",
+          "value": "06",
+          "label_ar": "دول مشاركة",
+          "label_en": "Participating Countries"
+        },
+        {
+          "_key": "b",
+          "value": "+50",
+          "label_ar": "ورقة بحثية",
+          "label_en": "Papers"
+        },
+        {
+          "_key": "c",
+          "value": "02",
+          "label_ar": "أيام",
+          "label_en": "Days"
+        },
+        {
+          "_key": "d",
+          "value": "06",
+          "label_ar": "جلسات رئيسية",
+          "label_en": "Plenary Sessions"
+        },
+        {
+          "_key": "e",
+          "value": "06",
+          "label_ar": "ورشات علمية",
+          "label_en": "Workshops"
+        },
+        {
+          "_key": "f",
+          "value": "15",
+          "label_ar": "ملصق علمي",
+          "label_en": "Scientific Posters"
+        }
+      ],
+      "excellence_ar": "شهدت جامعة فرحات عباس سطيف 1 تنظيم المؤتمر الدولي الأول بمشاركة نخبة من الباحثين والخبراء، حيث أشرف على الفعاليات مدير الجامعة وعميد الكلية، بحضور ممثلين عن الهيئات الاقتصادية والبنوك.",
+      "excellence_en": "The university hosted the first international conference with the participation of elite researchers, overseen by the University Rector and Faculty Dean.",
+      "topics_ar": "ركزت الفعاليات على استكشاف التطبيقات العملية للذكاء الاصطناعي في تحليل البيانات المالية، إدارة المخاطر، واستشراف مستقبل التكنولوجيا المالية (FinTech) في الجزائر مع استعراض التحديات التشريعية والأخلاقية.",
+      "topics_en": "Events focused on exploring practical AI applications in financial data analysis, risk management, and the future of FinTech in Algeria.",
+      "achievement_ar": "شكل هذا المؤتمر نموذجاً في تعزيز الإشعاع العلمي للكلية، وترسيخ ثقافة البحث الجماعي، وتأكيد الريادة الفكرية في موضوع الذكاء الاصطناعي، وتحفيز الكفاءات الشابة على البحث التطبيقي المبتكر.",
+      "achievement_en": "This conference was a model in enhancing scientific radiance, establishing collective research culture, and stimulating young competencies.",
+      "galleryTitle_ar": "معرض صور الطبعة الأولى",
+      "galleryTitle_en": "1st Edition Gallery",
+      "logoUrl": "assets/img/iceic_2025.png",
+      "gallery": [],
+      "legacyImages": []
     }
-   ]
-  },
-  {
-   "_type": "track",
-   "_id": "track-2",
-   "order": 2,
-   "kicker_ar": "المحور الثاني",
-   "kicker_en": "Track 2",
-   "title_ar": "الصدمات العالمية وانعكاساتها على النظم الغذائية",
-   "title_en": "Global Shocks and Their Impact on Food Systems",
-   "icon": "globe",
-   "color": "secondary",
-   "topics": [
-    {
-     "_key": "t1",
-     "text_ar": "التوترات الجيوسياسية واضطرابات سلاسل الإمداد والتجارة الدولية.",
-     "text_en": "Geopolitical tensions and disruptions to supply chains and international trade."
-    },
-    {
-     "_key": "t2",
-     "text_ar": "التغيرات المناخية والكوارث الطبيعية وأثرها على استقرار الإنتاج الزراعي.",
-     "text_en": "Climate change and natural disasters and their effect on agricultural production stability."
-    },
-    {
-     "_key": "t3",
-     "text_ar": "تقلبات أسعار السلع الأساسية وتأثيرها على التضخم والقدرة الشرائية.",
-     "text_en": "Staple commodity price volatility and its impact on inflation and purchasing power."
-    },
-    {
-     "_key": "t4",
-     "text_ar": "تقييم مستويات الهشاشة البنيوية والتبعية الاستيرادية في الاقتصادات النامية.",
-     "text_en": "Assessing structural fragility and import dependence in developing economies."
-    }
-   ]
-  },
-  {
-   "_type": "track",
-   "_id": "track-3",
-   "order": 3,
-   "kicker_ar": "المحور الثالث",
-   "kicker_en": "Track 3",
-   "title_ar": "السياسات الاقتصادية والتمويلية لتعزيز الاستقلالية الغذائية",
-   "title_en": "Economic and Financing Policies for Strengthening Food Self-Reliance",
-   "icon": "coins",
-   "color": "accent",
-   "topics": [
-    {
-     "_key": "t1",
-     "text_ar": "تقييم السياسات الزراعية والتجارية بين الحماية والتحرير وأثرها على الإنتاج المحلي.",
-     "text_en": "Evaluating agricultural and trade policies between protection and liberalization and their effect on local production."
-    },
-    {
-     "_key": "t2",
-     "text_ar": "إصلاح منظومة الدعم الغذائي بما يوازن بين الكفاءة الاقتصادية والعدالة الاجتماعية.",
-     "text_en": "Reforming food subsidy systems to balance economic efficiency and social justice."
-    },
-    {
-     "_key": "t3",
-     "text_ar": "آليات التمويل المبتكر والمستدام للقطاع الفلاحي، مثل التمويل الأخضر، الصكوك الإسلامية، ورأس المال المخاطر.",
-     "text_en": "Innovative and sustainable financing mechanisms for agriculture, such as green finance, Islamic sukuk and venture capital."
-    },
-    {
-     "_key": "t4",
-     "text_ar": "دور الشراكة بين القطاعين العام والخاص في تحديث البنى التحتية واللوجستية الزراعية.",
-     "text_en": "The role of public-private partnerships in modernizing agricultural infrastructure and logistics."
-    }
-   ]
-  },
-  {
-   "_type": "track",
-   "_id": "track-4",
-   "order": 4,
-   "kicker_ar": "المحور الرابع",
-   "kicker_en": "Track 4",
-   "title_ar": "دور الابتكار والتحول الرقمي في استدامة سلاسل القيمة الغذائية",
-   "title_en": "The Role of Innovation and Digital Transformation in Food Value Chain Sustainability",
-   "icon": "chip",
-   "color": "blue",
-   "topics": [
-    {
-     "_key": "t1",
-     "text_ar": "الزراعة الذكية وتطبيقات الذكاء الاصطناعي وإنترنت الأشياء في رفع كفاءة الموارد.",
-     "text_en": "Smart agriculture, artificial intelligence and Internet of Things applications for resource efficiency."
-    },
-    {
-     "_key": "t2",
-     "text_ar": "التكنولوجيا الحيوية والتحسين الوراثي لمواجهة الإجهاد المناخي والمائي.",
-     "text_en": "Biotechnology and genetic improvement to cope with climate and water stress."
-    },
-    {
-     "_key": "t3",
-     "text_ar": "دور الرقمنة في تتبع سلاسل الإمداد، وإدارة التخزين، والحد من الفاقد والهدر الغذائي.",
-     "text_en": "The role of digitalization in supply chain traceability, storage management and reducing food loss and waste."
-    },
-    {
-     "_key": "t4",
-     "text_ar": "المقاولاتية والمؤسسات الناشئة في التكنولوجيا الزراعية (AgriTech) ودورها في تطوير الابتكار ضمن الصناعات التحويلية.",
-     "text_en": "Entrepreneurship and AgriTech start-ups and their role in driving innovation in food processing industries."
-    }
-   ]
-  },
-  {
-   "_type": "track",
-   "_id": "track-5",
-   "order": 5,
-   "kicker_ar": "المحور الخامس",
-   "kicker_en": "Track 5",
-   "title_ar": "اقتصاديات البيئة وإدارة الموارد الطبيعية",
-   "title_en": "Environmental Economics and Natural Resource Management",
-   "icon": "leaf",
-   "color": "purple",
-   "topics": [
-    {
-     "_key": "t1",
-     "text_ar": "الانتقال نحو الاقتصاد الأخضر والاقتصاد الدائري في النظم الزراعية الغذائية.",
-     "text_en": "Transition to the green and circular economy in agri-food systems."
-    },
-    {
-     "_key": "t2",
-     "text_ar": "الحوكمة الاقتصادية للموارد المائية، بما يشمل الري الذكي، تحلية المياه، وإعادة التدوير.",
-     "text_en": "Economic governance of water resources, including smart irrigation, desalination and recycling."
-    },
-    {
-     "_key": "t3",
-     "text_ar": "التقييم الاقتصادي لآثار التصحر وتدهور الأراضي وسبل التخفيف منها.",
-     "text_en": "Economic assessment of desertification and land degradation and mitigation measures."
-    },
-    {
-     "_key": "t4",
-     "text_ar": "تثمين التنوع البيولوجي والموارد الوراثية كأداة لتعزيز المنعة الغذائية.",
-     "text_en": "Valuing biodiversity and genetic resources as a tool for strengthening food resilience."
-    }
-   ]
-  },
-  {
-   "_type": "track",
-   "_id": "track-6",
-   "order": 6,
-   "kicker_ar": "المحور السادس",
-   "kicker_en": "Track 6",
-   "title_ar": "الحوكمة المؤسساتية والتجارب الدولية",
-   "title_en": "Institutional Governance and International Experiences",
-   "icon": "book",
-   "color": "gray",
-   "topics": [
-    {
-     "_key": "t1",
-     "text_ar": "الأطر المؤسسية وحوكمة القطاع الزراعي الغذائي وتكامل أدوار الحكومات، القطاع الخاص، والمجتمع المدني.",
-     "text_en": "Institutional frameworks and governance of the agri-food sector, and the complementary roles of governments, the private sector and civil society."
-    },
-    {
-     "_key": "t2",
-     "text_ar": "التكامل الاقتصادي الإقليمي ودوره في تعزيز الأمن الغذائي، مع الإشارة إلى منطقة التجارة الحرة القارية الإفريقية (ZLECAF) والمنطقة العربية.",
-     "text_en": "Regional economic integration and its role in strengthening food security, with reference to the African Continental Free Trade Area (AfCFTA) and the Arab region."
-    },
-    {
-     "_key": "t3",
-     "text_ar": "استعراض تجارب دولية رائدة في تحقيق السيادة الغذائية وبناء النظم المرنة والمستدامة.",
-     "text_en": "Reviewing leading international experiences in achieving food sovereignty and building resilient, sustainable systems."
-    },
-    {
-     "_key": "t4",
-     "text_ar": "دور مراكز البحث العلمي والمنظمات الدولية في توجيه السياسات العامة ونقل التكنولوجيا.",
-     "text_en": "The role of research centers and international organizations in guiding public policy and transferring technology."
-    }
-   ]
-  }
- ],
- "speakers": [],
- "committee": [
-  {
-   "_type": "committee",
-   "_id": "committee-high-01",
-   "committeeType": "high",
-   "order": 1,
-   "name_ar": "الأستاذ الدكتور محمد الهادي لطرش",
-   "name_en": "Prof. Mohamed El Hadi Latrech",
-   "role_ar": "الرئيس الشرفي",
-   "role_en": "Honorary President",
-   "institution_ar": "مدير جامعة سطيف 1 – فرحات عباس",
-   "institution_en": "Director of Ferhat Abbas University Setif 1"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-high-02",
-   "committeeType": "high",
-   "order": 2,
-   "name_ar": "الأستاذ الدكتور شوقي بورقبة",
-   "name_en": "Prof. Chawki Bourokba",
-   "role_ar": "رئيس المؤتمر",
-   "role_en": "Conference Chair",
-   "institution_ar": "عميد كلية العلوم الاقتصادية والتجارية وعلوم التسيير",
-   "institution_en": "Dean of the Faculty of Economics, Business and Management Sciences"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-01",
-   "committeeType": "scientific",
-   "order": 1,
-   "name_ar": "أ.د. زينب بوقاعة",
-   "name_en": "Prof. Zineb Boukaa",
-   "role_ar": "رئيسة اللجنة العلمية",
-   "role_en": "Chair of the Scientific Committee",
-   "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
-   "institution_en": "Ferhat Abbas University Setif 1, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-02",
-   "committeeType": "scientific",
-   "order": 2,
-   "name_ar": "أ.د. ذهبية لطرش",
-   "name_en": "Prof. Dahbia Latrech",
-   "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
-   "institution_en": "Ferhat Abbas University Setif 1, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-03",
-   "committeeType": "scientific",
-   "order": 3,
-   "name_ar": "أ.د. جويدة بلعة",
-   "name_en": "Prof. Djouida Bela",
-   "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
-   "institution_en": "Ferhat Abbas University Setif 1, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-04",
-   "committeeType": "scientific",
-   "order": 4,
-   "name_ar": "أ.د. سهام حرفوش",
-   "name_en": "Prof. Siham Harfouche",
-   "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
-   "institution_en": "Ferhat Abbas University Setif 1, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-05",
-   "committeeType": "scientific",
-   "order": 5,
-   "name_ar": "أ.د. فارس هباش",
-   "name_en": "Prof. Fares Habbache",
-   "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
-   "institution_en": "Ferhat Abbas University Setif 1, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-06",
-   "committeeType": "scientific",
-   "order": 6,
-   "name_ar": "أ.د. شرف الدين أمين بن عواق",
-   "name_en": "Prof. Charaf Eddine Amine Benaouag",
-   "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
-   "institution_en": "Ferhat Abbas University Setif 1, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-07",
-   "committeeType": "scientific",
-   "order": 7,
-   "name_ar": "أ.د. عادل زيات",
-   "name_en": "Prof. Adel Ziat",
-   "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
-   "institution_en": "Ferhat Abbas University Setif 1, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-08",
-   "committeeType": "scientific",
-   "order": 8,
-   "name_ar": "أ.د. عبد القادر هواري",
-   "name_en": "Prof. Abdelkader Houari",
-   "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
-   "institution_en": "Ferhat Abbas University Setif 1, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-09",
-   "committeeType": "scientific",
-   "order": 9,
-   "name_ar": "أ.د. صليحة رقاد",
-   "name_en": "Prof. Saliha Reggad",
-   "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
-   "institution_en": "Ferhat Abbas University Setif 1, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-10",
-   "committeeType": "scientific",
-   "order": 10,
-   "name_ar": "أ.د. مريم قطوش",
-   "name_en": "Prof. Meriem Guettouche",
-   "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
-   "institution_en": "Ferhat Abbas University Setif 1, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-11",
-   "committeeType": "scientific",
-   "order": 11,
-   "name_ar": "د. صادق هادي",
-   "name_en": "Dr. Sadek Hadi",
-   "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
-   "institution_en": "Ferhat Abbas University Setif 1, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-12",
-   "committeeType": "scientific",
-   "order": 12,
-   "name_ar": "د. إيمان صحراوي",
-   "name_en": "Dr. Imane Sahraoui",
-   "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
-   "institution_en": "Ferhat Abbas University Setif 1, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-13",
-   "committeeType": "scientific",
-   "order": 13,
-   "name_ar": "د. هند زيتوني",
-   "name_en": "Dr. Hind Zitouni",
-   "institution_ar": "جامعة فرحات عباس سطيف 1، الجزائر",
-   "institution_en": "Ferhat Abbas University Setif 1, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-14",
-   "committeeType": "scientific",
-   "order": 14,
-   "name_ar": "أ.د. خميسي قايدي",
-   "name_en": "Prof. Khemissi Kaidi",
-   "institution_ar": "جامعة برج بوعريريج، الجزائر",
-   "institution_en": "University of Bordj Bou Arreridj, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-15",
-   "committeeType": "scientific",
-   "order": 15,
-   "name_ar": "أ.د. عبد الوهاب سويسي",
-   "name_en": "Prof. Abdelouahab Souissi",
-   "institution_ar": "جامعة الجزائر 3، الجزائر",
-   "institution_en": "University of Algiers 3, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-16",
-   "committeeType": "scientific",
-   "order": 16,
-   "name_ar": "أ.د. جمال بلخباط",
-   "name_en": "Prof. Djamel Belkhabat",
-   "institution_ar": "جامعة باتنة 1، الجزائر",
-   "institution_en": "University of Batna 1, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-17",
-   "committeeType": "scientific",
-   "order": 17,
-   "name_ar": "أ.د. حجو لعمارة",
-   "name_en": "Prof. Hadjou Lamara",
-   "institution_ar": "جامعة تيزي وزو، الجزائر",
-   "institution_en": "University of Tizi Ouzou, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-18",
-   "committeeType": "scientific",
-   "order": 18,
-   "name_ar": "أ.د. وسيلة ليماني",
-   "name_en": "Prof. Wassila Limani",
-   "institution_ar": "المعهد الوطني الجزائري للبحث الزراعي (INRAA)، الجزائر",
-   "institution_en": "National Institute of Agronomic Research (INRAA), Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-19",
-   "committeeType": "scientific",
-   "order": 19,
-   "name_ar": "أ.د. إيمان بوشنقير",
-   "name_en": "Prof. Imane Bouchenguir",
-   "institution_ar": "جامعة عنابة، الجزائر",
-   "institution_en": "University of Annaba, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-20",
-   "committeeType": "scientific",
-   "order": 20,
-   "name_ar": "د. نعيمة بوراس",
-   "name_en": "Dr. Naima Bouras",
-   "institution_ar": "وزارة الفلاحة والتنمية الريفية والصيد البحري، الجزائر",
-   "institution_en": "Ministry of Agriculture, Rural Development and Fisheries, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-21",
-   "committeeType": "scientific",
-   "order": 21,
-   "name_ar": "د. حواء عمروني",
-   "name_en": "Dr. Hawa Amrouni",
-   "institution_ar": "المعهد الوطني الجزائري للبحث الزراعي (INRAA)، الجزائر",
-   "institution_en": "National Institute of Agronomic Research (INRAA), Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-22",
-   "committeeType": "scientific",
-   "order": 22,
-   "name_ar": "أ.د. فضيلة باشا",
-   "name_en": "Prof. Fadila Bacha",
-   "institution_ar": "المعهد الوطني الجزائري للبحث الزراعي (INRAA)، الجزائر",
-   "institution_en": "National Institute of Agronomic Research (INRAA), Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-23",
-   "committeeType": "scientific",
-   "order": 23,
-   "name_ar": "د. سمير دمدوم",
-   "name_en": "Dr. Samir Demdoum",
-   "institution_ar": "منظمة الأغذية والزراعة للأمم المتحدة (FAO)، مكتب الجزائر",
-   "institution_en": "Food and Agriculture Organization of the UN (FAO), Algeria Office"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-24",
-   "committeeType": "scientific",
-   "order": 24,
-   "name_ar": "د. علي داودي",
-   "name_en": "Dr. Ali Daoudi",
-   "institution_ar": "المدرسة الوطنية العليا للفلاحة، الجزائر",
-   "institution_en": "National Higher School of Agronomy, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-25",
-   "committeeType": "scientific",
-   "order": 25,
-   "name_ar": "أ.د. وداد صبحي",
-   "name_en": "Prof. Widad Sebhi",
-   "institution_ar": "جامعة سطيف 1 / مركز البحث في البيوتكنولوجيا (CRBt) قسنطينة، الجزائر",
-   "institution_en": "Setif 1 University / Biotechnology Research Center (CRBt) Constantine, Algeria"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-26",
-   "committeeType": "scientific",
-   "order": 26,
-   "name_ar": "د. أرانكا إغناسياك-شولتس",
-   "name_en": "Dr. Aranka Ignasiak-Szulc",
-   "institution_ar": "جامعة نيكولاس كوبرنيكوس في تورون، بولندا",
-   "institution_en": "Nicolaus Copernicus University in Toruń, Poland"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-27",
-   "committeeType": "scientific",
-   "order": 27,
-   "name_ar": "د. دافيدي كالاندرا",
-   "name_en": "Dr. Davide Calandra",
-   "institution_ar": "جامعة تورينو، إيطاليا",
-   "institution_en": "University of Turin, Italy"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-28",
-   "committeeType": "scientific",
-   "order": 28,
-   "name_ar": "د. كيرستين بيزولدت",
-   "name_en": "Dr. Kerstin Pezoldt",
-   "institution_ar": "جامعة إلميناو التقنية، ألمانيا",
-   "institution_en": "Technische Universität Ilmenau, Germany"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-29",
-   "committeeType": "scientific",
-   "order": 29,
-   "name_ar": "د. ميشال بوشكو",
-   "name_en": "Dr. Michał Buszko",
-   "institution_ar": "جامعة نيكولاس كوبرنيكوس في تورون، بولندا",
-   "institution_en": "Nicolaus Copernicus University in Toruń, Poland"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-30",
-   "committeeType": "scientific",
-   "order": 30,
-   "name_ar": "أ.د. محمد أسلم حنيف",
-   "name_en": "Prof. Muhammad Aslam Haneef",
-   "institution_ar": "الجامعة الإسلامية العالمية، ماليزيا",
-   "institution_en": "International Islamic University Malaysia"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-31",
-   "committeeType": "scientific",
-   "order": 31,
-   "name_ar": "أ.د. أحمد بلوافي",
-   "name_en": "Prof. Ahmed Belouafi",
-   "institution_ar": "جامعة الملك عبد العزيز، جدة، المملكة العربية السعودية",
-   "institution_en": "King Abdulaziz University, Jeddah, Saudi Arabia"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-32",
-   "committeeType": "scientific",
-   "order": 32,
-   "name_ar": "د. عرفان شوقي بيك",
-   "name_en": "Dr. Irfan Syauqi Beik",
-   "institution_ar": "جامعة IPB، بوغور، إندونيسيا",
-   "institution_en": "IPB University, Bogor, Indonesia"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-sci-33",
-   "committeeType": "scientific",
-   "order": 33,
-   "name_ar": "د. ثناء الله أنصاري",
-   "name_en": "Dr. Sanaullah Ansari",
-   "institution_ar": "جامعة SZABIST، إسلام آباد، باكستان",
-   "institution_en": "SZABIST University, Islamabad, Pakistan"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-org-01",
-   "committeeType": "organizing",
-   "order": 11,
-   "name_ar": "د. أنيسة حرفوش",
-   "name_en": "Dr. Anissa Harfouche",
-   "institution_ar": "جامعة سطيف 1",
-   "institution_en": "Setif 1 University"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-org-02",
-   "committeeType": "organizing",
-   "order": 12,
-   "name_ar": "د. رفيق خلفي",
-   "name_en": "Dr. Rafik Khelfi",
-   "institution_ar": "جامعة سطيف 1",
-   "institution_en": "Setif 1 University"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-org-03",
-   "committeeType": "organizing",
-   "order": 13,
-   "name_ar": "د. سعيدة خواثرة",
-   "name_en": "Dr. Saida Khouatra",
-   "institution_ar": "جامعة سطيف 1",
-   "institution_en": "Setif 1 University"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-org-04",
-   "committeeType": "organizing",
-   "order": 14,
-   "name_ar": "د. عماد شرماط",
-   "name_en": "Dr. Imad Chermat",
-   "institution_ar": "جامعة سطيف 1",
-   "institution_en": "Setif 1 University"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-org-05",
-   "committeeType": "organizing",
-   "order": 15,
-   "name_ar": "د. يوسف بن زيد",
-   "name_en": "Dr. Youcef Benzid",
-   "institution_ar": "جامعة سطيف 1",
-   "institution_en": "Setif 1 University"
-  },
-  {
-   "_type": "committee",
-   "_id": "committee-org-06",
-   "committeeType": "organizing",
-   "order": 16,
-   "name_ar": "د. أميمة بطوش",
-   "name_en": "Dr. Oumaima Batouche",
-   "institution_ar": "جامعة سطيف 1",
-   "institution_en": "Setif 1 University"
-  }
- ],
- "program": [
-  {
-   "_type": "programDay",
-   "_id": "programDay-1",
-   "dayNumber": 1,
-   "date": "2027-10-20",
-   "sessions": [
-    {
-     "_key": "a",
-     "timeFrom": "08:30",
-     "timeTo": "09:30",
-     "color": "accent",
-     "title_ar": "استقبال وتسجيل المشاركين",
-     "title_en": "Registration & Welcome",
-     "place_ar": "بهو قاعة المحاضرات الكبرى",
-     "place_en": "Main Auditorium Lobby"
-    },
-    {
-     "_key": "b",
-     "timeFrom": "09:30",
-     "timeTo": "10:30",
-     "color": "primary",
-     "title_ar": "الجلسة الافتتاحية الرسمية",
-     "title_en": "Official Opening Ceremony",
-     "place_ar": "كلمة السيد مدير الجامعة وعميد الكلية",
-     "place_en": "Speech by the University Rector & Faculty Dean"
-    },
-    {
-     "_key": "c",
-     "timeFrom": "11:00",
-     "timeTo": "13:00",
-     "color": "secondary",
-     "title_ar": "الجلسة العامة الأولى (المتحدثون الرئيسيون)",
-     "title_en": "First Plenary Session (Keynotes)",
-     "place_ar": "مداخلات الخبراء حول واقع الأمن الغذائي العالمي",
-     "place_en": "Expert talks on global food security reality"
-    },
-    {
-     "_key": "d",
-     "timeFrom": "14:30",
-     "timeTo": "17:00",
-     "color": "blue",
-     "title_ar": "الجلسات العلمية الموازية (ورشات العمل)",
-     "title_en": "Parallel Scientific Sessions (Workshops)",
-     "place_ar": "مناقشة الأبحاث المقبولة في المحورين الأول والثاني",
-     "place_en": "Discussion of accepted papers in Tracks 1 & 2"
-    }
-   ]
-  },
-  {
-   "_type": "programDay",
-   "_id": "programDay-2",
-   "dayNumber": 2,
-   "date": "2027-10-21",
-   "sessions": [
-    {
-     "_key": "a",
-     "timeFrom": "09:00",
-     "timeTo": "12:30",
-     "color": "primary",
-     "title_ar": "الجلسات العلمية الموازية",
-     "title_en": "Parallel Scientific Sessions",
-     "place_ar": "عروض ومناقشات المحاور 3، 4، 5، و 6",
-     "place_en": "Presentations for Tracks 3, 4, 5, & 6"
-    },
-    {
-     "_key": "b",
-     "timeFrom": "14:00",
-     "timeTo": "15:30",
-     "color": "accent",
-     "title_ar": "جلسة تفاعلية للطلبة والباحثين",
-     "title_en": "Interactive Session for Students",
-     "place_ar": "منهجية النشر في المجلات المصنفة",
-     "place_en": "Publishing methodology in indexed journals"
-    },
-    {
-     "_key": "c",
-     "timeFrom": "16:00",
-     "timeTo": "17:00",
-     "color": "secondary",
-     "title_ar": "الجلسة الختامية وتلاوة التوصيات",
-     "title_en": "Closing Ceremony & Recommendations",
-     "place_ar": "توزيع الشهادات واختتام الفعاليات",
-     "place_en": "Distribution of certificates and closing"
-    }
-   ]
-  }
- ],
- "dates": [
-  {
-   "_type": "importantDate",
-   "_id": "date-1",
-   "order": 1,
-   "date": "2026-11-15",
-   "icon": "calendar",
-   "title_ar": "فتح باب استقبال الأوراق البحثية",
-   "title_en": "Opening of paper submission"
-  },
-  {
-   "_type": "importantDate",
-   "_id": "date-2",
-   "order": 2,
-   "date": "2026-11-26",
-   "icon": "mail",
-   "title_ar": "آخر أجل لإرسال الملخصات",
-   "title_en": "Abstract submission deadline"
-  },
-  {
-   "_type": "importantDate",
-   "_id": "date-3",
-   "order": 3,
-   "date": "2026-12-03",
-   "icon": "mail",
-   "title_ar": "الرد على الملخصات",
-   "title_en": "Notification on abstracts"
-  },
-  {
-   "_type": "importantDate",
-   "_id": "date-4",
-   "order": 4,
-   "date": "2027-02-15",
-   "icon": "file",
-   "title_ar": "آخر أجل لإرسال الأوراق البحثية كاملة",
-   "title_en": "Full paper submission deadline"
-  },
-  {
-   "_type": "importantDate",
-   "_id": "date-5",
-   "order": 5,
-   "date": "2027-03-05",
-   "icon": "award",
-   "title_ar": "إعلان قرار اللجنة العلمية بقبول الأوراق",
-   "title_en": "Scientific Committee decision on accepted papers"
-  },
-  {
-   "_type": "importantDate",
-   "_id": "date-6",
-   "order": 6,
-   "date": "2027-04-05",
-   "icon": "calendar",
-   "title_ar": "نشر البرنامج النهائي للمؤتمر",
-   "title_en": "Publication of the final conference program"
-  },
-  {
-   "_type": "importantDate",
-   "_id": "date-7",
-   "order": 7,
-   "date": "2027-04-20",
-   "icon": "award",
-   "title_ar": "انعقاد المؤتمر",
-   "title_en": "Conference dates",
-   "dateLabel_ar": "20–21 أفريل 2027",
-   "dateLabel_en": "20–21 April 2027"
-  }
- ],
- "editions": [
-  {
-   "_type": "history",
-   "_id": "history-2025",
-   "editionYear": "2025",
-   "dateLabel_ar": "14-15 أفريل 2025",
-   "dateLabel_en": "14-15 April 2025",
-   "title_ar": "استخدامات الذكاء الاصطناعي في الخدمات المالية",
-   "title_en": "Uses of Artificial Intelligence in Financial Services",
-   "summary_ar": "حدث علمي دولي نوعي احتضنته جامعة فرحات عباس سطيف 1، بمشاركة أكثر من 150 باحث من 6 دول مختلفة، لتبادل الرؤى حول تقاطع الذكاء الاصطناعي مع القطاع المالي.",
-   "summary_en": "A qualitative international scientific event hosted by Ferhat Abbas Setif 1 University, with the participation of more than 150 researchers from 6 different countries.",
-   "intro_ar": "حدث أكاديمي دولي رسم ملامح التميز العلمي، شكل نموذجاً متميزاً في تعزيز إشعاع الكلية وتأكيد ريادتها الفكرية في مجال التكنولوجيا المالية.",
-   "intro_en": "An international academic event that painted the features of scientific excellence, forming a distinguished model in enhancing the faculty's radiance.",
-   "stats": [
-    {
-     "_key": "a",
-     "value": "06",
-     "label_ar": "دول مشاركة",
-     "label_en": "Participating Countries"
-    },
-    {
-     "_key": "b",
-     "value": "+50",
-     "label_ar": "ورقة بحثية",
-     "label_en": "Papers"
-    },
-    {
-     "_key": "c",
-     "value": "02",
-     "label_ar": "أيام",
-     "label_en": "Days"
-    },
-    {
-     "_key": "d",
-     "value": "06",
-     "label_ar": "جلسات رئيسية",
-     "label_en": "Plenary Sessions"
-    },
-    {
-     "_key": "e",
-     "value": "06",
-     "label_ar": "ورشات علمية",
-     "label_en": "Workshops"
-    },
-    {
-     "_key": "f",
-     "value": "15",
-     "label_ar": "ملصق علمي",
-     "label_en": "Scientific Posters"
-    }
-   ],
-   "excellence_ar": "شهدت جامعة فرحات عباس سطيف 1 تنظيم المؤتمر الدولي الأول بمشاركة نخبة من الباحثين والخبراء، حيث أشرف على الفعاليات مدير الجامعة وعميد الكلية، بحضور ممثلين عن الهيئات الاقتصادية والبنوك.",
-   "excellence_en": "The university hosted the first international conference with the participation of elite researchers, overseen by the University Rector and Faculty Dean.",
-   "topics_ar": "ركزت الفعاليات على استكشاف التطبيقات العملية للذكاء الاصطناعي في تحليل البيانات المالية، إدارة المخاطر، واستشراف مستقبل التكنولوجيا المالية (FinTech) في الجزائر مع استعراض التحديات التشريعية والأخلاقية.",
-   "topics_en": "Events focused on exploring practical AI applications in financial data analysis, risk management, and the future of FinTech in Algeria.",
-   "achievement_ar": "شكل هذا المؤتمر نموذجاً في تعزيز الإشعاع العلمي للكلية، وترسيخ ثقافة البحث الجماعي، وتأكيد الريادة الفكرية في موضوع الذكاء الاصطناعي، وتحفيز الكفاءات الشابة على البحث التطبيقي المبتكر.",
-   "achievement_en": "This conference was a model in enhancing scientific radiance, establishing collective research culture, and stimulating young competencies.",
-   "galleryTitle_ar": "معرض صور الطبعة الأولى",
-   "galleryTitle_en": "1st Edition Gallery",
-   "logoUrl": "assets/img/iceic_2025.png",
-   "gallery": [],
-   "legacyImages": []
-  }
- ],
- "sponsors": []
+  ],
+  "sponsors": []
 }

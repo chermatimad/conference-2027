@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="assets/vendor/fa/css/all.min.css">
     <link rel="stylesheet" href="assets/vendor/aos/aos.css">
-    <link rel="stylesheet" href="assets/css/tailwind.css?v=20261125b">
+    <link rel="stylesheet" href="assets/css/tailwind.css?v=20261125c">
 </head>
 <body class="font-cairo text-gray-800 transition-all duration-300 flex flex-col min-h-screen">
 
@@ -163,6 +163,20 @@
                     <a href="#news" class="inline-flex items-center gap-2 text-primary font-black text-sm border-2 border-primary/15 hover:border-primary hover:bg-primary hover:text-white px-5 py-2.5 rounded-xl transition"><span data-ar="جميع الإعلانات" data-en="All Announcements">جميع الإعلانات</span> <i class="fas fa-arrow-left rtl:rotate-0 ltr:rotate-180 text-xs" aria-hidden="true"></i></a>
                 </div>
                 <div id="ann-carousel" class="max-w-6xl mx-auto" role="region" aria-roledescription="carousel"></div>
+            </div>
+        </section>
+
+        <!-- Deadlines (أفقي متحرك — يُملأ من importantDate) -->
+        <section id="home-deadlines" class="hidden relative py-20 md:py-24 bg-primary text-white overflow-hidden scroll-mt-20" aria-label="Important dates">
+            <div class="absolute -top-24 ltr:-right-24 rtl:-left-24 w-96 h-96 bg-accent/10 rounded-full blur-[90px]" aria-hidden="true"></div>
+            <div class="absolute -bottom-24 ltr:-left-24 rtl:-right-24 w-96 h-96 bg-secondary/30 rounded-full blur-[90px]" aria-hidden="true"></div>
+            <div class="container mx-auto px-4 sm:px-8 relative z-10">
+                <div class="text-center mb-14 md:mb-16">
+                    <span class="text-accent font-black text-sm tracking-widest" id="dl-kicker">سجّلها في أجندتك</span>
+                    <h2 id="dl-title" class="text-3xl md:text-5xl font-black mt-2">المواعيد الهامة</h2>
+                    <div class="w-20 h-1.5 bg-accent mx-auto rounded-full mt-4"></div>
+                </div>
+                <div id="dl-root" class="max-w-7xl mx-auto"></div>
             </div>
         </section>
 
@@ -494,6 +508,6 @@
     </div>
 
     <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/js/app.js?v=20261125b" defer></script>
+    <script src="assets/js/app.js?v=20261125c" defer></script>
 </body>
 </html>
