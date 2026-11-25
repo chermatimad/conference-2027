@@ -801,13 +801,13 @@
     const dot = '<span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span>';
     const list = (items) => `<ul class="space-y-3">${items.map((g) => `<li class="flex gap-3 text-gray-600 leading-relaxed">${dot}<span>${esc(t(g, 'text'))}</span></li>`).join('')}</ul>`;
     root.innerHTML = `
+      <section id="sub-guidelines" class="${CARD} scroll-mt-24">${secHead(L('قبل أن تكتب', 'Before you write'), L('شروط المشاركة في المؤتمر', 'Participation Requirements'))}
+        ${list(sub.guidelines || [])}
+        ${tpls.length ? `<div class="flex flex-wrap gap-4 mt-8">${tpls.map(([u, lb]) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer" download class="inline-flex items-center gap-2 bg-primary hover:bg-secondary text-white font-black py-3.5 px-7 rounded-xl transition-colors"><i class="fas fa-file-word" aria-hidden="true"></i> ${lb}</a>`).join('')}</div>` : ''}</section>
       <section id="sub-dates" class="rise bg-primary text-white rounded-3xl p-8 md:p-12 shadow-sm scroll-mt-24 relative overflow-hidden"><div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
         <div class="mb-10 text-center"><span class="text-accent font-bold text-sm">${L('سجّلها في أجندتك', 'Mark your calendar')}</span><h3 class="text-3xl md:text-4xl font-black mt-1 leading-tight">${L('تواريخ مهمة', 'Important Dates')}</h3><div class="w-16 h-1 bg-accent mt-4 mx-auto rounded-full"></div></div>
         ${dates.length ? tlVertical(dates) : emptyBox(EMPTY())}
         ${dnote ? `<p class="tl-note"><i class="fas fa-exclamation-circle text-accent mt-1" aria-hidden="true"></i><span>${esc(dnote)}</span></p>` : ''}</section>
-      <section id="sub-guidelines" class="${CARD} scroll-mt-24">${secHead(L('قبل أن تكتب', 'Before you write'), L('شروط المشاركة في المؤتمر', 'Participation Requirements'))}
-        ${list(sub.guidelines || [])}
-        ${tpls.length ? `<div class="flex flex-wrap gap-4 mt-8">${tpls.map(([u, lb]) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer" download class="inline-flex items-center gap-2 bg-primary hover:bg-secondary text-white font-black py-3.5 px-7 rounded-xl transition-colors"><i class="fas fa-file-word" aria-hidden="true"></i> ${lb}</a>`).join('')}</div>` : ''}</section>
       ${(pintro || ben.length || pub.length) ? `<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         ${(pintro || ben.length) ? `<section class="${CARD}">${secHead(L('نرحّب بكم', 'You are welcome'), L('المشاركة في المؤتمر', 'Attending the Conference'))}${pintro ? `<p class="text-gray-700 font-bold leading-relaxed mb-5">${esc(pintro)}</p>` : ''}${list(ben)}</section>` : ''}
         ${pub.length ? `<section class="${CARD}">${secHead(L('ما بعد المؤتمر', 'Beyond the event'), L('فرص النشر', 'Publication Opportunities'))}${list(pub)}</section>` : ''}</div>` : ''}
@@ -1067,6 +1067,12 @@
   // ---------- الإقلاع ----------
   async function init() {
     try { const q = new URLSearchParams(location.search).get('lang'); const saved = q || localStorage.getItem('lang'); if (saved === 'en' || saved === 'ar') lang = saved; } catch { /* */ }
+    $$('.dropdown-menu').forEach((m) => {
+      const li = m.closest('.group'); if (!li) return;
+      m.addEventListener('click', (e) => { if (!e.target.closest('a')) return; li.classList.add('nav-closed'); const ae = document.activeElement; if (ae && ae.blur) ae.blur(); });
+      li.addEventListener('mouseleave', () => li.classList.remove('nav-closed'));
+      li.addEventListener('focusout', () => setTimeout(() => { if (!li.matches(':hover')) li.classList.remove('nav-closed'); }, 0));
+    });
     window.AOS && AOS.init({once: true, offset: 50, duration: 800, disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches});
     bindEvents();
     const topBtn = byId('to-top');
