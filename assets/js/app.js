@@ -230,9 +230,10 @@
     setText('ov-kicker', (k => (k === 'مرحباً بكم' || k === 'Welcome') ? L('تعرّف على المؤتمر', 'Discover the Conference') : k)(t(home, 'welcomeKicker'))); setText('ov-title', t(home, 'welcomeTitle'));
     setText('ov-heading', t(home, 'welcomeHeading')); setText('ov-text', t(home, 'welcomeText'));
     const ovLogo = byId('ov-logo'); if (ovLogo) ovLogo.src = confLogo;
+    setText('ov-mode', L('حضوري', 'In person')); setText('hero-mode', L('حضوري', 'In person'));
     const ovFacts = byId('ov-facts');
     if (ovFacts) {
-      const rows = [[L('التاريخ', 'Date'), dateTxt], [L('المكان', 'Venue'), t(s, 'venueName')], [L('المحاور العلمية', 'Scientific themes'), L(`${arr('tracks').length} محاور`, `${arr('tracks').length} themes`)], [L('المشاركة', 'Participation'), L('مجانية لجميع المشاركين', 'Free of charge')]].filter((r) => r[1] && !/^0 /.test(r[1]));
+      const rows = [[L('نمط المشاركة', 'Format'), L('حضوري', 'In person')], [L('الرسوم', 'Fees'), L('المشاركة مجانية لجميع المشاركين', 'Free participation for all')]];
       ovFacts.innerHTML = rows.map(([k, v]) => `<div class="py-4 first:pt-0 last:pb-0"><dt class="text-accent text-xs font-black tracking-wider mb-1">${esc(k)}</dt><dd class="font-bold text-lg leading-snug">${esc(v)}</dd></div>`).join('');
     }
 

@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="assets/vendor/fa/css/all.min.css">
     <link rel="stylesheet" href="assets/vendor/aos/aos.css">
-    <link rel="stylesheet" href="assets/css/tailwind.css?v=20261125g">
+    <link rel="stylesheet" href="assets/css/tailwind.css?v=20261125h">
 </head>
 <body class="font-cairo text-gray-800 transition-all duration-300 flex flex-col min-h-screen">
 
@@ -132,7 +132,7 @@
 
                 <div class="flex items-center justify-center gap-5 mb-8"><span class="hidden sm:block h-px w-16 bg-accent/60" aria-hidden="true"></span><h1 id="hero-title" data-aos="zoom-in" data-aos-delay="100" class="text-lg md:text-2xl font-black text-accent tracking-wide drop-shadow-2xl">قضايا اقتصادية معاصرة</h1><span class="hidden sm:block h-px w-16 bg-accent/60" aria-hidden="true"></span></div>
                 <h2 id="hero-theme" data-aos="fade-up" data-aos-delay="300" class="text-white max-w-6xl mx-auto drop-shadow-2xl">الأمن الغذائي في ظل التحديات العالمية : الابتكار والسياسات الاقتصادية لتحقيق الاستدامة</h2>
-                <p id="hero-date" data-aos="fade-up" data-aos-delay="400" class="inline-block text-accent font-black text-xl md:text-3xl mt-10 mb-8 px-8 py-2.5 rounded-full border border-accent/40 bg-white/5 drop-shadow-lg" dir="auto">20-21 أفريل 2027</p>
+                <div class="flex flex-wrap items-center justify-center gap-3 mt-10 mb-8" data-aos="fade-up" data-aos-delay="400"><p id="hero-date" class="inline-block text-accent font-black text-xl md:text-3xl px-8 py-2.5 rounded-full border border-accent/40 bg-white/5 drop-shadow-lg" dir="auto">20-21 أفريل 2027</p><span id="hero-mode" class="inline-block bg-accent text-primary font-black text-xl md:text-3xl px-7 py-2.5 rounded-full shadow-lg"></span></div>
                 <div id="hero-cta" data-aos="fade-up" data-aos-delay="450" class="flex flex-wrap items-center justify-center gap-4 mb-14">
                     <a href="https://events.univ-setif.dz/" data-submit-link data-register target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-secondary hover:bg-green-700 text-white font-bold py-3.5 px-7 rounded-xl shadow-xl hover:-translate-y-0.5 transition-all duration-300"><i class="fas fa-paper-plane text-sm" aria-hidden="true"></i><span data-ar="إرسال الورقة البحثية" data-en="Submit Your Paper">إرسال الورقة البحثية</span></a>
                     <a id="cta-call" href="#" data-call-link target="_blank" rel="noopener noreferrer" class="hidden inline-flex items-center gap-3 border border-white/40 hover:bg-white hover:text-primary text-white font-bold py-3.5 px-7 rounded-xl transition-all duration-300"><i class="fas fa-download text-sm" aria-hidden="true"></i><span data-ar="تحميل إعلان المؤتمر" data-en="Download Conference Call">تحميل إعلان المؤتمر</span></a>
@@ -163,20 +163,6 @@
             </div>
         </section>
 
-        <!-- Deadlines (أفقي متحرك — يُملأ من importantDate) -->
-        <section id="home-deadlines" class="hidden relative py-20 md:py-24 bg-primary text-white overflow-hidden scroll-mt-20" aria-label="Important dates">
-            <div class="absolute -top-24 ltr:-right-24 rtl:-left-24 w-96 h-96 bg-accent/10 rounded-full blur-[90px]" aria-hidden="true"></div>
-            <div class="absolute -bottom-24 ltr:-left-24 rtl:-right-24 w-96 h-96 bg-secondary/30 rounded-full blur-[90px]" aria-hidden="true"></div>
-            <div class="container mx-auto px-4 sm:px-8 relative z-10">
-                <div class="text-center mb-14 md:mb-16">
-                    <span class="text-accent font-black text-sm tracking-widest" id="dl-kicker">سجّلها في أجندتك</span>
-                    <h2 id="dl-title" class="text-3xl md:text-5xl font-black mt-2">المواعيد الهامة</h2>
-                    <div class="w-20 h-1.5 bg-accent mx-auto rounded-full mt-4"></div>
-                </div>
-                <div id="dl-root" class="max-w-7xl mx-auto"></div>
-            </div>
-        </section>
-
         <!-- Overview (Bento) -->
         <section class="py-24 relative bg-bgLight overflow-hidden">
             <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px]"></div>
@@ -200,20 +186,27 @@
                         </div>
                     </div>
 
-                    <aside class="lg:col-span-5 relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-primary to-secondary text-white p-8 md:p-10 shadow-lg" data-aos="fade-right">
-                        <div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
-                        <div class="bg-white rounded-2xl p-5 flex items-center justify-center mb-8 shadow-md"><img id="ov-logo" src="assets/img/conference_logo.png" alt="ICCEI 2027" class="h-32 w-auto object-contain"></div>
-                        <dl id="ov-facts" class="divide-y divide-white/15"></dl>
+                    <aside class="lg:col-span-5 relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-primary to-secondary text-white shadow-lg flex flex-col" data-aos="fade-right">
+                        <div class="relative h-60 md:h-72 shrink-0">
+                            <img src="assets/img/faculty-building.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent"></div>
+                            <div class="absolute top-0 inset-x-0 h-1.5 bg-accent"></div>
+                            <span id="ov-mode" class="absolute top-5 ltr:right-5 rtl:left-5 bg-accent text-primary font-black text-sm md:text-base px-5 py-1.5 rounded-full shadow-lg"></span>
+                        </div>
+                        <div class="relative px-8 md:px-10 pb-8 md:pb-10 -mt-16 flex-1">
+                            <div class="bg-white rounded-2xl p-4 flex items-center justify-center mx-auto w-56 shadow-xl ring-4 ring-primary/40 mb-6"><img id="ov-logo" src="assets/img/conference_logo.png" alt="ICCEI 2027" class="h-28 w-auto object-contain"></div>
+                            <dl id="ov-facts" class="divide-y divide-white/15"></dl>
+                        </div>
                     </aside>
                 </div>
             </div>
         </section>
 
         <!-- Gateway Cards -->
-        <section class="py-24 bg-bgLight border-t border-gray-100">
+        <section class="py-24 bg-gradient-to-br from-primary to-secondary text-white">
             <div class="container mx-auto px-4 sm:px-8">
                 <div class="text-center mb-16" data-aos="fade-up">
-                    <h2 id="gw-title" class="text-3xl md:text-4xl font-black text-primary mb-4" data-ar="تفاصيل المؤتمر" data-en="Conference Details">تفاصيل المؤتمر</h2>
+                    <h2 id="gw-title" class="text-3xl md:text-4xl font-black text-white mb-4" data-ar="تفاصيل المؤتمر" data-en="Conference Details">تفاصيل المؤتمر</h2>
                     <div class="w-20 h-1.5 bg-accent mx-auto rounded-full"></div>
                 </div>
                 <div id="gateway-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto"></div>
@@ -232,6 +225,20 @@
                 <div class="text-center mt-12">
                     <a href="#speakers" class="inline-flex items-center gap-3 bg-primary hover:bg-secondary text-white font-bold py-3 px-8 rounded-xl transition shadow-md"><span data-ar="عرض جميع المتحدثين" data-en="View All Speakers">عرض جميع المتحدثين</span> <i class="fas fa-arrow-left rtl:rotate-0 ltr:rotate-180" aria-hidden="true"></i></a>
                 </div>
+            </div>
+        </section>
+
+        <!-- Deadlines (أفقي متحرك — يُملأ من importantDate) -->
+        <section id="home-deadlines" class="hidden relative py-20 md:py-24 bg-primary text-white overflow-hidden scroll-mt-20" aria-label="Important dates">
+            <div class="absolute -top-24 ltr:-right-24 rtl:-left-24 w-96 h-96 bg-accent/10 rounded-full blur-[90px]" aria-hidden="true"></div>
+            <div class="absolute -bottom-24 ltr:-left-24 rtl:-right-24 w-96 h-96 bg-secondary/30 rounded-full blur-[90px]" aria-hidden="true"></div>
+            <div class="container mx-auto px-4 sm:px-8 relative z-10">
+                <div class="text-center mb-14 md:mb-16">
+                    <span class="text-accent font-black text-sm tracking-widest" id="dl-kicker">سجّلها في أجندتك</span>
+                    <h2 id="dl-title" class="text-3xl md:text-5xl font-black mt-2">المواعيد الهامة</h2>
+                    <div class="w-20 h-1.5 bg-accent mx-auto rounded-full mt-4"></div>
+                </div>
+                <div id="dl-root" class="max-w-7xl mx-auto"></div>
             </div>
         </section>
 
@@ -487,6 +494,6 @@
     </div>
 
     <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/js/app.js?v=20261125g" defer></script>
+    <script src="assets/js/app.js?v=20261125h" defer></script>
 </body>
 </html>
