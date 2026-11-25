@@ -59,6 +59,9 @@ export const siteSettings = defineType({
       name: 'registrationOpen', title: 'استقبال الأوراق مفتوح؟ (يُظهر زر «إرسال الورقة البحثية»)', type: 'boolean', initialValue: true, group: 'event',
     }),
     defineField({
+      name: 'registrationUrl', title: 'رابط زر «التسجيل» في القائمة', type: 'url', group: 'event', initialValue: 'https://events.univ-setif.dz/event/36/', validation: safeUrl(),
+    }),
+    defineField({
       name: 'paperSubmissionUrl', title: 'رابط منصة إرسال الأوراق', type: 'url', group: 'event',
       validation: safeUrl(),
     }),

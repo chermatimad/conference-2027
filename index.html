@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="assets/vendor/fa/css/all.min.css">
     <link rel="stylesheet" href="assets/vendor/aos/aos.css">
-    <link rel="stylesheet" href="assets/css/tailwind.css?v=20261125a">
+    <link rel="stylesheet" href="assets/css/tailwind.css?v=20261125b">
 </head>
 <body class="font-cairo text-gray-800 transition-all duration-300 flex flex-col min-h-screen">
 
@@ -91,6 +91,7 @@
                 </ul>
 
                 <div class="hidden xl:flex gap-3 ltr:ml-4 rtl:mr-4 shrink-0">
+                    <a href="https://events.univ-setif.dz/event/36/" data-register-link target="_blank" rel="noopener noreferrer" class="bg-accent hover:bg-yellow-600 text-white px-7 py-2.5 rounded-xl font-black shadow-lg ring-2 ring-accent/40 transition-all transform hover:scale-105" data-ar="التسجيل" data-en="Register">التسجيل</a>
                 </div>
             </div>
         </div>
@@ -108,6 +109,7 @@
                 <li><a href="https://events.univ-setif.dz/" data-submit-link target="_blank" rel="noopener noreferrer" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-secondary transition" data-ar="إرسال الورقة البحثية" data-en="Paper Submission">إرسال الورقة البحثية</a></li>
                 <li><a href="#contact" class="mobile-link block bg-white/5 hover:bg-white/20 py-3 rounded-xl font-bold text-white transition" data-ar="اتصل بنا" data-en="Contact">اتصل بنا</a></li>
                 <li><a href="https://events.univ-setif.dz/" data-submit-link data-register target="_blank" rel="noopener noreferrer" class="mobile-link block w-full bg-secondary py-3 rounded-xl font-bold text-white transition" data-ar="إرسال الورقة البحثية" data-en="Submit Your Paper">إرسال الورقة البحثية</a></li>
+                <li><a href="https://events.univ-setif.dz/event/36/" data-register-link target="_blank" rel="noopener noreferrer" class="mobile-link block w-full bg-accent py-3 rounded-xl font-black text-white transition" data-ar="التسجيل" data-en="Register">التسجيل</a></li>
                 <li><a href="#" data-call-link target="_blank" rel="noopener noreferrer" class="hidden mobile-link w-full border border-accent py-3 rounded-xl font-bold text-accent transition" data-ar="تحميل إعلان المؤتمر" data-en="Download Conference Call">تحميل إعلان المؤتمر</a></li>
             </ul>
         </div>
@@ -131,7 +133,10 @@
                 <div class="flex items-center justify-center gap-5 mb-8"><span class="hidden sm:block h-px w-16 bg-accent/60" aria-hidden="true"></span><h1 id="hero-title" data-aos="zoom-in" data-aos-delay="100" class="text-lg md:text-2xl font-black text-accent tracking-wide drop-shadow-2xl">قضايا اقتصادية معاصرة</h1><span class="hidden sm:block h-px w-16 bg-accent/60" aria-hidden="true"></span></div>
                 <h2 id="hero-theme" data-aos="fade-up" data-aos-delay="300" class="text-white max-w-6xl mx-auto drop-shadow-2xl">الأمن الغذائي في ظل التحديات العالمية : الابتكار والسياسات الاقتصادية لتحقيق الاستدامة</h2>
                 <p id="hero-date" data-aos="fade-up" data-aos-delay="400" class="inline-block text-accent font-black text-xl md:text-3xl mt-10 mb-8 px-8 py-2.5 rounded-full border border-accent/40 bg-white/5 drop-shadow-lg" dir="auto">20-21 أفريل 2027</p>
-                <div class="mb-16"></div>
+                <div id="hero-cta" data-aos="fade-up" data-aos-delay="450" class="flex flex-wrap items-center justify-center gap-4 mb-14">
+                    <a href="https://events.univ-setif.dz/" data-submit-link data-register target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-secondary hover:bg-green-700 text-white font-bold py-3.5 px-7 rounded-xl shadow-xl hover:-translate-y-0.5 transition-all duration-300"><i class="fas fa-paper-plane text-sm" aria-hidden="true"></i><span data-ar="إرسال الورقة البحثية" data-en="Submit Your Paper">إرسال الورقة البحثية</span></a>
+                    <a id="cta-call" href="#" data-call-link target="_blank" rel="noopener noreferrer" class="hidden inline-flex items-center gap-3 border border-white/40 hover:bg-white hover:text-primary text-white font-bold py-3.5 px-7 rounded-xl transition-all duration-300"><i class="fas fa-download text-sm" aria-hidden="true"></i><span data-ar="تحميل إعلان المؤتمر" data-en="Download Conference Call">تحميل إعلان المؤتمر</span></a>
+                </div>
 
                 <div data-aos="fade-up" data-aos-delay="500" class="max-w-4xl mx-auto glass-panel rounded-3xl p-6 md:p-8 flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-12 relative overflow-hidden border-t border-l border-white/30">
                     <div class="text-center w-16 sm:w-20 md:w-24"><span id="days" class="block text-3xl sm:text-4xl md:text-6xl font-black text-white drop-shadow-lg mb-1">00</span><span class="text-xs md:text-sm font-bold uppercase text-accent tracking-widest" data-ar="يوم" data-en="Days">يوم</span></div>
@@ -140,18 +145,6 @@
                     <div class="text-center w-16 sm:w-20 md:w-24"><span id="seconds" class="block text-3xl sm:text-4xl md:text-6xl font-black text-white drop-shadow-lg mb-1">00</span><span class="text-xs md:text-sm font-bold uppercase text-accent tracking-widest" data-ar="ثانية" data-en="Seconds">ثانية</span></div>
                 </div>
 
-                <div data-aos="fade-up" data-aos-delay="600" id="hero-cta" class="max-w-4xl mx-auto mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-                    <a href="https://events.univ-setif.dz/" data-submit-link data-register target="_blank" rel="noopener noreferrer" class="group flex items-center gap-4 rounded-2xl bg-secondary hover:bg-green-700 text-white p-5 text-start shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <span class="w-14 h-14 shrink-0 rounded-xl bg-white/15 flex items-center justify-center text-2xl"><i class="fas fa-paper-plane" aria-hidden="true"></i></span>
-                        <span class="flex-grow min-w-0"><span class="block font-black text-lg md:text-xl leading-snug" data-ar="إرسال الورقة البحثية" data-en="Submit Your Paper">إرسال الورقة البحثية</span><span class="block text-sm text-white/80 mt-0.5" data-ar="أرسل مداخلتك عبر منصة المؤتمر الإلكترونية" data-en="Submit your paper through the conference platform">أرسل مداخلتك عبر منصة المؤتمر الإلكترونية</span></span>
-                        <i class="fas fa-arrow-left rtl:rotate-0 ltr:rotate-180 opacity-70 group-hover:opacity-100 transition" aria-hidden="true"></i>
-                    </a>
-                    <a id="cta-call" href="#" data-call-link target="_blank" rel="noopener noreferrer" class="hidden group flex items-center gap-4 rounded-2xl border-2 border-accent/60 bg-white/10 hover:bg-accent text-white p-5 text-start shadow-xl hover:-translate-y-1 transition-all duration-300 backdrop-blur">
-                        <span class="w-14 h-14 shrink-0 rounded-xl bg-accent/25 group-hover:bg-white/20 flex items-center justify-center text-2xl text-accent group-hover:text-white transition"><i class="fas fa-file-download" aria-hidden="true"></i></span>
-                        <span class="flex-grow min-w-0"><span class="block font-black text-lg md:text-xl leading-snug" data-ar="تحميل إعلان المؤتمر" data-en="Download Conference Call">تحميل إعلان المؤتمر</span><span class="block text-sm text-white/80 mt-0.5" data-ar="الإعلان الرسمي للمؤتمر بصيغة PDF" data-en="Official call for papers (PDF)">الإعلان الرسمي للمؤتمر بصيغة PDF</span></span>
-                        <i class="fas fa-download opacity-70 group-hover:opacity-100 transition" aria-hidden="true"></i>
-                    </a>
-                </div>
             </div>
 
             <i class="fas fa-globe-africa absolute bottom-10 ltr:right-10 rtl:left-10 text-white/5 text-[15rem] animate-float" aria-hidden="true"></i>
@@ -501,6 +494,6 @@
     </div>
 
     <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/js/app.js?v=20261125a" defer></script>
+    <script src="assets/js/app.js?v=20261125b" defer></script>
 </body>
 </html>

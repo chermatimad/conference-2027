@@ -266,8 +266,8 @@
     $$('[data-submit-link]').forEach((a) => { if (sub) a.href = sub; });
     $$('[data-register]').forEach((b) => b.classList.toggle('hidden', s.registrationOpen === false));
     const callPdf = safeFile(lang === 'ar' ? s.callPdfArUrl || s.callPdfEnUrl : s.callPdfEnUrl || s.callPdfArUrl);
-    $$('[data-call-link]').forEach((b) => { if (callPdf) b.href = callPdf; b.classList.toggle('hidden', !callPdf); if (callPdf) b.classList.add('flex'); });
-    const cta = byId('hero-cta'); if (cta) cta.classList.toggle('hidden', !callPdf && s.registrationOpen === false);
+    $$('[data-call-link]').forEach((b) => { if (callPdf) b.href = callPdf; b.classList.toggle('hidden', !callPdf); if (callPdf) b.classList.add('inline-flex'); });
+    const regUrl = safeHttps(s.registrationUrl); $$('[data-register-link]').forEach((a) => { if (regUrl) a.href = regUrl; });
 
     const soc = byId('social-links');
     if (soc) {
