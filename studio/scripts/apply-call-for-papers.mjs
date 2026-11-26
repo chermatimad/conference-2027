@@ -16,6 +16,9 @@ async function upsert(doc) {
 }
 
 for (const d of buildDocs()) await upsert(d)
+// أزل ملفات PDF القديمة المرفوعة في Studio ليعتمد الموقع الملفين الرسميين المحليين (assets/docs/call-for-papers-*.pdf)
+await c.patch('siteSettings').unset(['callPdfAr', 'callPdfEn']).commit()
+console.log('✔ removed old call-for-papers PDFs from siteSettings')
 
 // المحاور والتواريخ: استبدال كامل
 for (const [type, docs] of [['track', trackDocs()], ['importantDate', dateDocs()]]) {
